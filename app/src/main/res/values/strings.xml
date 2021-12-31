@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Resilience</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="input_name">Nombre</string>
+    <string name="input_age">Edad</string>
+    <string name="logo">Logo</string>
+    <string name="password">Contraseña</string>
+    <string name="title_sign_up">Necesitamos saber mas de ti</string>
+    <string name="sign_up">Registrarse</string>
+</resources>
