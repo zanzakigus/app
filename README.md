@@ -46,7 +46,7 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 
 Se agradece la participación de los siguientes mencionados que ayudarón a la realización de este proyecto.
 
-- **Andrés Covarrubias** - [Cova-ops](https://github.com/Cova-ops)
+- **Daniel Covarrubias** - [Cova-ops](https://github.com/Cova-ops)
 - **Erick Rodriguez** - [zanzakigus](https://github.com/zanzakigus)
 - **Diego Flores** - [diego_flores](#DiegoTuGit)
 
