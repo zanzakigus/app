@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/invisible">
+
+    <View
+        android:id="@+id/background_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/background_action_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/icon_home"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_home"
+        app:backgroundTint="@color/color_button_green"
+        app:layout_constraintEnd_toStartOf="@id/icon_graph"
+        app:layout_constraintStart_toStartOf="@id/background_action_bar"
+        app:layout_constraintTop_toTopOf="@id/background_action_bar"
+        app:layout_constraintBottom_toBottomOf="@id/background_action_bar"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/icon_graph"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_graph"
+        app:backgroundTint="@color/color_button_green"
+        app:layout_constraintEnd_toStartOf="@id/icon_notifications"
+        app:layout_constraintStart_toEndOf="@id/icon_home"
+        app:layout_constraintTop_toTopOf="@id/background_action_bar"
+        app:layout_constraintBottom_toBottomOf="@id/background_action_bar"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/icon_notifications"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_notification"
+        app:backgroundTint="@color/color_button_green"
+        app:layout_constraintEnd_toStartOf="@id/icon_user"
+        app:layout_constraintStart_toEndOf="@id/icon_graph"
+        app:layout_constraintTop_toTopOf="@id/background_action_bar"
+        app:layout_constraintBottom_toBottomOf="@id/background_action_bar"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/icon_user"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_user"
+        app:backgroundTint="@color/color_button_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_notifications"
+        app:layout_constraintTop_toTopOf="@id/background_action_bar"
+        app:layout_constraintBottom_toBottomOf="@id/background_action_bar"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="140dp"
         style="@style/center_things"
-        android:text="@string/email"
+        android:text="@string/input_email"
         android:textAppearance="@style/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
         android:layout_marginTop="40dp"
         style="@style/center_things"
         android:gravity="center_vertical"
-        android:text="@string/password"
+        android:text="@string/input_password"
         android:textAppearance="@style/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,6 @@
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"/>
-
 
     <View
         android:id="@+id/arrow"
