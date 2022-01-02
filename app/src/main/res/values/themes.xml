@@ -3,11 +3,18 @@
     <style name="Theme.Plantillas" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
     </style>
 
-    <!-- Estilo de la letra de pantalla de carga -->
+    <!-- Estilo de la Letra de pantalla de carga -->
     <style name="name_app_menu">
         <item name="android:textSize"> 48sp </item>
         <item name="android:fontFamily"> @font/roboto_regular </item>
         <item name="android:textColor"> #FFFFFF </item>
+    </style>
+
+    <!-- Estilo de Letra de los Titulos Azules -->
+    <style name="title_blue">
+        <item name="android:textSize"> 25sp </item>
+        <item name="android:fontFamily"> @font/inter_semi_bold </item>
+        <item name="android:textColor"> #38386D </item>
     </style>
 
     <!-- Estilo de Letra de los Titulos -->
@@ -17,11 +24,18 @@
         <item name="android:textColor"> #FFFFFF </item>
     </style>
 
-    <!-- Estilo de la letra -->
+    <!-- Estilo de la Letra -->
     <style name="text">
         <item name="android:textSize"> 18sp </item>
         <item name="android:fontFamily"> @font/roboto_regular </item>
         <item name="android:textColor"> #FFFFFF </item>
+    </style>
+
+    <!-- Estilo de la Letra Gris -->
+    <style name="text_gray">
+        <item name="android:textSize"> 18sp </item>
+        <item name="android:fontFamily"> @font/roboto_regular </item>
+        <item name="android:textColor"> #8B8B8B </item>
     </style>
 
     <!-- Background de Boton Registrarse -->
@@ -29,7 +43,7 @@
         <item name="android:backgroundTint" tools:targetApi="lollipop">@color/background_color</item>
     </style>
 
-    <!-- Estilo para centrar las cosas -->
+    <!-- Estilo para Centrar las Cosas -->
     <style name="center_things">
         <item name="android:layout_marginLeft"> 50dp </item>
         <item name="android:layout_marginStart"> 50dp </item>
