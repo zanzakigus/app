@@ -31,7 +31,7 @@
                 android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:lineSpacingExtra="10dp"
-                android:text="@string/title_history_detections"
+                android:text="@string/title_questions"
                 android:textAppearance="@style/title_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,47 +40,47 @@
 
             <include
                 android:id="@+id/component_detection_1"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_2"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_3"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_4"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_5"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_6"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_7"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_8"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_9"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_10"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
 
             <include
                 android:id="@+id/component_detection_11"
-                layout="@layout/component_detection" />
+                layout="@layout/component_question" />
         </LinearLayout>
     </ScrollView>
 

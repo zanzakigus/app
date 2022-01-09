@@ -9,9 +9,11 @@
     <string name="logo">Logo</string>
     <string name="sign_up">Registrarse</string>
     <string name="text_date">15 / Agosto / 21</string>
+    <string name="text_question">Esto es una pregunta muy preguntona</string>
     <string name="text_psicologia_positiva">La psicología positiva estudia…</string>
     <string name="title_buenos_dias">Buenos días</string>
     <string name="title_history_detections">Histórico de detecciones</string>
+    <string name="title_questions">Preguntas</string>
     <string name="title_sign_up">Necesitamos saber mas de ti</string>
     <string name="title_username">${username}</string>
 </resources>
