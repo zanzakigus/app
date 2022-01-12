@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40dp"
+    android:layout_marginBottom="15dp"
+    android:background="@color/invisible">
+
+    <View
+        android:id="@+id/component_question"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/background_component_detection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/text_question"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:ellipsize="none"
+        android:gravity="top"
+        android:justificationMode="inter_word"
+        android:scrollHorizontally="false"
+        android:text="@string/text_question"
+        android:textAppearance="@style/text_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/component_question"
+        app:layout_constraintEnd_toEndOf="@+id/component_question"
+        app:layout_constraintStart_toStartOf="@+id/component_question"
+        app:layout_constraintTop_toTopOf="@+id/component_question"
+        tools:ignore="MissingConstraints"
+        tools:targetApi="o" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
