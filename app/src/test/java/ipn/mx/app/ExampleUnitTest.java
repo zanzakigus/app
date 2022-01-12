@@ -1,4 +1,4 @@
-package ipn.mx.plantillas;
+package ipn.mx.app;
 
 import org.junit.Test;
 

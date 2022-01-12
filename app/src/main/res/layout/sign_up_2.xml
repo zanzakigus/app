@@ -66,7 +66,7 @@
     <EditText
         android:id="@+id/name_input"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="45dp"
         android:layout_marginTop="5dp"
         style="@style/center_things"
         android:background="@drawable/custom_input"
@@ -92,7 +92,7 @@
     <EditText
         android:id="@+id/a_paterno_input"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="45dp"
         android:layout_marginTop="5dp"
         style="@style/center_things"
         android:background="@drawable/custom_input"
@@ -118,7 +118,7 @@
     <EditText
         android:id="@+id/a_materno_input"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="45dp"
         android:layout_marginTop="5dp"
         style="@style/center_things"
         android:background="@drawable/custom_input"
@@ -144,7 +144,7 @@
     <EditText
         android:id="@+id/fecha_nacimiento_input"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="45dp"
         android:layout_marginTop="5dp"
         style="@style/center_things"
         android:background="@drawable/custom_input"
