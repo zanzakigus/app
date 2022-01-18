@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/secondary_color">
 
-
     <View
         android:id="@+id/logo"
         android:layout_width="200dp"
@@ -51,7 +50,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentTop="true"
@@ -64,10 +63,11 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <EditText
-        android:id="@+id/name_input"
+        android:id="@+id/email_input"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="5dp"
+        android:textColor="@color/black"
         style="@style/center_things"
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
@@ -75,10 +75,12 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/a_paterno"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentTop="true"
@@ -87,21 +89,24 @@
         android:textAppearance="@style/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_input" />
+        app:layout_constraintTop_toBottomOf="@+id/email_input" />
 
     <EditText
-        android:id="@+id/a_paterno_input"
+        android:id="@+id/password_input"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="5dp"
+        android:textColor="@color/black"
         style="@style/center_things"
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:padding="12dp"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a_paterno" />
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <View
         android:id="@+id/arrow"
@@ -111,7 +116,7 @@
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/a_paterno_input"
+        app:layout_constraintTop_toBottomOf="@id/password_input"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

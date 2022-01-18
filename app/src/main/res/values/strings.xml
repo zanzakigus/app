@@ -1,4 +1,5 @@
 <resources>
+    <!-- VISTAS -->
     <string name="app_name">Resilience</string>
     <string name="input_a_materno">Apellido Materno</string>
     <string name="input_a_paterno">Apellido Paterno</string>
@@ -16,4 +17,14 @@
     <string name="title_questions">Preguntas</string>
     <string name="title_sign_up">Necesitamos saber mas de ti</string>
     <string name="title_username">${username}</string>
+
+    <!-- CLASE: SignUp1 -->
+    <string name="missing_email">Se requiere de un correo electrónico para continuar</string>
+    <string name="missing_password">Se requiere de una contraseña para continuar</string>
+
+    <!-- CLASE: SignUp1 -->
+    <string name="missing_name">Se requiere de su nombre para continuar</string>
+    <string name="missing_a_paterno">Se requiere de su apellido paterno para continuar</string>
+    <string name="missing_a_materno">Se requiere de su apellido materno para continuar</string>
+    <string name="missing_f_nacimiento">Se requiere de su fecha de nacimiento para continuar</string>
 </resources>
