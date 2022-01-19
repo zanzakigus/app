@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -17,6 +18,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -68,7 +72,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
         if(loggedPassword !=null || loggedEmail!=null){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Index.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
@@ -115,7 +119,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                                 // to save our data with key and value.
                                 editor.apply();
-                                Intent intent = new Intent(this, MainActivity.class);
+                                Intent intent = new Intent(this, Index.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
@@ -125,7 +129,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             System.out.println(error.toString());
                             Toast myToast = Toast.makeText(context, R.string.login_error, Toast.LENGTH_LONG);
                             myToast.show();
-                        });
+                        })/*{
+
+                    //This is for Headers If You Needed
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json; charset=UTF-8");
+                        params.put("token", "hola");
+                        return params;
+                    }
+                }*/;
                 queue.add(jsonObjectRequest);
 
             }
