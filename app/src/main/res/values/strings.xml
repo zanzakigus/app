@@ -1,7 +1,14 @@
 <resources>
+
+    <!-- SETTINGS -->
+
+    <string name="server_host">http://192.168.3.20:8000</string>
+    <string name="shared_key">shared_prefs</string>
+    <string name="logged_email_key">email_key</string>
+    <string name="logged_password_key">password_key</string>
+
     <!-- VISTAS -->
     <string name="app_name">Resilience</string>
-    <string name="server_host">http://192.168.3.20:8000</string>
     <string name="input_a_materno">Apellido Materno</string>
     <string name="input_a_paterno">Apellido Paterno</string>
     <string name="input_email">Correo Electrónico</string>
@@ -31,8 +38,9 @@
     <string name="missing_f_nacimiento">Se requiere de su fecha de nacimiento para continuar</string>
 
 
-    <!-- CLASE: SignUp1 -->
+    <!-- CLASE: Login -->
     <string name="logged_succed">Se inició sesión exitosamente</string>
+    <string name="logged_fail">Los datos son incorrectos, favor de verificar</string>
 
 
     <!-- ERRORES REQUEST HTTP -->
