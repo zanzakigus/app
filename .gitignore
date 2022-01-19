@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/dictionaries/zanzakigus.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/.name
+.idea/compiler.xml
