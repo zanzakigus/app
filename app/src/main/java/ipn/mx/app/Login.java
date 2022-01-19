@@ -71,10 +71,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
-        if(loggedPassword !=null || loggedEmail!=null){
+        if (loggedPassword != null && loggedEmail != null) {
             Intent intent = new Intent(this, Index.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -120,8 +120,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 // to save our data with key and value.
                                 editor.apply();
                                 Intent intent = new Intent(this, Index.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
+                                finish();
                             }
                             Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
                             myToast.show();
