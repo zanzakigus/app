@@ -41,6 +41,9 @@
     <!-- Background de Boton Registrarse -->
     <style name="a_tag_button">
         <item name="android:backgroundTint" tools:targetApi="lollipop">@color/background_color</item>
+        <item name="android:textSize"> 18sp </item>
+        <item name="android:fontFamily"> @font/roboto_regular </item>
+        <item name="android:textColor"> #FFFFFF </item>
     </style>
 
     <!-- Estilo para Centrar las Cosas -->
