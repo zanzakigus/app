@@ -8,10 +8,17 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +26,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_carga);
+
+        PeticionAPI api = new PeticionAPI(this);
+        HashMap<String, String> params = new HashMap<>();
+
+        JSONObject response = new JSONObject();
+        /*
+        try {
+            response = api.peticionGET("http://192.168.1.71:8000/", params);
+        } catch (InterruptedException | JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("Adentro", "Despues de la llamada de la funcion");
+        System.out.println(response.toString());*/
+
+        Class[] parameterTypes = new Class[1];
+        parameterTypes[0] = String.class;
+        Method functionToPass = null;
+        try {
+             functionToPass = MainActivity.class.getMethod("printAdios", parameterTypes[0]);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        MainActivity mainActivity = new MainActivity();
+        api.Prueba(mainActivity, functionToPass, "Segunda funcion");
+
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -30,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+    }
+
+    public void printHola(String message){
+        Log.d("Hola", "printHola: " + message);
+    }
+
+    public void printAdios(String message){
+        Log.d("Adios", "printAdios: " + message);
     }
 
     @Override

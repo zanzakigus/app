@@ -64,7 +64,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // initializing shared preferences keys.
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
         EMAIL_KEY = this.getResources().getString(R.string.logged_email_key);
-        PASSWORD_KEY = this.getResources().getString(R.string.logged_email_key);
+        PASSWORD_KEY = this.getResources().getString(R.string.logged_password_key);
 
         // initializing our shared preferences.
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -76,7 +76,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-
     }
 
 
@@ -141,7 +140,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                 }*/;
                 queue.add(jsonObjectRequest);
-
             }
         } else if (v == btnRegister) {
             Intent intent = new Intent(this, SignUp1.class);
