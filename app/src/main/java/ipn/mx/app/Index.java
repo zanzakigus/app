@@ -11,20 +11,38 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Index extends AppCompatActivity implements View.OnClickListener {
 
-    EditText edtCorreo, edtContra;
-    View btnNext;
+
+    Context context;
+    View btnHome;
     TextView tevNombreUsuario;
+
+
+
+    //Http request variables
+    RequestQueue queue;
+    String host;
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
-
-    // key for storing email.
     public static String EMAIL_KEY;
-
-    // key for storing password.
     public static String PASSWORD_KEY;
+    public static String NOMBRE_KEY;
+
 
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
@@ -32,6 +50,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
+    private String loggedNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +61,72 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         edtCorreo = findViewById(R.id.email_input);
         edtContra = findViewById(R.id.password_input);*/
         tevNombreUsuario = findViewById(R.id.title_username);
+        btnHome = findViewById(R.id.icon_home);
+
+        btnHome.setOnClickListener(this);
 
         /*btnNext.setOnClickListener(this);*/
+
+        queue = Volley.newRequestQueue(this);
+        host = this.getResources().getString(R.string.server_host);
 
         // initializing shared preferences keys.
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
         EMAIL_KEY = this.getResources().getString(R.string.logged_email_key);
-        PASSWORD_KEY = this.getResources().getString(R.string.logged_email_key);
+        PASSWORD_KEY = this.getResources().getString(R.string.logged_password_key);
+        NOMBRE_KEY = this.getResources().getString(R.string.logged_nombre);
 
         // initializing our shared preferences.
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
         loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
-        tevNombreUsuario.setText(loggedPassword);
+
         if (loggedPassword == null || loggedEmail == null) {
             Intent intent = new Intent(this, Login.class);
             /*intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
             startActivity(intent);
             finish();
-        }else{
+        } else {
+
+            context = this;
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET, host + "/usuario?correo=" + loggedEmail + "&password=" + loggedPassword, null, response -> {
+                        boolean resp;
+                        try {
+                            resp = response.getBoolean("resp");
+
+                            if (resp) {
+                                JSONObject usuarioJSON = null;
+                                try {
+                                    usuarioJSON = response.getJSONObject("contenido");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString(NOMBRE_KEY, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_paterno"));
+                                editor.apply();
+                                tevNombreUsuario.setText(loggedNombre = sharedpreferences.getString(NOMBRE_KEY, "Sin nombre"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }, error -> {
+                        System.out.println(error.toString());
+                        Toast myToast = Toast.makeText(this, R.string.general_error, Toast.LENGTH_LONG);
+                        myToast.show();
+                    }) {
+
+                //This is for Headers If You Needed
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Content-Type", "application/json; charset=UTF-8");
+                    return params;
+                }
+            };
+            queue.add(jsonObjectRequest);
 
         }
 
@@ -69,19 +134,10 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-/*        if (v == btnNext) {
-            if (edtCorreo.getText().toString().equals("")) {
-                Toast myToast = Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG);
-                myToast.show();
-            } else if (edtContra.getText().toString().equals("")) {
-                Toast myToast = Toast.makeText(this, R.string.missing_password, Toast.LENGTH_LONG);
-                myToast.show();
-            } else {
-                Intent intent = new Intent(this, SignUp2.class);
-                intent.putExtra("correo", edtCorreo.getText().toString());
-                intent.putExtra("contra", edtContra.getText().toString());
+        if (v == btnHome) {
+                Intent intent = new Intent(this, Index.class);
                 startActivity(intent);
-            }
-        }*/
+                finish();
+        }
     }
 }

@@ -1,11 +1,12 @@
 <resources>
 
     <!-- SETTINGS -->
-    <string name="server_host">http://127.0.0.1:5000</string>
+    <!--<string name="server_host">http://127.0.0.1:5000</string>-->
+    <string name="server_host">http://192.168.3.20:8000</string>
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
     <string name="logged_password_key">password_key</string>
-
+    <string name="logged_nombre">nombre_key</string>
     <!-- VISTAS -->
     <string name="app_name">Resilience</string>
     <string name="input_a_materno">Apellido Materno</string>
@@ -44,4 +45,5 @@
 
     <!-- ERRORES REQUEST HTTP -->
     <string name="login_error">Error al iniciar sesión, favor de intentarlo más tarde</string>
+    <string name="general_error">Error al cargar información, favor de intentarlo más tarde</string>
 </resources>

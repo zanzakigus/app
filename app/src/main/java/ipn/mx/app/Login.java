@@ -26,8 +26,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     EditText edtCorreo, edtContra;
     View btnLogin, btnRegister;
+
+    //Http request variables
     RequestQueue queue;
-    String urlLogin;
+    String host;
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
@@ -59,7 +61,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnRegister.setOnClickListener(this);
 
         queue = Volley.newRequestQueue(this);
-        urlLogin = this.getResources().getString(R.string.server_host)+"/login";
+        host = this.getResources().getString(R.string.server_host);
 
         // initializing shared preferences keys.
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
@@ -102,15 +104,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.POST, urlLogin, jsonObj, response -> {
+                        (Request.Method.POST, host + "/login", jsonObj, response -> {
                             boolean resp = false;
-                            String message = context.getResources().getString(R.string.logged_fail);;
+                            String message = context.getResources().getString(R.string.logged_fail);
+                            ;
                             try {
-                                 resp = response.getBoolean("resp");
+                                resp = response.getBoolean("resp");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if(resp){
+                            if (resp) {
                                 message = context.getResources().getString(R.string.logged_succed);
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                 editor.putString(EMAIL_KEY, email);
