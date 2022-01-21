@@ -27,40 +27,58 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
     RequestQueue requestQueue;
     JSONObject reqJsonObj = new JSONObject();
     JSONObject resJsonObj;
-    final int TIMEOUT = new GlobalInfo().TIMEOUT_REQUEST;
-    final int INTENTS = new GlobalInfo().MAX_INTENTS;
+
+    private Object classPetition;
+    private Method functionToPass;
 
     PeticionAPI(Context context) {
         this.context = context;
         requestQueue = Volley.newRequestQueue(context);
     }
 
-    public JSONObject peticionGET(String URL, HashMap<String, String> params) throws InterruptedException, JSONException {
+    public void peticionGET(String URL, HashMap<String, String> params, Object object, Method method) {
 
-        resJsonObj = new JSONObject();
-        for (String key : params.keySet())
-            reqJsonObj.put(key, params.get(key));
+        StringBuilder URLBuilder = new StringBuilder(URL);
+        URLBuilder.append("?");
+        for (String key : params.keySet()) {
+            URLBuilder.append(key).append("=").append(params.get(key)).append("&");
+        }
+        // Se elimina el ultimo Amperson o en su defecto el signo de interrogacion en caso de que no haya parametros
+        URLBuilder.deleteCharAt(URLBuilder.length() - 1);
+        URL = URLBuilder.toString();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, reqJsonObj, this, this);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, new JSONObject(), this, this);
         requestQueue.add(request);
-
-        int intents = 0;
-        while (intents < INTENTS && resJsonObj.length() == 0) {
-            Log.d("Esperando respuesta", "Esperando respuesta");
-            Thread.sleep(TIMEOUT);
-            intents++;
-        }
-        if (intents == INTENTS) {
-            resJsonObj.put("error", "TIMEOUT GONE");
-        }
-        return resJsonObj;
+        classPetition = object;
+        functionToPass = method;
     }
 
-    public void Prueba(Object object, Method method, String name) {
-        Object[] parameters = new Object[1];
-        parameters[0] = name;
+    public void peticionPOST(String URL, HashMap<String, String> params, Object object, Method method) {
+
+        reqJsonObj = new JSONObject();
+        for (String key : params.keySet()) {
+            try {
+                reqJsonObj.put(key, params.get(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, reqJsonObj, this, this);
+        requestQueue.add(request);
+        classPetition = object;
+        functionToPass = method;
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        resJsonObj = new JSONObject();
+        resJsonObj = response;
+        Object[] parameters = new Object[2];
+        parameters[0] = response;
+        parameters[1] = context;
         try {
-            method.invoke(object, parameters);
+            functionToPass.invoke(classPetition, parameters);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -69,18 +87,22 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
     }
 
     @Override
-    public void onResponse(JSONObject response) {
-        resJsonObj = new JSONObject();
-        resJsonObj = response;
-        Log.d("OK", "Me respondio");
-    }
-
-    @Override
     public void onErrorResponse(VolleyError error) {
         resJsonObj = new JSONObject();
         try {
             resJsonObj.put("error", error.toString());
         } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Object[] parameters = new Object[2];
+        parameters[0] = resJsonObj;
+        parameters[1] = context;
+
+        try {
+            functionToPass.invoke(classPetition, parameters);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
     }

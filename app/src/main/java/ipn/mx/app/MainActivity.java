@@ -29,18 +29,23 @@ public class MainActivity extends AppCompatActivity {
 
         PeticionAPI api = new PeticionAPI(this);
         HashMap<String, String> params = new HashMap<>();
+        params.put("valor1", "value1");
+        params.put("valor2", "value2");
+        params.put("valor3", "value3");
 
-        JSONObject response = new JSONObject();
-        /*
+        MainActivity mainActivity = new MainActivity();
+        Class[] parameterTypes = new Class[1];
+        parameterTypes[0] = JSONObject.class;
+        Method functionToPass = null;
         try {
-            response = api.peticionGET("http://192.168.1.71:8000/", params);
-        } catch (InterruptedException | JSONException e) {
+            functionToPass = MainActivity.class.getMethod("Respuesta", JSONObject.class);
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 
-        Log.d("Adentro", "Despues de la llamada de la funcion");
-        System.out.println(response.toString());*/
+        api.peticionGET("http://192.168.1.71:8000/", params, mainActivity, functionToPass);
 
+        /*
         Class[] parameterTypes = new Class[1];
         parameterTypes[0] = String.class;
         Method functionToPass = null;
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         MainActivity mainActivity = new MainActivity();
-        api.Prueba(mainActivity, functionToPass, "Segunda funcion");
+        api.Prueba(mainActivity, functionToPass, "Segunda funcion"); */
 
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-    public void printHola(String message){
-        Log.d("Hola", "printHola: " + message);
-    }
-
-    public void printAdios(String message){
-        Log.d("Adios", "printAdios: " + message);
+    public void Respuesta(JSONObject response) throws JSONException {
+        if (response.has("error")) {
+            Log.e("ERROR", "ERROR Prueba: " + response.getString("error"));
+            return;
+        }
+        Log.d("A ver si sale", "Respuesta: " + response.getString("message"));
     }
 
     @Override
