@@ -105,7 +105,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
                                 }
 
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                                editor.putString(NOMBRE_KEY, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_paterno"));
+                                editor.putString(NOMBRE_KEY, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
                                 editor.apply();
                                 tevNombreUsuario.setText(loggedNombre = sharedpreferences.getString(NOMBRE_KEY, "Sin nombre"));
                             }

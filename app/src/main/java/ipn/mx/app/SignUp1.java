@@ -41,6 +41,7 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener {
                 intent.putExtra("correo", edtCorreo.getText().toString());
                 intent.putExtra("contra", edtContra.getText().toString());
                 startActivity(intent);
+                finish();
             }
         }
     }
