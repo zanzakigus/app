@@ -8,6 +8,7 @@
     <string name="logged_email_key">email_key</string>
     <string name="logged_password_key">password_key</string>
     <string name="logged_nombre">nombre_key</string>
+
     <!-- VISTAS -->
     <string name="app_name">Resilience</string>
     <string name="input_a_materno">Apellido Materno</string>
@@ -19,14 +20,22 @@
     <string name="logo">Logo</string>
     <string name="sign_up">Registrarse</string>
     <string name="log_in">Iniciar sesión</string>
+    <string name="update_info">Actualizar Información</string>
+    <string name="log_out">Cerrar Sesión</string>
     <string name="text_date">15 / Agosto / 21</string>
     <string name="text_question">Esto es una pregunta muy preguntona</string>
     <string name="text_psicologia_positiva">La psicología positiva estudia…</string>
     <string name="title_buenos_dias">Buenos días</string>
     <string name="title_history_detections">Histórico de detecciones</string>
+    <string name="title_user">Datos Personales</string>
+    <string name="title_update_info">Actualizar Información</string>
     <string name="title_questions">Preguntas</string>
     <string name="title_sign_up">Necesitamos saber mas de ti</string>
     <string name="title_username">${username}</string>
+    <string name="title_f_nacimiento">${fNacimiento}</string>
+    <string name="title_correo">${correo}</string>
+    <string name="title_det_ultima_semana">${det_ultima_semana}</string>
+    <string name="title_det_total">${det_total}</string>
 
     <!-- CLASE: SignUp1 -->
     <string name="missing_email">Se requiere de un correo electrónico para continuar</string>
@@ -38,13 +47,15 @@
     <string name="missing_a_materno">Se requiere de su apellido materno para continuar</string>
     <string name="missing_f_nacimiento">Se requiere de su fecha de nacimiento para continuar</string>
 
-
     <!-- CLASE: Login -->
     <string name="logged_succed">Se inició sesión exitosamente</string>
     <string name="logged_fail">Los datos son incorrectos, favor de verificar</string>
 
+    <!-- CLASE: UpdateInfo -->
+    <string name="update_info_success">Información Actualizada</string>
 
     <!-- ERRORES REQUEST HTTP -->
     <string name="login_error">Error al iniciar sesión, favor de intentarlo más tarde</string>
     <string name="general_error">Error al cargar información, favor de intentarlo más tarde</string>
+
 </resources>

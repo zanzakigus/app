@@ -72,7 +72,6 @@
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:padding="12dp"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -99,7 +98,6 @@
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:padding="12dp"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/a_paterno" />
@@ -126,7 +124,6 @@
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:padding="12dp"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/a_materno" />

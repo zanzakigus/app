@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.usuario.Usuario;
@@ -65,6 +66,32 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, reqJsonObj, this, this);
+        requestQueue.add(request);
+        classPetition = object;
+        functionToPass = method;
+    }
+
+    //TODO: Falta probarlo
+    public void peticionPUT(String URL, HashMap<String, String> params, Object object, Method method) {
+
+        reqJsonObj = new JSONObject();
+        for (String key : params.keySet()) {
+            try {
+                reqJsonObj.put(key, params.get(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, URL, reqJsonObj, this, this){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Accept", "application/json");
+                return params;
+            }
+        };
         requestQueue.add(request);
         classPetition = object;
         functionToPass = method;

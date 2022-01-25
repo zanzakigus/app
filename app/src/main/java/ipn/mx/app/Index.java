@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,10 +29,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
 
     Context context;
-    View btnHome;
+    Button btnHome, btnGraph, btnNotification, btnUser;
     TextView tevNombreUsuario;
-
-
 
     //Http request variables
     RequestQueue queue;
@@ -57,13 +56,21 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-/*        btnNext = findViewById(R.id.arrow);
+        /*
+        btnNext = findViewById(R.id.arrow);
         edtCorreo = findViewById(R.id.email_input);
         edtContra = findViewById(R.id.password_input);*/
         tevNombreUsuario = findViewById(R.id.title_username);
+
         btnHome = findViewById(R.id.icon_home);
+        btnGraph = findViewById(R.id.icon_graph);
+        btnNotification = findViewById(R.id.icon_notifications);
+        btnUser = findViewById(R.id.icon_user);
 
         btnHome.setOnClickListener(this);
+        btnGraph.setOnClickListener(this);
+        btnNotification.setOnClickListener(this);
+        btnUser.setOnClickListener(this);
 
         /*btnNext.setOnClickListener(this);*/
 
@@ -134,10 +141,18 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == btnHome) {
-                Intent intent = new Intent(this, Index.class);
-                startActivity(intent);
-                finish();
+        if (btnHome == v) {
+            Intent intent = new Intent(this, Index.class);
+            startActivity(intent);
+        } else if (btnGraph == v) {
+            Intent intent = new Intent(this, HistoryDetection.class);
+            startActivity(intent);
+        } else if (btnNotification == v) {
+            //Intent intent = new Intent(this, Index.class);
+            //startActivity(intent);
+        } else if (btnUser == v) {
+            Intent intent = new Intent(this, User.class);
+            startActivity(intent);
         }
     }
 }
