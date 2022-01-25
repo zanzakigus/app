@@ -119,14 +119,13 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
                     String fNacimiento = Day + "/" + Month + "/" + year;
                     edtFNacimiento.setText(fNacimiento);
                 }
-            }, dia, mes, anno);
+            }, anno, mes, dia);
             datePickerDialog.show();
         }
     }
 
     public void onSignUp(JSONObject response, Context context) throws JSONException {
-        //context = context.getApplicationContext();
-        System.out.println(context);
+        //System.out.println(context);
         if (response.has("error")) {
             Log.e("ERROR", "ERROR onSignUp: " + response.getString("error"));
             Toast myToast = Toast.makeText(context, "ERROR " + (500) + " onSignUp: " + response.getString("error"), Toast.LENGTH_LONG);
@@ -144,9 +143,14 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
         Toast myToast = Toast.makeText(context, "Usuario Creado", Toast.LENGTH_LONG);
         myToast.show();
 
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(EMAIL_KEY, correo);
-        editor.putString(PASSWORD_KEY, contra);
+        String Shared = context.getResources().getString(R.string.shared_key);
+        SharedPreferences SharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
+        String emailKey = context.getResources().getString(R.string.logged_email_key);
+        String passKey = context.getResources().getString(R.string.logged_password_key);
+
+        SharedPreferences.Editor editor = SharedP.edit();
+        editor.putString(emailKey, correo);
+        editor.putString(passKey, contra);
         editor.apply();
 
         Intent intent = new Intent(context, Index.class);
