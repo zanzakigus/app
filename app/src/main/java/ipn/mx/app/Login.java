@@ -1,16 +1,17 @@
 package ipn.mx.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -20,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Method;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +31,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Http request variables
     RequestQueue queue;
     String host;
+
+    String email, password;
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
@@ -85,8 +88,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         Context context = this;
         if (v == btnLogin) {
-            String email = edtCorreo.getText().toString();
-            String password = edtContra.getText().toString();
+            email = edtCorreo.getText().toString();
+            password = edtContra.getText().toString();
             if (email.equals("")) {
                 Toast myToast = Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG);
                 myToast.show();
@@ -95,58 +98,69 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 myToast.show();
             } else {
 
-                JSONObject jsonObj = new JSONObject();
+                PeticionAPI api = new PeticionAPI(this);
+
+                HashMap<String, String> params = new HashMap<>();
+                params.put("correo", email);
+                params.put("password", password);
+
+                Login login = new Login();
+                login.email = email;
+                login.password = password;
+                Class[] parameterTypes = new Class[2];
+                parameterTypes[0] = JSONObject.class;
+                parameterTypes[1] = Context.class;
+                Method funtionToPass = null;
+
                 try {
-                    jsonObj.put("correo", email);
-                    jsonObj.put("password", password);
-                } catch (JSONException e) {
+                    funtionToPass = Login.class.getMethod("onLogin", parameterTypes);
+                } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 }
+                api.peticionPOST(host + "/login", params, login, funtionToPass);
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.POST, host + "/login", jsonObj, response -> {
-                            boolean resp = false;
-                            String message = context.getResources().getString(R.string.logged_fail);
-                            ;
-                            try {
-                                resp = response.getBoolean("resp");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (resp) {
-                                message = context.getResources().getString(R.string.logged_succed);
-                                SharedPreferences.Editor editor = sharedpreferences.edit();
-                                editor.putString(EMAIL_KEY, email);
-                                editor.putString(PASSWORD_KEY, password);
-
-                                // to save our data with key and value.
-                                editor.apply();
-                                Intent intent = new Intent(this, Index.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                            Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
-                            myToast.show();
-                        }, error -> {
-                            System.out.println(error.toString());
-                            Toast myToast = Toast.makeText(context, R.string.login_error, Toast.LENGTH_LONG);
-                            myToast.show();
-                        })/*{
-
-                    //This is for Headers If You Needed
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Content-Type", "application/json; charset=UTF-8");
-                        params.put("token", "hola");
-                        return params;
-                    }
-                }*/;
-                queue.add(jsonObjectRequest);
             }
         } else if (v == btnRegister) {
             Intent intent = new Intent(this, SignUp1.class);
             startActivity(intent);
         }
+    }
+
+    public void onLogin(JSONObject response, Context context) throws JSONException {
+        if (response.has("error")) {
+            Log.e("ERROR", "ERROR onLogin: " + response.getString("error"));
+            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " onLogin: " + response.getString("error"), Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        int status = response.getInt("status");
+        String message = response.getString("message");
+        if (status != 200) {
+            Log.e("ERROR", "ERROR onLogin: " + message);
+            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " onLogin: " + message, Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        String Shared = context.getResources().getString(R.string.shared_key);
+        SharedPreferences SharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
+        String emailKey = context.getResources().getString(R.string.logged_email_key);
+        String passKey = context.getResources().getString(R.string.logged_password_key);
+
+        message = context.getResources().getString(R.string.logged_succed);
+        SharedPreferences.Editor editor = SharedP.edit();;
+
+
+        editor.putString(emailKey, email);
+        editor.putString(passKey, password);
+        editor.apply();
+
+        Intent intent = new Intent(context, Index.class);
+        context.startActivity(intent);
+        Log.i("INFO", "INFO: Usuario Loggeado");
+        ((Activity) context).finish();
+
+        Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+        myToast.show();
+
     }
 }
