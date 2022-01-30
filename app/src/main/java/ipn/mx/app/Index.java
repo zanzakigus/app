@@ -1,9 +1,11 @@
 package ipn.mx.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,44 +99,23 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             finish();
         } else {
 
-            context = this;
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.GET, host + "/usuario?correo=" + loggedEmail + "&password=" + loggedPassword, null, response -> {
-                        boolean resp;
-                        try {
-                            resp = response.getBoolean("resp");
+            PeticionAPI api = new PeticionAPI(this);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("correo", loggedEmail);
+            params.put("password", loggedPassword);
 
-                            if (resp) {
-                                JSONObject usuarioJSON = null;
-                                try {
-                                    usuarioJSON = response.getJSONObject("contenido");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+            Index index = new Index();
+            Class[] parameterTypes = new Class[2];
+            parameterTypes[0] = JSONObject.class;
+            parameterTypes[1] = Context.class;
+            Method functionToPass = null;
+            try {
+                functionToPass = Index.class.getMethod("localSaveUserInfo", parameterTypes);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
 
-                                SharedPreferences.Editor editor = sharedpreferences.edit();
-                                editor.putString(NOMBRE_KEY, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
-                                editor.apply();
-                                tevNombreUsuario.setText(loggedNombre = sharedpreferences.getString(NOMBRE_KEY, "Sin nombre"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }, error -> {
-                        System.out.println(error.toString());
-                        Toast myToast = Toast.makeText(this, R.string.general_error, Toast.LENGTH_LONG);
-                        myToast.show();
-                    }) {
-
-                //This is for Headers If You Needed
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("Content-Type", "application/json; charset=UTF-8");
-                    return params;
-                }
-            };
-            queue.add(jsonObjectRequest);
+            api.peticionGET(this.getResources().getString(R.string.server_host) + "/usuario", params, index, functionToPass);
 
         }
 
@@ -154,5 +136,32 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
         }
+    }
+
+    public void localSaveUserInfo(JSONObject response, Context context) throws JSONException {
+        if (response.has("error")) {
+            Log.e("ERROR", "ERROR localSaveUserInfo: " + response.getString("error"));
+            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " localSaveUserInfo: " + response.getString("error"), Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        int status = response.getInt("status");
+        String message = response.getString("message");
+        if (status != 200) {
+            Log.e("ERROR", "ERROR localSaveUserInfo: " + message);
+            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " localSaveUserInfo: " + message, Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        JSONObject usuarioJSON = response.getJSONObject("contenido");
+        String Shared = context.getResources().getString(R.string.shared_key);
+        SharedPreferences SharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
+        String nombreKey = context.getResources().getString(R.string.logged_nombre);
+
+        SharedPreferences.Editor editor = SharedP.edit();;
+        editor.putString(nombreKey, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
+        editor.apply();
+        ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(SharedP.getString(nombreKey, "Sin nombre"));
+
     }
 }
