@@ -37,6 +37,9 @@
     <string name="title_correo">${correo}</string>
     <string name="title_det_ultima_semana">${det_ultima_semana}</string>
     <string name="title_det_total">${det_total}</string>
+    <string name="title_seccion_positivo">Sección 2: Positivos</string>
+    <string name="title_seccion_negativo">Sección 1: Negativos</string>
+    <string name="title_fit_ini">Primer Análisis</string>
 
     <!-- CLASE: SignUp1 -->
     <string name="missing_email">Se requiere de un correo electrónico para continuar</string>
@@ -52,11 +55,23 @@
     <string name="logged_succed">Se inició sesión exitosamente</string>
     <string name="logged_fail">Los datos son incorrectos, favor de verificar</string>
 
+    <!-- CLASE: Index -->
+    <string name="no_neural">No se encontro la red neuronal</string>
+
+
     <!-- CLASE: UpdateInfo -->
     <string name="update_info_success">Información Actualizada</string>
 
     <!-- ERRORES REQUEST HTTP -->
     <string name="login_error">Error al iniciar sesión, favor de intentarlo más tarde</string>
     <string name="general_error">Error al cargar información, favor de intentarlo más tarde</string>
+
+
+    <!-- CLASE: Section fit Neural Network -->
+    <string name="timer">---</string>
+    <string name="connect">CONECTAR\nDIADEMA</string>
+    <string name="text_primer_analisis_1">Para el correcto funcionamiento de la app necesitamos analizar tus patrones cerebrales en determinados momentos, e necesario que portes la diadema y la conectes a tu dispositivo.</string>
+    <string name="text_primer_analisis_2">A continuación se te pedira imaginar ciertas situaciones personales, puedes cerrar los ojos y penar en ellas mientras analizamos tus datos.</string>
+
 
 </resources>

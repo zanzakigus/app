@@ -27,6 +27,9 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import ipn.mx.app.neural.FitConnect;
 
 public class Index extends AppCompatActivity implements View.OnClickListener {
 
@@ -59,10 +62,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        /*
-        btnNext = findViewById(R.id.arrow);
-        edtCorreo = findViewById(R.id.email_input);
-        edtContra = findViewById(R.id.password_input);*/
         tevNombreUsuario = findViewById(R.id.title_username);
 
         btnHome = findViewById(R.id.icon_home);
@@ -105,17 +104,23 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             params.put("password", loggedPassword);
 
             Index index = new Index();
+            index.loggedEmail = loggedEmail;
+            index.loggedPassword = loggedPassword;
             Class[] parameterTypes = new Class[2];
             parameterTypes[0] = JSONObject.class;
             parameterTypes[1] = Context.class;
             Method functionToPass = null;
+
             try {
-                functionToPass = Index.class.getMethod("localSaveUserInfo", parameterTypes);
+                functionToPass = Index.class.getMethod("existNeural", parameterTypes);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
 
-            api.peticionGET(this.getResources().getString(R.string.server_host) + "/usuario", params, index, functionToPass);
+            api.peticionPOST(this.getResources().getString(R.string.server_host) + "/exist_neural", params, index, functionToPass);
+
+
+
 
         }
 
@@ -162,6 +167,52 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         editor.putString(nombreKey, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
         editor.apply();
         ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(SharedP.getString(nombreKey, "Sin nombre"));
+
+    }
+
+    public void existNeural(JSONObject response, Context context) throws JSONException {
+        if (response.has("error")) {
+            Log.e("ERROR", "ERROR existNeural: " + response.getString("error"));
+            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " existNeural: " + response.getString("error"), Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        int status = response.getInt("status");
+        String message = response.getString("message");
+        if (status != 200) {
+            Log.e("ERROR", "ERROR existNeural: " + message);
+            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " existNeural: " + message, Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        if(message.equals("No file")){
+            Intent intent = new Intent(context, FitConnect.class);
+            context.startActivity(intent);
+            Log.i("INFO", "INFO: No neural file found");
+            ((Activity) context).finish();
+
+            Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            myToast.show();
+        }else {
+            PeticionAPI api = new PeticionAPI(context);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("correo", loggedEmail);
+            params.put("password", loggedPassword);
+
+            Index index = new Index();
+            Class[] parameterTypes = new Class[2];
+            parameterTypes[0] = JSONObject.class;
+            parameterTypes[1] = Context.class;
+            Method functionToPass = null;
+            try {
+                functionToPass = Index.class.getMethod("localSaveUserInfo", parameterTypes);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+
+            api.peticionGET(context.getResources().getString(R.string.server_host) + "/usuario", params, index, functionToPass);
+        }
+
 
     }
 }
