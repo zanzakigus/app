@@ -73,5 +73,8 @@
     <string name="text_primer_analisis_1">Para el correcto funcionamiento de la app necesitamos analizar tus patrones cerebrales en determinados momentos, e necesario que portes la diadema y la conectes a tu dispositivo.</string>
     <string name="text_primer_analisis_2">A continuación se te pedira imaginar ciertas situaciones personales, puedes cerrar los ojos y penar en ellas mientras analizamos tus datos.</string>
     <string name="no_connect">La diadema no está conectada, favor de conectar para poder continuar.</string>
+    <string name="no_found_diadema">No se encontró la diadema, favor de verificar que la diadema esté en modo búsqueda.</string>
+    <string name="searching_diadema">Se está intentando conectar a la diadema, espere un momento por favor…</string>
+    <string name="connected_diadema">Diadema conectada, puede continuar</string>
 
 </resources>
