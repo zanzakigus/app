@@ -47,7 +47,8 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
     private ProgressBar progressBar;
     private TextView progressText;
     View btnNext;
-    int i = 0;
+    int i = 1;
+    boolean enviado = false;
 
 
     private NeuroSky neuroSky;
@@ -56,39 +57,26 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.section_positive_fit);
+        setContentView(R.layout.section_negative_fit);
 
         neuroSky = NeuroSkyManager.getNeuroSky();
         if (neuroSky.isConnected()) {
-            Toast myToast = Toast.makeText(this, "si rsts", Toast.LENGTH_LONG);
-            myToast.show();
             neuroSky.start();
-            NeuroSkyManager.enviarWavesTipoPositivo();
         } else {
-            Toast myToast = Toast.makeText(this, "ni a", Toast.LENGTH_LONG);
+            Intent intent = new Intent(this, FitConnect.class);
+            startActivity(intent);
+            finish();
+            Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
             myToast.show();
         }
 
         // set the id for the progressbar and progress text
         progressBar = findViewById(R.id.progress_bar);
         progressText = findViewById(R.id.progress_text);
+        btnNext = findViewById(R.id.arrow);
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // set the limitations for the numeric
-                // text under the progress bar
-                if (i <= 100) {
-                    progressText.setText("" + i);
-                    progressBar.setProgress(i);
-                    i++;
-                    handler.postDelayed(this, 200);
-                } else {
-                    handler.removeCallbacks(this);
-                }
-            }
-        }, 200);
+        btnNext.setOnClickListener(this);
+        progressBar.setOnClickListener(this);
     }
 
     @Override
@@ -98,9 +86,43 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
                 Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
                 myToast.show();
             } else {
-                Intent intent = new Intent(this, FitNeural1.class);
+                Intent intent = new Intent(this, FitNeural2.class);
                 startActivity(intent);
                 finish();
+            }
+        }else if(v == progressBar){
+
+            if(enviado){
+                Toast myToast = Toast.makeText(this, R.string.sent_waves_try, Toast.LENGTH_LONG);
+                myToast.show();
+            }else{
+                Toast myToast = Toast.makeText(this, R.string.sending_waves, Toast.LENGTH_LONG);
+                myToast.show();
+
+                NeuroSkyManager.enviarWavesTipoNegativo();
+
+                final Handler handler = new Handler();
+                Context context = this;
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // set the limitations for the numeric
+                        // text under the progress bar
+                        if (i <= 60) {
+                            progressText.setText("" + i);
+                            int progress = (i*100)/60;
+                            progressBar.setProgress(progress);
+                            i++;
+                            handler.postDelayed(this, 1000);
+                        } else {
+                            NeuroSkyManager.stopSendingWaves();
+                            enviado = true;
+                            Toast myToast = Toast.makeText(context, R.string.sent_waves_succed, Toast.LENGTH_LONG);
+                            myToast.show();
+                            handler.removeCallbacks(this);
+                        }
+                    }
+                }, 1000);
             }
 
 

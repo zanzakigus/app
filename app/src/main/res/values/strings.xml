@@ -76,5 +76,9 @@
     <string name="no_found_diadema">No se encontró la diadema, favor de verificar que la diadema esté en modo búsqueda.</string>
     <string name="searching_diadema">Se está intentando conectar a la diadema, espere un momento por favor…</string>
     <string name="connected_diadema">Diadema conectada, puede continuar</string>
+    <string name="text_listo_fit_wave">Cuando sientas que estés listo presiona el círculo azul.</string>
+    <string name="sending_waves">Enviando ondas cerebrales.</string>
+    <string name="sent_waves_succed">Ondas cerebrales enviadas con éxito, puedes continuar.</string>
+    <string name="sent_waves_try">Ya se enviaron las ondas cerebrales necesarias, favor de continuar.</string>
 
 </resources>

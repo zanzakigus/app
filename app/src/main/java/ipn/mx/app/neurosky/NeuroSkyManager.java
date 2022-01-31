@@ -191,16 +191,16 @@ public class NeuroSkyManager {
 
     public void onClassifyResponse(JSONObject response, Context context) throws JSONException {
         if (response.has("error")) {
-            Log.e("ERROR", "ERROR onFitResponse: " + response.getString("error"));
-            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " onFitResponse: " + response.getString("error"), Toast.LENGTH_LONG);
+            Log.e("ERROR", "ERROR onClassifyResponse: " + response.getString("error"));
+            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " onClassifyResponse: " + response.getString("error"), Toast.LENGTH_LONG);
             myToast.show();
             return;
         }
         int status = response.getInt("status");
         String message = response.getString("message");
         if (status != 200) {
-            Log.e("ERROR", "ERROR onFitResponse: " + message);
-            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " onFitResponse: " + message, Toast.LENGTH_LONG);
+            Log.e("ERROR", "ERROR onClassifyResponse: " + message);
+            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " onClassifyResponse: " + message, Toast.LENGTH_LONG);
             myToast.show();
             return;
         }
@@ -214,23 +214,20 @@ public class NeuroSkyManager {
 
     public void onSentWaves(JSONObject response, Context context) throws JSONException {
         if (response.has("error")) {
-            Log.e("ERROR", "ERROR onFitResponse: " + response.getString("error"));
-            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " onFitResponse: " + response.getString("error"), Toast.LENGTH_LONG);
+            Log.e("ERROR", "ERROR onSentWaves: " + response.getString("error"));
+            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " onSentWaves: " + response.getString("error"), Toast.LENGTH_LONG);
             myToast.show();
             return;
         }
         int status = response.getInt("status");
         String message = response.getString("message");
         if (status != 200) {
-            Log.e("ERROR", "ERROR onFitResponse: " + message);
-            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " onFitResponse: " + message, Toast.LENGTH_LONG);
+            Log.e("ERROR", "ERROR onSentWaves: " + message);
+            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " onSentWaves: " + message, Toast.LENGTH_LONG);
             myToast.show();
             return;
         }
-
-
-        Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
-        myToast.show();
+        Log.d(LOG_TAG + "-WAVES SENT", "brain: Enviada con exito.");
 
     }
 
@@ -238,7 +235,7 @@ public class NeuroSkyManager {
         tipo_seleccionado = TIPO_POSITIVA;
     }
 
-    public static void enviarWavesTipoTriste() {
+    public static void enviarWavesTipoNegativo() {
         tipo_seleccionado = TIPO_NEGATIVA;
 
     }
@@ -255,7 +252,7 @@ public class NeuroSkyManager {
 
     }
 
-    public void solicitarEntrenamiento() {
+    public static void solicitarEntrenamiento() {
         tipo_seleccionado = -1;
         HashMap<String, String> params = new HashMap<String, String>();
         String Shared = context.getResources().getString(R.string.shared_key);
@@ -282,7 +279,7 @@ public class NeuroSkyManager {
                 e.printStackTrace();
             }
 
-            api.peticionPOST(context.getResources().getString(R.string.server_host) + "/waves_data", params, neuroSkyManager, functionToPass);
+            api.peticionPOST(context.getResources().getString(R.string.server_host) + "/fit_neural", params, neuroSkyManager, functionToPass);
 
         }
 
@@ -327,4 +324,7 @@ public class NeuroSkyManager {
         return estrendada;
     }
 
+    public static void setEstrendada(boolean estrendada) {
+        NeuroSkyManager.estrendada = estrendada;
+    }
 }
