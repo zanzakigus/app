@@ -56,7 +56,7 @@
     <string name="logged_fail">Los datos son incorrectos, favor de verificar</string>
 
     <!-- CLASE: Index -->
-    <string name="no_neural">No se encontro la red neuronal</string>
+    <string name="no_neural">No se encontró la red neuronal</string>
 
 
     <!-- CLASE: UpdateInfo -->
@@ -72,6 +72,6 @@
     <string name="connect">CONECTAR\nDIADEMA</string>
     <string name="text_primer_analisis_1">Para el correcto funcionamiento de la app necesitamos analizar tus patrones cerebrales en determinados momentos, e necesario que portes la diadema y la conectes a tu dispositivo.</string>
     <string name="text_primer_analisis_2">A continuación se te pedira imaginar ciertas situaciones personales, puedes cerrar los ojos y penar en ellas mientras analizamos tus datos.</string>
-
+    <string name="no_connect">La diadema no está conectada, favor de conectar para poder continuar.</string>
 
 </resources>

@@ -191,7 +191,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             Log.i("INFO", "INFO: No neural file found");
             ((Activity) context).finish();
 
-            Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            Toast myToast = Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG);
             myToast.show();
         }else {
             PeticionAPI api = new PeticionAPI(context);
