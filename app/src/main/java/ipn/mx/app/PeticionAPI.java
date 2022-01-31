@@ -32,7 +32,7 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
     private Object classPetition;
     private Method functionToPass;
 
-    PeticionAPI(Context context) {
+    public PeticionAPI(Context context) {
         this.context = context;
         requestQueue = Volley.newRequestQueue(context);
     }
