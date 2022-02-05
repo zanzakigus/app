@@ -38,5 +38,36 @@
         app:layout_constraintTop_toBottomOf="@id/title_notificacion_externa"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/title_notificacion_interna"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:lineSpacingExtra="10dp"
+        android:text="Enviar notificacion interna a la aplicacion"
+        android:textAppearance="@style/title_blue"
+        android:layout_marginTop="50dp"
+        style="@style/center_things"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_notificacion_externa"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_notificacion_interna"
+        style="@style/center_things"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:background="@drawable/background_blue_button"
+        android:text="Click"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_notificacion_interna"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
