@@ -81,4 +81,10 @@
     <string name="sent_waves_succed">Ondas cerebrales enviadas con éxito, puedes continuar.</string>
     <string name="sent_waves_try">Ya se enviaron las ondas cerebrales necesarias, favor de continuar.</string>
 
+
+    <!-- Test: Todos los strings de las vistas de Testeo -->
+    <string name="test_Ciudado">¡¡Ciudado!!</string>
+    <string name="test_emocion_detectada">Se ha detectado que te encuentras en una emoción negativa</string>
+    <string name="test_btn_continuar">Continuar</string>
+
 </resources>
