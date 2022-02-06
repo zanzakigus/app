@@ -42,6 +42,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
     RequestQueue queue;
     String host;
 
+    public static final int NOTIFICATION_ID = 888;
+
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
