@@ -1,7 +1,9 @@
 package ipn.mx.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,7 +21,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-public class User extends AppCompatActivity implements View.OnClickListener {
+public class User extends AppCompatActivity implements View.OnClickListener, DialogInterface.OnClickListener {
 
     Context cGlobal;
 
@@ -28,7 +30,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
 
     // View
     TextView tvUsername, tvFNacimiento, tvEmail, tvDetUltimaSemana, tvDetTotal;
-    Button btnUpdateInfo, btnLogOut;
+    Button btnUpdateInfo, btnLogOut, btnUpdatePassword;
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
@@ -42,7 +44,6 @@ public class User extends AppCompatActivity implements View.OnClickListener {
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
-    private String loggedNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +72,12 @@ public class User extends AppCompatActivity implements View.OnClickListener {
 
         btnUpdateInfo = findViewById(R.id.editar_info);
         btnLogOut = findViewById(R.id.cerrar_sesion);
+        btnUpdatePassword = findViewById(R.id.cambiar_contra);
 
         btnUpdateInfo.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
+        btnUpdateInfo.setOnClickListener(this);
+        btnUpdatePassword.setOnClickListener(this);
 
         // Obtener la informacion del usuario a mostrar
 
@@ -136,6 +140,27 @@ public class User extends AppCompatActivity implements View.OnClickListener {
             startActivity(intent);
         } else if(btnLogOut == v) {
             logOut();
+        } else if(btnUpdatePassword == v){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.user_dialog_message)
+                    .setTitle(R.string.user_dialog_title)
+                    .setPositiveButton(R.string.user_dialog_affirmative, this)
+                    .setNegativeButton(R.string.user_dialog_negative, this);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    // Evento de los Clicks del Dialog Alert
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+        // Cuando i = -1: Botón Afirmativo
+        // Cuando i = -2: Botón Negativo
+        // Cuando el usuario le da al botón negativo no es necesario poner código
+        // El dialog se cierra de forma automatica
+        if(i == -1){
+            Intent intent = new Intent(this, CodePassword.class);
+            startActivity(intent);
         }
     }
 
@@ -160,7 +185,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
         String username = userData.getString("nombre") + " " + userData.getString("ap_paterno") + " " + userData.getString("ap_materno");
 
         // Poner el texto a los TextView
-        // Se hace de este modo debido a que esta funcion se corre despues del onCrete, entonces no comparte
+        // Se hace de este modo debido a que esta funcion se corre despues del onCreate, entonces no comparte
         // las variables de esta funcion, es principalmente por eso que se manda en Context por parametro
         ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(username);
         ((TextView) ((Activity) context).findViewById(R.id.text_f_nacimiento)).setText(userData.getString("correo"));
@@ -178,4 +203,6 @@ public class User extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
         finish();
     }
+
+
 }

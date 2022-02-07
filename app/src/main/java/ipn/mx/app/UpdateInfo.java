@@ -45,7 +45,6 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
-    private String loggedNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
