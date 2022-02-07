@@ -2,8 +2,8 @@
 
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
-    <string name="server_host">http://192.168.3.20:8000</string>
-    <!--<string name="server_host">http://192.168.1.71:8000</string>-->
+    <!--<string name="server_host">http://192.168.3.20:8000</string>-->
+    <string name="server_host">http://192.168.1.71:8000</string>
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -23,6 +23,7 @@
     <string name="sign_up">Registrarse</string>
     <string name="log_in">Iniciar sesión</string>
     <string name="update_info">Actualizar Información</string>
+    <string name="update_password">Cambiar contraseña</string>
     <string name="log_out">Cerrar Sesión</string>
     <string name="text_date">15 / Agosto / 21</string>
     <string name="text_question">Esto es una pregunta muy preguntona</string>
@@ -41,12 +42,14 @@
     <string name="title_seccion_positivo">Sección 2: Positivos</string>
     <string name="title_seccion_negativo">Sección 1: Negativos</string>
     <string name="title_fit_ini">Primer Análisis</string>
+    <string name="title_change_password">Cambio de contraseña</string>
+    <string name="title_update_password">Actualizar Contraseña</string>
 
     <!-- CLASE: SignUp1 -->
     <string name="missing_email">Se requiere de un correo electrónico para continuar</string>
     <string name="missing_password">Se requiere de una contraseña para continuar</string>
 
-    <!-- CLASE: SignUp1 -->
+    <!-- CLASE: SignUp2 -->
     <string name="missing_name">Se requiere de su nombre para continuar</string>
     <string name="missing_a_paterno">Se requiere de su apellido paterno para continuar</string>
     <string name="missing_a_materno">Se requiere de su apellido materno para continuar</string>
@@ -59,9 +62,28 @@
     <!-- CLASE: Index -->
     <string name="no_neural">No se encontró la red neuronal</string>
 
+    <!-- CLASE: User -->
+    <string name="user_dialog_title">¡¡Cambio de contraseña!!</string>
+    <string name="user_dialog_message">¿Desea empezar el procedimiento para actualizar la contraseña?</string>
+    <string name="user_dialog_affirmative">Cambiar contraseña</string>
+    <string name="user_dialog_negative">Cancelar</string>
 
     <!-- CLASE: UpdateInfo -->
     <string name="update_info_success">Información Actualizada</string>
+
+    <!-- CLASE: CodePassword -->
+    <string name="password_information">Se le ha enviado a su correo un código para poder actualizar la contraseña.</string>
+    <string name="second_information">El correo puede tardar hasta un minuto en llegar. En caso de no encontrarlo favor de revisar la bandeja de spam o correos no deseados.</string>
+    <string name="third_information">En caso de cerrar la aplicación el codigo quedará invalida y debera de iniciar el procedimiento de nuevo.</string>
+    <string name="invalid_password_code">Favor de ingresar una contraseña valida. Solo queda un intento restante.</string>
+    <string name="log_out_reason">Por motivos de seguridad se ha cerrado la sesión.</string>
+    <string name="confirme_code">Validar código</string>
+
+    <!-- CLASE: UpdatePassword -->
+    <string name="update_password_new">Ingrese la nueva contraseña</string>
+    <string name="update_password_confirm">Confirme la contraseña</string>
+    <string name="update_password_text_first">La actualización de la contraseña se hará de forma inmediata.</string>
+    <string name="update_password_text_second">Se cerrará la sesión para que pueda ingresar con la nueva contraseña.</string>
 
     <!-- ERRORES REQUEST HTTP -->
     <string name="login_error">Error al iniciar sesión, favor de intentarlo más tarde</string>

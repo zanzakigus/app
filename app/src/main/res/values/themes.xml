@@ -80,4 +80,18 @@
         <item name="android:layout_marginTop"> 20dp </item>
     </style>
 
+    <!-- Estilo para EditText del codigo de password -->
+    <style name="style_edit_text_code_password">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:maxLength"> 1 </item>
+        <item name="android:importantForAutofill" tools:targetApi="o">no</item>
+        <item name="android:inputType"> number </item>
+        <item name="android:textColor"> @color/black </item>
+        <item name="android:background"> @drawable/custom_input </item>
+        <item name="android:padding"> 12dp </item>
+        <item name="android:gravity"> center </item>
+        <item name="android:imeOptions"> actionNext </item>
+    </style>
+
 </resources>

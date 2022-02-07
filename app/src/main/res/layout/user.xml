@@ -102,6 +102,18 @@
                 android:textColor="@color/black" />
 
             <Button
+                android:id="@+id/cambiar_contra"
+                android:gravity="center"
+                android:background="@drawable/background_yellow"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/update_password"
+                android:theme="@style/inside_button"
+                android:textColor="@color/black" />
+
+            <Button
                 android:id="@+id/cerrar_sesion"
                 android:gravity="center"
                 android:background="@drawable/background_red"

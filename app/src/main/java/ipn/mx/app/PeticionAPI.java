@@ -1,9 +1,11 @@
 package ipn.mx.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -49,6 +51,14 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
         URL = URLBuilder.toString();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, new JSONObject(), this, this);
+
+        // En caso de que la peticion se tarde mucho el Volley vuelve a mandar otra petición haciendo que al servidor le lleguen dos peticiones o mas
+        // Con esto aumnetamos el tiempo de espera y hacemos que como mucho solo haga una petición. ASi evitamos duplicidades en el servidor.
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         requestQueue.add(request);
         classPetition = object;
         functionToPass = method;
@@ -66,12 +76,19 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, reqJsonObj, this, this);
+
+        // En caso de que la peticion se tarde mucho el Volley vuelve a mandar otra petición haciendo que al servidor le lleguen dos peticiones o mas
+        // Con esto aumnetamos el tiempo de espera y hacemos que como mucho solo haga una petición. ASi evitamos duplicidades en el servidor.
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         requestQueue.add(request);
         classPetition = object;
         functionToPass = method;
     }
 
-    //TODO: Falta probarlo
     public void peticionPUT(String URL, HashMap<String, String> params, Object object, Method method) {
 
         reqJsonObj = new JSONObject();
@@ -92,6 +109,14 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
                 return params;
             }
         };
+
+        // En caso de que la peticion se tarde mucho el Volley vuelve a mandar otra petición haciendo que al servidor le lleguen dos peticiones o mas
+        // Con esto aumnetamos el tiempo de espera y hacemos que como mucho solo haga una petición. ASi evitamos duplicidades en el servidor.
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         requestQueue.add(request);
         classPetition = object;
         functionToPass = method;
@@ -104,6 +129,7 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
         Object[] parameters = new Object[2];
         parameters[0] = response;
         parameters[1] = context;
+
         try {
             functionToPass.invoke(classPetition, parameters);
         } catch (IllegalAccessException e) {
