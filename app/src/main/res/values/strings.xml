@@ -3,7 +3,8 @@
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
     <!--<string name="server_host">http://192.168.3.20:8000</string>-->
-    <string name="server_host">http://192.168.1.71:8000</string>
+    <string name="server_host">http://192.168.1.17:8000</string>
+    <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -116,5 +117,7 @@
     <string name="m_content_title">¡¡Ciudado!!</string>
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
     <string name="m_big_text">Se ha detectado que te encuentras en una emoción negativa, presiona en estrategia para poder apoyarte. </string>
+    <string name="m_notification_button">Estrategia </string>
+
 
 </resources>

@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import ipn.mx.app.service.HeadsetConnectionService;
+
 public class User extends AppCompatActivity implements View.OnClickListener, DialogInterface.OnClickListener {
 
     Context cGlobal;
@@ -199,9 +201,15 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         editor.putString(PASSWORD_KEY, null);
         editor.apply();
 
+        /*if (HeadsetConnectionService.isIsIntentServiceRunning()){
+            Intent hcs = new Intent(this, HeadsetConnectionService.class);
+            stopService(hcs);
+        }*/
+
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
+
     }
 
 

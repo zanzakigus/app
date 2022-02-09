@@ -4,6 +4,10 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.core.app.NotificationManagerCompat;
+
+import ipn.mx.app.Index;
+import ipn.mx.app.notification.GlobalNotificationManager;
 import ipn.mx.app.test.ClickNotification;
 
 public class GenericNotificationService extends IntentService {
@@ -23,7 +27,7 @@ public class GenericNotificationService extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (STRATEGY_ACTION_YES.equals(action)) {
-                handleActionSnooze();
+                handleActionYes();
             }
         }
     }
@@ -32,12 +36,12 @@ public class GenericNotificationService extends IntentService {
     /**
      * Handles action strategy in the provided background thread.
      */
-    private void handleActionSnooze() {
+    private void handleActionYes() {
         Log.d(TAG, "handleActionStrategy()");
         Intent intent = new Intent(getApplicationContext(), ClickNotification.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-
+        GlobalNotificationManager.clearNotification(this);
 
     }
 

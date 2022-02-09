@@ -13,6 +13,7 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
     private String mBigContentTitle;
     private String mBigText;
     private String mSummaryText;
+    private String buttonText;
 
 
 
@@ -25,6 +26,7 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
         // Content for API <24 (4.0 and below) devices.
         mContentText = context.getResources().getString(R.string.m_content_text);
         mPriority = NotificationCompat.PRIORITY_HIGH;
+        buttonText = context.getResources().getString(R.string.m_notification_button);
 
         // BigText Style Notification values:
         mBigContentTitle = context.getResources().getString(R.string.app_name);
@@ -68,6 +70,13 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
         this.mSummaryText = mSummaryText;
     }
 
+    public String getButtonText() {
+        return buttonText;
+    }
+
+    public void setButtonText(String buttonText) {
+        this.buttonText = buttonText;
+    }
 
     @Override
     public String toString() {

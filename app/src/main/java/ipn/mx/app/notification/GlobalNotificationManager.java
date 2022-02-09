@@ -23,7 +23,8 @@ public class GlobalNotificationManager {
     private Context context;
     NotificationManagerCompat notificationManagerCompat;
     NotificationManagerData  notificacionManagerData;
-
+    Intent notifyIntent;
+    Intent strategyIntent;
 
     public GlobalNotificationManager(Context context, NotificationManagerData notificacionManagerData) {
         this.context = context;
@@ -33,7 +34,7 @@ public class GlobalNotificationManager {
     }
 
     public void generateNotification() {
-        Log.d(TAG, "generateBigTextStyleNotification()");
+        Log.d(TAG, "generateNotification()");
 
         // 1. Create/Retrieve Notification Channel for O and beyond devices (26+).
         String notificationChannelId =
@@ -53,7 +54,7 @@ public class GlobalNotificationManager {
 
 
         // 3. Set up main Intent for notification.
-        Intent notifyIntent = new Intent(context, ClickNotification.class);
+        notifyIntent = new Intent(context, ClickNotification.class);
 
         // Sets the Activity to start in a new, empty task
         /* notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
@@ -69,14 +70,14 @@ public class GlobalNotificationManager {
         // 4. Create additional Actions (Intents) for the Notification.
 
         // Strategy Action
-        Intent strategyIntent = new Intent(context, GenericNotificationService.class);
+        strategyIntent = new Intent(context, GenericNotificationService.class);
         strategyIntent.setAction(GenericNotificationService.STRATEGY_ACTION_YES);
 
         PendingIntent strategyPendingIntent = PendingIntent.getService(context, 0, strategyIntent, 0);
         NotificationCompat.Action strategyAction =
                 new NotificationCompat.Action.Builder(
-                        R.drawable.ic_alarm_white_48dp,
-                        "Estrategia",
+                        R.drawable.ic_reply_white_18dp,
+                        notificacionManagerData.getButtonText(),
                         strategyPendingIntent)
                         .build();
 
@@ -130,5 +131,30 @@ public class GlobalNotificationManager {
                 .build();
 
         notificationManagerCompat.notify(Index.NOTIFICATION_ID, notification);
+    }
+
+    public Intent getNotifyIntent() {
+        return notifyIntent;
+    }
+
+    public void setNotifyIntent(Intent notifyIntent) {
+        this.notifyIntent = notifyIntent;
+    }
+
+    public Intent getStrategyIntent() {
+        return strategyIntent;
+    }
+
+    public void setStrategyIntent(Intent strategyIntent) {
+        this.strategyIntent = strategyIntent;
+    }
+
+    public static void clearNotification(Context context ){
+
+        Log.d(TAG, "clearNotification()");
+
+        NotificationManagerCompat notificationManagerCompat =
+                NotificationManagerCompat.from(context);
+        notificationManagerCompat.cancel(Index.NOTIFICATION_ID);
     }
 }

@@ -36,6 +36,7 @@ import ipn.mx.app.notification.GlobalNotificationManager;
 import ipn.mx.app.notification.mock.MockDatabase;
 import ipn.mx.app.notification.mock.NotificationManagerData;
 import ipn.mx.app.notification.util.NotificationUtil;
+import ipn.mx.app.service.HeadsetConnectionService;
 
 public class NotificationTest extends AppCompatActivity implements View.OnClickListener {
 
@@ -74,6 +75,8 @@ public class NotificationTest extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnNotificacionExterna) {
+            Intent hcs = new Intent(this, HeadsetConnectionService.class);
+            startService(hcs);
 
 
             boolean areNotificationsEnabled = notificationManagerCompat.areNotificationsEnabled();
@@ -82,11 +85,14 @@ public class NotificationTest extends AppCompatActivity implements View.OnClickL
             } else {
                 Toast.makeText(this, "No se que pedo", Toast.LENGTH_SHORT).show();
             }
-            NotificationManagerData nmd = new NotificationManagerData(this);
+            /*NotificationManagerData nmd = new NotificationManagerData(this);
             GlobalNotificationManager gnm = new GlobalNotificationManager(this, nmd);
-            gnm.generateNotification();
+            gnm.generateNotification();*/
 
         } else if (v == btnNotificacionInterna) {
+            Intent hcs = new Intent(this, HeadsetConnectionService.class);
+            startService(hcs);
+
             dialog.setContentView(R.layout.alert_dialog_test);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 

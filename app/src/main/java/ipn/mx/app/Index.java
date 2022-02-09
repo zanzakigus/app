@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import ipn.mx.app.neural.FitConnect;
+import ipn.mx.app.service.HeadsetConnectionService;
 
 public class Index extends AppCompatActivity implements View.OnClickListener {
 
@@ -210,6 +211,11 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
                 functionToPass = Index.class.getMethod("localSaveUserInfo", parameterTypes);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
+            }
+            if (!HeadsetConnectionService.isIsIntentServiceRunning()){
+                Intent hcs = new Intent(this, HeadsetConnectionService.class);
+                context.startService(hcs);
+                Toast.makeText(context, "service llll", Toast.LENGTH_LONG).show();
             }
 
             api.peticionGET(context.getResources().getString(R.string.server_host) + "/usuario", params, index, functionToPass);
