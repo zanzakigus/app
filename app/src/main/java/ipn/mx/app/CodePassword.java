@@ -117,7 +117,7 @@ public class CodePassword extends AppCompatActivity implements View.OnClickListe
             }
 
             // Log.d("codePassword", codePasswordServer + "           " + codePasswordUser);
-            // Validamos que la contraseña proporcionada es la misma que la que nos brindo el server
+            // Validamos que el codigo proporcionado es el mismo que la que nos brindo el server
             if (!codePasswordUser.equals(codePasswordServer)) {
                 if (intentsCode == -1) logOut();
                 else Toast.makeText(this, R.string.invalid_password_code, Toast.LENGTH_LONG).show();
