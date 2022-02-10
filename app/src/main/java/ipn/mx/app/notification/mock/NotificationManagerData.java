@@ -4,7 +4,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 
 import androidx.core.app.NotificationCompat;
+
 import ipn.mx.app.R;
+import ipn.mx.app.global.GlobalInfo;
 
 public class NotificationManagerData extends MockDatabase.MockNotificationData {
 
@@ -14,7 +16,7 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
     private String mBigText;
     private String mSummaryText;
     private String buttonText;
-
+    private int notificationId;
 
 
     public NotificationManagerData(Context context) {
@@ -22,7 +24,8 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
 
         // Standard Notification values:
         // Title for API <16 (4.0 and below) devices.
-        mContentTitle = context.getResources().getString(R.string.m_content_title);;
+        mContentTitle = context.getResources().getString(R.string.m_content_title);
+        ;
         // Content for API <24 (4.0 and below) devices.
         mContentText = context.getResources().getString(R.string.m_content_text);
         mPriority = NotificationCompat.PRIORITY_HIGH;
@@ -30,8 +33,9 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
 
         // BigText Style Notification values:
         mBigContentTitle = context.getResources().getString(R.string.app_name);
-        mBigText =context.getResources().getString(R.string.m_big_text);
+        mBigText = context.getResources().getString(R.string.m_big_text);
         mSummaryText = context.getResources().getString(R.string.m_summary_text);
+        notificationId = GlobalInfo.NOTIFICATION_EMOTION_ID;
 
         // Notification channel values (for devices targeting 26 and above):
         mChannelId = "notifications";
@@ -76,6 +80,14 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
 
     public void setButtonText(String buttonText) {
         this.buttonText = buttonText;
+    }
+
+    public int getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(int notificationId) {
+        this.notificationId = notificationId;
     }
 
     @Override

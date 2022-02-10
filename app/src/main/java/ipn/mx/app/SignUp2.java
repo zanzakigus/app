@@ -1,8 +1,6 @@
 package ipn.mx.app;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,14 +23,12 @@ import java.util.HashMap;
 
 public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
 
-    EditText edtNombre, edtAPaterno, edtAMaterno, edtFNacimiento;
-    View btnNext;
-
-    String correo, contra;
-
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
+    EditText edtNombre, edtAPaterno, edtAMaterno, edtFNacimiento;
+    View btnNext;
+    String correo, contra;
     SharedPreferences sharedpreferences;
 
     private int anno, mes, dia;

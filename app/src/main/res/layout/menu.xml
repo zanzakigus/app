@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,14 +8,14 @@
 
     <TextView
         android:id="@+id/title_buenos_dias"
+        style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="100dp"
         android:gravity="top"
         android:lineSpacingExtra="10dp"
         android:text="@string/title_buenos_dias"
         android:textAppearance="@style/title_blue"
-        android:layout_marginTop="100dp"
-        style="@style/center_things"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,14 +23,14 @@
 
     <TextView
         android:id="@+id/title_username"
+        style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="0dp"
         android:gravity="top"
         android:lineSpacingExtra="10dp"
         android:text="@string/title_username"
         android:textAppearance="@style/title_blue"
-        android:layout_marginTop="0dp"
-        style="@style/center_things"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_buenos_dias"
@@ -39,14 +38,14 @@
 
     <TextView
         android:id="@+id/title_psicologia_positiva"
+        style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="60dp"
         android:gravity="top"
         android:lineSpacingExtra="10dp"
         android:text="@string/text_psicologia_positiva"
         android:textAppearance="@style/title"
-        android:layout_marginTop="60dp"
-        style="@style/center_things"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_username"
@@ -56,8 +55,8 @@
         android:id="@+id/figure_colors"
         android:layout_width="260dp"
         android:layout_height="260dp"
-        android:background="@drawable/figure_colors"
         android:layout_marginTop="70dp"
+        android:background="@drawable/figure_colors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_psicologia_positiva"
@@ -66,8 +65,8 @@
     <include
         android:id="@+id/action_bar"
         layout="@layout/action_bar"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minHeight="61dp"
     android:layout_marginBottom="15dp"
-    android:background="@color/invisible">
+    android:background="@color/invisible"
+    android:minHeight="61dp">
 
     <View
         android:id="@+id/component_button_big"
@@ -29,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:ellipsize="none"
         android:gravity="center"
         android:justificationMode="inter_word"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:scrollHorizontally="false"
         android:text="@string/connect"
         android:textAppearance="@style/text"

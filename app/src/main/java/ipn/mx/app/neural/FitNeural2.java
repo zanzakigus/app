@@ -18,15 +18,13 @@ import ipn.mx.app.neurosky.library.NeuroSky;
 
 public class FitNeural2 extends AppCompatActivity implements View.OnClickListener {
 
-    private ProgressBar progressBar;
-    private TextView progressText;
+    private final static String LOG_TAG = "NeuroSky";
     View btnNext;
     int i = 1;
     boolean enviado = false;
-
-
+    private ProgressBar progressBar;
+    private TextView progressText;
     private NeuroSky neuroSky;
-    private final static String LOG_TAG = "NeuroSky";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +62,12 @@ public class FitNeural2 extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent);
                 finish();
             }
-        }else if(v == progressBar){
+        } else if (v == progressBar) {
 
-            if(enviado){
+            if (enviado) {
                 Toast myToast = Toast.makeText(this, R.string.sent_waves_try, Toast.LENGTH_LONG);
                 myToast.show();
-            }else{
+            } else {
                 Toast myToast = Toast.makeText(this, R.string.sending_waves, Toast.LENGTH_LONG);
                 myToast.show();
 
@@ -84,7 +82,7 @@ public class FitNeural2 extends AppCompatActivity implements View.OnClickListene
                         // text under the progress bar
                         if (i <= 60) {
                             progressText.setText("" + i);
-                            int progress = (i*100)/60;
+                            int progress = (i * 100) / 60;
                             progressBar.setProgress(progress);
                             i++;
                             handler.postDelayed(this, 1000);

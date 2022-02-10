@@ -15,32 +15,33 @@
  */
 package ipn.mx.app.neurosky.library.message;
 
+import java.util.Set;
+
 import ipn.mx.app.neurosky.library.message.enums.BrainWave;
 import ipn.mx.app.neurosky.library.message.enums.Signal;
 import ipn.mx.app.neurosky.library.message.enums.State;
-import java.util.Set;
 
 @SuppressWarnings("PMD") // I want to have the same methods names as field names
 public class BrainEvent {
-  private final State state;
-  private final Signal signal;
-  private final Set<BrainWave> brainWaves;
+    private final State state;
+    private final Signal signal;
+    private final Set<BrainWave> brainWaves;
 
-  public BrainEvent(final State state, final Signal signal, final Set<BrainWave> brainWaves) {
-    this.state = state;
-    this.signal = signal;
-    this.brainWaves = brainWaves;
-  }
+    public BrainEvent(final State state, final Signal signal, final Set<BrainWave> brainWaves) {
+        this.state = state;
+        this.signal = signal;
+        this.brainWaves = brainWaves;
+    }
 
-  public State state() {
-    return state;
-  }
+    public State state() {
+        return state;
+    }
 
-  public Signal signal() {
-    return signal;
-  }
+    public Signal signal() {
+        return signal;
+    }
 
-  public Set<BrainWave> brainWaves() {
-    return brainWaves;
-  }
+    public Set<BrainWave> brainWaves() {
+        return brainWaves;
+    }
 }

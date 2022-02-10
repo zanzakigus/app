@@ -15,33 +15,32 @@
  */
 package ipn.mx.app.neurosky.library;
 
-import ipn.mx.app.neurosky.library.message.BrainEvent;
-
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.Subject;
+import ipn.mx.app.neurosky.library.message.BrainEvent;
 
 
 class EventBus {
 
-  private final Subject<Object> bus = PublishSubject.create().toSerialized();
+    private final Subject<Object> bus = PublishSubject.create().toSerialized();
 
-  private EventBus() {
-  }
+    private EventBus() {
+    }
 
-  public static EventBus create() {
-    return new EventBus();
-  }
+    public static EventBus create() {
+        return new EventBus();
+    }
 
-  public void send(final BrainEvent object) {
-    bus.onNext(object);
-  }
+    public void send(final BrainEvent object) {
+        bus.onNext(object);
+    }
 
-  @SuppressWarnings("unchecked")
-  public Flowable<BrainEvent> receive(BackpressureStrategy backpressureStrategy) {
-    return (Flowable<BrainEvent>) (Flowable<?>) bus
-        .toFlowable(backpressureStrategy)
-        .filter(object -> object instanceof BrainEvent);
-  }
+    @SuppressWarnings("unchecked")
+    public Flowable<BrainEvent> receive(BackpressureStrategy backpressureStrategy) {
+        return (Flowable<BrainEvent>) (Flowable<?>) bus
+                .toFlowable(backpressureStrategy)
+                .filter(object -> object instanceof BrainEvent);
+    }
 }

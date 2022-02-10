@@ -1,41 +1,21 @@
 package ipn.mx.app.test;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.app.Person;
-import androidx.core.app.RemoteInput;
-import androidx.core.content.ContextCompat;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import ipn.mx.app.Index;
-import ipn.mx.app.MainActivity;
 import ipn.mx.app.R;
-import ipn.mx.app.notification.GlobalNotificationBuilder;
-import ipn.mx.app.notification.GlobalNotificationManager;
-import ipn.mx.app.notification.mock.MockDatabase;
-import ipn.mx.app.notification.mock.NotificationManagerData;
-import ipn.mx.app.notification.util.NotificationUtil;
 import ipn.mx.app.service.HeadsetConnectionService;
 
 public class NotificationTest extends AppCompatActivity implements View.OnClickListener {
@@ -43,15 +23,12 @@ public class NotificationTest extends AppCompatActivity implements View.OnClickL
     public static final String TAG = "Notification";
     Button btnNotificacionExterna;
     Button btnNotificacionInterna;
-
-    private PendingIntent pendingIntent;
-
     // Objetos del Dialog
     Dialog dialog;
     Button btnContinuarDialog;
     ImageView btnCloseDialog;
-
     NotificationManagerCompat notificationManagerCompat;
+    private PendingIntent pendingIntent;
 
     // TODO: Si se desea programar una notificacion se hace esto
     // TODO: https://www.youtube.com/watch?v=REJ3pDLGTmA

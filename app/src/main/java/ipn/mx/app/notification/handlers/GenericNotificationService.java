@@ -4,17 +4,15 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
-import androidx.core.app.NotificationManagerCompat;
-
 import ipn.mx.app.Index;
+import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.notification.GlobalNotificationManager;
-import ipn.mx.app.test.ClickNotification;
 
 public class GenericNotificationService extends IntentService {
 
-    private static final String TAG = "NotificationService";
     public static final String STRATEGY_ACTION_YES = "YES";
     public static final String STRATEGY_ACTION_NO = "NO";
+    private static final String TAG = "NotificationService";
 
     public GenericNotificationService() {
         super("GenericNotificationService");
@@ -38,11 +36,11 @@ public class GenericNotificationService extends IntentService {
      */
     private void handleActionYes() {
         Log.d(TAG, "handleActionStrategy()");
-        Intent intent = new Intent(getApplicationContext(), ClickNotification.class);
+        Intent intent = new Intent(getApplicationContext(), Index.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        GlobalNotificationManager.clearNotification(this);
-
+        GlobalNotificationManager.clearNotification(this, GlobalInfo.NOTIFICATION_EMOTION_ID);
+        GlobalInfo.notificationsDisplayed.remove(GlobalInfo.NOTIFICATION_EMOTION_ID);
     }
 
 

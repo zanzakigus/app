@@ -8,26 +8,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 import ipn.mx.app.neural.FitConnect;
 import ipn.mx.app.service.HeadsetConnectionService;
@@ -35,23 +28,17 @@ import ipn.mx.app.service.HeadsetConnectionService;
 public class Index extends AppCompatActivity implements View.OnClickListener {
 
 
-    Context context;
-    Button btnHome, btnGraph, btnNotification, btnUser;
-    TextView tevNombreUsuario;
-
-    //Http request variables
-    RequestQueue queue;
-    String host;
-
-    public static final int NOTIFICATION_ID = 888;
-
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
-
-
+    Context context;
+    Button btnHome, btnGraph, btnNotification, btnUser;
+    TextView tevNombreUsuario;
+    //Http request variables
+    RequestQueue queue;
+    String host;
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
@@ -64,6 +51,9 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+
+        /*Intent hcs = new Intent(this, HeadsetConnectionService.class);
+        startService(hcs);*/
 
         tevNombreUsuario = findViewById(R.id.title_username);
 
@@ -123,8 +113,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             api.peticionPOST(this.getResources().getString(R.string.server_host) + "/exist_neural", params, index, functionToPass);
 
 
-
-
         }
 
     }
@@ -166,7 +154,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         SharedPreferences SharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
         String nombreKey = context.getResources().getString(R.string.logged_nombre);
 
-        SharedPreferences.Editor editor = SharedP.edit();;
+        SharedPreferences.Editor editor = SharedP.edit();
+        ;
         editor.putString(nombreKey, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
         editor.apply();
         ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(SharedP.getString(nombreKey, "Sin nombre"));
@@ -188,7 +177,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             myToast.show();
             return;
         }
-        if(message.equals("No file")){
+        if (message.equals("No file")) {
             Intent intent = new Intent(context, FitConnect.class);
             context.startActivity(intent);
             Log.i("INFO", "INFO: No neural file found");
@@ -196,7 +185,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
             Toast myToast = Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG);
             myToast.show();
-        }else {
+        } else {
             PeticionAPI api = new PeticionAPI(context);
             HashMap<String, String> params = new HashMap<>();
             params.put("correo", loggedEmail);
@@ -212,8 +201,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
-            if (!HeadsetConnectionService.isIsIntentServiceRunning()){
-                Intent hcs = new Intent(this, HeadsetConnectionService.class);
+            if (!HeadsetConnectionService.isIsIntentServiceRunning()) {
+                Intent hcs = new Intent(context, HeadsetConnectionService.class);
                 context.startService(hcs);
                 Toast.makeText(context, "service llll", Toast.LENGTH_LONG).show();
             }

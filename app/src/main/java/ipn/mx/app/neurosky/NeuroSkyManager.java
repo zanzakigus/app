@@ -8,14 +8,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +15,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Set;
 
-import ipn.mx.app.Index;
 import ipn.mx.app.Login;
 import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
@@ -35,16 +26,13 @@ import ipn.mx.app.neurosky.library.message.enums.Signal;
 import ipn.mx.app.neurosky.library.message.enums.State;
 
 public class NeuroSkyManager {
-    private static NeuroSky neuroSky;
-    private static State estadoDiadema = State.UNKNOWN;
-    private final static String LOG_TAG = "NeuroSky";
-    @SuppressLint("StaticFieldLeak")
-    private static Context context;
-
-
     public static final int TIPO_NEGATIVA = 0;
     public static final int TIPO_POSITIVA = 1;
-
+    private final static String LOG_TAG = "NeuroSky";
+    private static NeuroSky neuroSky;
+    private static State estadoDiadema = State.UNKNOWN;
+    @SuppressLint("StaticFieldLeak")
+    private static Context context;
     private static int tipo_seleccionado = -1;
     private static boolean clasificar = false;
     private static boolean estrendada = false;
@@ -71,6 +59,100 @@ public class NeuroSkyManager {
             }
         });
         NeuroSkyManager.context = context;
+    }
+
+    public static void enviarWavesTipoPositivo() {
+        tipo_seleccionado = TIPO_POSITIVA;
+    }
+
+    public static void enviarWavesTipoNegativo() {
+        tipo_seleccionado = TIPO_NEGATIVA;
+
+    }
+
+    public static void enviarWavesIdentificar() {
+        tipo_seleccionado = -1;
+        clasificar = true;
+
+    }
+
+    public static void stopSendingWaves() {
+        tipo_seleccionado = -1;
+        clasificar = false;
+
+    }
+
+    public static void solicitarEntrenamiento() {
+        tipo_seleccionado = -1;
+        HashMap<String, String> params = new HashMap<String, String>();
+        String Shared = context.getResources().getString(R.string.shared_key);
+        SharedPreferences sharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
+        String emailKey = context.getResources().getString(R.string.logged_email_key);
+        String passKey = context.getResources().getString(R.string.logged_password_key);
+        String loggedEmail = sharedP.getString(emailKey, null);
+        String loggedPassword = sharedP.getString(passKey, null);
+
+        if (loggedPassword != null && loggedEmail != null) {
+            PeticionAPI api = new PeticionAPI(context);
+            params.put("correo", loggedEmail);
+            params.put("password", loggedPassword);
+
+            NeuroSkyManager neuroSkyManager = new NeuroSkyManager();
+            Class[] parameterTypes = new Class[2];
+            parameterTypes[0] = JSONObject.class;
+            parameterTypes[1] = Context.class;
+            Method functionToPass = null;
+
+            try {
+                functionToPass = NeuroSkyManager.class.getMethod("onFitResponse", JSONObject.class, Context.class);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+
+            api.peticionPOST(context.getResources().getString(R.string.server_host) + "/fit_neural", params, neuroSkyManager, functionToPass);
+
+        }
+
+    }
+
+    public static NeuroSky getNeuroSky() {
+        return neuroSky;
+    }
+
+    public static void setNeuroSky(NeuroSky neuroSky) {
+        NeuroSkyManager.neuroSky = neuroSky;
+    }
+
+    public static State getEstadoDiadema() {
+        return estadoDiadema;
+    }
+
+    public static void setEstadoDiadema(State estadoDiadema) {
+        NeuroSkyManager.estadoDiadema = estadoDiadema;
+    }
+
+    public static Context getContext() {
+        return context;
+    }
+
+    public static void setContext(Context context) {
+        NeuroSkyManager.context = context;
+    }
+
+    public static int getTipo_seleccionado() {
+        return tipo_seleccionado;
+    }
+
+    public static boolean isClasificar() {
+        return clasificar;
+    }
+
+    public static boolean isEstrendada() {
+        return estrendada;
+    }
+
+    public static void setEstrendada(boolean estrendada) {
+        NeuroSkyManager.estrendada = estrendada;
     }
 
     private void handleStateChange(final State state) {
@@ -110,7 +192,6 @@ public class NeuroSkyManager {
         Log.d(LOG_TAG + "-SIGNALS", String.format("%s: %d", signal.toString(), signal.getValue()));
     }
 
-
     private void handleBrainWavesChange(final Set<BrainWave> brainWaves) {
 
         // Request a string response from the provided URL.
@@ -133,7 +214,7 @@ public class NeuroSkyManager {
                 PeticionAPI api = new PeticionAPI(context);
                 params.put("correo", loggedEmail);
                 params.put("password", loggedPassword);
-                params.put("tipo",String.valueOf(tipo_seleccionado));
+                params.put("tipo", String.valueOf(tipo_seleccionado));
                 Log.d(LOG_TAG + "-WAVES", "brain: Enviando waves.");
 
                 NeuroSkyManager neuroSkyManager = new NeuroSkyManager();
@@ -211,7 +292,6 @@ public class NeuroSkyManager {
 
     }
 
-
     public void onSentWaves(JSONObject response, Context context) throws JSONException {
         if (response.has("error")) {
             Log.e("ERROR", "ERROR onSentWaves: " + response.getString("error"));
@@ -229,102 +309,5 @@ public class NeuroSkyManager {
         }
         Log.d(LOG_TAG + "-WAVES SENT", "brain: Enviada con exito.");
 
-    }
-
-    public static void enviarWavesTipoPositivo() {
-        tipo_seleccionado = TIPO_POSITIVA;
-    }
-
-    public static void enviarWavesTipoNegativo() {
-        tipo_seleccionado = TIPO_NEGATIVA;
-
-    }
-
-    public static void enviarWavesIdentificar() {
-        tipo_seleccionado = -1;
-        clasificar = true;
-
-    }
-
-    public static void stopSendingWaves() {
-        tipo_seleccionado = -1;
-        clasificar = false;
-
-    }
-
-    public static void solicitarEntrenamiento() {
-        tipo_seleccionado = -1;
-        HashMap<String, String> params = new HashMap<String, String>();
-        String Shared = context.getResources().getString(R.string.shared_key);
-        SharedPreferences sharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
-        String emailKey = context.getResources().getString(R.string.logged_email_key);
-        String passKey = context.getResources().getString(R.string.logged_password_key);
-        String loggedEmail = sharedP.getString(emailKey, null);
-        String loggedPassword = sharedP.getString(passKey, null);
-
-        if (loggedPassword != null && loggedEmail != null) {
-            PeticionAPI api = new PeticionAPI(context);
-            params.put("correo", loggedEmail);
-            params.put("password", loggedPassword);
-
-            NeuroSkyManager neuroSkyManager = new NeuroSkyManager();
-            Class[] parameterTypes = new Class[2];
-            parameterTypes[0] = JSONObject.class;
-            parameterTypes[1] = Context.class;
-            Method functionToPass = null;
-
-            try {
-                functionToPass = NeuroSkyManager.class.getMethod("onFitResponse", JSONObject.class, Context.class);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-
-            api.peticionPOST(context.getResources().getString(R.string.server_host) + "/fit_neural", params, neuroSkyManager, functionToPass);
-
-        }
-
-    }
-
-
-    public static NeuroSky getNeuroSky() {
-        return neuroSky;
-    }
-
-    public static void setNeuroSky(NeuroSky neuroSky) {
-        NeuroSkyManager.neuroSky = neuroSky;
-    }
-
-    public static State getEstadoDiadema() {
-        return estadoDiadema;
-    }
-
-    public static void setEstadoDiadema(State estadoDiadema) {
-        NeuroSkyManager.estadoDiadema = estadoDiadema;
-    }
-
-    public static Context getContext() {
-        return context;
-    }
-
-    public static void setContext(Context context) {
-        NeuroSkyManager.context = context;
-    }
-
-    public static int getTipo_seleccionado() {
-        return tipo_seleccionado;
-    }
-
-
-    public static boolean isClasificar() {
-        return clasificar;
-    }
-
-
-    public static boolean isEstrendada() {
-        return estrendada;
-    }
-
-    public static void setEstrendada(boolean estrendada) {
-        NeuroSkyManager.estrendada = estrendada;
     }
 }

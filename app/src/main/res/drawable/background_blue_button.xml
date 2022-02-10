@@ -1,24 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- drawable/rectangle_4.xml -->
-<vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
+<?xml version="1.0" encoding="utf-8"?><!-- drawable/rectangle_4.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="148.12dp"
     android:height="61.12dp"
     android:viewportWidth="148.12"
-    android:viewportHeight="61.12"
-    >
+    android:viewportHeight="61.12">
 
     <group>
 
-        <clip-path
-            android:pathData="M30.5606 2.06058H117.561C133.301 2.06058 146.061 14.8205 146.061 30.5606C146.061 46.3007 133.301 59.0606 117.561 59.0606H30.5606C14.8205 59.0606 2.06058 46.3007 2.06058 30.5606C2.06058 14.8205 14.8205 2.06058 30.5606 2.06058Z"
-            />
+        <clip-path android:pathData="M30.5606 2.06058H117.561C133.301 2.06058 146.061 14.8205 146.061 30.5606C146.061 46.3007 133.301 59.0606 117.561 59.0606H30.5606C14.8205 59.0606 2.06058 46.3007 2.06058 30.5606C2.06058 14.8205 14.8205 2.06058 30.5606 2.06058Z" />
 
         <path
-            android:pathData="M2.06058 2.06058V59.0606H146.061V2.06058"
             android:fillColor="@color/dark_blue"
-            />
+            android:pathData="M2.06058 2.06058V59.0606H146.061V2.06058" />
 
     </group>
 

@@ -45,6 +45,14 @@
     <string name="title_fit_ini">Primer Análisis</string>
     <string name="title_change_password">Cambio de contraseña</string>
     <string name="title_update_password">Actualizar Contraseña</string>
+    <string name="title_headset_setting">Configuración de Diadema</string>
+
+    <!-- VISTA: headset_setting -->
+    <string name="text_notify_conn">Notificar conexión</string>
+    <string name="text_button_clasify">Detectar emoción</string>
+    <string name="text_button_conn_sett">Conectar diadema</string>
+    <string name="text_button_desconn_sett">Desconectar diadema</string>
+
 
     <!-- CLASE: SignUp1 -->
     <string name="missing_email">Se requiere de un correo electrónico para continuar</string>
@@ -118,6 +126,8 @@
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
     <string name="m_big_text">Se ha detectado que te encuentras en una emoción negativa, presiona en estrategia para poder apoyarte. </string>
     <string name="m_notification_button">Estrategia </string>
+
+
 
 
 </resources>

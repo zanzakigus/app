@@ -1,35 +1,74 @@
 package ipn.mx.app.notification;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import ipn.mx.app.Index;
 import ipn.mx.app.R;
+import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.notification.handlers.GenericNotificationService;
 import ipn.mx.app.notification.mock.NotificationManagerData;
 import ipn.mx.app.notification.util.NotificationUtil;
-import ipn.mx.app.test.ClickNotification;
 
 public class GlobalNotificationManager {
     public static final String TAG = "Notification";
-    private Context context;
     NotificationManagerCompat notificationManagerCompat;
-    NotificationManagerData  notificacionManagerData;
+    NotificationManagerData notificacionManagerData;
     Intent notifyIntent;
     Intent strategyIntent;
+    private Context context;
 
     public GlobalNotificationManager(Context context, NotificationManagerData notificacionManagerData) {
         this.context = context;
         notificationManagerCompat = NotificationManagerCompat.from(context.getApplicationContext());
         this.notificacionManagerData = notificacionManagerData;
+
+    }
+
+    public static void clearNotification(Context context, int notificationId) {
+
+        Log.d(TAG, "clearNotification()");
+
+        NotificationManagerCompat notificationManagerCompat =
+                NotificationManagerCompat.from(context);
+        notificationManagerCompat.cancel(notificationId);
+    }
+
+
+
+    public static boolean existNotification(Context context, int notificationId) {
+        Log.d(TAG, "existNotification()");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+            StatusBarNotification[] notifications = mNotificationManager.getActiveNotifications();
+            for (StatusBarNotification notification : notifications) {
+                if (notification.getId() == notificationId) {
+                    return true;
+                }
+            }
+            return false;
+        }else{
+            for (Integer notificacionIdArr: GlobalInfo.notificationsDisplayed
+                 ) {
+                if (notificacionIdArr == notificationId){
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 
@@ -54,7 +93,7 @@ public class GlobalNotificationManager {
 
 
         // 3. Set up main Intent for notification.
-        notifyIntent = new Intent(context, ClickNotification.class);
+        notifyIntent = new Intent(context, Index.class);
 
         // Sets the Activity to start in a new, empty task
         /* notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
@@ -92,7 +131,7 @@ public class GlobalNotificationManager {
 
         GlobalNotificationBuilder.setNotificationCompatBuilderInstance(notificationCompatBuilder);
 
-        Notification notification = notificationCompatBuilder
+        @SuppressLint("WrongConstant") Notification notification = notificationCompatBuilder
                 // BIG_TEXT_STYLE sets title and content for API 16 (4.1 and after).
                 .setStyle(bigTextStyle)
                 // Title for API <16 (4.0 and below) devices.
@@ -130,7 +169,14 @@ public class GlobalNotificationManager {
 
                 .build();
 
-        notificationManagerCompat.notify(Index.NOTIFICATION_ID, notification);
+        try {
+            notificationManagerCompat.notify(notificacionManagerData.getNotificationId(), notification);
+            GlobalInfo.notificationsDisplayed.add(notificacionManagerData.getNotificationId());
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
     public Intent getNotifyIntent() {
@@ -147,14 +193,5 @@ public class GlobalNotificationManager {
 
     public void setStrategyIntent(Intent strategyIntent) {
         this.strategyIntent = strategyIntent;
-    }
-
-    public static void clearNotification(Context context ){
-
-        Log.d(TAG, "clearNotification()");
-
-        NotificationManagerCompat notificationManagerCompat =
-                NotificationManagerCompat.from(context);
-        notificationManagerCompat.cancel(Index.NOTIFICATION_ID);
     }
 }

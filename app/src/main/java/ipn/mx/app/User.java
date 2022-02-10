@@ -21,25 +21,19 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import ipn.mx.app.service.HeadsetConnectionService;
-
 public class User extends AppCompatActivity implements View.OnClickListener, DialogInterface.OnClickListener {
-
-    Context cGlobal;
-
-    // Action Bar
-    Button btnHome, btnGraph, btnNotification, btnUser;
-
-    // View
-    TextView tvUsername, tvFNacimiento, tvEmail, tvDetUltimaSemana, tvDetTotal;
-    Button btnUpdateInfo, btnLogOut, btnUpdatePassword;
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
-
+    Context cGlobal;
+    // Action Bar
+    Button btnHome, btnGraph, btnNotification, btnUser;
+    // View
+    TextView tvUsername, tvFNacimiento, tvEmail, tvDetUltimaSemana, tvDetTotal;
+    Button btnUpdateInfo, btnLogOut, btnUpdatePassword;
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
@@ -137,12 +131,12 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
-        } else if(btnUpdateInfo == v){
+        } else if (btnUpdateInfo == v) {
             Intent intent = new Intent(this, UpdateInfo.class);
             startActivity(intent);
-        } else if(btnLogOut == v) {
+        } else if (btnLogOut == v) {
             logOut();
-        } else if(btnUpdatePassword == v){
+        } else if (btnUpdatePassword == v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.user_dialog_message)
                     .setTitle(R.string.user_dialog_title)
@@ -160,7 +154,7 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         // Cuando i = -2: Botón Negativo
         // Cuando el usuario le da al botón negativo no es necesario poner código
         // El dialog se cierra de forma automatica
-        if(i == -1){
+        if (i == -1) {
             Intent intent = new Intent(this, CodePassword.class);
             startActivity(intent);
         }
@@ -194,7 +188,7 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         ((TextView) ((Activity) context).findViewById(R.id.text_correo)).setText(userData.getString("fecha_nacimiento"));
     }
 
-    private void logOut(){
+    private void logOut() {
         // Cerramos la sesion en el telefono
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(EMAIL_KEY, null);

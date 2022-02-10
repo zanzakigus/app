@@ -1,9 +1,6 @@
 package ipn.mx.app;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
-import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -20,9 +17,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
-import ipn.mx.app.global.GlobalInfo;
-import ipn.mx.app.usuario.Usuario;
 
 public class PeticionAPI implements Response.ErrorListener, Response.Listener<JSONObject> {
 
@@ -100,7 +94,7 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
             }
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, URL, reqJsonObj, this, this){
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, URL, reqJsonObj, this, this) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();

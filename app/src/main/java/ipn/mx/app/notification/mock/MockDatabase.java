@@ -15,25 +15,30 @@
  */
 package ipn.mx.app.notification.mock;
 
-import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationCompat.MessagingStyle;
-import androidx.core.app.Person;
-import androidx.core.graphics.drawable.IconCompat;
-
-import ipn.mx.app.R;
-
-import java.util.ArrayList;
-
-/** Mock data for each of the Notification Style Demos. */
+/**
+ * Mock data for each of the Notification Style Demos.
+ */
 public final class MockDatabase {
 
 
-    /** Represents standard data needed for a Notification. */
+    public static Uri resourceToUri(Context context, int resId) {
+        return Uri.parse(
+                ContentResolver.SCHEME_ANDROID_RESOURCE
+                        + "://"
+                        + context.getResources().getResourcePackageName(resId)
+                        + "/"
+                        + context.getResources().getResourceTypeName(resId)
+                        + "/"
+                        + context.getResources().getResourceEntryName(resId));
+    }
+
+    /**
+     * Represents standard data needed for a Notification.
+     */
     public abstract static class MockNotificationData {
 
         // Standard notification values:
@@ -122,16 +127,5 @@ public final class MockDatabase {
         public void setmChannelLockscreenVisibility(int mChannelLockscreenVisibility) {
             this.mChannelLockscreenVisibility = mChannelLockscreenVisibility;
         }
-    }
-
-    public static Uri resourceToUri(Context context, int resId) {
-        return Uri.parse(
-                ContentResolver.SCHEME_ANDROID_RESOURCE
-                        + "://"
-                        + context.getResources().getResourcePackageName(resId)
-                        + "/"
-                        + context.getResources().getResourceTypeName(resId)
-                        + "/"
-                        + context.getResources().getResourceEntryName(resId));
     }
 }

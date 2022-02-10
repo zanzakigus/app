@@ -16,20 +16,21 @@
 package ipn.mx.app.neurosky.library.validation;
 
 import android.bluetooth.BluetoothAdapter;
+
 import com.neurosky.thinkgear.TGDevice;
 
 public interface Preconditions {
-  boolean isConnecting(TGDevice device);
+    boolean isConnecting(TGDevice device);
 
-  boolean isConnected(TGDevice device);
+    boolean isConnected(TGDevice device);
 
-  boolean canConnect(TGDevice device);
+    boolean canConnect(TGDevice device);
 
-  boolean isBluetoothAdapterInitialized();
+    boolean isBluetoothAdapterInitialized();
 
-  boolean isBluetoothAdapterInitialized(BluetoothAdapter bluetoothAdapter);
+    boolean isBluetoothAdapterInitialized(BluetoothAdapter bluetoothAdapter);
 
-  boolean isBluetoothEnabled();
+    boolean isBluetoothEnabled();
 
-  boolean isBluetoothEnabled(BluetoothAdapter bluetoothAdapter);
+    boolean isBluetoothEnabled(BluetoothAdapter bluetoothAdapter);
 }

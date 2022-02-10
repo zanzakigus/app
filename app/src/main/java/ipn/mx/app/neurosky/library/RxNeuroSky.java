@@ -16,7 +16,17 @@
 package ipn.mx.app.neurosky.library;
 
 import android.bluetooth.BluetoothAdapter;
+
 import androidx.annotation.NonNull;
+
+import com.neurosky.thinkgear.TGDevice;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import io.reactivex.rxjava3.core.BackpressureStrategy;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 import ipn.mx.app.neurosky.library.exception.BluetoothConnectingOrConnectedException;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotConnectedException;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
@@ -28,142 +38,137 @@ import ipn.mx.app.neurosky.library.message.enums.Signal;
 import ipn.mx.app.neurosky.library.message.enums.State;
 import ipn.mx.app.neurosky.library.validation.DefaultPreconditions;
 import ipn.mx.app.neurosky.library.validation.Preconditions;
-import com.neurosky.thinkgear.TGDevice;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import io.reactivex.rxjava3.core.BackpressureStrategy;
-import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Flowable;
 
 public class RxNeuroSky {
-  private final static EventBus eventBus = EventBus.create();
-  private boolean rawSignalEnabled = false;
-  private TGDevice device;
-  private DeviceMessageHandler handler;
-  private Preconditions preconditions;
+    private final static EventBus eventBus = EventBus.create();
+    private boolean rawSignalEnabled = false;
+    private TGDevice device;
+    private DeviceMessageHandler handler;
+    private Preconditions preconditions;
 
-  public RxNeuroSky() {
-    this(new ExtendedDeviceMessageListener() {
-      private State state = State.UNKNOWN;
+    public RxNeuroSky() {
+        this(new ExtendedDeviceMessageListener() {
+            private State state = State.UNKNOWN;
 
-      @Override public void onStateChange(State state) {
-        this.state = state;
-        eventBus.send(new BrainEvent(state, Signal.STATE_CHANGE, new HashSet<>()));
-      }
+            @Override
+            public void onStateChange(State state) {
+                this.state = state;
+                eventBus.send(new BrainEvent(state, Signal.STATE_CHANGE, new HashSet<>()));
+            }
 
-      @Override public void onSignalChange(Signal signal) {
-        eventBus.send(new BrainEvent(state, signal, new HashSet<>()));
-      }
+            @Override
+            public void onSignalChange(Signal signal) {
+                eventBus.send(new BrainEvent(state, signal, new HashSet<>()));
+            }
 
-      @Override public void onBrainWavesChange(Set<BrainWave> brainWaves) {
-        eventBus.send(new BrainEvent(state, Signal.EEG_POWER, brainWaves));
-      }
-    });
-  }
-
-  protected RxNeuroSky(final DeviceMessageListener listener) {
-    this(listener, new DefaultPreconditions());
-  }
-
-  protected RxNeuroSky(final DeviceMessageListener listener, @NonNull Preconditions preconditions) {
-    this.preconditions = preconditions;
-    if (preconditions.isBluetoothAdapterInitialized()) {
-      handler = new DeviceMessageHandler(listener);
-      device = new TGDevice(BluetoothAdapter.getDefaultAdapter(), handler);
+            @Override
+            public void onBrainWavesChange(Set<BrainWave> brainWaves) {
+                eventBus.send(new BrainEvent(state, Signal.EEG_POWER, brainWaves));
+            }
+        });
     }
-  }
 
-  public Flowable<BrainEvent> stream(BackpressureStrategy backpressureStrategy) {
-    return eventBus.receive(backpressureStrategy);
-  }
+    protected RxNeuroSky(final DeviceMessageListener listener) {
+        this(listener, new DefaultPreconditions());
+    }
 
-  public Flowable<BrainEvent> stream() {
-    return stream(BackpressureStrategy.BUFFER);
-  }
+    protected RxNeuroSky(final DeviceMessageListener listener, @NonNull Preconditions preconditions) {
+        this.preconditions = preconditions;
+        if (preconditions.isBluetoothAdapterInitialized()) {
+            handler = new DeviceMessageHandler(listener);
+            device = new TGDevice(BluetoothAdapter.getDefaultAdapter(), handler);
+        }
+    }
 
-  public Completable connect() {
-    return Completable.create(emitter -> {
-      if (!preconditions.isBluetoothEnabled()) {
-        emitter.onError(new BluetoothNotEnabledException());
-      }
+    public Flowable<BrainEvent> stream(BackpressureStrategy backpressureStrategy) {
+        return eventBus.receive(backpressureStrategy);
+    }
 
-      if (preconditions.canConnect(device)) {
-        openConnection();
-        emitter.onComplete();
-      } else {
-        emitter.onError(new BluetoothConnectingOrConnectedException());
-      }
-    });
-  }
+    public Flowable<BrainEvent> stream() {
+        return stream(BackpressureStrategy.BUFFER);
+    }
 
-  protected void openConnection() {
-    device.connect(rawSignalEnabled);
-  }
+    public Completable connect() {
+        return Completable.create(emitter -> {
+            if (!preconditions.isBluetoothEnabled()) {
+                emitter.onError(new BluetoothNotEnabledException());
+            }
 
-  public Completable disconnect() {
-    return Completable.create(emitter -> {
-      if (preconditions.isConnected(device)) {
-        closeConnection();
-        emitter.onComplete();
-      } else {
-        emitter.onError(new BluetoothNotConnectedException());
-      }
-    });
-  }
+            if (preconditions.canConnect(device)) {
+                openConnection();
+                emitter.onComplete();
+            } else {
+                emitter.onError(new BluetoothConnectingOrConnectedException());
+            }
+        });
+    }
 
-  protected void closeConnection() {
-    device.close();
-  }
+    protected void openConnection() {
+        device.connect(rawSignalEnabled);
+    }
 
-  public void enableRawSignal() {
-    rawSignalEnabled = true;
-  }
+    public Completable disconnect() {
+        return Completable.create(emitter -> {
+            if (preconditions.isConnected(device)) {
+                closeConnection();
+                emitter.onComplete();
+            } else {
+                emitter.onError(new BluetoothNotConnectedException());
+            }
+        });
+    }
 
-  public void disableRawSignal() {
-    rawSignalEnabled = false;
-  }
+    protected void closeConnection() {
+        device.close();
+    }
 
-  public boolean isRawSignalEnabled() {
-    return rawSignalEnabled;
-  }
+    public void enableRawSignal() {
+        rawSignalEnabled = true;
+    }
 
-  public Completable start() {
-    return Completable.create(emitter -> {
-      if (preconditions.isConnected(device)) {
-        startMonitoring();
-        emitter.onComplete();
-      } else {
-        emitter.onError(new BluetoothNotConnectedException());
-      }
-    });
-  }
+    public void disableRawSignal() {
+        rawSignalEnabled = false;
+    }
 
-  protected void startMonitoring() {
-    device.start();
-  }
+    public boolean isRawSignalEnabled() {
+        return rawSignalEnabled;
+    }
 
-  public Completable stop() {
-    return Completable.create(emitter -> {
-      if (preconditions.isConnected(device)) {
-        stopMonitoring();
-        emitter.onComplete();
-      } else {
-        emitter.onError(new BluetoothNotConnectedException());
-      }
-    });
-  }
+    public Completable start() {
+        return Completable.create(emitter -> {
+            if (preconditions.isConnected(device)) {
+                startMonitoring();
+                emitter.onComplete();
+            } else {
+                emitter.onError(new BluetoothNotConnectedException());
+            }
+        });
+    }
 
-  protected void stopMonitoring() {
-    device.stop();
-  }
+    protected void startMonitoring() {
+        device.start();
+    }
 
-  public TGDevice getDevice() {
-    return device;
-  }
+    public Completable stop() {
+        return Completable.create(emitter -> {
+            if (preconditions.isConnected(device)) {
+                stopMonitoring();
+                emitter.onComplete();
+            } else {
+                emitter.onError(new BluetoothNotConnectedException());
+            }
+        });
+    }
 
-  public DeviceMessageHandler getHandler() {
-    return handler;
-  }
+    protected void stopMonitoring() {
+        device.stop();
+    }
+
+    public TGDevice getDevice() {
+        return device;
+    }
+
+    public DeviceMessageHandler getHandler() {
+        return handler;
+    }
 }

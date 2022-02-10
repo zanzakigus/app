@@ -12,37 +12,29 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    // creating constant keys for shared preferences.
+    public static String SHARED_PREFS;
+    // key for storing email.
+    public static String EMAIL_KEY;
+    // key for storing password.
+    public static String PASSWORD_KEY;
     EditText edtCorreo, edtContra;
     View btnLogin, btnRegister;
-
     //Http request variables
     RequestQueue queue;
     String host;
-
     String email, password;
-
-    // creating constant keys for shared preferences.
-    public static String SHARED_PREFS;
-
-    // key for storing email.
-    public static String EMAIL_KEY;
-
-    // key for storing password.
-    public static String PASSWORD_KEY;
-
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
@@ -147,7 +139,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         String passKey = context.getResources().getString(R.string.logged_password_key);
 
         message = context.getResources().getString(R.string.logged_succed);
-        SharedPreferences.Editor editor = SharedP.edit();;
+        SharedPreferences.Editor editor = SharedP.edit();
+        ;
 
 
         editor.putString(emailKey, email);

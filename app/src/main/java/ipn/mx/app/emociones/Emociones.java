@@ -5,7 +5,7 @@ public class Emociones {
     int id_emocion;
     String emocion_texto;
 
-    public Emociones (){
+    public Emociones() {
 
     }
 

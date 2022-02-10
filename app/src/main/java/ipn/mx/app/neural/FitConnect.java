@@ -1,9 +1,7 @@
 package ipn.mx.app.neural;
 
 import android.bluetooth.BluetoothAdapter;
-
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,12 +15,10 @@ import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
 
 public class FitConnect extends AppCompatActivity implements View.OnClickListener {
+    private final static String LOG_TAG = "NeuroSky";
     View btnNext, btnConnect;
-
     BluetoothAdapter bluetoothAdapter;
     NeuroSky neuroSky;
-    private final static String LOG_TAG = "NeuroSky";
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

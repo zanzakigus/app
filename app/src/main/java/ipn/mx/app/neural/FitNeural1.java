@@ -1,58 +1,31 @@
 package ipn.mx.app.neural;
 
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import io.reactivex.rxjava3.annotations.NonNull;
 import ipn.mx.app.R;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
-import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
-import ipn.mx.app.neurosky.library.listener.ExtendedDeviceMessageListener;
-import ipn.mx.app.neurosky.library.message.enums.BrainWave;
-import ipn.mx.app.neurosky.library.message.enums.Signal;
-import ipn.mx.app.neurosky.library.message.enums.State;
-
-import android.os.Handler;
-import android.widget.Toast;
-
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Set;
 
 
 public class FitNeural1 extends AppCompatActivity implements View.OnClickListener {
 
-    private ProgressBar progressBar;
-    private TextView progressText;
+    private final static String LOG_TAG = "NeuroSky";
     View btnNext;
     int i = 1;
     boolean enviado = false;
-
-
+    private ProgressBar progressBar;
+    private TextView progressText;
     private NeuroSky neuroSky;
-    private final static String LOG_TAG = "NeuroSky";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +63,12 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent);
                 finish();
             }
-        }else if(v == progressBar){
+        } else if (v == progressBar) {
 
-            if(enviado){
+            if (enviado) {
                 Toast myToast = Toast.makeText(this, R.string.sent_waves_try, Toast.LENGTH_LONG);
                 myToast.show();
-            }else{
+            } else {
                 Toast myToast = Toast.makeText(this, R.string.sending_waves, Toast.LENGTH_LONG);
                 myToast.show();
 
@@ -110,7 +83,7 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
                         // text under the progress bar
                         if (i <= 60) {
                             progressText.setText("" + i);
-                            int progress = (i*100)/60;
+                            int progress = (i * 100) / 60;
                             progressBar.setProgress(progress);
                             i++;
                             handler.postDelayed(this, 1000);

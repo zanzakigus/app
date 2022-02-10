@@ -5,7 +5,7 @@ public class Preguntas {
     int id_preguntas;
     String texto_pregunta;
 
-    public Preguntas(){
+    public Preguntas() {
 
     }
 

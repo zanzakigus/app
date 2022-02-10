@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title_user"
+                android:id="@+id/title_headset_setting"
                 style="@style/center_things"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:lineSpacingExtra="10dp"
-                android:text="@string/title_user"
+                android:text="@string/title_headset_setting"
                 android:textAppearance="@style/title_blue" />
 
             <TextView
@@ -44,83 +44,51 @@
                 android:textColor="@color/black"
                 tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/text_f_nacimiento"
+
+            <Switch
+                android:id="@+id/swt_notify_conn"
                 style="@style/center_things"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="10dp"
-                android:text="@string/title_f_nacimiento"
-                android:textAppearance="@style/text_gray"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="@string/text_notify_conn"
                 android:textColor="@color/black"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/text_correo"
-                style="@style/center_things"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="10dp"
-                android:text="@string/title_correo"
-                android:textAppearance="@style/text_gray"
-                android:textColor="@color/black"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/text_det_ultima_semana"
-                style="@style/center_things"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="10dp"
-                android:text="@string/title_det_ultima_semana"
-                android:textAppearance="@style/text_gray"
-                android:textColor="@color/black"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/text_det_total"
-                style="@style/center_things"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="10dp"
-                android:text="@string/title_det_total"
-                android:textAppearance="@style/text_gray"
-                android:textColor="@color/black"
-                tools:ignore="MissingConstraints" />
-
+                android:theme="@style/style_switch"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Button
-                android:id="@+id/editar_info"
+                android:id="@+id/conectar"
                 style="@style/center_things"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/background_green"
                 android:gravity="center"
-                android:text="@string/update_info"
+                android:text="@string/text_button_conn_sett"
                 android:textColor="@color/black"
                 android:theme="@style/inside_button" />
 
             <Button
-                android:id="@+id/cambiar_contra"
-                style="@style/center_things"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/background_yellow"
-                android:gravity="center"
-                android:text="@string/update_password"
-                android:textColor="@color/black"
-                android:theme="@style/inside_button" />
-
-            <Button
-                android:id="@+id/cerrar_sesion"
+                android:id="@+id/desconetar"
                 style="@style/center_things"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/background_red"
                 android:gravity="center"
-                android:text="@string/log_out"
+                android:text="@string/text_button_desconn_sett"
+                android:textColor="@color/black"
+                android:theme="@style/inside_button" />
+
+            <Button
+                android:id="@+id/detectar_emocion"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/background_yellow"
+                android:gravity="center"
+                android:text="@string/text_button_clasify"
                 android:textColor="@color/black"
                 android:theme="@style/inside_button" />
         </LinearLayout>

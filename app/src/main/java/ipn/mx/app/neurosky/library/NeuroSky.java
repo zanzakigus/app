@@ -16,108 +16,111 @@
 package ipn.mx.app.neurosky.library;
 
 import android.bluetooth.BluetoothAdapter;
+
 import androidx.annotation.NonNull;
+
+import com.neurosky.thinkgear.TGDevice;
+
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
 import ipn.mx.app.neurosky.library.listener.DeviceMessageListener;
 import ipn.mx.app.neurosky.library.validation.DefaultPreconditions;
 import ipn.mx.app.neurosky.library.validation.Preconditions;
-import com.neurosky.thinkgear.TGDevice;
 
 public class NeuroSky {
 
-  private boolean rawSignalEnabled = false;
-  private TGDevice device;
-  private DeviceMessageHandler handler;
-  private Preconditions preconditions;
+    private boolean rawSignalEnabled = false;
+    private TGDevice device;
+    private DeviceMessageHandler handler;
+    private Preconditions preconditions;
 
-  public NeuroSky(final DeviceMessageListener listener) {
-    this(listener, new DefaultPreconditions());
-  }
-
-  protected NeuroSky(final DeviceMessageListener listener, @NonNull Preconditions preconditions) {
-    this.preconditions = preconditions;
-    if (preconditions.isBluetoothAdapterInitialized()) {
-      handler = new DeviceMessageHandler(listener);
-      device = new TGDevice(BluetoothAdapter.getDefaultAdapter(), handler);
-    }
-  }
-
-  public void connect() throws BluetoothNotEnabledException {
-    if (!preconditions.isBluetoothEnabled()) {
-      throw new BluetoothNotEnabledException();
+    public NeuroSky(final DeviceMessageListener listener) {
+        this(listener, new DefaultPreconditions());
     }
 
-    if (canConnect()) {
-      openConnection();
+    protected NeuroSky(final DeviceMessageListener listener, @NonNull Preconditions preconditions) {
+        this.preconditions = preconditions;
+        if (preconditions.isBluetoothAdapterInitialized()) {
+            handler = new DeviceMessageHandler(listener);
+            device = new TGDevice(BluetoothAdapter.getDefaultAdapter(), handler);
+        }
     }
-  }
 
-  protected void openConnection() {
-    device.connect(rawSignalEnabled);
-  }
+    public void connect() throws BluetoothNotEnabledException {
+        if (!preconditions.isBluetoothEnabled()) {
+            throw new BluetoothNotEnabledException();
+        }
 
-  public void disconnect() {
-    if (isConnected()) {
-      closeConnection();
+        if (canConnect()) {
+            openConnection();
+        }
     }
-  }
 
-  protected void closeConnection() {
-    device.close();
-  }
-
-  public void enableRawSignal() {
-    rawSignalEnabled = true;
-  }
-
-  public void disableRawSignal() {
-    rawSignalEnabled = false;
-  }
-
-  public boolean isRawSignalEnabled() {
-    return rawSignalEnabled;
-  }
-
-  public void start() {
-    if (isConnected() || device.getState() == 0) {
-      if(device.getState() == 0){
-        device.EKGstartDetection();
-      }
-      startMonitoring();
+    protected void openConnection() {
+        device.connect(rawSignalEnabled);
     }
-  }
 
-  protected void startMonitoring() {
-    device.start();
-  }
-
-  public void stop() {
-    if (isConnected() || device.getState() == 0) {
-      stopMonitoring();
+    public void disconnect() {
+        if (isConnected()) {
+            closeConnection();
+        }
     }
-  }
 
-  protected void stopMonitoring() {
-    device.stop();
-  }
+    protected void closeConnection() {
+        device.close();
+    }
 
-  public boolean canConnect() {
-    return preconditions.canConnect(device);
-  }
+    public void enableRawSignal() {
+        rawSignalEnabled = true;
+    }
 
-  public boolean isConnected() {
-    return preconditions.isConnected(device);
-  }
+    public void disableRawSignal() {
+        rawSignalEnabled = false;
+    }
 
-  public boolean isConnecting() {
-    return preconditions.isConnecting(device);
-  }
+    public boolean isRawSignalEnabled() {
+        return rawSignalEnabled;
+    }
 
-  public TGDevice getDevice() {
-    return device;
-  }
+    public void start() {
+        if (isConnected() || device.getState() == 0) {
+            if (device.getState() == 0) {
+                device.EKGstartDetection();
+            }
+            startMonitoring();
+        }
+    }
 
-  public DeviceMessageHandler getHandler() {
-    return handler;
-  }
+    protected void startMonitoring() {
+        device.start();
+    }
+
+    public void stop() {
+        if (isConnected() || device.getState() == 0) {
+            stopMonitoring();
+        }
+    }
+
+    protected void stopMonitoring() {
+        device.stop();
+    }
+
+    public boolean canConnect() {
+        return preconditions.canConnect(device);
+    }
+
+    public boolean isConnected() {
+        return preconditions.isConnected(device);
+    }
+
+    public boolean isConnecting() {
+        return preconditions.isConnecting(device);
+    }
+
+    public TGDevice getDevice() {
+        return device;
+    }
+
+    public DeviceMessageHandler getHandler() {
+        return handler;
+    }
 }

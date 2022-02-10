@@ -18,5 +18,5 @@ package ipn.mx.app.neurosky.library.listener;
 import android.os.Message;
 
 public interface DeviceMessageListener {
-  void onMessageReceived(Message message);
+    void onMessageReceived(Message message);
 }

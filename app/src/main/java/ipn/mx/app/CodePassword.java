@@ -1,6 +1,5 @@
 package ipn.mx.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,25 +24,38 @@ import java.util.HashMap;
 
 public class CodePassword extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
-    EditText edtNumber1, edtNumber2, edtNumber3, edtNumber4, edtNumber5, edtNumber6;
-    Button btnConfirmar;
-
     public static String codePasswordServer;
-    String codePasswordUser;
-    int intentsCode = 1;
-
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
-
+    EditText edtNumber1, edtNumber2, edtNumber3, edtNumber4, edtNumber5, edtNumber6;
+    Button btnConfirmar;
+    String codePasswordUser;
+    int intentsCode = 1;
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
+
+    public static void getCodePassword(JSONObject response, Context context) throws JSONException {
+        if (response.has("error")) {
+            Log.e("ERROR", "ERROR getCodePassword: " + response.getString("error"));
+            Toast.makeText(context, "ERROR " + (500) + " getCodePassword: " + response.getString("error"), Toast.LENGTH_LONG).show();
+            return;
+        }
+        int status = response.getInt("status");
+        String message = response.getString("message");
+        if (status != 200) {
+            Log.e("ERROR", "ERROR getCodePassword: " + message);
+            Toast.makeText(context, "ERROR " + (status) + " getCodePassword: " + message, Toast.LENGTH_LONG).show();
+            return;
+        }
+        codePasswordServer = response.getString("numbers");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,22 +155,6 @@ public class CodePassword extends AppCompatActivity implements View.OnClickListe
             mInputConnection.sendKeyEvent(kd);
             mInputConnection.sendKeyEvent(ku);
         }
-    }
-
-    public static void getCodePassword(JSONObject response, Context context) throws JSONException {
-        if (response.has("error")) {
-            Log.e("ERROR", "ERROR getCodePassword: " + response.getString("error"));
-            Toast.makeText(context, "ERROR " + (500) + " getCodePassword: " + response.getString("error"), Toast.LENGTH_LONG).show();
-            return;
-        }
-        int status = response.getInt("status");
-        String message = response.getString("message");
-        if (status != 200) {
-            Log.e("ERROR", "ERROR getCodePassword: " + message);
-            Toast.makeText(context, "ERROR " + (status) + " getCodePassword: " + message, Toast.LENGTH_LONG).show();
-            return;
-        }
-        codePasswordServer = response.getString("numbers");
     }
 
     public void logOut() {

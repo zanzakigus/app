@@ -20,25 +20,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class UpdateInfo extends AppCompatActivity implements View.OnClickListener {
-
-    // Action Bar
-    Button btnHome, btnGraph, btnNotification, btnUser;
-
-    // View
-    EditText edtNombre, edtAPaterno, edtAMaterno, edtFNacimiento;
-    Button btnActualizar;
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
-
-
+    // Action Bar
+    Button btnHome, btnGraph, btnNotification, btnUser;
+    // View
+    EditText edtNombre, edtAPaterno, edtAMaterno, edtFNacimiento;
+    Button btnActualizar;
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
