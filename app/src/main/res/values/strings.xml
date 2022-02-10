@@ -93,6 +93,9 @@
     <string name="update_password_confirm">Confirme la contraseña</string>
     <string name="update_password_text_first">La actualización de la contraseña se hará de forma inmediata.</string>
     <string name="update_password_text_second">Se cerrará la sesión para que pueda ingresar con la nueva contraseña.</string>
+    <string name="update_password_password_short">La contraseña debe tener minimo 5 carácteres.</string>
+    <string name="update_password_passwords_no_equals">La contraseña debe tener minimo 5 carácteres.</string>
+    <string name="update_password_success">Se actualizó la contraseña correctamente</string>
 
     <!-- ERRORES REQUEST HTTP -->
     <string name="login_error">Error al iniciar sesión, favor de intentarlo más tarde</string>
