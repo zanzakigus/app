@@ -1,8 +1,11 @@
 package ipn.mx.app;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -13,8 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
+import ipn.mx.app.neurosky.library.NeuroSky;
+import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
+import ipn.mx.app.service.HeadsetConnectionService;
 
 public class SettingHeadset extends AppCompatActivity implements View.OnClickListener {
+
+
+    private final String TAG = "SettingHeadset";
 
     Button btnConnHs, btnDiscHs, btnClasify;
     Switch swtEnableNoti;
@@ -34,6 +43,9 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
+
+    private NeuroSky neuroSky;
+    BluetoothAdapter bluetoothAdapter;
 
     @Override
 
@@ -65,6 +77,9 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
 
         swtEnableNoti.setOnClickListener(this);
 
+        neuroSky = NeuroSkyManager.getNeuroSky();
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
         if (NeuroSkyManager.getNeuroSky() != null && NeuroSkyManager.getNeuroSky().isConnected()) {
             btnDiscHs.setVisibility(View.VISIBLE);
             btnClasify.setVisibility(View.VISIBLE);
@@ -80,13 +95,67 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
 
         if (btnConnHs == v) {
-            Toast.makeText(this, "ss", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onClick()-btnConnHs: ");
+            if (neuroSky != null && !neuroSky.isConnected()) {
+                if (!bluetoothAdapter.isEnabled()) {
+                    bluetoothAdapter.enable();
+                }
+                try {
+                    neuroSky.connect();
+                    Toast myToast = Toast.makeText(this, R.string.text_sett_conn, Toast.LENGTH_LONG);
+                    myToast.show();
+                    btnDiscHs.setVisibility(View.VISIBLE);
+                    btnClasify.setVisibility(View.VISIBLE);
+                    btnConnHs.setVisibility(View.GONE);
+                } catch (BluetoothNotEnabledException e) {
+                    Log.d(TAG, e.getMessage());
+                }
+            } else {
+                Toast myToast = Toast.makeText(this, R.string.text_sett_conn, Toast.LENGTH_LONG);
+                myToast.show();
+                btnDiscHs.setVisibility(View.VISIBLE);
+                btnClasify.setVisibility(View.VISIBLE);
+                btnConnHs.setVisibility(View.GONE);
+            }
+
         } else if (btnClasify == v) {
-            Toast.makeText(this, "ss2", Toast.LENGTH_SHORT).show();
-        } else if (btnConnHs == v) {
-            Toast.makeText(this, "ss2", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onClick()-btnClasify: ");
+            if (neuroSky != null && neuroSky.isConnected()) {
+                NeuroSkyManager.enviarWavesIdentificar();
+            }else {
+                Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
+                myToast.show();
+            }
+
+
+        } else if (btnDiscHs == v) {
+            Log.d(TAG, "onClick()-btnDiscHs: ");
+            if (neuroSky != null && neuroSky.isConnected()) {
+                try {
+                    neuroSky.disconnect();
+                    btnDiscHs.setVisibility(View.GONE);
+                    btnClasify.setVisibility(View.GONE);
+                    btnConnHs.setVisibility(View.VISIBLE);
+                    Toast myToast = Toast.makeText(this, R.string.text_sett_disconn, Toast.LENGTH_LONG);
+                    myToast.show();
+                } catch (BluetoothNotEnabledException e) {
+                    Log.d(TAG, e.getMessage());
+                }
+            } else {
+                Toast myToast = Toast.makeText(this, R.string.text_sett_disconn, Toast.LENGTH_LONG);
+                myToast.show();
+                btnDiscHs.setVisibility(View.GONE);
+                btnClasify.setVisibility(View.GONE);
+                btnConnHs.setVisibility(View.VISIBLE);
+            }
         } else if (swtEnableNoti == v) {
+            Log.d(TAG, "onClick()-swtEnableNoti: ");
             GlobalInfo.setEnableNotifyConnHeadset(swtEnableNoti.isChecked());
+            if (!HeadsetConnectionService.isIsIntentServiceRunning()) {
+                Intent hcs = new Intent(this, HeadsetConnectionService.class);
+                startService(hcs);
+                Log.d(TAG, "onClick()-btnDiscHs:  HeadsetConnectionService inicializado");
+            }
         }
 
 

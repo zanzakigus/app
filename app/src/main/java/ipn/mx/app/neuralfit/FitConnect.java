@@ -1,4 +1,4 @@
-package ipn.mx.app.neural;
+package ipn.mx.app.neuralfit;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;

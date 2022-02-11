@@ -18,12 +18,15 @@ import java.util.Set;
 import ipn.mx.app.Login;
 import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
+import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
 import ipn.mx.app.neurosky.library.listener.ExtendedDeviceMessageListener;
 import ipn.mx.app.neurosky.library.message.enums.BrainWave;
 import ipn.mx.app.neurosky.library.message.enums.Signal;
 import ipn.mx.app.neurosky.library.message.enums.State;
+import ipn.mx.app.notification.GlobalNotificationManager;
+import ipn.mx.app.notification.mock.NotificationManagerData;
 
 public class NeuroSkyManager {
     public static final int TIPO_NEGATIVA = 0;
@@ -286,7 +289,10 @@ public class NeuroSkyManager {
             return;
         }
 
-
+        NotificationManagerData nmd = new NotificationManagerData(context);
+        nmd.setmSummaryText(context.getResources().getString(R.string.text_conn_serv_btn));
+        GlobalNotificationManager gnm = new GlobalNotificationManager(context, nmd);
+        gnm.generateNotification();
         Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
         myToast.show();
 

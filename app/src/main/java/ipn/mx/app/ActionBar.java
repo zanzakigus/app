@@ -38,8 +38,8 @@ public class ActionBar extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(this, HistoryDetection.class);
             startActivity(intent);
         } else if (btnNotification == v) {
-            //Intent intent = new Intent(this, Index.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, SettingHeadset.class);
+            startActivity(intent);
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);

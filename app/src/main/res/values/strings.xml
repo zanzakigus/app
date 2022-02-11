@@ -52,6 +52,17 @@
     <string name="text_button_clasify">Detectar emoción</string>
     <string name="text_button_conn_sett">Conectar diadema</string>
     <string name="text_button_desconn_sett">Desconectar diadema</string>
+    <string name="text_sett_disconn">Diadema Conectada</string>
+    <string name="text_sett_conn">Diadema Desconectada</string>
+
+
+    <!-- CLASE: HeadsetConnectionService -->
+    <string name="text_conn_serv_btn">Configuración</string>
+    <string name="text_conn_serv_summary">Diadema</string>
+    <string name="text_conn_serv_ctitle">Conexión</string>
+    <string name="text_conn_serv_ctext">La diadema no se encuentra conectada</string>
+    <string name="text_conn_serv_btitle">Conexión Diadema</string>
+    <string name="text_conn_serv_btext">La diadema no está conectada, para una mejor experiencia debes tener la diadema conectada.\n\nPresiona el botón Configuración</string>
 
 
     <!-- CLASE: SignUp1 -->
@@ -127,7 +138,7 @@
     <string name="m_summary_text">Emoción detectada</string>
     <string name="m_content_title">¡¡Ciudado!!</string>
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
-    <string name="m_big_text">Se ha detectado que te encuentras en una emoción negativa, presiona en estrategia para poder apoyarte. </string>
+    <string name="m_big_text">Se ha detectado que te encuentras experimentando una emoción negativa, presiona el botón estrategia para poder apoyarte. </string>
     <string name="m_notification_button">Estrategia </string>
 
 

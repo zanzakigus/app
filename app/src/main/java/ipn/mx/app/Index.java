@@ -22,7 +22,8 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import ipn.mx.app.neural.FitConnect;
+import ipn.mx.app.neuralfit.FitConnect;
+import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.service.HeadsetConnectionService;
 
 public class Index extends AppCompatActivity implements View.OnClickListener {
@@ -204,7 +205,12 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             if (!HeadsetConnectionService.isIsIntentServiceRunning()) {
                 Intent hcs = new Intent(context, HeadsetConnectionService.class);
                 context.startService(hcs);
-                Toast.makeText(context, "service llll", Toast.LENGTH_LONG).show();
+                Log.i("INFO", "INFO: Servicio verificar conexion diadema iniciado");
+            }
+            if (!ClasifyService.isIntentServiceRunning()) {
+                Intent hcs = new Intent(context, ClasifyService.class);
+                context.startService(hcs);
+                Log.i("INFO", "INFO: Servicio clasificacion de ondas cereblares iniciado");
             }
 
             api.peticionGET(context.getResources().getString(R.string.server_host) + "/usuario", params, index, functionToPass);
