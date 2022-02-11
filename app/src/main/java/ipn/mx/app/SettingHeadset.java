@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
+import ipn.mx.app.notification.GlobalNotificationManager;
+import ipn.mx.app.notification.mock.NotificationManagerData;
 import ipn.mx.app.service.HeadsetConnectionService;
 
 public class SettingHeadset extends AppCompatActivity implements View.OnClickListener {
@@ -25,7 +28,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
 
     private final String TAG = "SettingHeadset";
 
-    Button btnConnHs, btnDiscHs, btnClasify;
+    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser;
     Switch swtEnableNoti;
     TextView tvUserName;
 
@@ -53,6 +56,16 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.headset_setting);
 
+        btnHome = findViewById(R.id.icon_home);
+        btnGraph = findViewById(R.id.icon_graph);
+        btnNotification = findViewById(R.id.icon_notifications);
+        btnUser = findViewById(R.id.icon_user);
+
+        btnHome.setOnClickListener(this);
+        btnGraph.setOnClickListener(this);
+        btnNotification.setOnClickListener(this);
+        btnUser.setOnClickListener(this);
+
         btnConnHs = findViewById(R.id.conectar);
         btnDiscHs = findViewById(R.id.desconetar);
         btnClasify = findViewById(R.id.detectar_emocion);
@@ -77,6 +90,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
 
         swtEnableNoti.setOnClickListener(this);
 
+        new NeuroSkyManager(this);
         neuroSky = NeuroSkyManager.getNeuroSky();
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -94,25 +108,59 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-        if (btnConnHs == v) {
+        if (btnHome == v) {
+            Intent intent = new Intent(this, Index.class);
+            startActivity(intent);
+        } else if (btnGraph == v) {
+            Intent intent = new Intent(this, HistoryDetection.class);
+            startActivity(intent);
+        } else if (btnNotification == v) {
+            Intent intent = new Intent(this, SettingHeadset.class);
+            startActivity(intent);
+        } else if (btnUser == v) {
+            Intent intent = new Intent(this, User.class);
+            startActivity(intent);
+        }
+
+        else if (btnConnHs == v) {
             Log.d(TAG, "onClick()-btnConnHs: ");
             if (neuroSky != null && !neuroSky.isConnected()) {
                 if (!bluetoothAdapter.isEnabled()) {
                     bluetoothAdapter.enable();
                 }
+
                 try {
                     neuroSky.connect();
-                    Toast myToast = Toast.makeText(this, R.string.text_sett_conn, Toast.LENGTH_LONG);
-                    myToast.show();
-                    btnDiscHs.setVisibility(View.VISIBLE);
-                    btnClasify.setVisibility(View.VISIBLE);
-                    btnConnHs.setVisibility(View.GONE);
+
+                    final Handler handler = new Handler();
+                    Context context = this;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // set the limitations for the numeric
+                            // text under the progress bar
+                            if (!neuroSky.isConnected()) {
+                                handler.postDelayed(this, 1000);
+                            } else {
+                                btnDiscHs.setVisibility(View.VISIBLE);
+                                btnClasify.setVisibility(View.VISIBLE);
+                                btnConnHs.setVisibility(View.GONE);
+                                neuroSky.start();
+                                handler.removeCallbacks(this);
+                                Toast myToast = Toast.makeText(context, R.string.text_sett_conn, Toast.LENGTH_LONG);
+                                myToast.show();
+                            }
+                        }
+                    }, 1000);
+
+
                 } catch (BluetoothNotEnabledException e) {
                     Log.d(TAG, e.getMessage());
                 }
             } else {
                 Toast myToast = Toast.makeText(this, R.string.text_sett_conn, Toast.LENGTH_LONG);
                 myToast.show();
+                neuroSky.start();
                 btnDiscHs.setVisibility(View.VISIBLE);
                 btnClasify.setVisibility(View.VISIBLE);
                 btnConnHs.setVisibility(View.GONE);
@@ -133,11 +181,27 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
             if (neuroSky != null && neuroSky.isConnected()) {
                 try {
                     neuroSky.disconnect();
-                    btnDiscHs.setVisibility(View.GONE);
-                    btnClasify.setVisibility(View.GONE);
-                    btnConnHs.setVisibility(View.VISIBLE);
-                    Toast myToast = Toast.makeText(this, R.string.text_sett_disconn, Toast.LENGTH_LONG);
-                    myToast.show();
+                    final Handler handler = new Handler();
+                    Context context = this;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // set the limitations for the numeric
+                            // text under the progress bar
+                            if (neuroSky.isConnected()) {
+                                handler.postDelayed(this, 1000);
+                            } else {
+                                btnDiscHs.setVisibility(View.GONE);
+                                btnClasify.setVisibility(View.GONE);
+                                btnConnHs.setVisibility(View.VISIBLE);
+                                Toast myToast = Toast.makeText(context, R.string.text_sett_disconn, Toast.LENGTH_LONG);
+                                myToast.show();
+                                handler.removeCallbacks(this);
+                            }
+                        }
+                    }, 1000);
+
+
                 } catch (BluetoothNotEnabledException e) {
                     Log.d(TAG, e.getMessage());
                 }

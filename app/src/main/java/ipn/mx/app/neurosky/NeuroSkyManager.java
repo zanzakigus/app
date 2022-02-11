@@ -192,7 +192,7 @@ public class NeuroSkyManager {
     }
 
     private void handleSignalChange(final Signal signal) {
-        Log.d(LOG_TAG + "-SIGNALS", String.format("%s: %d", signal.toString(), signal.getValue()));
+        /*Log.d(LOG_TAG + "-SIGNALS", String.format("%s: %d", signal.toString(), signal.getValue()));*/
     }
 
     private void handleBrainWavesChange(final Set<BrainWave> brainWaves) {
@@ -202,7 +202,7 @@ public class NeuroSkyManager {
 
         for (BrainWave brainWave : brainWaves) {
             params.put(brainWave.toString(), String.valueOf(brainWave.getValue()));
-            Log.d(LOG_TAG + "-WAVES", String.format("brain: %s: %d", brainWave.toString(), brainWave.getValue()));
+            /*Log.d(LOG_TAG + "-WAVES", String.format("brain: %s: %d", brainWave.toString(), brainWave.getValue()));*/
         }
 
         String Shared = context.getResources().getString(R.string.shared_key);
@@ -226,8 +226,17 @@ public class NeuroSkyManager {
                 parameterTypes[1] = Context.class;
                 Method functionToPass = null;
                 String methodName = "onSentWaves";
+                boolean enviar = false;
                 if (clasificar) {
                     methodName = "onClassifyResponse";
+                    if(GlobalInfo.getClasifyTimeDelayCounter() == GlobalInfo.getClasifyTimeDelay()/1000){
+                        enviar = true;
+                        GlobalInfo.setClasifyTimeDelayCounter(0);
+                    }else {
+                        GlobalInfo.setClasifyTimeDelayCounter(GlobalInfo.getClasifyTimeDelayCounter()+1);
+                    }
+                }else {
+                    enviar = true;
                 }
                 try {
                     functionToPass = NeuroSkyManager.class.getMethod(methodName, parameterTypes);
@@ -235,7 +244,10 @@ public class NeuroSkyManager {
                     e.printStackTrace();
                 }
 
-                api.peticionPOST(context.getResources().getString(R.string.server_host) + "/waves_data", params, neuroSkyManager, functionToPass);
+                if(enviar){
+                    api.peticionPOST(context.getResources().getString(R.string.server_host) + "/waves_data", params, neuroSkyManager, functionToPass);
+                }
+
 
             }
         } else {

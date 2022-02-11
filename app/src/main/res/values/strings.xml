@@ -52,8 +52,8 @@
     <string name="text_button_clasify">Detectar emoción</string>
     <string name="text_button_conn_sett">Conectar diadema</string>
     <string name="text_button_desconn_sett">Desconectar diadema</string>
-    <string name="text_sett_disconn">Diadema Conectada</string>
-    <string name="text_sett_conn">Diadema Desconectada</string>
+    <string name="text_sett_disconn">Diadema Desconectada</string>
+    <string name="text_sett_conn">Diadema Conectada</string>
 
 
     <!-- CLASE: HeadsetConnectionService -->

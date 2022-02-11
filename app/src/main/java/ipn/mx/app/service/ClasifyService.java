@@ -34,6 +34,7 @@ public class ClasifyService extends Service {
             @Override
             public void run() {
                 if (NeuroSkyManager.getNeuroSky() != null && NeuroSkyManager.getNeuroSky().isConnected()) {
+                    Log.d(TAG, "onStartCommand(): Classifying" );
                     NeuroSkyManager.enviarWavesIdentificar();
                 }
                 handler.postDelayed(this, GlobalInfo.getClasifyTimeDelay());
