@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neuralfit.FitConnect;
 import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.service.HeadsetConnectionService;
@@ -84,6 +85,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
         loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
+
+        GlobalInfo.setIniEnableNotifyConnHeadset(this);
 
         if (loggedPassword == null || loggedEmail == null) {
             Intent intent = new Intent(this, Login.class);
@@ -156,7 +159,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         String nombreKey = context.getResources().getString(R.string.logged_nombre);
 
         SharedPreferences.Editor editor = SharedP.edit();
-        ;
         editor.putString(nombreKey, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
         editor.apply();
         ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(SharedP.getString(nombreKey, "Sin nombre"));

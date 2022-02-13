@@ -1,6 +1,11 @@
 package ipn.mx.app.global;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
+
+import ipn.mx.app.R;
 
 public class GlobalInfo {
 
@@ -14,13 +19,24 @@ public class GlobalInfo {
     public static ArrayList<Integer> notificationsDisplayed = new ArrayList<>();
 
 
+
     public static boolean isEnableNotifyConnHeadset() {
         return enableNotifyConnHeadset;
 
     }
 
-    public static void setEnableNotifyConnHeadset(boolean notifyConnHeadset) {
+    public static void setEnableNotifyConnHeadset(boolean notifyConnHeadset, Context context) {
+        SharedPreferences sharedpreferences = context.getSharedPreferences(context.getResources().getString(R.string.shared_key), Context.MODE_PRIVATE);
         GlobalInfo.enableNotifyConnHeadset = notifyConnHeadset;
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(context.getResources().getString(R.string.logged_notication_conn_enable), notifyConnHeadset ? "True":null);
+        editor.apply();
+    }
+
+    public static void setIniEnableNotifyConnHeadset(Context context) {
+        SharedPreferences sharedpreferences = context.getSharedPreferences(context.getResources().getString(R.string.shared_key), Context.MODE_PRIVATE);
+        GlobalInfo.enableNotifyConnHeadset =
+        sharedpreferences.getString(context.getResources().getString(R.string.logged_notication_conn_enable), null)!=null;
     }
 
     public static ArrayList<Integer> getNotificationsDisplayed() {

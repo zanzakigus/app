@@ -10,6 +10,7 @@
     <string name="logged_email_key">email_key</string>
     <string name="logged_password_key">password_key</string>
     <string name="logged_nombre">nombre_key</string>
+    <string name="logged_notication_conn_enable">conn_key</string>
 
     <!-- VISTAS -->
     <string name="app_name">Resilience</string>

@@ -84,6 +84,8 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         loggedNombre = sharedpreferences.getString(NOMBRE_KEY, null);
         tvUserName.setText(loggedNombre);
 
+        swtEnableNoti.setChecked(GlobalInfo.isEnableNotifyConnHeadset());
+
         btnClasify.setOnClickListener(this);
         btnDiscHs.setOnClickListener(this);
         btnConnHs.setOnClickListener(this);
@@ -214,7 +216,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
             }
         } else if (swtEnableNoti == v) {
             Log.d(TAG, "onClick()-swtEnableNoti: ");
-            GlobalInfo.setEnableNotifyConnHeadset(swtEnableNoti.isChecked());
+            GlobalInfo.setEnableNotifyConnHeadset(swtEnableNoti.isChecked(), this);
             if (!HeadsetConnectionService.isIsIntentServiceRunning()) {
                 Intent hcs = new Intent(this, HeadsetConnectionService.class);
                 startService(hcs);
