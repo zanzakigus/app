@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -39,6 +40,8 @@ public class NeuroSkyManager {
     private static int tipo_seleccionado = -1;
     private static boolean clasificar = false;
     private static boolean estrendada = false;
+    private static int trainFile = 0;
+    private ArrayList<HashMap<String, String>> arrayWaves = new ArrayList<>();
 
     public NeuroSkyManager() {
 
@@ -226,17 +229,23 @@ public class NeuroSkyManager {
                 parameterTypes[1] = Context.class;
                 Method functionToPass = null;
                 String methodName = "onSentWaves";
+                String link = "/waves_data";
                 boolean enviar = false;
                 if (clasificar) {
                     methodName = "onClassifyResponse";
+                    link = "/classify_neural";
                     if(GlobalInfo.getClasifyTimeDelayCounter() == GlobalInfo.getClasifyTimeDelay()/1000){
                         enviar = true;
                         GlobalInfo.setClasifyTimeDelayCounter(0);
+                        params.put("array_waves", arrayWaves.toString());
+                        arrayWaves = new ArrayList<>();
                     }else {
                         GlobalInfo.setClasifyTimeDelayCounter(GlobalInfo.getClasifyTimeDelayCounter()+1);
+                        arrayWaves.add(params);
                     }
                 }else {
                     enviar = true;
+                    params.put("train_file", Integer.toString(trainFile));
                 }
                 try {
                     functionToPass = NeuroSkyManager.class.getMethod(methodName, parameterTypes);
@@ -244,8 +253,9 @@ public class NeuroSkyManager {
                     e.printStackTrace();
                 }
 
+
                 if(enviar){
-                    api.peticionPOST(context.getResources().getString(R.string.server_host) + "/waves_data", params, neuroSkyManager, functionToPass);
+                    api.peticionPOST(context.getResources().getString(R.string.server_host) + link, params, neuroSkyManager, functionToPass);
                 }
 
 
@@ -300,13 +310,15 @@ public class NeuroSkyManager {
             myToast.show();
             return;
         }
+        if(message.equals("0")){
+            NotificationManagerData nmd = new NotificationManagerData(context);
+            GlobalNotificationManager gnm = new GlobalNotificationManager(context, nmd);
+            gnm.generateNotification();
+            Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            myToast.show();
+        }
 
-        NotificationManagerData nmd = new NotificationManagerData(context);
-        nmd.setmSummaryText(context.getResources().getString(R.string.text_conn_serv_btn));
-        GlobalNotificationManager gnm = new GlobalNotificationManager(context, nmd);
-        gnm.generateNotification();
-        Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
-        myToast.show();
+
 
     }
 
@@ -327,5 +339,13 @@ public class NeuroSkyManager {
         }
         Log.d(LOG_TAG + "-WAVES SENT", "brain: Enviada con exito.");
 
+    }
+
+    public static int getTrainFile() {
+        return trainFile;
+    }
+
+    public static void setTrainFile(int trainFile) {
+        NeuroSkyManager.trainFile = trainFile;
     }
 }

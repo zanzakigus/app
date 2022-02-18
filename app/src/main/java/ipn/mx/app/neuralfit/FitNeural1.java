@@ -72,6 +72,7 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
                 Toast myToast = Toast.makeText(this, R.string.sending_waves, Toast.LENGTH_LONG);
                 myToast.show();
 
+                NeuroSkyManager.setTrainFile(0);
                 NeuroSkyManager.enviarWavesTipoNegativo();
 
                 final Handler handler = new Handler();
@@ -81,14 +82,18 @@ public class FitNeural1 extends AppCompatActivity implements View.OnClickListene
                     public void run() {
                         // set the limitations for the numeric
                         // text under the progress bar
-                        if (i <= 60) {
+                        if (i <= 120) {
                             progressText.setText("" + i);
-                            int progress = (i * 100) / 60;
+                            int progress = (i * 100) / 120;
                             progressBar.setProgress(progress);
                             i++;
+                            if(i==96){
+                                NeuroSkyManager.setTrainFile(1);
+                            }
                             handler.postDelayed(this, 1000);
                         } else {
                             NeuroSkyManager.stopSendingWaves();
+                            NeuroSkyManager.setTrainFile(0);
                             enviado = true;
                             Toast myToast = Toast.makeText(context, R.string.sent_waves_succed, Toast.LENGTH_LONG);
                             myToast.show();
