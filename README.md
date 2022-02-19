@@ -4,7 +4,7 @@ Para el desarrollo dela Trabajo Terminal, de la Escuela Superior de Computo del 
 
 ## Comenzando 🚀
 
-A continucación se menciona el procedimiento que se debe de llevar a cabo para el testeo de esta aplicación.
+A continuación se menciona el procedimiento que se debe de llevar a cabo para el testeo de esta aplicación.
 
 Mira **Despliegue** para conocer como desplegar el proyecto.
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +30,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public static String EMAIL_KEY;
     // key for storing password.
     public static String PASSWORD_KEY;
+    // View variables
     EditText edtCorreo, edtContra;
     View btnLogin, btnRegister;
+    TextView tvForgetPassword;
     //Http request variables
     RequestQueue queue;
     String host;
@@ -51,9 +54,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         edtCorreo = findViewById(R.id.email_input);
         edtContra = findViewById(R.id.password_input);
         btnRegister = findViewById(R.id.registrarse_button);
+        tvForgetPassword = findViewById(R.id.forget_password);
 
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
+        tvForgetPassword.setOnClickListener(this);
 
         queue = Volley.newRequestQueue(this);
         host = this.getResources().getString(R.string.server_host);
@@ -114,6 +119,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
         } else if (v == btnRegister) {
             Intent intent = new Intent(this, SignUp1.class);
+            startActivity(intent);
+        } else if (v == tvForgetPassword) {
+            Intent intent = new Intent(this, ForgetPassword.class);
             startActivity(intent);
         }
     }

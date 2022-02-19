@@ -2,9 +2,10 @@
 
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
-    <string name="server_host">http://192.168.3.20:8000</string>
+<!--    <string name="server_host">http://192.168.3.20:8000</string>-->
 
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
+    <string name="server_host">http://192.168.1.75:8000</string>
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -56,7 +57,6 @@
     <string name="text_sett_disconn">Diadema Desconectada</string>
     <string name="text_sett_conn">Diadema Conectada</string>
 
-
     <!-- CLASE: HeadsetConnectionService -->
     <string name="text_conn_serv_btn">Configuración</string>
     <string name="text_conn_serv_summary">Diadema</string>
@@ -64,7 +64,6 @@
     <string name="text_conn_serv_ctext">La diadema no se encuentra conectada</string>
     <string name="text_conn_serv_btitle">Conexión Diadema</string>
     <string name="text_conn_serv_btext">La diadema no está conectada, para una mejor experiencia debes tener la diadema conectada.\n\nPresiona el botón Configuración</string>
-
 
     <!-- CLASE: SignUp1 -->
     <string name="missing_email">Se requiere de un correo electrónico para continuar</string>
@@ -79,6 +78,7 @@
     <!-- CLASE: Login -->
     <string name="logged_succed">Se inició sesión exitosamente</string>
     <string name="logged_fail">Los datos son incorrectos, favor de verificar</string>
+    <string name="forget_password"><u>Recuperar Contraseña</u></string>
 
     <!-- CLASE: Index -->
     <string name="no_neural">No se encontró la red neuronal</string>
@@ -99,6 +99,12 @@
     <string name="invalid_password_code">Favor de ingresar una contraseña valida. Solo queda un intento restante.</string>
     <string name="log_out_reason">Por motivos de seguridad se ha cerrado la sesión.</string>
     <string name="confirme_code">Validar código</string>
+
+    <!-- CLASE: ForgetPassword -->
+    <string name="forget_password_title">Recuperar Contraseña</string>
+    <string name="forget_password_send_email">Enviar correo</string>
+    <string name="forget_password_first_text">Favor de ingresar su correo registrado en la aplicación. Se le enviará un correo con su nueva contraseña.</string>
+    <string name="forget_password_second_text">La actualización de la contraseña se hace de forma inmediata. Se recomienda que se cambie la contraseña iniciando sesión en la sección de perfil.</string>
 
     <!-- CLASE: UpdatePassword -->
     <string name="update_password_new">Ingrese la nueva contraseña</string>

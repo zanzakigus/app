@@ -116,6 +116,39 @@ public class PeticionAPI implements Response.ErrorListener, Response.Listener<JS
         functionToPass = method;
     }
 
+    public void peticionPATCH(String URL, HashMap<String, String> params, Object object, Method method) {
+
+        reqJsonObj = new JSONObject();
+        for (String key : params.keySet()) {
+            try {
+                reqJsonObj.put(key, params.get(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PATCH, URL, reqJsonObj, this, this) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Accept", "application/json");
+                return params;
+            }
+        };
+
+        // En caso de que la peticion se tarde mucho el Volley vuelve a mandar otra petición haciendo que al servidor le lleguen dos peticiones o mas
+        // Con esto aumnetamos el tiempo de espera y hacemos que como mucho solo haga una petición. ASi evitamos duplicidades en el servidor.
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        requestQueue.add(request);
+        classPetition = object;
+        functionToPass = method;
+    }
+
     @Override
     public void onResponse(JSONObject response) {
         resJsonObj = new JSONObject();
