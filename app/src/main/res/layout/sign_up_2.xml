@@ -67,10 +67,14 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="5dp"
+        android:autofillHints=""
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textColor="@color/black"
+        android:inputType="text"
+        android:maxLines="1"
+        android:imeOptions="actionNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -97,6 +101,9 @@
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textColor="@color/black"
+        android:inputType="text"
+        android:maxLines="1"
+        android:imeOptions="actionNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/a_paterno" />
@@ -123,6 +130,9 @@
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textColor="@color/black"
+        android:inputType="text"
+        android:maxLines="1"
+        android:imeOptions="actionNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/a_materno" />
@@ -150,6 +160,8 @@
         android:inputType="none"
         android:padding="12dp"
         android:textColor="@color/black"
+        android:maxLines="1"
+        android:imeOptions="actionSend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fecha_nacimiento" />

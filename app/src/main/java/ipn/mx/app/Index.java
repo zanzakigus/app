@@ -23,7 +23,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import ipn.mx.app.global.GlobalInfo;
-import ipn.mx.app.neuralfit.FitConnect;
 import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.service.HeadsetConnectionService;
 
@@ -115,10 +114,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             }
 
             api.peticionPOST(this.getResources().getString(R.string.server_host) + "/exist_neural", params, index, functionToPass);
-
-
         }
-
     }
 
     @Override
@@ -159,10 +155,10 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         String nombreKey = context.getResources().getString(R.string.logged_nombre);
 
         SharedPreferences.Editor editor = SharedP.edit();
+        Log.d("Buenas", "localSaveUserInfo: " + usuarioJSON.getString("nombre"));
         editor.putString(nombreKey, usuarioJSON.getString("nombre") + " " + usuarioJSON.getString("ap_paterno") + " " + usuarioJSON.getString("ap_materno"));
         editor.apply();
         ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(SharedP.getString(nombreKey, "Sin nombre"));
-
     }
 
     public void existNeural(JSONObject response, Context context) throws JSONException {
@@ -181,13 +177,12 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             return;
         }
         if (message.equals("No file")) {
-            Intent intent = new Intent(context, FitConnect.class);
+            Intent intent = new Intent(context, InfoAppView.class);
             context.startActivity(intent);
             Log.i("INFO", "INFO: No neural file found");
             ((Activity) context).finish();
 
-            Toast myToast = Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG);
-            myToast.show();
+            Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG).show();
         } else {
             PeticionAPI api = new PeticionAPI(context);
             HashMap<String, String> params = new HashMap<>();
@@ -217,7 +212,5 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
             api.peticionGET(context.getResources().getString(R.string.server_host) + "/usuario", params, index, functionToPass);
         }
-
-
     }
 }

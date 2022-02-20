@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +24,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
@@ -59,6 +61,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
         tvForgetPassword.setOnClickListener(this);
+        edtContra.setOnEditorActionListener(this);
 
         queue = Volley.newRequestQueue(this);
         host = this.getResources().getString(R.string.server_host);
@@ -85,44 +88,49 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         Context context = this;
         if (v == btnLogin) {
-            email = edtCorreo.getText().toString();
-            password = edtContra.getText().toString();
-            if (email.equals("")) {
-                Toast myToast = Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG);
-                myToast.show();
-            } else if (password.equals("")) {
-                Toast myToast = Toast.makeText(this, R.string.missing_password, Toast.LENGTH_LONG);
-                myToast.show();
-            } else {
-
-                PeticionAPI api = new PeticionAPI(this);
-
-                HashMap<String, String> params = new HashMap<>();
-                params.put("correo", email);
-                params.put("password", password);
-
-                Login login = new Login();
-                login.email = email;
-                login.password = password;
-                Class[] parameterTypes = new Class[2];
-                parameterTypes[0] = JSONObject.class;
-                parameterTypes[1] = Context.class;
-                Method funtionToPass = null;
-
-                try {
-                    funtionToPass = Login.class.getMethod("onLogin", parameterTypes);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-                api.peticionPOST(host + "/login", params, login, funtionToPass);
-
-            }
+            sendPetitionLogin();
         } else if (v == btnRegister) {
             Intent intent = new Intent(this, SignUp1.class);
             startActivity(intent);
         } else if (v == tvForgetPassword) {
             Intent intent = new Intent(this, ForgetPassword.class);
             startActivity(intent);
+        }
+    }
+
+    public void sendPetitionLogin() {
+        email = edtCorreo.getText().toString();
+        password = edtContra.getText().toString();
+        if (email.equals("")) {
+            Toast myToast = Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG);
+            myToast.show();
+        } else if (password.equals("")) {
+            Toast myToast = Toast.makeText(this, R.string.missing_password, Toast.LENGTH_LONG);
+            myToast.show();
+        } else {
+
+            PeticionAPI api = new PeticionAPI(this);
+
+            HashMap<String, String> params = new HashMap<>();
+            params.put("correo", email);
+            params.put("password", password);
+
+            Log.d("Correo", "sendPetitionLogin: " + email);
+
+            Login login = new Login();
+            login.email = email;
+            login.password = password;
+            Class[] parameterTypes = new Class[2];
+            parameterTypes[0] = JSONObject.class;
+            parameterTypes[1] = Context.class;
+            Method functionToPass = null;
+
+            try {
+                functionToPass = Login.class.getMethod("onLogin", parameterTypes);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            api.peticionPOST(host + "/login", params, login, functionToPass);
         }
     }
 
@@ -148,8 +156,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         message = context.getResources().getString(R.string.logged_succed);
         SharedPreferences.Editor editor = SharedP.edit();
-        ;
-
 
         editor.putString(emailKey, email);
         editor.putString(passKey, password);
@@ -162,6 +168,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
         myToast.show();
+    }
 
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+        boolean handled = false;
+        if(edtContra.getId() == textView.getId() && i == EditorInfo.IME_ACTION_SEND){
+            sendPetitionLogin();
+            handled = true;
+        }
+        return handled;
     }
 }

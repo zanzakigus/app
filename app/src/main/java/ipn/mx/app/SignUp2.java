@@ -1,12 +1,14 @@
 package ipn.mx.app;
 
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -154,7 +156,7 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
         Intent intent = new Intent(context, Index.class);
         context.startActivity(intent);
         Log.i("INFO", "INFO: Usuario Creado");
-        finish();
+        ((Activity) context).finish();
     }
 
     private String formatoNumeroDosCifras(int num) {

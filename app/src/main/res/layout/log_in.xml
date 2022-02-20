@@ -56,6 +56,8 @@
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:textColor="@color/black"
+        android:maxLines="1"
+        android:imeOptions="actionNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
@@ -87,8 +89,9 @@
         android:inputType="textPassword"
         android:padding="12dp"
         android:textColor="@color/black"
+        android:maxLines="1"
+        android:imeOptions="actionSend"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 

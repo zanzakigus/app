@@ -35,7 +35,7 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
     TextView tvUsername, tvFNacimiento, tvEmail, tvDetUltimaSemana, tvDetTotal;
     Button btnUpdateInfo, btnLogOut, btnUpdatePassword;
     // variable for shared preferences.
-    SharedPreferences sharedpreferences;
+    static SharedPreferences sharedpreferences;
 
     //logged variables
     private String loggedEmail;
@@ -203,8 +203,5 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
-
     }
-
-
 }

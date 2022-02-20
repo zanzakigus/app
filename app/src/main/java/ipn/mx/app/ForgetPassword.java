@@ -1,5 +1,6 @@
 package ipn.mx.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,8 +44,12 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
 
             String correo = tvCorreo.getText().toString();
 
-            params.put("correo", correo);
+            if(correo.length() == 0){
+                Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG).show();
+                return;
+            }
 
+            params.put("correo", correo);
             ForgetPassword forgetPassword = new ForgetPassword();
             Class[] parameterTypes = new Class[2];
             parameterTypes[0] = JSONObject.class;
@@ -78,6 +83,6 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
 
         Intent intent = new Intent(context, Login.class);
         context.startActivity(intent);
-        finish();
+        ((Activity) context).finish();
     }
 }

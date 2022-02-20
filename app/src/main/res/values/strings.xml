@@ -5,7 +5,8 @@
 <!--    <string name="server_host">http://192.168.3.20:8000</string>-->
 
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
-    <string name="server_host">http://192.168.1.75:8000</string>
+<!--    <string name="server_host">http://192.168.1.75:8000</string>-->
+    <string name="server_host">http://192.168.1.65:8000</string>
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -80,6 +81,12 @@
     <string name="logged_fail">Los datos son incorrectos, favor de verificar</string>
     <string name="forget_password"><u>Recuperar Contraseña</u></string>
 
+    <!-- CLASE: InfoAppView -->
+    <string name="title_info_view">Resilience</string>
+    <string name="info_view_text_first">Buscamos alertarte cuando detectemos que estas pasando por una emoción negativa y logres ser conciente de su existencia.</string>
+    <string name="info_view_text_second">Al hacerlo continuamente podras hacer concienca si las causas de la emoción están repitiendose.</string>
+    <string name="info_view_text_third">Junto con la alerta de la detección te recomendaremos acciones o mensajes con el objetivo de ayudarte a pensar un poco más claro y ser conciente de lo que estas sintiendo.</string>
+
     <!-- CLASE: Index -->
     <string name="no_neural">No se encontró la red neuronal</string>
 
@@ -96,7 +103,7 @@
     <string name="password_information">Se le ha enviado a su correo un código para poder actualizar la contraseña.</string>
     <string name="second_information">El correo puede tardar hasta un minuto en llegar. En caso de no encontrarlo favor de revisar la bandeja de spam o correos no deseados.</string>
     <string name="third_information">En caso de cerrar la aplicación el codigo quedará invalida y debera de iniciar el procedimiento de nuevo.</string>
-    <string name="invalid_password_code">Favor de ingresar una contraseña valida. Solo queda un intento restante.</string>
+    <string name="invalid_password_code">Favor de ingresar una contraseña válida. Solo queda un intento restante.</string>
     <string name="log_out_reason">Por motivos de seguridad se ha cerrado la sesión.</string>
     <string name="confirme_code">Validar código</string>
 
