@@ -127,6 +127,11 @@
     <string name="general_error">Error al cargar información, favor de intentarlo más tarde</string>
 
 
+    <!-- CLASE: Incomplete Training -->
+    <string name="incomplete_training_title">Entrenamiento Incompleto</string>
+    <string name="incomplete_training_text_first">El entrenamiento de los patrones cerebrales quedo pendiente y se retomará hasta donde se habia llegado.</string>
+    <string name="incomplete_training_training_first">Emocion Negativa Visual</string>
+
     <!-- CLASE: Section fit Neural Network -->
     <string name="timer">---</string>
     <string name="connect">CONECTAR\nDIADEMA</string>
