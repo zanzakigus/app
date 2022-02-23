@@ -5,8 +5,8 @@
 <!--    <string name="server_host">http://192.168.3.20:8000</string>-->
 
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
-<!--    <string name="server_host">http://192.168.1.75:8000</string>-->
-    <string name="server_host">http://192.168.1.65:8000</string>
+    <string name="server_host">http://192.168.1.75:8000</string>
+<!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -49,6 +49,16 @@
     <string name="title_change_password">Cambio de contraseña</string>
     <string name="title_update_password">Actualizar Contraseña</string>
     <string name="title_headset_setting">Configuración de Diadema</string>
+
+
+    <!-- VISTA: Headset Tutorial -->
+    <string name="headset_tutorial_title">Uso de diadema</string>
+    <string name="headset_tutorial_text_first">La diadema tiene tres modos de operacion, apagado, encendido o buscando dispositivo nuevo a conectarse.</string>
+    <string name="headset_tutorial_text_second">Si es la primera vez que se conecta hacia la diadema, favor de colocar la diadema en la tercera opcion y buscarla mediante Bluetooth en su celular.</string>
+    <string name="headset_tutorial_text_third">Cuando ya este conectada, favor de colocarla en su cabeza como se muestra en el siguiente video.</string>
+    <string name="headset_tutorial_text_fourth">No se olvide de colocar la pinza en la seccion de su oreja.</string>
+    <string name="headset_tutorial_text_fifth">Hasta este punto la aplicacion deberia de ser capaz de conectarse a la diadema y poder interactuar con ella.</string>
+    <string name="headset_tutorial_btn_continuar">Continuar</string>
 
     <!-- VISTA: headset_setting -->
     <string name="text_notify_conn">Notificar conexión</string>
@@ -130,7 +140,11 @@
     <!-- CLASE: Incomplete Training -->
     <string name="incomplete_training_title">Entrenamiento Incompleto</string>
     <string name="incomplete_training_text_first">El entrenamiento de los patrones cerebrales quedo pendiente y se retomará hasta donde se habia llegado.</string>
-    <string name="incomplete_training_training_first">Emocion Negativa Visual</string>
+    <string name="incomplete_training_training_first">Emoción Negativa Visual</string>
+    <string name="incomplete_training_training_second">Emoción Negativa de Imaginación</string>
+    <string name="incomplete_training_training_third">Emoción Positiva Visual</string>
+    <string name="incomplete_training_training_fourth">Emoción Positiva de Imaginación</string>
+    <string name="incomplete_training_btn_continuar">Continuar con el Entrenamiento</string>
 
     <!-- CLASE: Section fit Neural Network -->
     <string name="timer">---</string>
@@ -159,8 +173,5 @@
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
     <string name="m_big_text">Se ha detectado que te encuentras experimentando una emoción negativa, presiona el botón estrategia para poder apoyarte. </string>
     <string name="m_notification_button">Estrategia </string>
-
-
-
 
 </resources>

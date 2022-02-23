@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary_color">
+
+    <TextView
+        android:id="@+id/headset_tutorial_title"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/headset_tutorial_title"
+        android:textAppearance="@style/title_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headset_tutorial_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_first"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/headset_tutorial_text_first"
+                android:textAppearance="@style/text_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_info_view"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/text_second"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/headset_tutorial_text_second"
+                android:textAppearance="@style/text_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_first"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/text_third"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/headset_tutorial_text_third"
+                android:textAppearance="@style/text_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_second"
+                tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                android:id="@+id/text_fourth"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/headset_tutorial_text_fourth"
+                android:textAppearance="@style/text_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_third"
+                tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                android:id="@+id/text_fifth"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/headset_tutorial_text_fifth"
+                android:textAppearance="@style/text_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_fourth"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_continuar"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/background_green"
+                android:gravity="center"
+                android:text="@string/headset_tutorial_btn_continuar"
+                android:textColor="@color/black"
+                android:theme="@style/inside_button"
+                />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
