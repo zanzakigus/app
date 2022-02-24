@@ -202,9 +202,11 @@ public class NeuroSkyManager {
 
         // Request a string response from the provided URL.
         HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> waves = new HashMap<String, String>();
 
         for (BrainWave brainWave : brainWaves) {
-            params.put(brainWave.toString(), String.valueOf(brainWave.getValue()));
+            /*params.put(brainWave.toString(), String.valueOf(brainWave.getValue()));*/
+            waves.put(brainWave.toString(), String.valueOf(brainWave.getValue()));
             /*Log.d(LOG_TAG + "-WAVES", String.format("brain: %s: %d", brainWave.toString(), brainWave.getValue()));*/
         }
 
@@ -241,11 +243,18 @@ public class NeuroSkyManager {
                         arrayWaves = new ArrayList<>();
                     }else {
                         GlobalInfo.setClasifyTimeDelayCounter(GlobalInfo.getClasifyTimeDelayCounter()+1);
-                        arrayWaves.add(params);
+                        arrayWaves.add(waves);
                     }
                 }else {
-                    enviar = true;
-                    params.put("train_file", Integer.toString(trainFile));
+                    if(GlobalInfo.getTrainSectionTime() == GlobalInfo.getTrainSectionTimeCounter()){
+                        enviar = true;
+                        GlobalInfo.setTrainSectionTimeCounter(0);
+                        params.put("array_waves", arrayWaves.toString());
+                        arrayWaves = new ArrayList<>();
+                    }else {
+                        GlobalInfo.setTrainSectionTimeCounter(GlobalInfo.getTrainSectionTimeCounter()+1);
+                        arrayWaves.add(waves);
+                    }
                 }
                 try {
                     functionToPass = NeuroSkyManager.class.getMethod(methodName, parameterTypes);

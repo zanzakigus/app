@@ -15,6 +15,8 @@ public class GlobalInfo {
     public final int MAX_INTENTS = 5;
     private static boolean enableNotifyConnHeadset = false;
     private static int clasifyTimeDelay = 60000;
+    private static int trainSectionTime = 90;
+    private static int trainSectionTimeCounter = 90;
     private static int clasifyTimeDelayCounter = clasifyTimeDelay/1000;
     public static ArrayList<Integer> notificationsDisplayed = new ArrayList<>();
 
@@ -49,6 +51,18 @@ public class GlobalInfo {
 
     public static void setClasifyTimeDelay(int clasifyTimeDelay) {
         GlobalInfo.clasifyTimeDelay = clasifyTimeDelay;
+    }
+
+    public static int getTrainSectionTime() {
+        return trainSectionTime;
+    }
+
+    public static int getTrainSectionTimeCounter() {
+        return trainSectionTimeCounter;
+    }
+
+    public static void setTrainSectionTimeCounter(int trainSectionTimeCounter) {
+        GlobalInfo.trainSectionTimeCounter = trainSectionTimeCounter;
     }
 
     public static int getClasifyTimeDelayCounter() {

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ipn.mx.app.Index;
 import ipn.mx.app.R;
+import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 
@@ -71,7 +72,7 @@ public class FitNeural2 extends AppCompatActivity implements View.OnClickListene
                 Toast myToast = Toast.makeText(this, R.string.sending_waves, Toast.LENGTH_LONG);
                 myToast.show();
 
-                NeuroSkyManager.setTrainFile(0);
+
                 NeuroSkyManager.enviarWavesTipoPositivo();
 
                 final Handler handler = new Handler();
@@ -81,18 +82,16 @@ public class FitNeural2 extends AppCompatActivity implements View.OnClickListene
                     public void run() {
                         // set the limitations for the numeric
                         // text under the progress bar
-                        if (i <= 120) {
+                        int time = GlobalInfo.getTrainSectionTime();
+                        if (i <= time) {
                             progressText.setText("" + i);
-                            int progress = (i * 100) / 120;
+                            int progress = (i * 100) / time;
                             progressBar.setProgress(progress);
                             i++;
-                            if(i==96){
-                                NeuroSkyManager.setTrainFile(1);
-                            }
+
                             handler.postDelayed(this, 1000);
                         } else {
                             NeuroSkyManager.stopSendingWaves();
-                            NeuroSkyManager.setTrainFile(0);
                             NeuroSkyManager.solicitarEntrenamiento();
                             enviado = true;
                             Toast myToast = Toast.makeText(context, R.string.sent_waves_succed, Toast.LENGTH_LONG);
