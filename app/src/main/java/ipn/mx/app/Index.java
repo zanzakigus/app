@@ -176,12 +176,15 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             myToast.show();
             return;
         }
-        if (message.equals("No file")) {
+        if (!message.equals("OK")) {
+
+            /*
+             * Aqui va logica para saber que view poner del entrenamiento pendiente
+             * */
             Intent intent = new Intent(context, InfoAppView.class);
             context.startActivity(intent);
             Log.i("INFO", "INFO: No neural file found");
             ((Activity) context).finish();
-
             Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG).show();
         } else {
             PeticionAPI api = new PeticionAPI(context);
