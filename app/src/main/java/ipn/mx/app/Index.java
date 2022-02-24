@@ -194,6 +194,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             parameterTypes[0] = JSONObject.class;
             parameterTypes[1] = Context.class;
             Method functionToPass = null;
+
             try {
                 functionToPass = Index.class.getMethod("localSaveUserInfo", parameterTypes);
             } catch (NoSuchMethodException e) {

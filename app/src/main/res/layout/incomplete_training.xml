@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/title"
         style="@style/center_things"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
-        android:gravity="top"
+        android:gravity="center"
         android:lineSpacingExtra="10dp"
         android:text="@string/incomplete_training_title"
         android:textAppearance="@style/title_blue"
@@ -39,66 +39,12 @@
 
     <LinearLayout
         android:id="@+id/view_first_training"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/text_first"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/icon_first_training"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_check_outline_circle_green"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="@string/incomplete_training_training_first"
-            android:textAppearance="@style/text_blue"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/view_second_training"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/view_first_training"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/icon_second_training"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_remove_outline_circle_red"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="@string/incomplete_training_training_first"
-            android:textAppearance="@style/text_blue"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/view_third_training"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/view_second_training"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -113,14 +59,68 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="@string/incomplete_training_training_first"
             android:textAppearance="@style/text_blue"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/view_second_training"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/view_first_training"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/icon_fourth_training"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_remove_circle_red"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/incomplete_training_training_second"
+            android:textAppearance="@style/text_blue"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_third_training"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/view_second_training"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/icon_fourth_training"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_remove_circle_red"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/incomplete_training_training_third"
+            android:textAppearance="@style/text_blue"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/view_fourth_training"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/view_third_training"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,21 +140,26 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="@string/incomplete_training_training_first"
+            android:gravity="center_vertical"
+            android:text="@string/incomplete_training_training_fourth"
             android:textAppearance="@style/text_blue"/>
     </LinearLayout>
 
-    <View
-        android:id="@+id/arrow"
-        android:layout_width="90dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_arrow_forward"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <Button
+        android:id="@+id/btn_continuar"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_green"
+        android:gravity="center"
+        android:text="@string/incomplete_training_btn_continuar"
+        android:textColor="@color/black"
+        android:theme="@style/inside_button"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_fourth_training"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
