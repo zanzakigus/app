@@ -98,6 +98,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             HashMap<String, String> params = new HashMap<>();
             params.put("correo", loggedEmail);
             params.put("password", loggedPassword);
+            params.put("section_size", "90");
 
             Index index = new Index();
             index.loggedEmail = loggedEmail;
@@ -176,17 +177,19 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             myToast.show();
             return;
         }
-        if (!message.equals("OK")) {
+        if (message.equals("None")) {
 
-            /*
-             * Aqui va logica para saber que view poner del entrenamiento pendiente
-             * */
             Intent intent = new Intent(context, InfoAppView.class);
             context.startActivity(intent);
             Log.i("INFO", "INFO: No neural file found");
             ((Activity) context).finish();
             Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG).show();
-        } else {
+        } else if(!message.equals("OK")){
+            Log.i("Lo que me regresa", message);
+            /*
+             * Aqui va logica para saber que view poner del entrenamiento pendiente
+             * */
+        }else {
             PeticionAPI api = new PeticionAPI(context);
             HashMap<String, String> params = new HashMap<>();
             params.put("correo", loggedEmail);
