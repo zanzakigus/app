@@ -73,19 +73,16 @@ public class NeuroSkyManager {
 
     public static void enviarWavesTipoNegativo() {
         tipo_seleccionado = TIPO_NEGATIVA;
-
     }
 
     public static void enviarWavesIdentificar() {
         tipo_seleccionado = -1;
         clasificar = true;
-
     }
 
     public static void stopSendingWaves() {
         tipo_seleccionado = -1;
         clasificar = false;
-
     }
 
     public static void solicitarEntrenamiento() {
