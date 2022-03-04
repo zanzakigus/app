@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +40,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
     Context context;
     Button btnHome, btnGraph, btnNotification, btnUser;
     TextView tevNombreUsuario;
+    VideoView vVIni;
+
     //Http request variables
     RequestQueue queue;
     String host;
@@ -62,6 +67,14 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         btnGraph = findViewById(R.id.icon_graph);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
+        vVIni = findViewById(R.id.video_ini);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/"
+                + R.raw.video_ini);
+        vVIni.setVideoURI(videoUri);
+
+        MediaController mc = new MediaController(this);
+        vVIni.setMediaController(mc);
+
 
         btnHome.setOnClickListener(this);
         btnGraph.setOnClickListener(this);
@@ -86,6 +99,8 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
 
         GlobalInfo.setIniEnableNotifyConnHeadset(this);
+
+
 
         if (loggedPassword == null || loggedEmail == null) {
             Intent intent = new Intent(this, Login.class);

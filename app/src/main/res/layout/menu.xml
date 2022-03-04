@@ -51,16 +51,23 @@
         app:layout_constraintTop_toBottomOf="@id/title_username"
         tools:ignore="MissingConstraints" />
 
-    <View
+    <FrameLayout
         android:id="@+id/figure_colors"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         android:layout_marginTop="70dp"
-        android:background="@drawable/figure_colors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_psicologia_positiva"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" >
+
+        <VideoView
+            android:id="@+id/video_ini"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </FrameLayout>
 
     <include
         android:id="@+id/action_bar"
