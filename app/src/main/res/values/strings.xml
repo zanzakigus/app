@@ -136,15 +136,30 @@
     <string name="login_error">Error al iniciar sesión, favor de intentarlo más tarde</string>
     <string name="general_error">Error al cargar información, favor de intentarlo más tarde</string>
 
-
     <!-- CLASE: Incomplete Training -->
     <string name="incomplete_training_title">Entrenamiento Incompleto</string>
     <string name="incomplete_training_text_first">El entrenamiento de los patrones cerebrales quedo pendiente y se retomará hasta donde se habia llegado.</string>
     <string name="incomplete_training_training_first">Emoción Negativa Visual</string>
-    <string name="incomplete_training_training_second">Emoción Negativa de Imaginación</string>
+    <string name="incomplete_training_training_second">Emoción Negativa Personal</string>
     <string name="incomplete_training_training_third">Emoción Positiva Visual</string>
-    <string name="incomplete_training_training_fourth">Emoción Positiva de Imaginación</string>
+    <string name="incomplete_training_training_fourth">Emoción Positiva Personal</string>
     <string name="incomplete_training_btn_continuar">Continuar con el Entrenamiento</string>
+
+    <!-- CLASE: Train Negative Visual -->
+    <string name="train_negative_visual_title">Emoción Negativa Visual</string>
+    <string name="train_negative_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca alguna emoción negativa</string>
+    <string name="train_negative_visual_text_second">Se recomienda seguir el video antes visto para ver la forma mas correcta de realizar el entrenamiento</string>
+    <string name="train_negative_visual_recomendations"><u>Recomendación 1</u>\n<u>Recomendación 2</u>\n<u>Recomendación 3</u></string>
+
+    <!-- CLASE: Train Negative Personal -->
+    <string name="train_negative_personal_title">Emoción Negativa Personal</string>
+    <string name="train_negative_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron.</string>
+    <string name="train_negative_personal_advice_1">Tu recuerdo mas triste</string>
+    <string name="train_negative_personal_advice_2">El lugar que da más miedo</string>
+    <string name="train_negative_personal_advice_3">La perdida de un ser querido</string>
+    <string name="train_negative_personal_advice_4">La muerte de una mascota</string>
+    <string name="train_negative_personal_advice_5">La discución mas fuerte que hayas tenido</string>
+    <string name="train_negative_personal_advice_6">Tragedias globales</string>
 
     <!-- CLASE: Section fit Neural Network -->
     <string name="timer">---</string>
