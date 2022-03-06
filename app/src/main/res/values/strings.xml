@@ -161,6 +161,27 @@
     <string name="train_negative_personal_advice_5">La discución mas fuerte que hayas tenido</string>
     <string name="train_negative_personal_advice_6">Tragedias globales</string>
 
+    <!-- CLASE: End Negative Section -->
+    <string name="end_negative_section_title">Terminaste la primera sección</string>
+    <string name="end_negative_section_text_first">Hemos terminado la medición de tus patrones cerebrales cuando sientes emociones que potencialmente puden convertirse en emociones negativas.</string>
+    <string name="end_negative_section_text_second">Es momento de que te relajes, respires profundamente y pienses solo en tu pulmones llenandose de oxigeno y expulsando el aire.</string>
+
+    <!-- CLASE: Train Positive Visual -->
+    <string name="train_positive_visual_title">Emoción Positiva Visual</string>
+    <string name="train_positive_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca emociónes positivas</string>
+    <string name="train_positive_visual_text_second">Se recomienda seguir el video antes visto para ver la forma mas correcta de realizar el entrenamiento</string>
+    <string name="train_positive_visual_recomendations"><u>Recomendación 1</u>\n<u>Recomendación 2</u>\n<u>Recomendación 3</u></string>
+
+    <!-- CLASE: Train Positive Personal -->
+    <string name="train_positive_personal_title">Emoción Positiva Personal</string>
+    <string name="train_positive_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron.</string>
+    <string name="train_positive_personal_advice_1">Tu recuerdo más feliz</string>
+    <string name="train_positive_personal_advice_2">El lugar que más tranquilidad te provoca</string>
+    <string name="train_positive_personal_advice_3">Tus seres queridos</string>
+    <string name="train_positive_personal_advice_4">Tu lugar favorito</string>
+    <string name="train_positive_personal_advice_5">Tus logros mas importantes</string>
+    <string name="train_positive_personal_advice_6">Tus personas favoritas</string>
+
     <!-- CLASE: Section fit Neural Network -->
     <string name="timer">---</string>
     <string name="connect">CONECTAR\nDIADEMA</string>

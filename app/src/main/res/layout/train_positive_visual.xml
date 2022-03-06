@@ -7,22 +7,23 @@
     android:background="@color/secondary_color">
 
     <TextView
-        android:id="@+id/train_negative_personal_title"
+        android:id="@+id/train_positive_visual_title"
         style="@style/center_things"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
         android:gravity="top"
         android:lineSpacingExtra="10dp"
-        android:text="@string/train_negative_personal_title"
+        android:text="@string/train_positive_visual_title"
         android:textAppearance="@style/title_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+
     <TextView
-        android:id="@+id/train_negative_personal_text_first"
+        android:id="@+id/train_positive_visual_text_first"
         style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,30 +31,44 @@
         android:gravity="top"
         android:justificationMode="inter_word"
         android:lineSpacingExtra="10dp"
-        android:text="@string/train_negative_personal_text_first"
+        android:text="@string/train_positive_visual_text_first"
         android:textAppearance="@style/text_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/train_negative_personal_title"
+        app:layout_constraintTop_toBottomOf="@id/train_positive_visual_title"
         tools:ignore="MissingConstraints" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/train_positive_visual_text_second"
+        style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toTopOf="@id/progress_layout"
+        android:layout_marginTop="50dp"
+        android:gravity="top"
+        android:justificationMode="inter_word"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/train_positive_visual_text_second"
+        android:textAppearance="@style/text_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/train_negative_personal_text_first">
+        app:layout_constraintTop_toBottomOf="@id/train_positive_visual_text_first"
+        tools:ignore="MissingConstraints" />
 
-        <LinearLayout
-            android:id="@+id/vertical_scroll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/train_positive_visual_recomendations"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:gravity="top"
+        android:justificationMode="inter_word"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/train_positive_visual_recomendations"
+        android:textAppearance="@style/text_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_positive_visual_text_second"
+        tools:ignore="MissingConstraints" />
 
     <View
         android:id="@+id/arrow"
@@ -65,6 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
+
 
     <RelativeLayout
         android:id="@+id/progress_layout"
@@ -84,9 +100,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/circular_shape"
-            android:gravity="center_horizontal"
             android:indeterminate="false"
-            android:progressDrawable="@drawable/circular_progress_bar" />
+            android:progressDrawable="@drawable/circular_progress_bar"
+            android:gravity="center_horizontal" />
 
         <!--Text implementation in center of the progress bar-->
         <TextView
