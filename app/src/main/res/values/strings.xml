@@ -5,9 +5,10 @@
 <!--    <string name="server_host">http://192.168.3.20:8000</string>-->
 
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
-    <string name="server_host">http://192.168.1.75:8000</string>
+    <!--<string name="server_host">http://192.168.1.75:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
+    <string name="server_host">http://192.168.1.18:8000</string>
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
     <string name="logged_password_key">password_key</string>
@@ -67,6 +68,15 @@
     <string name="text_button_desconn_sett">Desconectar diadema</string>
     <string name="text_sett_disconn">Diadema Desconectada</string>
     <string name="text_sett_conn">Diadema Conectada</string>
+
+
+    <!-- VISTA: history_detections -->
+    <string name="text_placeholder_fecha_ini">Fecha inicial</string>
+    <string name="text_placeholder_fecha_fin">Fecha final</string>
+    <string name="text_switch_history">Listado</string>
+    <string name="text_date_no_mayor_ini">La fecha de inicio debe ser anterior a la fecha final</string>
+    <string name="text_date_no_mayor_fin">La fecha de final debe ser posterior a la fecha inicial</string>
+
 
     <!-- CLASE: HeadsetConnectionService -->
     <string name="text_conn_serv_btn">Configuración</string>
