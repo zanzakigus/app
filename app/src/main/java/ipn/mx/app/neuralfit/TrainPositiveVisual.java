@@ -1,30 +1,23 @@
 package ipn.mx.app.neuralfit;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 
-public class TrainNegativePersonal extends AppCompatActivity implements View.OnClickListener {
-
-    final int CANTIDAD_CONSEJOS = 6;
-    LinearLayout vertical_scroll;
+public class TrainPositiveVisual extends AppCompatActivity implements View.OnClickListener {
 
     View btnNext;
     int i = 1;
@@ -34,13 +27,9 @@ public class TrainNegativePersonal extends AppCompatActivity implements View.OnC
     private NeuroSky neuroSky;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.train_negative_personal);
-
-        vertical_scroll = findViewById(R.id.vertical_scroll);
-
-        agregarConsejos();
+        setContentView(R.layout.train_positive_visual);
 
         neuroSky = NeuroSkyManager.getNeuroSky();
         if (neuroSky.isConnected()) {
@@ -71,7 +60,7 @@ public class TrainNegativePersonal extends AppCompatActivity implements View.OnC
             } else if (i != GlobalInfo.getTrainSectionTime()) {
                 Toast.makeText(this, R.string.first_send_waves, Toast.LENGTH_LONG).show();
             } else {
-                Intent intent = new Intent(this, EndNegativeSection.class);
+                Intent intent = new Intent(this, TrainPositivePersonal.class);
                 startActivity(intent);
                 finish();
             }
@@ -84,7 +73,7 @@ public class TrainNegativePersonal extends AppCompatActivity implements View.OnC
                 Toast myToast = Toast.makeText(this, R.string.sending_waves, Toast.LENGTH_LONG);
                 myToast.show();
 
-                NeuroSkyManager.enviarWavesTipoNegativo();
+                NeuroSkyManager.enviarWavesTipoPositivo();
 
                 final Handler handler = new Handler();
                 Context context = this;
@@ -111,31 +100,5 @@ public class TrainNegativePersonal extends AppCompatActivity implements View.OnC
                 }, 1000);
             }
         }
-    }
-
-    private void agregarConsejos() {
-
-        String consejos[] = new String[CANTIDAD_CONSEJOS];
-        consejos[0] = getResources().getString(R.string.train_negative_personal_advice_1);
-        consejos[1] = getResources().getString(R.string.train_negative_personal_advice_2);
-        consejos[2] = getResources().getString(R.string.train_negative_personal_advice_3);
-        consejos[3] = getResources().getString(R.string.train_negative_personal_advice_4);
-        consejos[4] = getResources().getString(R.string.train_negative_personal_advice_5);
-        consejos[5] = getResources().getString(R.string.train_negative_personal_advice_6);
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0, 0, 0, 40);
-
-        for (String consejo : consejos) {
-            ConstraintLayout newConsejo = (ConstraintLayout) getLayoutInflater().inflate(R.layout.component_question, null);
-            newConsejo.setLayoutParams(layoutParams);
-            newConsejo.setMinHeight(100);
-
-            TextView textConsejo = (TextView) newConsejo.getViewById(R.id.text_question);
-            textConsejo.setText(consejo);
-
-            vertical_scroll.addView(newConsejo);
-        }
-
     }
 }

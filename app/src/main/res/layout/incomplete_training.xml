@@ -51,7 +51,7 @@
             android:id="@+id/icon_first_training"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_check_circle_green"
+            android:src="@drawable/ic_remove_circle_red"
             />
 
         <TextView

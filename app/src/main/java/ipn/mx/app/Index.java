@@ -51,7 +51,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
-    private String loggedNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +99,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
         GlobalInfo.setIniEnableNotifyConnHeadset(this);
 
-
-
         if (loggedPassword == null || loggedEmail == null) {
             Intent intent = new Intent(this, Login.class);
             /*intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
@@ -113,7 +110,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             HashMap<String, String> params = new HashMap<>();
             params.put("correo", loggedEmail);
             params.put("password", loggedPassword);
-            params.put("section_size", "90");
+            params.put("section_size", GlobalInfo.getTrainSectionTime() + "");
 
             Index index = new Index();
             index.loggedEmail = loggedEmail;
@@ -192,19 +189,14 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
             myToast.show();
             return;
         }
-        if (message.equals("None")) {
+        if (message.equals("None") || !message.equals("OK")) {
 
             Intent intent = new Intent(context, InfoAppView.class);
             context.startActivity(intent);
             Log.i("INFO", "INFO: No neural file found");
             ((Activity) context).finish();
             Toast.makeText(context, R.string.no_neural, Toast.LENGTH_LONG).show();
-        } else if(!message.equals("OK")){
-            Log.i("Lo que me regresa", message);
-            /*
-             * Aqui va logica para saber que view poner del entrenamiento pendiente
-             * */
-        }else {
+        } else {
             PeticionAPI api = new PeticionAPI(context);
             HashMap<String, String> params = new HashMap<>();
             params.put("correo", loggedEmail);
