@@ -120,7 +120,7 @@
             android:background="@drawable/circular_shape"
             android:indeterminate="false"
             android:progressDrawable="@drawable/circular_progress_bar"
-            android:textAlignment="center" />
+            android:gravity="center_horizontal" />
 
         <!--Text implementation in center of the progress bar-->
         <TextView

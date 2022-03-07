@@ -38,10 +38,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
     TextView tvForgetPassword;
     //Http request variables
     RequestQueue queue;
-    String host;
-    String email, password;
+    static String host;
+    static String email, password;
     // variable for shared preferences.
-    SharedPreferences sharedpreferences;
+    static SharedPreferences sharedpreferences;
 
     //logged variables
     private String loggedEmail;
@@ -99,7 +99,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
     }
 
     public void sendPetitionLogin() {
-        email = edtCorreo.getText().toString();
+        email = edtCorreo.getText().toString().trim();
         password = edtContra.getText().toString();
         if (email.equals("")) {
             Toast myToast = Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG);
@@ -115,11 +115,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
             params.put("correo", email);
             params.put("password", password);
 
-            Log.d("Correo", "sendPetitionLogin: " + email);
+            Log.d("LogIn", "Petición a: " + host + "/login");
+            Log.d("LogIn", "sendPetitionLogin: " + email);
+            Log.d("LogIn", "sendPetitionLogin: " + password);
 
             Login login = new Login();
-            login.email = email;
-            login.password = password;
             Class[] parameterTypes = new Class[2];
             parameterTypes[0] = JSONObject.class;
             parameterTypes[1] = Context.class;
@@ -130,6 +130,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
+
             api.peticionPOST(host + "/login", params, login, functionToPass);
         }
     }
@@ -145,20 +146,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
         String message = response.getString("message");
         if (status != 200) {
             Log.e("ERROR", "ERROR onLogin: " + message);
-            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " onLogin: " + message, Toast.LENGTH_LONG);
+            Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
             myToast.show();
             return;
         }
-        String Shared = context.getResources().getString(R.string.shared_key);
-        SharedPreferences SharedP = context.getSharedPreferences(Shared, Context.MODE_PRIVATE);
-        String emailKey = context.getResources().getString(R.string.logged_email_key);
-        String passKey = context.getResources().getString(R.string.logged_password_key);
 
         message = context.getResources().getString(R.string.logged_succed);
-        SharedPreferences.Editor editor = SharedP.edit();
+        SharedPreferences.Editor editor = sharedpreferences.edit();
 
-        editor.putString(emailKey, email);
-        editor.putString(passKey, password);
+        editor.putString(EMAIL_KEY, email);
+        editor.putString(PASSWORD_KEY, password);
         editor.apply();
 
         Intent intent = new Intent(context, Index.class);
