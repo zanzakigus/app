@@ -76,7 +76,9 @@
     <string name="text_switch_history">Listado</string>
     <string name="text_date_no_mayor_ini">La fecha de inicio debe ser anterior a la fecha final</string>
     <string name="text_date_no_mayor_fin">La fecha de final debe ser posterior a la fecha inicial</string>
-
+    <string name="text_line_chart_title">Emociones negativas</string>
+    <string name="text_line_pie_title">Emociones negativas</string>
+    <string name="text_no_info_history">No hay información que mostrar, seleccionar otro periodo.</string>
 
     <!-- CLASE: HeadsetConnectionService -->
     <string name="text_conn_serv_btn">Configuración</string>

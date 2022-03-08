@@ -56,7 +56,8 @@
         android:imeOptions="actionSend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swt_history" />
+        app:layout_constraintTop_toBottomOf="@+id/swt_history"
+        />
 
 
     <EditText
@@ -95,9 +96,80 @@
 
 
 
-            <include
+<!--            <include
                 android:id="@+id/component_detection_1"
-                layout="@layout/component_detection" />
+                layout="@layout/component_detection" />-->
+
+            <TextView
+                android:id="@+id/title_line_chart"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/text_line_chart_title"
+                android:textAppearance="@style/text_blue"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vertical_scroll"
+                tools:ignore="MissingConstraints,Suspicious0dp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart1"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="200dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/title_line_chart"/>
+
+            <TextView
+                android:id="@+id/title_pie_chart"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="top"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/text_line_pie_title"
+                android:textAppearance="@style/text_blue"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vertical_scroll"
+                tools:ignore="MissingConstraints,Suspicious0dp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart2"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="200dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/no_info"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:gravity="center"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/text_no_info_history"
+                android:textAppearance="@style/title_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
+                android:visibility="gone"/>
 
 
         </LinearLayout>

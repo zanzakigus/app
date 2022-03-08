@@ -19,8 +19,6 @@ import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
-import ipn.mx.app.notification.GlobalNotificationManager;
-import ipn.mx.app.notification.mock.NotificationManagerData;
 import ipn.mx.app.service.HeadsetConnectionService;
 
 public class SettingHeadset extends AppCompatActivity implements View.OnClickListener {

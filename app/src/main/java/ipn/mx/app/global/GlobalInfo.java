@@ -13,6 +13,9 @@ public class GlobalInfo {
     public static final int NOTIFICATION_CONN_ID = 999;
     public final int TIMEOUT_REQUEST = 2000;
     public final int MAX_INTENTS = 5;
+    public static final int TIPO_NEGATIVO = 0;
+    public static final int TIPO_POSITIVO = 1;
+    public static final int TIPO_ALL = -1;
     private static boolean enableNotifyConnHeadset = false;
     private static int clasifyTimeDelay = 60000;
     private static int trainSectionTime = 90;

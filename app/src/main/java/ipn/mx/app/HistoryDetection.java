@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,22 +20,52 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+import ipn.mx.app.chartcustom.MarkerViewPointer;
+import ipn.mx.app.global.GlobalInfo;
 
 public class HistoryDetection extends AppCompatActivity implements View.OnClickListener {
 
     private final String TAG = "HistoryDetection";
 
+    private LineChart lineChart;
+    private PieChart pieChart;
+
+
     Button btnHome, btnGraph, btnNotification, btnUser;
     LinearLayout vertical_scroll;
     Switch aSwitch;
     EditText fecha_ini, fecha_fin;
+    TextView pieTitle, lineTitle, noInfo;
 
 
     Context context;
@@ -54,6 +85,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
     private int anno_ini, mes_ini, dia_ini, anno_fin, mes_fin, dia_fin;
     String fInicial, fFinal;
 
+    ArrayList<ConstraintLayout> emocionesViews = new ArrayList<>();
+    JSONArray emocionesJSONArray = new JSONArray();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +103,12 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         aSwitch = findViewById(R.id.swt_history);
         fecha_ini = findViewById(R.id.fecha_ini_input);
         fecha_fin = findViewById(R.id.fecha_fin_input);
+        lineTitle = findViewById(R.id.title_line_chart);
+        pieTitle = findViewById(R.id.title_pie_chart);
+        lineChart = findViewById(R.id.chart1);
+        pieChart = findViewById(R.id.chart2);
+        noInfo = findViewById(R.id.no_info);
+
 
         fecha_ini.setKeyListener(null);
         fecha_fin.setKeyListener(null);
@@ -80,6 +120,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
+        aSwitch.setOnClickListener(this);
 
 
         final Calendar c = Calendar.getInstance();
@@ -119,7 +160,11 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
         getHistory();
 
+
+
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -209,6 +254,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             }, anno_fin, mes_fin, dia_fin);
             datePickerDialog.show();
         } else if (aSwitch == v) {
+            aSwitch.setText(aSwitch.isChecked()?"Graficas":"Listado");
             getHistory();
         }
     }
@@ -218,6 +264,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
     }
 
     private void getHistory() {
+
         Log.d(TAG, "getHistory() ");
         PeticionAPI api = new PeticionAPI(context);
         HashMap<String, String> params = new HashMap<>();
@@ -225,9 +272,25 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         params.put("password", loggedPassword);
         params.put("fecha_ini", fInicial);
         params.put("fecha_fin", fFinal);
+        int tipo = aSwitch.isChecked() ? GlobalInfo.TIPO_NEGATIVO : GlobalInfo.TIPO_NEGATIVO;
+        params.put("tipo", String.valueOf(tipo));
 
         HistoryDetection historyDetection = new HistoryDetection();
         historyDetection.vertical_scroll = vertical_scroll;
+        historyDetection.pieTitle = pieTitle;
+        historyDetection.lineTitle = lineTitle;
+        historyDetection.lineChart = lineChart;
+        historyDetection.pieChart = pieChart;
+        historyDetection.emocionesViews = emocionesViews;
+        historyDetection.dia_ini = dia_ini;
+        historyDetection.mes_ini = mes_ini;
+        historyDetection.anno_ini = anno_ini;
+        historyDetection.dia_fin = dia_fin;
+        historyDetection.mes_fin = mes_fin;
+        historyDetection.anno_fin = anno_fin;
+        historyDetection.context =context;
+        historyDetection.noInfo =noInfo;
+
         Class[] parameterTypes = new Class[2];
         parameterTypes[0] = JSONObject.class;
         parameterTypes[1] = Context.class;
@@ -259,25 +322,352 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             myToast.show();
             return;
         }
+        lineChart.setVisibility(View.GONE);
+        pieChart.setVisibility(View.GONE);
+        lineTitle.setVisibility(View.GONE);
+        pieTitle.setVisibility(View.GONE);
+        for (ConstraintLayout emocion : emocionesViews) {
+            vertical_scroll.removeView(emocion);
+        }
+        emocionesViews.clear();
 
         JSONArray emociones = response.getJSONArray("message");
+        if (emociones.length() == 0) {
+            noInfo.setVisibility(View.VISIBLE);
+        }else{
+            noInfo.setVisibility(View.GONE);
+            Log.d(TAG, "lstado() " + emociones.length());
+            for (int i = 0; i < emociones.length(); i++) {
+                ConstraintLayout emocion = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.component_detection, null);
+                emocionesViews.add(emocion);
+                ConstraintLayout.LayoutParams newLayoutParams = new ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                newLayoutParams.topMargin = 20;
+                emocion.setLayoutParams(newLayoutParams);
 
-        Log.d(TAG, "lstado() " + emociones.length());
-        for (int i = 0; i < emociones.length(); i++) {
-            ConstraintLayout emocion = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.component_detection, null);
-
-            ConstraintLayout.LayoutParams newLayoutParams =  new ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT);
-            newLayoutParams.topMargin = 20;
-            emocion.setLayoutParams(newLayoutParams);
-
-            TextView fecha = emocion.findViewById(R.id.text_date);
-            fecha.setText(emociones.getJSONObject(i).getString("fecha_deteccion"));
-            vertical_scroll.addView(emocion);
+                TextView fecha = emocion.findViewById(R.id.text_date);
+                fecha.setText(emociones.getJSONObject(i).getString("fecha_deteccion"));
+                vertical_scroll.addView(emocion);
+            }
         }
+
+
 
 
     }
 
+    public void grafica(JSONObject response, Context context) throws JSONException {
+        Log.d(TAG, "grafica() ");
+        if (response.has("error")) {
+            Log.e(TAG, "ERROR grafica: " + response.getString("error"));
+            Toast myToast = Toast.makeText(context, "ERROR " + (500) + " grafica: " + response.getString("error"), Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        int status = response.getInt("status");
+
+        if (status != 200) {
+            String message = response.getString("message");
+            Log.e(TAG, "ERROR grafica: " + message);
+            Toast myToast = Toast.makeText(context, "ERROR " + (status) + " grafica: " + message, Toast.LENGTH_LONG);
+            myToast.show();
+            return;
+        }
+        for (ConstraintLayout emocion : emocionesViews) {
+            vertical_scroll.removeView(emocion);
+        }
+        emocionesViews.clear();
+        emocionesJSONArray = response.getJSONArray("message");
+
+        if (emocionesJSONArray.length() == 0) {
+            noInfo.setVisibility(View.VISIBLE);
+        }else{
+            noInfo.setVisibility(View.GONE);
+            generateDataLine();
+            generateDataPie();
+        }
+
+
+    }
+    private void generateDataPie() {
+        Log.d(TAG, "generateDataPie(): ");
+
+        Calendar ini = Calendar.getInstance();
+        ini.set(Calendar.DAY_OF_MONTH, dia_ini);
+        ini.set(Calendar.MONTH, mes_ini);  // 0-11 so 1 less
+        ini.set(Calendar.YEAR, anno_ini);
+
+        Calendar fin = Calendar.getInstance();
+        fin.set(Calendar.DAY_OF_MONTH, dia_fin);
+        fin.set(Calendar.MONTH, mes_fin);
+        fin.set(Calendar.YEAR, anno_fin);
+        long diff = fin.getTimeInMillis() - ini.getTimeInMillis();
+        long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        int tipo;
+    
+        if (90 < dias) {
+            tipo = 0; //por mes
+
+        } else if (2 < dias) {
+            tipo = 2; // por dias
+        } else {
+            tipo = 3; // por horas
+        }
+        int count = 0;
+        String fechaAnter = null;
+        String day = null;
+        String month = null;
+        String year;
+        String hour = null;
+        Calendar calendar = Calendar.getInstance();
+        Log.d(TAG, "generateDataPie() lenght: " + emocionesJSONArray.length());
+
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        for (int i = 0; i < emocionesJSONArray.length(); i++) {
+            String fecha = null;
+            try {
+                fecha = emocionesJSONArray.getJSONObject(i).getString("fecha_deteccion");
+            } catch (Exception e) {
+                Log.e(TAG, "generateDataPie() ");
+                e.printStackTrace();
+            }
+            if (i == 0) {
+                fechaAnter = fecha;
+                day = fechaAnter.substring(0, 2);
+                month = fechaAnter.substring(3, 5);
+                year = fechaAnter.substring(6, 10);
+                hour = fechaAnter.substring(11, 13);
+                //01/05/2020 10:15
+                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+                calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
+                calendar.set(Calendar.YEAR, Integer.parseInt(year));
+                calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+            }
+            String dataAnt;
+            int iIni = 0, iFin, finFormat, iniFormat=0;
+            if (tipo == 3) {
+                iIni = 11;
+                iFin = 13;
+                finFormat = 13;
+                dataAnt = hour;
+
+            } else if (tipo == 2) {
+                iFin = 2;
+                dataAnt = day;
+                finFormat = 10;
+
+            } else {
+                iIni = 3;
+                iFin = 5;
+                finFormat = 2;
+                iniFormat = 5;
+                dataAnt = month;
+
+            }
+            String data = fecha.substring(iIni, iFin);
+            if (!data.equals(dataAnt)) {
+                entries.add(new PieEntry(count, fechaAnter.substring(iniFormat,finFormat)));
+                count = 0;
+                if (emocionesJSONArray.length() == i + 1){
+                    entries.add(new PieEntry(count+1, fecha.substring(iniFormat,finFormat)));
+                }
+            } else if (emocionesJSONArray.length() == i + 1) {
+                entries.add(new PieEntry(count+1, fechaAnter.substring(iniFormat,finFormat)));
+            }
+
+            fechaAnter = fecha;
+            day = fecha.substring(0, 2);
+            month = fecha.substring(3, 5);
+            year = fecha.substring(6, 10);
+            hour = fecha.substring(11, 13);
+            calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+            count++;
+        }
+
+
+        PieDataSet d = new PieDataSet(entries, "");
+
+        // space between slices
+        d.setSliceSpace(2f);
+        d.setColors(ColorTemplate.COLORFUL_COLORS);
+        d.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        d.setValueTextSize(11f);
+        d.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+
+
+        pieChart.setData(new PieData(d));
+        pieChart.animateX(1000);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setRotationEnabled(true);
+        pieChart.setHighlightPerTapEnabled(true);
+
+        pieTitle.setVisibility(View.VISIBLE);
+        pieChart.setVisibility(View.VISIBLE);
+        Legend l = pieChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+
+
+
+
+    }
+
+
+    private void generateDataLine() {
+
+        Log.d(TAG, "generateDataLine(): ");
+        ArrayList<Entry> values1 = new ArrayList<>();
+
+        Calendar ini = Calendar.getInstance();
+        ini.set(Calendar.DAY_OF_MONTH, dia_ini);
+        ini.set(Calendar.MONTH, mes_ini);  // 0-11 so 1 less
+        ini.set(Calendar.YEAR, anno_ini);
+
+        Calendar fin = Calendar.getInstance();
+        fin.set(Calendar.DAY_OF_MONTH, dia_fin);
+        fin.set(Calendar.MONTH, mes_fin);
+        fin.set(Calendar.YEAR, anno_fin);
+        long diff = fin.getTimeInMillis() - ini.getTimeInMillis();
+        long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        int tipo;
+        String format = "dd MMM";
+        if (90 < dias) {
+            tipo = 0; //por mes
+            format = "MMM";
+        } else if (2 < dias) {
+            tipo = 2; // por dias
+        } else {
+            format = "dd MMM HH:mm";
+            tipo = 3; // por horas
+        }
+        int count = 0;
+        String fechaAnter;
+        String day = null;
+        String month = null;
+        String year;
+        String hour = null;
+        Calendar calendar = Calendar.getInstance();
+        Log.d(TAG, "generateDataLine() lenght: " + emocionesJSONArray.length());
+        for (int i = 0; i < emocionesJSONArray.length(); i++) {
+            String fecha = null;
+            try {
+                fecha = emocionesJSONArray.getJSONObject(i).getString("fecha_deteccion");
+            } catch (Exception e) {
+                Log.e(TAG, "generateDataLine() ");
+                e.printStackTrace();
+            }
+            if (i == 0) {
+                fechaAnter = fecha;
+                day = fechaAnter.substring(0, 2);
+                month = fechaAnter.substring(3, 5);
+                year = fechaAnter.substring(6, 10);
+                hour = fechaAnter.substring(11, 13);
+                //01/05/2020 10:15
+                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+                calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
+                calendar.set(Calendar.YEAR, Integer.parseInt(year));
+                calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+            }
+            String dataAnt;
+            int iIni = 0, iFin;
+            if (tipo == 3) {
+                iIni = 11;
+                iFin = 13;
+                dataAnt = hour;
+
+            } else if (tipo == 2) {
+                iFin = 2;
+                dataAnt = day;
+
+            } else {
+                iIni = 3;
+                iFin = 5;
+                dataAnt = month;
+
+            }
+
+            String data = fecha.substring(iIni, iFin);
+            long now;
+            if (!data.equals(dataAnt)) {
+                now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
+                values1.add(new Entry(now, count));
+                count = 0;
+                if (emocionesJSONArray.length() == i + 1){
+                    day = fecha.substring(0, 2);
+                    month = fecha.substring(3, 5);
+                    year = fecha.substring(6, 10);
+                    hour = fecha.substring(11, 13);
+                    calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+                    calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
+                    calendar.set(Calendar.YEAR, Integer.parseInt(year));
+                    calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+                    now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
+                    values1.add(new Entry(now, 1));
+                }
+            } else if (emocionesJSONArray.length() == i + 1) {
+                now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
+                values1.add(new Entry(now, count + 1));
+            }
+
+
+            day = fecha.substring(0, 2);
+            month = fecha.substring(3, 5);
+            year = fecha.substring(6, 10);
+            hour = fecha.substring(11, 13);
+            calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+            count++;
+        }
+
+        LineDataSet d1 = new LineDataSet(values1, "Emociones negativas");
+        d1.setLineWidth(2.5f);
+        d1.setCircleRadius(4.5f);
+        d1.setHighLightColor(Color.rgb(244, 117, 117));
+        d1.setDrawValues(false);
+        d1.setColors(Color.rgb(196, 0, 0));
+        d1.setCircleColor(Color.rgb(196, 0, 0));
+
+
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        sets.add(d1);
+
+
+        LineData lineData = new LineData(sets);
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f); // one hour
+        String finalFormat = format;
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+            private final SimpleDateFormat mFormat = new SimpleDateFormat(finalFormat, Locale.ENGLISH);
+
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+
+                long millis = TimeUnit.HOURS.toMillis((long) value);
+                return mFormat.format(new Date(millis));
+            }
+        });
+        lineChart.setVisibility(View.VISIBLE);
+        lineTitle.setVisibility(View.VISIBLE);
+
+        lineChart.setData(lineData);
+        // create marker to display box when values are selected
+        MarkerViewPointer mv = new MarkerViewPointer(context, R.layout.custom_marker_view);
+        // Set the marker to the chart
+        mv.setChartView(lineChart);
+        lineChart.setMarker(mv);
+        lineChart.animateX(1000);
+        lineChart.getDescription().setEnabled(false);
+
+    }
 }
