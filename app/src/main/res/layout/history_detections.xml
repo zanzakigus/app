@@ -42,39 +42,38 @@
     <EditText
         android:id="@+id/fecha_ini_input"
         style="@style/center_things"
-        android:hint="@string/text_placeholder_fecha_ini"
-        android:textColorHint="@color/dark_gray"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
+        android:hint="@string/text_placeholder_fecha_ini"
+        android:imeOptions="actionSend"
         android:inputType="none"
+        android:maxLines="1"
         android:padding="12dp"
         android:textColor="@color/black"
-        android:maxLines="1"
-        android:imeOptions="actionSend"
+        android:textColorHint="@color/dark_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swt_history"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/swt_history" />
 
 
     <EditText
         android:id="@+id/fecha_fin_input"
         style="@style/center_things"
-        android:hint="@string/text_placeholder_fecha_fin"
-        android:textColorHint="@color/dark_gray"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
+        android:hint="@string/text_placeholder_fecha_fin"
+        android:imeOptions="actionSend"
         android:inputType="none"
+        android:maxLines="1"
         android:padding="12dp"
         android:textColor="@color/black"
-        android:maxLines="1"
-        android:imeOptions="actionSend"
+        android:textColorHint="@color/dark_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fecha_ini_input" />
@@ -95,10 +94,9 @@
             android:orientation="vertical">
 
 
-
-<!--            <include
-                android:id="@+id/component_detection_1"
-                layout="@layout/component_detection" />-->
+            <!--            <include
+                            android:id="@+id/component_detection_1"
+                            layout="@layout/component_detection" />-->
 
             <TextView
                 android:id="@+id/title_line_chart"
@@ -119,13 +117,13 @@
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart1"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="200dp"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:minHeight="200dp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/title_line_chart"/>
+                app:layout_constraintTop_toBottomOf="@id/title_line_chart" />
 
             <TextView
                 android:id="@+id/title_pie_chart"
@@ -146,12 +144,12 @@
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart2"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="200dp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"/>
+                android:layout_weight="1"
+                android:minHeight="200dp"
+                android:visibility="gone" />
 
 
             <TextView
@@ -165,11 +163,11 @@
                 android:lineSpacingExtra="10dp"
                 android:text="@string/text_no_info_history"
                 android:textAppearance="@style/title_blue"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints"
-                android:visibility="gone"/>
+                tools:ignore="MissingConstraints" />
 
 
         </LinearLayout>

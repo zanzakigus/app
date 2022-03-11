@@ -11,7 +11,6 @@ import android.os.Build;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -48,7 +47,6 @@ public class GlobalNotificationManager {
     }
 
 
-
     public static boolean existNotification(Context context, int notificationId) {
         Log.d(TAG, "existNotification()");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -60,10 +58,10 @@ public class GlobalNotificationManager {
                 }
             }
             return false;
-        }else{
-            for (Integer notificacionIdArr: GlobalInfo.notificationsDisplayed
-                 ) {
-                if (notificacionIdArr == notificationId){
+        } else {
+            for (Integer notificacionIdArr : GlobalInfo.notificationsDisplayed
+            ) {
+                if (notificacionIdArr == notificationId) {
                     return true;
                 }
             }
@@ -172,7 +170,7 @@ public class GlobalNotificationManager {
         try {
             notificationManagerCompat.notify(notificacionManagerData.getNotificationId(), notification);
             GlobalInfo.notificationsDisplayed.add(notificacionManagerData.getNotificationId());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }

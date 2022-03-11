@@ -1,4 +1,4 @@
-package ipn.mx.app;
+package ipn.mx.app.updateinfo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,6 +29,11 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import ipn.mx.app.Index;
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
+import ipn.mx.app.signs.Login;
+
 public class UpdateStrengths extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
     public static String SHARED_PREFS;
@@ -56,13 +61,10 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
         context = this;
 
 
-
         edtCadena = findViewById(R.id.cadena_input);
         imvAgregar = findViewById(R.id.agregar);
         scrollView = findViewById(R.id.scrollview);
         btnUpdate = findViewById(R.id.update_stre);
-
-
 
 
         // Agregar accion al boton
@@ -89,7 +91,6 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
             finish();
             return;
         }
-
 
 
         // Se hace peticion para obtener la informacion del usuario
@@ -312,7 +313,7 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
 
         Intent intent = new Intent(context, Index.class);
         context.startActivity(intent);
-        Log.i("INFO", "INFO: "+R.string.text_update_stre_succed);
+        Log.i("INFO", "INFO: " + R.string.text_update_stre_succed);
         ((Activity) context).finish();
     }
 

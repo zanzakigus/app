@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import ipn.mx.app.Login;
 import ipn.mx.app.R;
 
 public class SignUp1 extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
@@ -50,7 +49,7 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener, 
                 return;
             }
             enterSignIn2();
-        }else if(btnSignIn == v){
+        } else if (btnSignIn == v) {
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
             finish();

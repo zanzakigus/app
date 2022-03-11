@@ -21,6 +21,10 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import ipn.mx.app.signs.Login;
+import ipn.mx.app.updateinfo.CodePassword;
+import ipn.mx.app.updateinfo.UpdateInfo;
+
 public class User extends AppCompatActivity implements View.OnClickListener, DialogInterface.OnClickListener {
 
     // creating constant keys for shared preferences.
@@ -28,15 +32,14 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
+    // variable for shared preferences.
+    static SharedPreferences sharedpreferences;
     Context cGlobal;
     // Action Bar
     Button btnHome, btnGraph, btnNotification, btnUser;
     // View
     TextView tvUsername, tvFNacimiento, tvEmail, tvDetUltimaSemana, tvDetTotal;
     Button btnUpdateInfo, btnLogOut, btnUpdatePassword;
-    // variable for shared preferences.
-    static SharedPreferences sharedpreferences;
-
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
@@ -193,10 +196,10 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         }
         detecion_week = statistics_week + detecion_week;
         detecion_all = statistics_all + detecion_all;
-        if(statistics_week == 0){
+        if (statistics_week == 0) {
             detecion_week = "Ninguna detección en última semana";
         }
-        if(statistics_all == 0){
+        if (statistics_all == 0) {
             detecion_all = "Ninguna detección";
         }
         // Poner el texto a los TextView

@@ -41,18 +41,17 @@
         android:id="@+id/view_first_training"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/text_first"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_first">
 
         <ImageView
             android:id="@+id/icon_first_training"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_remove_circle_red"
-            />
+            android:src="@drawable/ic_remove_circle_red" />
 
         <TextView
             android:layout_width="match_parent"
@@ -61,25 +60,24 @@
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="@string/incomplete_training_training_first"
-            android:textAppearance="@style/text_blue"/>
+            android:textAppearance="@style/text_blue" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/view_second_training"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/view_first_training"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_first_training">
 
         <ImageView
             android:id="@+id/icon_second_training"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_remove_circle_red"
-            />
+            android:src="@drawable/ic_remove_circle_red" />
 
         <TextView
             android:layout_width="match_parent"
@@ -88,25 +86,24 @@
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="@string/incomplete_training_training_second"
-            android:textAppearance="@style/text_blue"/>
+            android:textAppearance="@style/text_blue" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/view_third_training"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/view_second_training"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_second_training">
 
         <ImageView
             android:id="@+id/icon_third_training"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_remove_circle_red"
-            />
+            android:src="@drawable/ic_remove_circle_red" />
 
         <TextView
             android:layout_width="match_parent"
@@ -115,25 +112,24 @@
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="@string/incomplete_training_training_third"
-            android:textAppearance="@style/text_blue"/>
+            android:textAppearance="@style/text_blue" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/view_fourth_training"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/view_third_training"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_third_training">
 
         <ImageView
             android:id="@+id/icon_fourth_training"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_remove_circle_red"
-            />
+            android:src="@drawable/ic_remove_circle_red" />
 
         <TextView
             android:layout_width="match_parent"
@@ -142,7 +138,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="@string/incomplete_training_training_fourth"
-            android:textAppearance="@style/text_blue"/>
+            android:textAppearance="@style/text_blue" />
     </LinearLayout>
 
     <Button
@@ -157,9 +153,8 @@
         android:text="@string/incomplete_training_btn_continuar"
         android:textColor="@color/black"
         android:theme="@style/inside_button"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_fourth_training"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_fourth_training" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

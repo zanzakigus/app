@@ -6,7 +6,7 @@
 
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.75:8000</string>-->
-<!--    <string name="server_host">http://192.168.1.65:8000</string>-->
+    <!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <!--<string name="server_host">http://192.168.1.18:8000</string>-->
     <string name="shared_key">shared_prefs</string>
@@ -227,7 +227,6 @@
     <string name="sent_waves_succed">Ondas cerebrales enviadas con éxito, puedes continuar.</string>
     <string name="sent_waves_try">Ya se enviaron las ondas cerebrales necesarias, favor de continuar.</string>
     <string name="first_send_waves">Para continuar se debe de hacer el entrenamiento, favor de darle al circulo cuando este listo.</string>
-
 
 
     <!-- Test: Todos los strings de las vistas de Testeo -->

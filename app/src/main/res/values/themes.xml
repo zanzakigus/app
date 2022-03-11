@@ -97,7 +97,9 @@
 
 
     <style name="style_switch" parent="">
-        <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/background_color</item>
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">
+            @color/background_color
+        </item>
         <item name="android:colorForeground">@color/red</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>

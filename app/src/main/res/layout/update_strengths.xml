@@ -20,61 +20,58 @@
         tools:ignore="MissingConstraints" />
 
 
-
-
-
     <LinearLayout
         android:id="@+id/layout_inputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/logo"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo">
 
 
         <EditText
             android:id="@+id/cadena_input"
             style="@style/center_things"
             android:layout_width="200dp"
-            android:layout_marginTop="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
             android:background="@drawable/custom_input"
+            android:hint="@string/text_input_strengths"
+            android:imeOptions="actionNext"
             android:padding="12dp"
             android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:imeOptions="actionNext"
-            android:hint="@string/text_input_strengths"
-            android:textColorHint="@color/dark_gray"/>
+            android:textColorHint="@color/dark_gray" />
 
         <ImageView
             android:id="@+id/agregar"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_check_circle_green"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:src="@drawable/ic_check_circle_green" />
 
 
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="50dp"
         android:paddingBottom="50dp"
-        android:id="@+id/scrollView"
-        app:layout_constraintTop_toBottomOf="@+id/layout_inputs"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/update_stre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/update_stre">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_inputs">
 
         <LinearLayout
             android:id="@+id/scrollview"
+            style="@style/center_things"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            style="@style/center_things">
+            android:orientation="vertical">
 
         </LinearLayout>
 
@@ -93,11 +90,9 @@
         android:text="@string/update_info"
         android:textColor="@color/black"
         android:theme="@style/inside_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -145,8 +145,8 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener, 
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if(v == edtFNacimiento && hasFocus){
-            InputMethodManager imm =  (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (v == edtFNacimiento && hasFocus) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             Toast myToast = Toast.makeText(this, R.string.focus_f_nacimiento, Toast.LENGTH_LONG);
             myToast.show();
@@ -154,7 +154,7 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
-    public void openCalendarDialog(){
+    public void openCalendarDialog() {
         final Calendar c = Calendar.getInstance();
         dia = c.get(Calendar.DAY_OF_MONTH);
         mes = c.get(Calendar.MONTH);

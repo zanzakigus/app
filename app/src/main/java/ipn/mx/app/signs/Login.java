@@ -1,4 +1,4 @@
-package ipn.mx.app;
+package ipn.mx.app.signs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,7 +24,10 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import ipn.mx.app.signs.SignUp1;
+import ipn.mx.app.Index;
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
+import ipn.mx.app.updateinfo.ForgetPassword;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
@@ -34,17 +37,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
     public static String EMAIL_KEY;
     // key for storing password.
     public static String PASSWORD_KEY;
+    static String host;
+    static String email, password;
+    // variable for shared preferences.
+    static SharedPreferences sharedpreferences;
     // View variables
     EditText edtCorreo, edtContra;
     View btnLogin, btnRegister;
     TextView tvForgetPassword;
     //Http request variables
     RequestQueue queue;
-    static String host;
-    static String email, password;
-    // variable for shared preferences.
-    static SharedPreferences sharedpreferences;
-
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
@@ -173,7 +175,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
         boolean handled = false;
-        if(edtContra.getId() == textView.getId() && i == EditorInfo.IME_ACTION_SEND){
+        if (edtContra.getId() == textView.getId() && i == EditorInfo.IME_ACTION_SEND) {
             sendPetitionLogin();
             handled = true;
         }

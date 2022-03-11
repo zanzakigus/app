@@ -34,24 +34,24 @@ public class IncompleteTraining extends AppCompatActivity implements View.OnClic
 
         training = Integer.parseInt(getIntent().getStringExtra("training"));
 
-        firstIcon.setImageDrawable((training >= 1)? getResources().getDrawable(R.drawable.ic_check_circle_green): getResources().getDrawable(R.drawable.ic_remove_circle_red));
-        secondIcon.setImageDrawable((training >= 2)? getResources().getDrawable(R.drawable.ic_check_circle_green): getResources().getDrawable(R.drawable.ic_remove_circle_red));
-        thirdIcon.setImageDrawable((training >= 3)? getResources().getDrawable(R.drawable.ic_check_circle_green): getResources().getDrawable(R.drawable.ic_remove_circle_red));
-        fourthIcon.setImageDrawable((training >= 4)? getResources().getDrawable(R.drawable.ic_check_circle_green): getResources().getDrawable(R.drawable.ic_remove_circle_red));
+        firstIcon.setImageDrawable((training >= 1) ? getResources().getDrawable(R.drawable.ic_check_circle_green) : getResources().getDrawable(R.drawable.ic_remove_circle_red));
+        secondIcon.setImageDrawable((training >= 2) ? getResources().getDrawable(R.drawable.ic_check_circle_green) : getResources().getDrawable(R.drawable.ic_remove_circle_red));
+        thirdIcon.setImageDrawable((training >= 3) ? getResources().getDrawable(R.drawable.ic_check_circle_green) : getResources().getDrawable(R.drawable.ic_remove_circle_red));
+        fourthIcon.setImageDrawable((training >= 4) ? getResources().getDrawable(R.drawable.ic_check_circle_green) : getResources().getDrawable(R.drawable.ic_remove_circle_red));
     }
 
     @Override
     public void onClick(View v) {
-        if(btnContinuar == v){
-            if(training == 1){
+        if (btnContinuar == v) {
+            if (training == 1) {
                 Intent intent = new Intent(this, TrainNegativePersonal.class);
                 startActivity(intent);
                 finish();
-            } else if(training == 2){
+            } else if (training == 2) {
                 Intent intent = new Intent(this, TrainPositiveVisual.class);
                 startActivity(intent);
                 finish();
-            } else if(training == 3){
+            } else if (training == 3) {
                 Intent intent = new Intent(this, TrainNegativePersonal.class);
                 startActivity(intent);
                 finish();

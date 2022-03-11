@@ -56,6 +56,7 @@
                 android:textColor="@color/black"
                 android:theme="@style/style_switch"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
+
             <Button
                 android:id="@+id/conectar"
                 style="@style/center_things"

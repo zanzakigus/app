@@ -1,25 +1,19 @@
 package ipn.mx.app.test;
 
-import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 import ipn.mx.app.R;
@@ -30,7 +24,7 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
     ImageView imvAgregar;
     LinearLayout scrollView;
     HashSet<String> tagCadenas = new HashSet<>();
-    int intt=0;
+    int intt = 0;
 
 
     @Override
@@ -54,13 +48,13 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
 
         String cadena = edtCadena.getText().toString();
-        if(imvAgregar == v){
+        if (imvAgregar == v) {
             addTag(cadena);
         }
     }
 
-    public void addTag(String cadena){
-        if(cadena.length() == 0){
+    public void addTag(String cadena) {
+        if (cadena.length() == 0) {
             Toast.makeText(this, "LLene la cadena gilipolla", Toast.LENGTH_LONG).show();
             return;
         }
@@ -92,7 +86,7 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
         newTag.setBackground(getResources().getDrawable(R.drawable.background_estrategy));
         newTag.setOrientation(LinearLayout.HORIZONTAL);
         newTag.setGravity(Gravity.CENTER);
-        newTag.setPadding(50,15,30,15);
+        newTag.setPadding(50, 15, 30, 15);
         newTag.addView(newInfo);
         newTag.addView(icon);
 
@@ -100,7 +94,7 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
         icon.getLayoutParams().height = 70;
         icon.requestLayout();
 
-        if(scrollView.getChildCount() == 0){
+        if (scrollView.getChildCount() == 0) {
             LinearLayout ly = new LinearLayout(this);
             ly.setOrientation(LinearLayout.HORIZONTAL);
             ly.setGravity(Gravity.CENTER);
@@ -116,7 +110,7 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
         ly.addView(newTag);
         ly.addView(space3);
 
-        if(!validarTamano(cadena, scrollView)){
+        if (!validarTamano(cadena, scrollView)) {
             ly.removeViewAt(ly.getChildCount() - 1);
             ly.removeViewAt(ly.getChildCount() - 1);
 
@@ -141,8 +135,8 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
         tagCadenas.add(cadena);
     }
 
-    private boolean validarTamano(String cadena, LinearLayout scrollView){
-        LinearLayout ultimoHijo = (LinearLayout) scrollView.getChildAt(scrollView.getChildCount()  -1);
+    private boolean validarTamano(String cadena, LinearLayout scrollView) {
+        LinearLayout ultimoHijo = (LinearLayout) scrollView.getChildAt(scrollView.getChildCount() - 1);
         int hijos = ultimoHijo.getChildCount();
         int maxWidth = scrollView.getWidth();
         int actualWidth = 0;
@@ -152,11 +146,11 @@ public class TestDinamicObject extends AppCompatActivity implements View.OnClick
 
         for (int i = 1; i < hijos; i++) {
             LinearLayout ly = (LinearLayout) ultimoHijo.getChildAt(i++);
-            Log.i("Conta hij d ultimohijo", ly.getChildCount()+"" );
-            actualWidth += ((TextView) ly.getChildAt(0)).getText().toString().length()* 20 + 170;
+            Log.i("Conta hij d ultimohijo", ly.getChildCount() + "");
+            actualWidth += ((TextView) ly.getChildAt(0)).getText().toString().length() * 20 + 170;
         }
         Log.i("Tamanos de Width2", maxWidth + "              " + actualWidth + "                  " + newWidth);
-        if(actualWidth + newWidth <= maxWidth - 40)
+        if (actualWidth + newWidth <= maxWidth - 40)
             result = true;
         return result;
     }

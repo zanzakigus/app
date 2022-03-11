@@ -1,18 +1,16 @@
-package ipn.mx.app;
+package ipn.mx.app.updateinfo;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -21,17 +19,19 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-public class UpdatePassword extends AppCompatActivity implements View.OnClickListener {
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
+import ipn.mx.app.signs.Login;
 
-    EditText edtPassword, edtConfirm;
-    Button btnActualizar;
+public class UpdatePassword extends AppCompatActivity implements View.OnClickListener {
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
-
+    EditText edtPassword, edtConfirm;
+    Button btnActualizar;
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
@@ -73,15 +73,15 @@ public class UpdatePassword extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(btnActualizar == v){
+        if (btnActualizar == v) {
             String Password = edtPassword.getText().toString();
             String Actualizar = edtConfirm.getText().toString();
 
-            if(Password.length() <= 4 || Actualizar.length() <= 4){
+            if (Password.length() <= 4 || Actualizar.length() <= 4) {
                 Toast.makeText(this, R.string.update_password_password_short, Toast.LENGTH_LONG).show();
                 return;
             }
-            if(!Password.equals(Actualizar)){
+            if (!Password.equals(Actualizar)) {
                 Toast.makeText(this, R.string.update_password_passwords_no_equals, Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -129,7 +129,8 @@ public class UpdatePassword extends AppCompatActivity implements View.OnClickLis
         String emailKey = context.getResources().getString(R.string.logged_email_key);
         String passKey = context.getResources().getString(R.string.logged_password_key);
 
-        SharedPreferences.Editor editor = SharedP.edit();;
+        SharedPreferences.Editor editor = SharedP.edit();
+        ;
 
         editor.putString(emailKey, null);
         editor.putString(passKey, null);

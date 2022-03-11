@@ -1,17 +1,15 @@
-package ipn.mx.app;
+package ipn.mx.app.updateinfo;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -19,6 +17,10 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
+import ipn.mx.app.signs.Login;
 
 public class ForgetPassword extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,13 +40,13 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v == btnEnviar){
+        if (v == btnEnviar) {
             PeticionAPI api = new PeticionAPI(this);
             HashMap<String, String> params = new HashMap<>();
 
             String correo = tvCorreo.getText().toString();
 
-            if(correo.length() == 0){
+            if (correo.length() == 0) {
                 Toast.makeText(this, R.string.missing_email, Toast.LENGTH_LONG).show();
                 return;
             }

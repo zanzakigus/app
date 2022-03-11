@@ -24,29 +24,23 @@ import ipn.mx.app.service.HeadsetConnectionService;
 public class SettingHeadset extends AppCompatActivity implements View.OnClickListener {
 
 
-    private final String TAG = "SettingHeadset";
-
-    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser;
-    Switch swtEnableNoti;
-    TextView tvUserName;
-
-    // variable for shared preferences.
-    SharedPreferences sharedpreferences;
-
-    //logged variables
-    private String loggedEmail;
-    private String loggedPassword;
-    private String loggedNombre;
-
-
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
-
-    private NeuroSky neuroSky;
+    private final String TAG = "SettingHeadset";
+    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser;
+    Switch swtEnableNoti;
+    TextView tvUserName;
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
     BluetoothAdapter bluetoothAdapter;
+    //logged variables
+    private String loggedEmail;
+    private String loggedPassword;
+    private String loggedNombre;
+    private NeuroSky neuroSky;
 
     @Override
 
@@ -120,9 +114,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
-        }
-
-        else if (btnConnHs == v) {
+        } else if (btnConnHs == v) {
             Log.d(TAG, "onClick()-btnConnHs: ");
             if (neuroSky != null && !neuroSky.isConnected()) {
                 if (!bluetoothAdapter.isEnabled()) {
@@ -170,7 +162,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
             Log.d(TAG, "onClick()-btnClasify: ");
             if (neuroSky != null && neuroSky.isConnected()) {
                 NeuroSkyManager.enviarWavesIdentificar();
-            }else {
+            } else {
                 Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
                 myToast.show();
             }

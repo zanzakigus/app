@@ -9,11 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
-import ipn.mx.app.notification.GlobalNotificationManager;
-import ipn.mx.app.notification.mock.NotificationManagerData;
 
 public class ClasifyService extends Service {
 
@@ -34,7 +31,7 @@ public class ClasifyService extends Service {
             @Override
             public void run() {
                 if (NeuroSkyManager.getNeuroSky() != null && NeuroSkyManager.getNeuroSky().isConnected()) {
-                    Log.d(TAG, "onStartCommand(): Classifying" );
+                    Log.d(TAG, "onStartCommand(): Classifying");
                     NeuroSkyManager.enviarWavesIdentificar();
                 }
                 handler.postDelayed(this, GlobalInfo.getClasifyTimeDelay());

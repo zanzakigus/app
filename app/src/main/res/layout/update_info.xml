@@ -50,10 +50,10 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="12dp"
+                android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:padding="12dp"
-                android:textColor="@color/black"
-                android:imeOptions="actionNext"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/a_paterno"
@@ -71,9 +71,9 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="12dp"
+                android:imeOptions="actionNext"
                 android:padding="12dp"
-                android:textColor="@color/black"
-                android:imeOptions="actionNext"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/a_materno"
@@ -91,9 +91,9 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="12dp"
+                android:imeOptions="actionNext"
                 android:padding="12dp"
-                android:textColor="@color/black"
-                android:imeOptions="actionNext"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/fecha_nacimiento"

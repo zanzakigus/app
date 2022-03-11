@@ -1,4 +1,4 @@
-package ipn.mx.app;
+package ipn.mx.app.updateinfo;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -22,6 +22,14 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+
+import ipn.mx.app.HistoryDetection;
+import ipn.mx.app.Index;
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
+import ipn.mx.app.SettingHeadset;
+import ipn.mx.app.User;
+import ipn.mx.app.signs.Login;
 
 public class UpdateInfo extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
@@ -149,7 +157,7 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void openCalendarDialog(){
+    public void openCalendarDialog() {
         String strFNacimiento = edtFNacimiento.getText().toString();
         int dia = Integer.parseInt(strFNacimiento.split("/")[0]);
         int mes = Integer.parseInt(strFNacimiento.split("/")[1]) - 1;

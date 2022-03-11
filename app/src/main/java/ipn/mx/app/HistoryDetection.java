@@ -25,7 +25,6 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -33,7 +32,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -55,38 +53,29 @@ import ipn.mx.app.global.GlobalInfo;
 
 public class HistoryDetection extends AppCompatActivity implements View.OnClickListener {
 
-    private final String TAG = "HistoryDetection";
-
-    private LineChart lineChart;
-    private PieChart pieChart;
-
-
-    Button btnHome, btnGraph, btnNotification, btnUser;
-    LinearLayout vertical_scroll;
-    Switch aSwitch;
-    EditText fecha_ini, fecha_fin;
-    TextView pieTitle, lineTitle, noInfo;
-
-
-    Context context;
-
-    // variable for shared preferences.
-    SharedPreferences sharedpreferences;
-
     //logged variables
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
+    private final String TAG = "HistoryDetection";
+    Button btnHome, btnGraph, btnNotification, btnUser;
+    LinearLayout vertical_scroll;
+    Switch aSwitch;
+    EditText fecha_ini, fecha_fin;
+    TextView pieTitle, lineTitle, noInfo;
+    Context context;
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    String fInicial, fFinal;
+    ArrayList<ConstraintLayout> emocionesViews = new ArrayList<>();
+    JSONArray emocionesJSONArray = new JSONArray();
+    private LineChart lineChart;
+    private PieChart pieChart;
     private String loggedEmail;
     private String loggedPassword;
     private String loggedNombre;
-
     private int anno_ini, mes_ini, dia_ini, anno_fin, mes_fin, dia_fin;
-    String fInicial, fFinal;
-
-    ArrayList<ConstraintLayout> emocionesViews = new ArrayList<>();
-    JSONArray emocionesJSONArray = new JSONArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,8 +148,6 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
 
         getHistory();
-
-
 
 
     }
@@ -254,7 +241,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             }, anno_fin, mes_fin, dia_fin);
             datePickerDialog.show();
         } else if (aSwitch == v) {
-            aSwitch.setText(aSwitch.isChecked()?"Graficas":"Listado");
+            aSwitch.setText(aSwitch.isChecked() ? "Graficas" : "Listado");
             getHistory();
         }
     }
@@ -288,8 +275,8 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         historyDetection.dia_fin = dia_fin;
         historyDetection.mes_fin = mes_fin;
         historyDetection.anno_fin = anno_fin;
-        historyDetection.context =context;
-        historyDetection.noInfo =noInfo;
+        historyDetection.context = context;
+        historyDetection.noInfo = noInfo;
 
         Class[] parameterTypes = new Class[2];
         parameterTypes[0] = JSONObject.class;
@@ -334,7 +321,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         JSONArray emociones = response.getJSONArray("message");
         if (emociones.length() == 0) {
             noInfo.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             noInfo.setVisibility(View.GONE);
             Log.d(TAG, "lstado() " + emociones.length());
             for (int i = 0; i < emociones.length(); i++) {
@@ -351,8 +338,6 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 vertical_scroll.addView(emocion);
             }
         }
-
-
 
 
     }
@@ -382,7 +367,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
         if (emocionesJSONArray.length() == 0) {
             noInfo.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             noInfo.setVisibility(View.GONE);
             generateDataLine();
             generateDataPie();
@@ -390,6 +375,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
 
     }
+
     private void generateDataPie() {
         Log.d(TAG, "generateDataPie(): ");
 
@@ -406,7 +392,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
         int tipo;
-    
+
         if (90 < dias) {
             tipo = 0; //por mes
 
@@ -443,10 +429,10 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
                 calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
                 calendar.set(Calendar.YEAR, Integer.parseInt(year));
-                calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
             }
             String dataAnt;
-            int iIni = 0, iFin, finFormat, iniFormat=0;
+            int iIni = 0, iFin, finFormat, iniFormat = 0;
             if (tipo == 3) {
                 iIni = 11;
                 iFin = 13;
@@ -468,13 +454,13 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             }
             String data = fecha.substring(iIni, iFin);
             if (!data.equals(dataAnt)) {
-                entries.add(new PieEntry(count, fechaAnter.substring(iniFormat,finFormat)));
+                entries.add(new PieEntry(count, fechaAnter.substring(iniFormat, finFormat)));
                 count = 0;
-                if (emocionesJSONArray.length() == i + 1){
-                    entries.add(new PieEntry(count+1, fecha.substring(iniFormat,finFormat)));
+                if (emocionesJSONArray.length() == i + 1) {
+                    entries.add(new PieEntry(count + 1, fecha.substring(iniFormat, finFormat)));
                 }
             } else if (emocionesJSONArray.length() == i + 1) {
-                entries.add(new PieEntry(count+1, fechaAnter.substring(iniFormat,finFormat)));
+                entries.add(new PieEntry(count + 1, fechaAnter.substring(iniFormat, finFormat)));
             }
 
             fechaAnter = fecha;
@@ -485,7 +471,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
             calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
             calendar.set(Calendar.YEAR, Integer.parseInt(year));
-            calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
             count++;
         }
 
@@ -512,8 +498,6 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
-
-
 
 
     }
@@ -573,7 +557,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
                 calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
                 calendar.set(Calendar.YEAR, Integer.parseInt(year));
-                calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
             }
             String dataAnt;
             int iIni = 0, iFin;
@@ -599,7 +583,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
                 values1.add(new Entry(now, count));
                 count = 0;
-                if (emocionesJSONArray.length() == i + 1){
+                if (emocionesJSONArray.length() == i + 1) {
                     day = fecha.substring(0, 2);
                     month = fecha.substring(3, 5);
                     year = fecha.substring(6, 10);
@@ -607,7 +591,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                     calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
                     calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
                     calendar.set(Calendar.YEAR, Integer.parseInt(year));
-                    calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+                    calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
                     now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
                     values1.add(new Entry(now, 1));
                 }
@@ -624,7 +608,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
             calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
             calendar.set(Calendar.YEAR, Integer.parseInt(year));
-            calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
             count++;
         }
 

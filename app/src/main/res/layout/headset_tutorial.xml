@@ -128,8 +128,7 @@
                 android:gravity="center"
                 android:text="@string/headset_tutorial_btn_continuar"
                 android:textColor="@color/black"
-                android:theme="@style/inside_button"
-                />
+                android:theme="@style/inside_button" />
 
         </LinearLayout>
 

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import ipn.mx.app.Login;
 import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
@@ -28,6 +27,7 @@ import ipn.mx.app.neurosky.library.message.enums.Signal;
 import ipn.mx.app.neurosky.library.message.enums.State;
 import ipn.mx.app.notification.GlobalNotificationManager;
 import ipn.mx.app.notification.mock.NotificationManagerData;
+import ipn.mx.app.signs.Login;
 
 public class NeuroSkyManager {
     public static final int TIPO_NEGATIVA = 0;
@@ -158,6 +158,14 @@ public class NeuroSkyManager {
         NeuroSkyManager.estrendada = estrendada;
     }
 
+    public static int getTrainFile() {
+        return trainFile;
+    }
+
+    public static void setTrainFile(int trainFile) {
+        NeuroSkyManager.trainFile = trainFile;
+    }
+
     private void handleStateChange(final State state) {
         if (estadoDiadema.equals(State.UNKNOWN) || estadoDiadema.equals(State.DISCONNECTED) || estadoDiadema.equals(State.NOT_PAIRED)) {
             try {
@@ -233,23 +241,23 @@ public class NeuroSkyManager {
                 if (clasificar) {
                     methodName = "onClassifyResponse";
                     link = "/classify_neural";
-                    if(GlobalInfo.getClasifyTimeDelayCounter() == GlobalInfo.getClasifyTimeDelay()/1000){
+                    if (GlobalInfo.getClasifyTimeDelayCounter() == GlobalInfo.getClasifyTimeDelay() / 1000) {
                         enviar = true;
                         GlobalInfo.setClasifyTimeDelayCounter(0);
                         params.put("array_waves", arrayWaves.toString());
                         arrayWaves = new ArrayList<>();
-                    }else {
-                        GlobalInfo.setClasifyTimeDelayCounter(GlobalInfo.getClasifyTimeDelayCounter()+1);
+                    } else {
+                        GlobalInfo.setClasifyTimeDelayCounter(GlobalInfo.getClasifyTimeDelayCounter() + 1);
                         arrayWaves.add(waves);
                     }
-                }else {
-                    if(GlobalInfo.getTrainSectionTime() == GlobalInfo.getTrainSectionTimeCounter()){
+                } else {
+                    if (GlobalInfo.getTrainSectionTime() == GlobalInfo.getTrainSectionTimeCounter()) {
                         enviar = true;
                         GlobalInfo.setTrainSectionTimeCounter(0);
                         params.put("array_waves", arrayWaves.toString());
                         arrayWaves = new ArrayList<>();
-                    }else {
-                        GlobalInfo.setTrainSectionTimeCounter(GlobalInfo.getTrainSectionTimeCounter()+1);
+                    } else {
+                        GlobalInfo.setTrainSectionTimeCounter(GlobalInfo.getTrainSectionTimeCounter() + 1);
                         arrayWaves.add(waves);
                     }
                 }
@@ -260,7 +268,7 @@ public class NeuroSkyManager {
                 }
 
 
-                if(enviar){
+                if (enviar) {
                     api.peticionPOST(context.getResources().getString(R.string.server_host) + link, params, neuroSkyManager, functionToPass);
                 }
 
@@ -316,14 +324,13 @@ public class NeuroSkyManager {
             myToast.show();
             return;
         }
-        if(message.equals("0")){
+        if (message.equals("0")) {
             NotificationManagerData nmd = new NotificationManagerData(context);
             GlobalNotificationManager gnm = new GlobalNotificationManager(context, nmd);
             gnm.generateNotification();
             Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
             myToast.show();
         }
-
 
 
     }
@@ -345,13 +352,5 @@ public class NeuroSkyManager {
         }
         Log.d(LOG_TAG + "-WAVES SENT", "brain: Enviada con exito.");
 
-    }
-
-    public static int getTrainFile() {
-        return trainFile;
-    }
-
-    public static void setTrainFile(int trainFile) {
-        NeuroSkyManager.trainFile = trainFile;
     }
 }

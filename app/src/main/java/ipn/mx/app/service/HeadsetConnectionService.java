@@ -1,19 +1,14 @@
 package ipn.mx.app.service;
 
-import android.app.Dialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import ipn.mx.app.Index;
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;

@@ -9,23 +9,20 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ipn.mx.app.neuralfit.FitConnect;
+import ipn.mx.app.signs.Login;
 
 public class InfoAppView extends AppCompatActivity implements View.OnClickListener {
-
-    View Arrow;
-
-    // variable for shared preferences.
-    SharedPreferences sharedpreferences;
-
-    //logged variables
-    private String loggedEmail;
-    private String loggedPassword;
-
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
+    View Arrow;
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    //logged variables
+    private String loggedEmail;
+    private String loggedPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,7 @@ public class InfoAppView extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if(v == Arrow){
+        if (v == Arrow) {
             Intent intent = new Intent(this, FitConnect.class);
             startActivity(intent);
         }

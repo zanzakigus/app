@@ -1,4 +1,4 @@
-package ipn.mx.app;
+package ipn.mx.app.updateinfo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +21,10 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
+import ipn.mx.app.signs.Login;
 
 public class CodePassword extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 

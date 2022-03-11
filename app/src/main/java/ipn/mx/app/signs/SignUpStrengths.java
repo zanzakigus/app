@@ -95,7 +95,7 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
                 params.put("ap_materno", apMaterno);
                 params.put("password", contra);
                 params.put("fecha_nacimiento", fechaNacimiento);
-                params.put("strengths",tagCadenas.toString());
+                params.put("strengths", tagCadenas.toString());
 
                 SignUpStrengths signUpStrengths = new SignUpStrengths();
                 Class[] parameterTypes = new Class[2];

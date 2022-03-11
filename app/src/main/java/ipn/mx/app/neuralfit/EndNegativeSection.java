@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ipn.mx.app.R;
 
-public class EndNegativeSection extends AppCompatActivity implements View.OnClickListener{
+public class EndNegativeSection extends AppCompatActivity implements View.OnClickListener {
 
     View arrow;
 
@@ -25,7 +25,7 @@ public class EndNegativeSection extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if(v == arrow){
+        if (v == arrow) {
             Intent intent = new Intent(this, TrainPositiveVisual.class);
             startActivity(intent);
         }

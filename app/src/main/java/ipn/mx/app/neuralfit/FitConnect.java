@@ -19,36 +19,32 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import ipn.mx.app.Login;
 import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
+import ipn.mx.app.signs.Login;
 
 public class FitConnect extends AppCompatActivity implements View.OnClickListener {
     private final static String LOG_TAG = "NeuroSky";
-    View btnNext, btnConnect;
-    BluetoothAdapter bluetoothAdapter;
-    NeuroSky neuroSky;
-
-
-    //Http request variables
-    RequestQueue queue;
-    String host;
-    // variable for shared preferences.
-    SharedPreferences sharedpreferences;
-
-    //logged variables
-    private String loggedEmail;
-    private String loggedPassword;
-
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
+    View btnNext, btnConnect;
+    BluetoothAdapter bluetoothAdapter;
+    NeuroSky neuroSky;
+    //Http request variables
+    RequestQueue queue;
+    String host;
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    //logged variables
+    private String loggedEmail;
+    private String loggedPassword;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
