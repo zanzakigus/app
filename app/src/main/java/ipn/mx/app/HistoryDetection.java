@@ -461,8 +461,8 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             } else {
                 iIni = 3;
                 iFin = 5;
-                finFormat = 2;
-                iniFormat = 5;
+                iniFormat = 3;
+                finFormat = 10;
                 dataAnt = month;
 
             }

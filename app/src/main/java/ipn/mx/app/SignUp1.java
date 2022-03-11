@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener, 
 
     EditText edtCorreo, edtContra;
     View btnNext;
+    Button btnSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +27,12 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener, 
         btnNext = findViewById(R.id.arrow);
         edtCorreo = findViewById(R.id.email_input);
         edtContra = findViewById(R.id.password_input);
+        btnSignIn = findViewById(R.id.login_button);
 
         btnNext.setOnClickListener(this);
+        btnSignIn.setOnClickListener(this);
         edtContra.setOnEditorActionListener(this);
+
     }
 
     @Override
@@ -42,6 +47,10 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener, 
                 return;
             }
             enterSignIn2();
+        }else if(btnSignIn == v){
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -60,6 +69,6 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener, 
         intent.putExtra("correo", edtCorreo.getText().toString());
         intent.putExtra("contra", edtContra.getText().toString());
         startActivity(intent);
-        finish();
+
     }
 }

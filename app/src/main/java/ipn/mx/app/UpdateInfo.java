@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-public class UpdateInfo extends AppCompatActivity implements View.OnClickListener {
+public class UpdateInfo extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
@@ -33,7 +34,7 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
     Button btnHome, btnGraph, btnNotification, btnUser;
     // View
     EditText edtNombre, edtAPaterno, edtAMaterno, edtFNacimiento;
-    Button btnActualizar;
+    Button btnActualizar, btnActualizarForta;
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
 
@@ -63,6 +64,7 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
         edtAMaterno = findViewById(R.id.a_materno_input);
         edtFNacimiento = findViewById(R.id.fecha_nacimiento_input);
         btnActualizar = findViewById(R.id.editar_info);
+        btnActualizarForta = findViewById(R.id.cambiar_forta);
 
         // Quitar lo editable
         // https://stackoverflow.com/questions/3928711/how-to-make-edittext-not-editable-through-xml-in-android/6174440#6174440
@@ -70,6 +72,7 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
 
         edtFNacimiento.setOnClickListener(this);
         btnActualizar.setOnClickListener(this);
+        btnActualizarForta.setOnClickListener(this);
 
         // initializing shared preferences keys.
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
@@ -128,22 +131,40 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
         } else if (btnActualizar == v) {
             handleUpdateButton();
         } else if (edtFNacimiento == v) {
-            String strFNacimiento = edtFNacimiento.getText().toString();
-            int dia = Integer.parseInt(strFNacimiento.split("/")[0]);
-            int mes = Integer.parseInt(strFNacimiento.split("/")[1]) - 1;
-            int anno = Integer.parseInt(strFNacimiento.split("/")[2]);
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                    String Day = formatoNumeroDosCifras(day);
-                    String Month = formatoNumeroDosCifras(month + 1);
-                    String fNacimiento = Day + "/" + Month + "/" + year;
-                    edtFNacimiento.setText(fNacimiento);
-                }
-            }, anno, mes, dia);
-            datePickerDialog.show();
+            openCalendarDialog();
+        } else if (btnActualizarForta == v) {
+            Intent intent = new Intent(this, UpdateStrengths.class);
+            startActivity(intent);
         }
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (v == edtFNacimiento && hasFocus) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            Toast myToast = Toast.makeText(this, R.string.focus_f_nacimiento, Toast.LENGTH_LONG);
+            myToast.show();
+            openCalendarDialog();
+        }
+    }
+
+    public void openCalendarDialog(){
+        String strFNacimiento = edtFNacimiento.getText().toString();
+        int dia = Integer.parseInt(strFNacimiento.split("/")[0]);
+        int mes = Integer.parseInt(strFNacimiento.split("/")[1]) - 1;
+        int anno = Integer.parseInt(strFNacimiento.split("/")[2]);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                String Day = formatoNumeroDosCifras(day);
+                String Month = formatoNumeroDosCifras(month + 1);
+                String fNacimiento = Day + "/" + Month + "/" + year;
+                edtFNacimiento.setText(fNacimiento);
+            }
+        }, anno, mes, dia);
+        datePickerDialog.show();
     }
 
     private void handleUpdateButton() {

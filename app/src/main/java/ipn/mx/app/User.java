@@ -104,6 +104,8 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         params.put("password", loggedPassword);
 
         User user = new User();
+        user.tvDetTotal = tvDetTotal;
+        user.tvDetUltimaSemana = tvDetUltimaSemana;
         Class[] parameterTypes = new Class[2];
         parameterTypes[0] = JSONObject.class;
         parameterTypes[1] = Context.class;
@@ -179,20 +181,42 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
 
         JSONObject userData = response.getJSONObject("contenido");
         String username = userData.getString("nombre") + " " + userData.getString("ap_paterno") + " " + userData.getString("ap_materno");
-
+        int statistics_all = response.getInt("statistics_all");
+        int statistics_week = response.getInt("statistics_week");
+        String detecion_all = " detecciones en total";
+        String detecion_week = " detecciones en última semana";
+        if (!(statistics_all > 0)) {
+            detecion_all = " detección en total";
+        }
+        if (!(statistics_week > 0)) {
+            detecion_week = " detección en última semana";
+        }
+        detecion_week = statistics_week + detecion_week;
+        detecion_all = statistics_all + detecion_all;
+        if(statistics_week == 0){
+            detecion_week = "Ninguna detección en última semana";
+        }
+        if(statistics_all == 0){
+            detecion_all = "Ninguna detección";
+        }
         // Poner el texto a los TextView
         // Se hace de este modo debido a que esta funcion se corre despues del onCreate, entonces no comparte
         // las variables de esta funcion, es principalmente por eso que se manda en Context por parametro
         ((TextView) ((Activity) context).findViewById(R.id.title_username)).setText(username);
         ((TextView) ((Activity) context).findViewById(R.id.text_f_nacimiento)).setText(userData.getString("correo"));
         ((TextView) ((Activity) context).findViewById(R.id.text_correo)).setText(userData.getString("fecha_nacimiento"));
+
+
+        tvDetUltimaSemana.setText(detecion_week);
+        tvDetTotal.setText(detecion_all);
+
+
     }
 
     private void logOut() {
         // Cerramos la sesion en el telefono
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(EMAIL_KEY, null);
-        editor.putString(PASSWORD_KEY, null);
+        editor.clear();
         editor.apply();
 
         /*if (HeadsetConnectionService.isIsIntentServiceRunning()){

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
+public class SignUp2 extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
@@ -55,6 +56,7 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
 
         // Agregar accion para que aparezca el calendario
         edtFNacimiento.setOnClickListener(this);
+        edtFNacimiento.setOnFocusChangeListener(this);
 
         // Agregar accion al boton
         btnNext.setOnClickListener(this);
@@ -81,46 +83,11 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
                 Toast myToast = Toast.makeText(this, R.string.missing_f_nacimiento, Toast.LENGTH_LONG);
                 myToast.show();
             } else {
+                enterSignStrengths();
 
-                PeticionAPI api = new PeticionAPI(this);
-                HashMap<String, String> params = new HashMap<>();
-
-                params.put("correo", correo);
-                params.put("nombre", edtNombre.getText().toString());
-                params.put("ap_paterno", edtAPaterno.getText().toString());
-                params.put("ap_materno", edtAMaterno.getText().toString());
-                params.put("password", contra);
-                params.put("fecha_nacimiento", edtFNacimiento.getText().toString());
-
-                SignUp2 signUp2 = new SignUp2();
-                Class[] parameterTypes = new Class[2];
-                parameterTypes[0] = JSONObject.class;
-                parameterTypes[1] = Context.class;
-                Method functionToPass = null;
-                try {
-                    functionToPass = SignUp2.class.getMethod("onSignUp", parameterTypes);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-
-                api.peticionPOST(this.getResources().getString(R.string.server_host) + "/usuario", params, signUp2, functionToPass);
             }
         } else if (v == edtFNacimiento) {
-            final Calendar c = Calendar.getInstance();
-            dia = c.get(Calendar.DAY_OF_MONTH);
-            mes = c.get(Calendar.MONTH);
-            anno = c.get(Calendar.YEAR);
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                    String Day = formatoNumeroDosCifras(day);
-                    String Month = formatoNumeroDosCifras(month + 1);
-                    String fNacimiento = Day + "/" + Month + "/" + year;
-                    edtFNacimiento.setText(fNacimiento);
-                }
-            }, anno, mes, dia);
-            datePickerDialog.show();
+            openCalendarDialog();
         }
     }
 
@@ -161,5 +128,47 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener {
 
     private String formatoNumeroDosCifras(int num) {
         return (num < 10) ? "0" + num : Integer.toString(num);
+    }
+
+    public void enterSignStrengths() {
+        Intent intent = new Intent(this, SignUpStrengths.class);
+        intent.putExtra("nombre", edtNombre.getText().toString());
+        intent.putExtra("ap_paterno", edtAPaterno.getText().toString());
+        intent.putExtra("ap_materno", edtAMaterno.getText().toString());
+        intent.putExtra("fecha_nacimiento", edtFNacimiento.getText().toString());
+        intent.putExtra("correo", correo);
+        intent.putExtra("contra", contra);
+        startActivity(intent);
+
+    }
+
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(v == edtFNacimiento && hasFocus){
+            InputMethodManager imm =  (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            Toast myToast = Toast.makeText(this, R.string.focus_f_nacimiento, Toast.LENGTH_LONG);
+            myToast.show();
+            openCalendarDialog();
+        }
+    }
+
+    public void openCalendarDialog(){
+        final Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        anno = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                String Day = formatoNumeroDosCifras(day);
+                String Month = formatoNumeroDosCifras(month + 1);
+                String fNacimiento = Day + "/" + Month + "/" + year;
+                edtFNacimiento.setText(fNacimiento);
+            }
+        }, anno, mes, dia);
+        datePickerDialog.show();
     }
 }

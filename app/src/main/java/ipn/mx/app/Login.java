@@ -92,6 +92,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
         } else if (v == btnRegister) {
             Intent intent = new Intent(this, SignUp1.class);
             startActivity(intent);
+            finish();
         } else if (v == tvForgetPassword) {
             Intent intent = new Intent(this, ForgetPassword.class);
             startActivity(intent);

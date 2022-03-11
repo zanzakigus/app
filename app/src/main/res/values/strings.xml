@@ -2,13 +2,13 @@
 
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
-<!--    <string name="server_host">http://192.168.3.20:8000</string>-->
+    <string name="server_host">http://192.168.3.20:8000</string>
 
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.75:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
-    <string name="server_host">http://192.168.1.18:8000</string>
+    <!--<string name="server_host">http://192.168.1.18:8000</string>-->
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
     <string name="logged_password_key">password_key</string>
@@ -38,7 +38,7 @@
     <string name="title_user">Datos Personales</string>
     <string name="title_update_info">Actualizar Información</string>
     <string name="title_questions">Preguntas</string>
-    <string name="title_sign_up">Necesitamos saber mas de ti</string>
+    <string name="title_sign_up">Necesitamos saber más de ti</string>
     <string name="title_username">${username}</string>
     <string name="title_f_nacimiento">${fNacimiento}</string>
     <string name="title_correo">${correo}</string>
@@ -50,6 +50,13 @@
     <string name="title_change_password">Cambio de contraseña</string>
     <string name="title_update_password">Actualizar Contraseña</string>
     <string name="title_headset_setting">Configuración de Diadema</string>
+
+    <!-- VISTA: update_info -->
+    <string name="update_forta">Actualizar fortalezas</string>
+
+    <!-- VISTA: sign_up_strengths -->
+    <string name="title_sign_up_strengths">Necesitamos saber más de ti, dinos tus fortalezas</string>
+    <string name="text_input_strengths">Fortaleza</string>
 
 
     <!-- VISTA: Headset Tutorial -->
@@ -97,6 +104,14 @@
     <string name="missing_a_paterno">Se requiere de su apellido paterno para continuar</string>
     <string name="missing_a_materno">Se requiere de su apellido materno para continuar</string>
     <string name="missing_f_nacimiento">Se requiere de su fecha de nacimiento para continuar</string>
+    <string name="focus_f_nacimiento">Selecciona tu fecha de nacimiento</string>
+
+    <!-- CLASE: SignUpStrengths-->
+    <string name="text_empty_strengt">Debes escribir tus fortalezas.</string>
+    <string name="text_add_strength">Fortaleza agregada</string>
+    <string name="text_add_strength_repeated">La fortaleza ya existe</string>
+    <string name="misssing_strengths">Se requiere al menos una fortaleza</string>
+
 
     <!-- CLASE: Login -->
     <string name="logged_succed">Se inició sesión exitosamente</string>
@@ -120,6 +135,10 @@
 
     <!-- CLASE: UpdateInfo -->
     <string name="update_info_success">Información Actualizada</string>
+
+    <!-- CLASE: update_strengths -->
+    <string name="text_update_stre_succed">Fortalezas actualizadas</string>
+
 
     <!-- CLASE: CodePassword -->
     <string name="password_information">Se le ha enviado a su correo un código para poder actualizar la contraseña.</string>
@@ -208,6 +227,8 @@
     <string name="sent_waves_succed">Ondas cerebrales enviadas con éxito, puedes continuar.</string>
     <string name="sent_waves_try">Ya se enviaron las ondas cerebrales necesarias, favor de continuar.</string>
     <string name="first_send_waves">Para continuar se debe de hacer el entrenamiento, favor de darle al circulo cuando este listo.</string>
+
+
 
     <!-- Test: Todos los strings de las vistas de Testeo -->
     <string name="test_Ciudado">¡¡Ciudado!!</string>
