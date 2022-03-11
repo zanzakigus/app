@@ -1,4 +1,4 @@
-package ipn.mx.app;
+package ipn.mx.app.signs;
 
 
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import ipn.mx.app.Login;
+import ipn.mx.app.R;
 
 public class SignUp1 extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 

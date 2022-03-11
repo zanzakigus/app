@@ -1,6 +1,5 @@
 package ipn.mx.app.neuralfit;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -20,18 +19,13 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import ipn.mx.app.Index;
-import ipn.mx.app.InfoAppView;
 import ipn.mx.app.Login;
 import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
-import ipn.mx.app.SignUp2;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
-import ipn.mx.app.service.ClasifyService;
-import ipn.mx.app.service.HeadsetConnectionService;
 
 public class FitConnect extends AppCompatActivity implements View.OnClickListener {
     private final static String LOG_TAG = "NeuroSky";

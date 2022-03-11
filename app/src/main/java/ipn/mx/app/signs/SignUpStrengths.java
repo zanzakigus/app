@@ -1,4 +1,4 @@
-package ipn.mx.app;
+package ipn.mx.app.signs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +27,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import ipn.mx.app.misc.BoxHelper;
+import ipn.mx.app.Index;
+import ipn.mx.app.PeticionAPI;
+import ipn.mx.app.R;
 
 public class SignUpStrengths extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
