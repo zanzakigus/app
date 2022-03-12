@@ -23,6 +23,12 @@ public class GlobalInfo {
     public final int TIMEOUT_REQUEST = 2000;
     public final int MAX_INTENTS = 5;
 
+
+    public static final int DEFAULT_PRESET_INDEX = 0;
+    public static final int DEFAULT_DURATION = 4000;
+    public static final int DEFAULT_DURATION_PREPA = 4;
+    public static final int MILLISECOND = 2000;
+
     public static boolean isEnableNotifyConnHeadset() {
         return enableNotifyConnHeadset;
 

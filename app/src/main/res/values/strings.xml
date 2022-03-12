@@ -58,6 +58,18 @@
     <string name="title_sign_up_strengths">Necesitamos saber más de ti, dinos tus fortalezas</string>
     <string name="text_input_strengths">Fortaleza</string>
 
+    <!-- VISTA: strategy_breathing.xml -->
+    <string name="title_strategy_breath">Hemos detectado una emoción negativa</string>
+    <string name="text_strategy_breath">Haz una pausa, respira e intenta buscar algunas cosas buenas a lo que ha ocurrido, pregúntate si estás viento todo el panorama.</string>
+    <string name="text_hold">Sosten</string>
+    <string name="text_breath_in">Inhale</string>
+    <string name="text_breath_out">Exhale</string>
+    <string name="text_breath_exercise">Presiona el círculo cuando quieras comenzar</string>
+    <string name="text_relax_and_confortable">Relájese y póngase cómodo</string>
+    <string name="text_focus_on_breathing">Concentrase en su respiración</string>
+    <string name="text_cirle_breath">4</string>
+   .
+
 
     <!-- VISTA: Headset Tutorial -->
     <string name="headset_tutorial_title">Uso de diadema</string>
