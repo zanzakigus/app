@@ -14,6 +14,7 @@
     <string name="logged_password_key">password_key</string>
     <string name="logged_nombre">nombre_key</string>
     <string name="logged_notication_conn_enable">conn_key</string>
+    <string name="locale_lenguage_mx">es_MX</string>
 
     <!-- VISTAS -->
     <string name="app_name">Resilience</string>
@@ -68,7 +69,14 @@
     <string name="text_relax_and_confortable">Relájese y póngase cómodo</string>
     <string name="text_focus_on_breathing">Concentrase en su respiración</string>
     <string name="text_cirle_breath">4</string>
-   .
+    <string name="strategy_breath_done">¡Bien hecho!</string>
+    <string name="strategy_breath_almost">Casi termina</string>
+
+
+    <!-- VISTA: strategy_strengths.xml -->
+    <string name="title_strategy_strengths">Hemos detectado una emoción negativa</string>
+    <string name="text_strategy_strengths">Haz una pausa y respira profundo. Es preciso recordarte tus fortalezas, para que tengas en mente que lo que estás pasando es temporal y tienes herramientas para superarlo.</string>
+    <string name="text_no_info_strategy_stre">No hay información que mostrar.</string>
 
 
     <!-- VISTA: Headset Tutorial -->
@@ -252,5 +260,6 @@
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
     <string name="m_big_text">Se ha detectado que te encuentras experimentando una emoción negativa, presiona el botón estrategia para poder apoyarte. </string>
     <string name="m_notification_button">Estrategia </string>
+
 
 </resources>

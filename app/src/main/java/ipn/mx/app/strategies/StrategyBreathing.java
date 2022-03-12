@@ -1,38 +1,40 @@
 package ipn.mx.app.strategies;
 
-import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Chronometer;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import ipn.mx.app.HistoryDetection;
+import ipn.mx.app.Index;
 import ipn.mx.app.R;
+import ipn.mx.app.SettingHeadset;
+import ipn.mx.app.User;
 import ipn.mx.app.global.GlobalInfo;
-import ipn.mx.app.neurosky.NeuroSkyManager;
 
 public class StrategyBreathing extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = StrategyBreathing.class.getSimpleName();
     private ConstraintLayout contentLayout;
-    private TextView statusText,textInstructions;
+    private TextView statusText, textInstructions;
     private View outerCircleView, innerCircleView;
+    private Button btnHome,btnGraph,btnNotification,btnUser;
+
     private Animation animationInhaleText, animationExhaleText,
             animationInhaleInnerCircle, animationExhaleInnerCircle;
-
     private Animation
-            animationInitialInhaleInnerCircle, animationInitialExhaleInnerCircle,animationInitial,animationInitialText;
+            animationInitialInhaleInnerCircle, animationInitialExhaleInnerCircle,
+            animationInitial, animationInitialText, doneCicleAnimation, doneTextAnimation;
     private Handler handler = new Handler();
 
     private int holdDuration = 0;
@@ -40,8 +42,9 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
     CountDownTimer countDownTimer;
 
-    boolean banderaIniciado = false, banderaCronometro = false, doneTime=false;
+    boolean banderaIniciado = false, banderaCronometro = false, doneTime = false;
     MediaPlayer mediaPlayer;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,17 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
         outerCircleView = findViewById(R.id.view_circle_outer);
         innerCircleView = findViewById(R.id.view_circle_inner);
+
+        btnHome = findViewById(R.id.icon_home);
+        btnGraph = findViewById(R.id.icon_graph);
+        btnNotification = findViewById(R.id.icon_notifications);
+        btnUser = findViewById(R.id.icon_user);
+
+
+        btnHome.setOnClickListener(this);
+        btnGraph.setOnClickListener(this);
+        btnNotification.setOnClickListener(this);
+        btnUser.setOnClickListener(this);
 
 
         prepareAnimations();
@@ -83,7 +97,6 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
     private void prepareAnimations() {
         int inhaleDuration = GlobalInfo.DEFAULT_DURATION;
         int exhaleDuration = GlobalInfo.DEFAULT_DURATION;
-
 
 
         // Initial - make small_one
@@ -118,6 +131,17 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
         animationInhaleInnerCircle.setFillAfter(true);
         animationInhaleInnerCircle.setAnimationListener(inhaleAnimationListener);
 
+        //Done animation
+
+        doneCicleAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_inner_circle_inhale);
+        doneCicleAnimation.setFillAfter(true);
+        doneCicleAnimation.setDuration(GlobalInfo.DEFAULT_DURATION);
+
+        doneTextAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_text_inhale);
+        doneTextAnimation.setFillAfter(true);
+
+
+
         setInhaleDuration(inhaleDuration);
 
         // Exhale - make small
@@ -131,27 +155,24 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
         setExhaleDuration(exhaleDuration);
 
-         countDownTimer = new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 long realtime = millisUntilFinished / 1000;
-                String add = "00:"+realtime;
-                if(realtime<10){
-                    add = "00:0"+realtime;
-                }else if (realtime ==60){
+                String add = "00:" + realtime;
+                if (realtime < 10) {
+                    add = "00:0" + realtime;
+                } else if (realtime == 60) {
                     add = "01:00";
                 }
                 textInstructions.setText(add);
             }
 
             public void onFinish() {
-                textInstructions.setText("Casi termina");
+                textInstructions.setText(R.string.strategy_breath_almost);
                 doneTime = true;
             }
         };
-
-
-
 
 
     }
@@ -159,7 +180,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
     private Animation.AnimationListener inhaleAnimationListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
-            if(!banderaCronometro){
+            if (!banderaCronometro) {
                 Log.d(TAG, "inhale animation start");
                 banderaCronometro = true;
                 countDownTimer.start();
@@ -171,20 +192,19 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
         public void onAnimationEnd(Animation animation) {
             Log.d(TAG, "inhale animation end");
 
-                if(holdDuration!=0){
-                    statusText.setText(R.string.text_hold);
+            if (holdDuration != 0) {
+                statusText.setText(R.string.text_hold);
+            }
+
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    statusText.setText(R.string.text_breath_out);
+                    statusText.startAnimation(animationExhaleText);
+                    innerCircleView.startAnimation(animationExhaleInnerCircle);
                 }
-
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        statusText.setText(R.string.text_breath_out);
-                        statusText.startAnimation(animationExhaleText);
-                        innerCircleView.startAnimation(animationExhaleInnerCircle);
-                    }
-                }, holdDuration);
-
+            }, holdDuration);
 
 
         }
@@ -202,8 +222,8 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
         @Override
         public void onAnimationEnd(Animation animation) {
             Log.d(TAG, "exhale animation end");
-            if(!doneTime){
-                if(holdDuration!=0){
+            if (!doneTime) {
+                if (holdDuration != 0) {
                     statusText.setText(R.string.text_hold);
                 }
                 handler.postDelayed(new Runnable() {
@@ -214,8 +234,11 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                         innerCircleView.startAnimation(animationInhaleInnerCircle);
                     }
                 }, holdDuration);
-            }else {
-                textInstructions.setText("Bien hecho");
+            } else {
+                textInstructions.setText(R.string.strategy_breath_done);
+                statusText.setText(R.string.strategy_breath_done);
+                innerCircleView.startAnimation(doneCicleAnimation);
+                statusText.startAnimation(doneTextAnimation);
                 mediaPlayer.stop();
             }
 
@@ -259,7 +282,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
         @Override
         public void onAnimationEnd(Animation animation) {
             Log.d(TAG, "initialAnimation end");
-            if(i>-3){
+            if (i > -3) {
                 innerCircleView.startAnimation(animationInitialExhaleInnerCircle);
                 i--;
             }
@@ -279,10 +302,10 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
         @Override
         public void onAnimationEnd(Animation animation) {
             Log.d(TAG, "initialAnimation end");
-            if(i>-3){
+            if (i > -3) {
                 innerCircleView.startAnimation(animationInitialInhaleInnerCircle);
                 i--;
-            }else if(i == -3){
+            } else if (i == -3) {
                 statusText.setText(R.string.text_breath_in);
                 statusText.setTextColor(getResources().getColor(R.color.green_transp));
                 statusText.startAnimation(animationInhaleText);
@@ -298,7 +321,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if(innerCircleView == v && !banderaIniciado){
+        if (innerCircleView == v && !banderaIniciado) {
             banderaIniciado = true;
             mediaPlayer = MediaPlayer.create(this, R.raw.breathing);
             mediaPlayer.setLooping(true); // Set looping
@@ -311,11 +334,11 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                     // text under the progress bar
                     int time = GlobalInfo.DEFAULT_DURATION_PREPA;
 
-                    if (i >0) {
+                    if (i > 0) {
                         statusText.setText("" + i);
                         i--;
                         handler.postDelayed(this, 1000);
-                    } else if (i==0) {
+                    } else if (i == 0) {
                         statusText.setText("Inicial");
                         statusText.setTextColor(getResources().getColor(R.color.color_button_green));
                         textInstructions.setText(R.string.text_relax_and_confortable);
@@ -324,6 +347,18 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                     }
                 }
             }, 1000);
+        } else if (btnHome == v) {
+            Intent intent = new Intent(this, Index.class);
+            startActivity(intent);
+        } else if (btnGraph == v) {
+            Intent intent = new Intent(this, HistoryDetection.class);
+            startActivity(intent);
+        } else if (btnNotification == v) {
+            Intent intent = new Intent(this, SettingHeadset.class);
+            startActivity(intent);
+        } else if (btnUser == v) {
+            Intent intent = new Intent(this, User.class);
+            startActivity(intent);
         }
 
     }
