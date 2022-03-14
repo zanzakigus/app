@@ -44,6 +44,22 @@
         <item name="android:textColor">#38386D</item>
     </style>
 
+    <!-- Estilo de la Letra Amarillo Negritas -->
+    <style name="text_yellow_bold">
+        <item name="android:textSize">32sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/yellow</item>
+    </style>
+
+    <!-- Estilo de la Letra Verde Negritas -->
+    <style name="text_green_bold">
+        <item name="android:textSize">32sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_button_green</item>
+    </style>
+
     <!-- Background de Boton Registrarse -->
     <style name="a_tag_button">
         <item name="android:backgroundTint" tools:targetApi="lollipop">@color/background_color

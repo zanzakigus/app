@@ -2,13 +2,14 @@
 
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
-    <string name="server_host">http://192.168.3.20:8000</string>
-
+<!--    <string name="server_host">http://192.168.3.20:8000</string>-->
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.75:8000</string>-->
     <!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <!--<string name="server_host">http://192.168.1.18:8000</string>-->
+    <string name="server_host">http://192.168.1.83:8000</string>
+
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
     <string name="logged_password_key">password_key</string>
@@ -217,11 +218,6 @@
     <string name="train_negative_personal_advice_5">La discución mas fuerte que hayas tenido</string>
     <string name="train_negative_personal_advice_6">Tragedias globales</string>
 
-    <!-- CLASE: End Negative Section -->
-    <string name="end_negative_section_title">Terminaste la primera sección</string>
-    <string name="end_negative_section_text_first">Hemos terminado la medición de tus patrones cerebrales cuando sientes emociones que potencialmente puden convertirse en emociones negativas.</string>
-    <string name="end_negative_section_text_second">Es momento de que te relajes, respires profundamente y pienses solo en tu pulmones llenandose de oxigeno y expulsando el aire.</string>
-
     <!-- CLASE: Train Positive Visual -->
     <string name="train_positive_visual_title">Emoción Positiva Visual</string>
     <string name="train_positive_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca emociónes positivas</string>
@@ -238,6 +234,18 @@
     <string name="train_positive_personal_advice_5">Tus logros mas importantes</string>
     <string name="train_positive_personal_advice_6">Tus personas favoritas</string>
 
+    <!-- CLASE: Train Finished -->
+    <string name="train_finished_title">Entrenamiento Completado</string>
+    <string name="train_finished_text_first">Felicidades has completado el entrenamiento, en este momento la red neuronal se está entrenando con tu información.</string>
+    <string name="train_finished_text_second">Este proceso puede demorar hasta 5 minutos, puede minimizar la aplicación, se le notificará cuando termine.</string>
+    <string name="train_finished_training">Entrenando</string>
+    <string name="train_finished_trained">Entrenamiento completado</string>
+
+    <!-- CLASE: End Negative Section -->
+    <string name="end_negative_section_title">Terminaste la primera sección</string>
+    <string name="end_negative_section_text_first">Hemos terminado la medición de tus patrones cerebrales cuando sientes emociones que potencialmente puden convertirse en emociones negativas.</string>
+    <string name="end_negative_section_text_second">Es momento de que te relajes, respires profundamente y pienses solo en tu pulmones llenandose de oxigeno y expulsando el aire.</string>
+
     <!-- CLASE: Section fit Neural Network -->
     <string name="timer">---</string>
     <string name="connect">CONECTAR\nDIADEMA</string>
@@ -252,7 +260,6 @@
     <string name="sent_waves_succed">Ondas cerebrales enviadas con éxito, puedes continuar.</string>
     <string name="sent_waves_try">Ya se enviaron las ondas cerebrales necesarias, favor de continuar.</string>
     <string name="first_send_waves">Para continuar se debe de hacer el entrenamiento, favor de darle al circulo cuando este listo.</string>
-
 
     <!-- Test: Todos los strings de las vistas de Testeo -->
     <string name="test_Ciudado">¡¡Ciudado!!</string>

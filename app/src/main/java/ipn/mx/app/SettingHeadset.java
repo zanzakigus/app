@@ -120,7 +120,6 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
                 if (!bluetoothAdapter.isEnabled()) {
                     bluetoothAdapter.enable();
                 }
-
                 try {
                     neuroSky.connect();
 
@@ -145,7 +144,6 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
                         }
                     }, 1000);
 
-
                 } catch (BluetoothNotEnabledException e) {
                     Log.d(TAG, e.getMessage());
                 }
@@ -166,7 +164,6 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
                 Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
                 myToast.show();
             }
-
 
         } else if (btnDiscHs == v) {
             Log.d(TAG, "onClick()-btnDiscHs: ");
@@ -213,7 +210,5 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
                 Log.d(TAG, "onClick()-btnDiscHs:  HeadsetConnectionService inicializado");
             }
         }
-
-
     }
 }

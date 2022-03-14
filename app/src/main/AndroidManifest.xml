@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
-            android:name=".strategies.StrategyStrength"
+            android:name=".Index"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -31,115 +31,92 @@
         </activity>
         <activity
             android:name=".signs.SignUp1"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".signs.SignUp2"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".signs.SignUpStrengths"
-            android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".User"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".HistoryDetection"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".signs.Login"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".InfoAppView"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".updateinfo.UpdateInfo"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".updateinfo.UpdateStrengths"
-            android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".updateinfo.CodePassword"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".updateinfo.ForgetPassword"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".updateinfo.UpdatePassword"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.FitConnect"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.FitNeural1"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.FitNeural2"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.IncompleteTraining"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.TrainNegativeVisual"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.TrainNegativePersonal"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.EndNegativeSection"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.TrainPositiveVisual"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".neuralfit.TrainPositivePersonal"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <!-- Vistas para hacer pruebas -->
         <activity
             android:name=".test.ClickNotification"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
             android:name=".SettingHeadset"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
 
         <service
             android:name=".notification.handlers.GenericNotificationService"
-            android:exported="false"></service>
+            android:exported="false" />
 
 
         <service
             android:name=".service.HeadsetConnectionService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <service
             android:name=".service.ClasifyService"
-            android:exported="false"></service>
+            android:exported="false" />
 
     </application>
 

@@ -1,5 +1,6 @@
 package ipn.mx.app.neuralfit;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ public class IncompleteTraining extends AppCompatActivity implements View.OnClic
     ImageView firstIcon, secondIcon, thirdIcon, fourthIcon;
     Button btnContinuar;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,11 @@ public class IncompleteTraining extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 finish();
             } else if (training == 3) {
-                Intent intent = new Intent(this, TrainNegativePersonal.class);
+                Intent intent = new Intent(this, TrainPositivePersonal.class);
+                startActivity(intent);
+                finish();
+            } else if (training == 4) {
+                Intent intent = new Intent(this, TrainFinished.class);
                 startActivity(intent);
                 finish();
             } else {

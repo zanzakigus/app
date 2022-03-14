@@ -216,7 +216,7 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
         boolean handled = false;
-        if (edtCadena.getId() == textView.getId() && (i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_NULL)) {
+        if (edtCadena.getId() == textView.getId() && (i == EditorInfo.IME_ACTION_NEXT || i == EditorInfo.IME_NULL)) {
             String cadena = edtCadena.getText().toString();
             if (tagCadenas.contains(cadena)) {
                 Toast.makeText(this, R.string.text_add_strength_repeated, Toast.LENGTH_SHORT).show();

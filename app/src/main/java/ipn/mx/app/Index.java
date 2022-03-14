@@ -82,7 +82,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         btnUser.setOnClickListener(this);
 
         /*btnNext.setOnClickListener(this);*/
-
         queue = Volley.newRequestQueue(this);
         host = this.getResources().getString(R.string.server_host);
 

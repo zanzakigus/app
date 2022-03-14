@@ -66,7 +66,7 @@ public class TrainPositivePersonal extends AppCompatActivity implements View.OnC
             if (!NeuroSkyManager.getNeuroSky().isConnected()) {
                 Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
                 myToast.show();
-            } else if (i != GlobalInfo.getTrainSectionTime()) {
+            } else if (!enviado) {
                 Toast.makeText(this, R.string.first_send_waves, Toast.LENGTH_LONG).show();
             } else {
                 Intent intent = new Intent(this, Index.class);
