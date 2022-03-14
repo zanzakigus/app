@@ -79,6 +79,10 @@
     <string name="text_no_info_strategy_stre">No hay información que mostrar.</string>
     <string name="text_btn_tell_me">Dime mis fortalezas</string>
 
+    <!-- VISTA: strategy_temporal.xml -->
+    <string name="text_strategy_temporal">Haz una pausa y respira profundo, es momento de valorar si esta emoción que experimentaste se está repitiendo y convirtiendo en un malestar para lograr tu bienestar.</string>
+
+
 
     <!-- VISTA: Headset Tutorial -->
     <string name="headset_tutorial_title">Uso de diadema</string>
