@@ -68,9 +68,8 @@ public class SignUp1 extends AppCompatActivity implements View.OnClickListener, 
 
     public void enterSignIn2() {
         Intent intent = new Intent(this, SignUp2.class);
-        intent.putExtra("correo", edtCorreo.getText().toString());
+        intent.putExtra("correo", edtCorreo.getText().toString().trim());
         intent.putExtra("contra", edtContra.getText().toString());
         startActivity(intent);
-
     }
 }

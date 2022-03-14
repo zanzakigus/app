@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary_color">
+
+    <TextView
+        android:id="@+id/train_finished_title"
+        style="@style/center_things"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:gravity="top"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/train_finished_title"
+        android:textAppearance="@style/title_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/train_finished_text_first"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:gravity="top"
+        android:justificationMode="inter_word"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/train_finished_text_first"
+        android:textAppearance="@style/text_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_finished_title"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/train_finished_text_second"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:gravity="top"
+        android:justificationMode="inter_word"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/train_finished_text_second"
+        android:textAppearance="@style/text_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_finished_text_first"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/train_finished_message"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="90dp"
+        android:gravity="center"
+        android:letterSpacing="0.1"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/train_finished_training"
+        android:textAppearance="@style/text_yellow_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_finished_text_second"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/arrow"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        android:visibility="invisible"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

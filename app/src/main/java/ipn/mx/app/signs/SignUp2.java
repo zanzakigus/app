@@ -84,7 +84,6 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener, 
                 myToast.show();
             } else {
                 enterSignStrengths();
-
             }
         } else if (v == edtFNacimiento) {
             openCalendarDialog();
@@ -132,16 +131,14 @@ public class SignUp2 extends AppCompatActivity implements View.OnClickListener, 
 
     public void enterSignStrengths() {
         Intent intent = new Intent(this, SignUpStrengths.class);
-        intent.putExtra("nombre", edtNombre.getText().toString());
-        intent.putExtra("ap_paterno", edtAPaterno.getText().toString());
-        intent.putExtra("ap_materno", edtAMaterno.getText().toString());
+        intent.putExtra("nombre", edtNombre.getText().toString().trim());
+        intent.putExtra("ap_paterno", edtAPaterno.getText().toString().trim());
+        intent.putExtra("ap_materno", edtAMaterno.getText().toString().trim());
         intent.putExtra("fecha_nacimiento", edtFNacimiento.getText().toString());
         intent.putExtra("correo", correo);
         intent.putExtra("contra", contra);
         startActivity(intent);
-
     }
-
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {

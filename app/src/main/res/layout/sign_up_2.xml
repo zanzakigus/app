@@ -71,13 +71,14 @@
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:imeOptions="actionNext"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:maxLines="1"
         android:padding="12dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        />
 
     <TextView
         android:id="@+id/a_paterno"
@@ -100,7 +101,7 @@
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:imeOptions="actionNext"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:maxLines="1"
         android:padding="12dp"
         android:textColor="@color/black"
@@ -129,7 +130,7 @@
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
         android:imeOptions="actionNext"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:maxLines="1"
         android:padding="12dp"
         android:textColor="@color/black"
