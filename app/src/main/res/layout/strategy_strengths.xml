@@ -40,14 +40,32 @@
         app:layout_constraintTop_toBottomOf="@id/title_strategy"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/button_tell_me"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_green"
+        android:gravity="center"
+        android:text="@string/text_btn_tell_me"
+        android:textColor="@color/black"
+        android:theme="@style/inside_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/action_bar"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/action_bar"
+        app:layout_constraintBottom_toTopOf="@id/button_tell_me"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_strategy"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
 
         <LinearLayout
             android:id="@+id/vertical_scroll"
@@ -73,8 +91,10 @@
 
 
 
+
         </LinearLayout>
     </ScrollView>
+
 
     <include
         android:id="@+id/action_bar"

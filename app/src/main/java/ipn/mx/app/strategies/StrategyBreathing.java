@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import java.util.Locale;
 
 import ipn.mx.app.HistoryDetection;
 import ipn.mx.app.Index;
@@ -29,6 +32,8 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
     private TextView statusText, textInstructions;
     private View outerCircleView, innerCircleView;
     private Button btnHome,btnGraph,btnNotification,btnUser;
+
+    TextToSpeech speaker;
 
     private Animation animationInhaleText, animationExhaleText,
             animationInhaleInnerCircle, animationExhaleInnerCircle;
@@ -75,6 +80,16 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
         innerCircleView.setOnClickListener(this);
 
+        speaker=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    speaker.setLanguage(new Locale(getResources().getString(R.string.locale_lenguage_mx)));
+                }
+            }
+        });
+
+        speaker.setPitch(0.9f);
 
     }
 
@@ -170,6 +185,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
             public void onFinish() {
                 textInstructions.setText(R.string.strategy_breath_almost);
+                speaker.speak(textInstructions.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                 doneTime = true;
             }
         };
@@ -194,6 +210,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
 
             if (holdDuration != 0) {
                 statusText.setText(R.string.text_hold);
+                speaker.speak(statusText.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
             }
 
 
@@ -201,6 +218,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                 @Override
                 public void run() {
                     statusText.setText(R.string.text_breath_out);
+                    speaker.speak(statusText.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                     statusText.startAnimation(animationExhaleText);
                     innerCircleView.startAnimation(animationExhaleInnerCircle);
                 }
@@ -224,24 +242,27 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
             Log.d(TAG, "exhale animation end");
             if (!doneTime) {
                 if (holdDuration != 0) {
+
                     statusText.setText(R.string.text_hold);
+                    speaker.speak(statusText.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                 }
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         statusText.setText(R.string.text_breath_in);
+                        speaker.speak(statusText.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                         statusText.startAnimation(animationInhaleText);
                         innerCircleView.startAnimation(animationInhaleInnerCircle);
                     }
                 }, holdDuration);
             } else {
                 textInstructions.setText(R.string.strategy_breath_done);
+                speaker.speak(textInstructions.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                 statusText.setText(R.string.strategy_breath_done);
                 innerCircleView.startAnimation(doneCicleAnimation);
                 statusText.startAnimation(doneTextAnimation);
                 mediaPlayer.stop();
             }
-
         }
 
         @Override
@@ -262,6 +283,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                 @Override
                 public void run() {
                     textInstructions.setText(R.string.text_focus_on_breathing);
+                    speaker.speak(textInstructions.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                     innerCircleView.startAnimation(animationInitialInhaleInnerCircle);
                 }
             }, holdDuration);
@@ -307,6 +329,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                 i--;
             } else if (i == -3) {
                 statusText.setText(R.string.text_breath_in);
+                speaker.speak(statusText.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
                 statusText.setTextColor(getResources().getColor(R.color.green_transp));
                 statusText.startAnimation(animationInhaleText);
                 innerCircleView.startAnimation(animationInhaleInnerCircle);
@@ -339,27 +362,45 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
                         i--;
                         handler.postDelayed(this, 1000);
                     } else if (i == 0) {
+
                         statusText.setText("Inicial");
                         statusText.setTextColor(getResources().getColor(R.color.color_button_green));
                         textInstructions.setText(R.string.text_relax_and_confortable);
+                        speaker.speak(getResources().getString(R.string.text_relax_and_confortable),TextToSpeech.QUEUE_FLUSH,null);
                         innerCircleView.startAnimation(animationInitial);
                         statusText.startAnimation(animationInitialText);
+
                     }
                 }
             }, 1000);
         } else if (btnHome == v) {
             Intent intent = new Intent(this, Index.class);
             startActivity(intent);
+            stopSounds();
+            finish();
+
         } else if (btnGraph == v) {
             Intent intent = new Intent(this, HistoryDetection.class);
             startActivity(intent);
+            stopSounds();
+            finish();
         } else if (btnNotification == v) {
             Intent intent = new Intent(this, SettingHeadset.class);
             startActivity(intent);
+            stopSounds();
+            finish();
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
+            stopSounds();
+            finish();
         }
 
     }
+
+    public void stopSounds(){
+        speaker.stop();
+        mediaPlayer.stop();
+    }
+
 }

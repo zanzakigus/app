@@ -67,7 +67,7 @@
     <string name="text_breath_out">Exhale</string>
     <string name="text_breath_exercise">Presiona el círculo cuando quieras comenzar</string>
     <string name="text_relax_and_confortable">Relájese y póngase cómodo</string>
-    <string name="text_focus_on_breathing">Concentrase en su respiración</string>
+    <string name="text_focus_on_breathing">Concéntrese en su respiración</string>
     <string name="text_cirle_breath">4</string>
     <string name="strategy_breath_done">¡Bien hecho!</string>
     <string name="strategy_breath_almost">Casi termina</string>
@@ -77,6 +77,7 @@
     <string name="title_strategy_strengths">Hemos detectado una emoción negativa</string>
     <string name="text_strategy_strengths">Haz una pausa y respira profundo. Es preciso recordarte tus fortalezas, para que tengas en mente que lo que estás pasando es temporal y tienes herramientas para superarlo.</string>
     <string name="text_no_info_strategy_stre">No hay información que mostrar.</string>
+    <string name="text_btn_tell_me">Dime mis fortalezas</string>
 
 
     <!-- VISTA: Headset Tutorial -->

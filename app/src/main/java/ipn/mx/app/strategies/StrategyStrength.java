@@ -4,13 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -32,9 +35,8 @@ import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
 import ipn.mx.app.SettingHeadset;
 import ipn.mx.app.User;
-import ipn.mx.app.global.GlobalInfo;
+import ipn.mx.app.misc.BoxHelper;
 import ipn.mx.app.signs.Login;
-import ipn.mx.app.updateinfo.UpdateStrengths;
 
 public class StrategyStrength extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,16 +48,24 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
 
     SharedPreferences sharedpreferences;
 
-    private Button btnHome,btnGraph,btnNotification,btnUser;
+    private Button btnHome, btnGraph, btnNotification, btnUser, btnTellMe;
     TextView tvNoInfo;
     LinearLayout vertical_scroll;
+    TextView tvTextInst;
+    Handler handler = new Handler();
 
     //logged variables
     private String loggedEmail;
     private String loggedPassword;
 
     Context context;
-    TextToSpeech ttobj;
+    TextToSpeech speaker;
+
+    int i;
+    BoxHelper<Boolean> primerRonda, lecturaInstruc;
+    MediaPlayer mediaPlayer;
+
+    ArrayList<String> strenghts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +73,28 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.strategy_strengths);
         context = this;
 
+        primerRonda = new BoxHelper<>(false);
+        lecturaInstruc = new BoxHelper<>(false);
+        strenghts = new ArrayList<>();
+        mediaPlayer = new MediaPlayer();
+
+
         btnHome = findViewById(R.id.icon_home);
         btnGraph = findViewById(R.id.icon_graph);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
+        btnTellMe = findViewById(R.id.button_tell_me);
 
         tvNoInfo = findViewById(R.id.no_info);
         vertical_scroll = findViewById(R.id.vertical_scroll);
+        tvTextInst = findViewById(R.id.text_strategy);
 
 
         btnHome.setOnClickListener(this);
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
+        btnTellMe.setOnClickListener(this);
 
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -97,18 +116,23 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
         }
 
 
-
-
         // Se hace peticion para obtener la informacion del usuario
         PeticionAPI api = new PeticionAPI(this);
         HashMap<String, String> params = new HashMap<>();
         params.put("correo", loggedEmail);
         params.put("password", loggedPassword);
 
+        initSpeaker();
+
         StrategyStrength strategyStrenght = new StrategyStrength();
         strategyStrenght.context = this;
         strategyStrenght.tvNoInfo = tvNoInfo;
         strategyStrenght.vertical_scroll = vertical_scroll;
+        strategyStrenght.speaker = speaker;
+        strategyStrenght.tvTextInst = tvTextInst;
+        strategyStrenght.primerRonda = primerRonda;
+        strategyStrenght.lecturaInstruc = lecturaInstruc;
+        strategyStrenght.strenghts = strenghts;
 
         Class[] parameterTypes = new Class[2];
         parameterTypes[0] = JSONObject.class;
@@ -122,34 +146,69 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
 
         api.peticionGET(this.getResources().getString(R.string.server_host) + "/fortalezas", params, strategyStrenght, functionToPass);
 
-        EditText write;
-        ttobj=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status != TextToSpeech.ERROR) {
-                    ttobj.setLanguage(new Locale(getResources().getString(R.string.locale_lenguage_mx)));
-                }
-            }
-        });
+        mediaPlayer = MediaPlayer.create(this, R.raw.strengths_strategy);
+        mediaPlayer.setLooping(true); // Set looping
+        mediaPlayer.setVolume(100, 100);
+        mediaPlayer.start();
+
+
     }
 
     @Override
     public void onClick(View v) {
-         if (btnHome == v) {
-            /*Intent intent = new Intent(this, Index.class);
-            startActivity(intent);*/
-             ttobj.speak("Haz una pausa y respira profundo. Es preciso recordarte tus fortalezas, para que tengas en mente que lo que estás pasando es temporal y tienes herramientas para superarlo.", TextToSpeech.QUEUE_FLUSH, null);
+        if (btnHome == v) {
+            Intent intent = new Intent(this, Index.class);
+            startActivity(intent);
+            finish();
+            stopSounds();
         } else if (btnGraph == v) {
             Intent intent = new Intent(this, HistoryDetection.class);
             startActivity(intent);
+            finish();
+            stopSounds();
         } else if (btnNotification == v) {
             Intent intent = new Intent(this, SettingHeadset.class);
             startActivity(intent);
+            finish();
+            stopSounds();
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
+            finish();
+            stopSounds();
+        } else if (btnTellMe == v) {
+            sayStrengths();
         }
 
+    }
+
+    public void initSpeaker() {
+        speaker = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    speaker.setLanguage(new Locale(getResources().getString(R.string.locale_lenguage_mx)));
+
+                }
+            }
+        });
+        speaker.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+                Log.i("TextToSpeech", "On Start");
+            }
+
+            @Override
+            public void onDone(String utteranceId) {
+                Log.i("TextToSpeech", "On Done " + utteranceId);
+                lecturaInstruc.set(true);
+            }
+
+            @Override
+            public void onError(String utteranceId) {
+                Log.i("TextToSpeech", "On Error");
+            }
+        });
     }
 
     public void putInfoOnScreen(JSONObject response, Context context) throws JSONException {
@@ -170,6 +229,12 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
             return;
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            speaker.speak(tvTextInst.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED);
+        } else {
+            speaker.speak(tvTextInst.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+        }
+
 
         JSONArray fortalezas = response.getJSONArray("message");
         if (fortalezas.length() == 0) {
@@ -178,6 +243,7 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
             tvNoInfo.setVisibility(View.GONE);
             Log.d(TAG, "putInfoOnScreen() " + fortalezas.length());
             for (int i = 0; i < fortalezas.length(); i++) {
+                strenghts.add(fortalezas.getJSONObject(i).getString("fortaleza_texto"));
                 ConstraintLayout fortaleza = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.component_question, null);
 
                 ConstraintLayout.LayoutParams newLayoutParams = new ConstraintLayout.LayoutParams(
@@ -188,17 +254,60 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
 
                 TextView texto = fortaleza.findViewById(R.id.text_question);
                 texto.setText(fortalezas.getJSONObject(i).getString("fortaleza_texto"));
+
+                fortaleza.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (primerRonda.get()) {
+                            speaker.speak(texto.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+
+                        }
+
+                    }
+
+                });
                 vertical_scroll.addView(fortaleza);
             }
+
+            sayStrengths();
         }
+    }
+
+    public void sayStrengths() {
+        i = 0;
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i(TAG, "handler");
+                if (i < strenghts.size()) {
+                    if (lecturaInstruc.get()) {
+                        lecturaInstruc.set(false);
+                        Log.i(TAG, "handler");
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            speaker.speak(strenghts.get(i), TextToSpeech.QUEUE_FLUSH, null, TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED);
+                        } else {
+                            speaker.speak(strenghts.get(i), TextToSpeech.QUEUE_FLUSH, null);
+                        }
+
+                        i++;
+                    }
+                    handler.postDelayed(this, 1000);
+
+                } else {
+                    primerRonda.set(true);
+                    handler.removeCallbacks(this);
+                }
+
+            }
+        }, 1000);
+    }
+
+    public void stopSounds(){
+        speaker.stop();
+        mediaPlayer.stop();
+    }
 
 
-    }
-    public void onPause(){
-        if(ttobj !=null){
-            ttobj.stop();
-            ttobj.shutdown();
-        }
-        super.onPause();
-    }
 }
