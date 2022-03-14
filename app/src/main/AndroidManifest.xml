@@ -95,6 +95,13 @@
             android:name=".neuralfit.TrainPositivePersonal"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
+        <activity
+            android:name=".strategies.StrategyBreathing"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".strategies.StrategyStrength"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <!-- Vistas para hacer pruebas -->
         <activity
             android:name=".test.ClickNotification"
