@@ -206,7 +206,7 @@
     <string name="train_negative_visual_title">Emoción Negativa Visual</string>
     <string name="train_negative_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca alguna emoción negativa</string>
     <string name="train_negative_visual_text_second">Se recomienda seguir el video antes visto para ver la forma mas correcta de realizar el entrenamiento</string>
-    <string name="train_negative_visual_recomendations"><u>Recomendación 1</u>\n<u>Recomendación 2</u>\n<u>Recomendación 3</u></string>
+    <string name="train_negative_visual_recomendations"><u>https://youtu.be/SPRxeOOTXxg</u>\n<u>https://youtu.be/YL-errZiNd8</u>\n<u>https://youtu.be/Gcnbxc5Zul0</u></string>
 
     <!-- CLASE: Train Negative Personal -->
     <string name="train_negative_personal_title">Emoción Negativa Personal</string>
@@ -222,7 +222,7 @@
     <string name="train_positive_visual_title">Emoción Positiva Visual</string>
     <string name="train_positive_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca emociónes positivas</string>
     <string name="train_positive_visual_text_second">Se recomienda seguir el video antes visto para ver la forma mas correcta de realizar el entrenamiento</string>
-    <string name="train_positive_visual_recomendations"><u>Recomendación 1</u>\n<u>Recomendación 2</u>\n<u>Recomendación 3</u></string>
+    <string name="train_positive_visual_recomendations"><u>https://youtu.be/2s9ovowoOyk</u>\n<u>https://youtu.be/CfEOwQnd-OM?t=40</u>\n<u>https://youtu.be/ZbZSe6N_BXs</u></string>
 
     <!-- CLASE: Train Positive Personal -->
     <string name="train_positive_personal_title">Emoción Positiva Personal</string>
