@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
-            android:name=".Index"
+            android:name=".neuralfit.TrainPositiveVisual"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -88,9 +88,9 @@
         <activity
             android:name=".neuralfit.EndNegativeSection"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity
-            android:name=".neuralfit.TrainPositiveVisual"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+<!--        <activity-->
+<!--            android:name=".neuralfit.TrainPositiveVisual"-->
+<!--            android:theme="@style/Theme.AppCompat.NoActionBar"/>-->
         <activity
             android:name=".neuralfit.TrainPositivePersonal"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>

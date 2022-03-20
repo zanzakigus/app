@@ -55,19 +55,36 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/train_negative_visual_recomendations"
-        style="@style/center_things"
+        android:id="@+id/train_negative_visual_recomendations_1"
+        style="@style/style_recomendations_videos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
-        android:gravity="top"
-        android:justificationMode="inter_word"
-        android:lineSpacingExtra="10dp"
-        android:text="@string/train_negative_visual_recomendations"
-        android:textAppearance="@style/text_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/train_negative_visual_text_second"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/train_negative_visual_recomendations_2"
+        style="@style/style_recomendations_videos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_negative_visual_recomendations_1"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/train_negative_visual_recomendations_3"
+        style="@style/style_recomendations_videos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_negative_visual_recomendations_2"
         tools:ignore="MissingConstraints" />
 
     <View

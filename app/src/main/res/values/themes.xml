@@ -111,6 +111,20 @@
         <item name="android:imeOptions">actionNext</item>
     </style>
 
+    <!-- Estilo para los video de recomendacion -->
+    <style name="style_recomendations_videos">
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginEnd">40dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:fontFamily" tools:targetApi="o">@font/roboto_italic</item>
+        <item name="android:gravity">top</item>
+        <item name="android:textAppearance">@style/text_blue</item>
+        <item name="android:lineSpacingExtra">10dp</item>
+        <item name="android:justificationMode" tools:targetApi="o">inter_word</item>
+    </style>
+
 
     <style name="style_switch" parent="">
         <item name="android:colorControlActivated" tools:targetApi="lollipop">

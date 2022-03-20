@@ -206,7 +206,10 @@
     <string name="train_negative_visual_title">Emoción Negativa Visual</string>
     <string name="train_negative_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca alguna emoción negativa</string>
     <string name="train_negative_visual_text_second">Se recomienda seguir el video antes visto para ver la forma mas correcta de realizar el entrenamiento</string>
-    <string name="train_negative_visual_recomendations"><u>https://youtu.be/SPRxeOOTXxg</u>\n<u>https://youtu.be/YL-errZiNd8</u>\n<u>https://youtu.be/Gcnbxc5Zul0</u></string>
+    <string name="train_negative_visual_recomendations_1">Escena Toy Story 3 https://youtu.be/SPRxeOOTXxg</string>
+    <string name="train_negative_visual_recomendations_2">Escena La Vida es Bella https://youtu.be/YL-errZiNd8</string>
+    <string name="train_negative_visual_recomendations_3">Historia Tailandés https://youtu.be/Gcnbxc5Zul0</string>
+    <string name="train_negative_visual_error_open_video">Ocurrio un problema al intentar abrir el video.</string>
 
     <!-- CLASE: Train Negative Personal -->
     <string name="train_negative_personal_title">Emoción Negativa Personal</string>
@@ -222,7 +225,9 @@
     <string name="train_positive_visual_title">Emoción Positiva Visual</string>
     <string name="train_positive_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca emociónes positivas</string>
     <string name="train_positive_visual_text_second">Se recomienda seguir el video antes visto para ver la forma mas correcta de realizar el entrenamiento</string>
-    <string name="train_positive_visual_recomendations"><u>https://youtu.be/2s9ovowoOyk</u>\n<u>https://youtu.be/CfEOwQnd-OM?t=40</u>\n<u>https://youtu.be/ZbZSe6N_BXs</u></string>
+    <string name="train_positive_visual_recomendations_1">Mejores Memes https://youtu.be/2s9ovowoOyk</string>
+    <string name="train_positive_visual_recomendations_2">Video Motivacional https://youtu.be/CfEOwQnd-OM?t=40</string>
+    <string name="train_positive_visual_recomendations_3">Happy - Pharrell Williams https://youtu.be/ZbZSe6N_BXs</string>
 
     <!-- CLASE: Train Positive Personal -->
     <string name="train_positive_personal_title">Emoción Positiva Personal</string>

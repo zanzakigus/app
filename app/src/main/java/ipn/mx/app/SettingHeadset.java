@@ -164,7 +164,6 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
                 Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
                 myToast.show();
             }
-
         } else if (btnDiscHs == v) {
             Log.d(TAG, "onClick()-btnDiscHs: ");
             if (neuroSky != null && neuroSky.isConnected()) {
