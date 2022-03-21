@@ -39,16 +39,16 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.train_positive_visual);
 
-//        neuroSky = NeuroSkyManager.getNeuroSky();
-//        if (neuroSky.isConnected()) {
-//            neuroSky.start();
-//        } else {
-//            Intent intent = new Intent(this, FitConnect.class);
-//            startActivity(intent);
-//            finish();
-//            Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
-//            myToast.show();
-//        }
+        neuroSky = NeuroSkyManager.getNeuroSky();
+        if (neuroSky.isConnected()) {
+            neuroSky.start();
+        } else {
+            Intent intent = new Intent(this, FitConnect.class);
+            startActivity(intent);
+            finish();
+            Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
+            myToast.show();
+        }
 
         // set the id for the progressbar and progress text
         progressBar = findViewById(R.id.progress_bar);

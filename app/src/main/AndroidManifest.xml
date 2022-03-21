@@ -94,6 +94,9 @@
         <activity
             android:name=".neuralfit.TrainPositivePersonal"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".ManualDetection"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
             android:name=".strategies.StrategyBreathing"

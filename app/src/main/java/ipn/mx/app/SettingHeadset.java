@@ -84,15 +84,24 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
 
         swtEnableNoti.setOnClickListener(this);
 
-        new NeuroSkyManager(this);
         neuroSky = NeuroSkyManager.getNeuroSky();
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        if (NeuroSkyManager.getNeuroSky() != null && NeuroSkyManager.getNeuroSky().isConnected()) {
-            btnDiscHs.setVisibility(View.VISIBLE);
-            btnClasify.setVisibility(View.VISIBLE);
-            btnConnHs.setVisibility(View.GONE);
+        Log.i("Neurosky", "Estatus de Neurosky: " + neuroSky);
+
+        if (NeuroSkyManager.getNeuroSky() != null) {
+            if(NeuroSkyManager.getNeuroSky().isConnected()){
+                btnDiscHs.setVisibility(View.VISIBLE);
+                btnClasify.setVisibility(View.VISIBLE);
+                btnConnHs.setVisibility(View.GONE);
+            } else {
+                btnDiscHs.setVisibility(View.GONE);
+                btnClasify.setVisibility(View.GONE);
+                btnConnHs.setVisibility(View.VISIBLE);
+            }
         } else {
+            new NeuroSkyManager(this);
+            neuroSky = NeuroSkyManager.getNeuroSky();
             btnDiscHs.setVisibility(View.GONE);
             btnClasify.setVisibility(View.GONE);
             btnConnHs.setVisibility(View.VISIBLE);
@@ -155,15 +164,9 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
                 btnClasify.setVisibility(View.VISIBLE);
                 btnConnHs.setVisibility(View.GONE);
             }
-
         } else if (btnClasify == v) {
-            Log.d(TAG, "onClick()-btnClasify: ");
-            if (neuroSky != null && neuroSky.isConnected()) {
-                NeuroSkyManager.enviarWavesIdentificar();
-            } else {
-                Toast myToast = Toast.makeText(this, R.string.no_connect, Toast.LENGTH_LONG);
-                myToast.show();
-            }
+            Intent intent = new Intent(this, ManualDetection.class);
+            startActivity(intent);
         } else if (btnDiscHs == v) {
             Log.d(TAG, "onClick()-btnDiscHs: ");
             if (neuroSky != null && neuroSky.isConnected()) {

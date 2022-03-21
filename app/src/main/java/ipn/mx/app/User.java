@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.signs.Login;
 import ipn.mx.app.updateinfo.CodePassword;
@@ -220,6 +221,9 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.apply();
+
+        NeuroSkyManager.stopSendingWaves();
+        NeuroSkyManager.getNeuroSky().disconnect();
 
         Intent stopHeadset = new Intent(this, ClasifyService.class);
         stopService(stopHeadset);

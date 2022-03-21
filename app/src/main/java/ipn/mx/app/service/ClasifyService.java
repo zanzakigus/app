@@ -30,7 +30,7 @@ public class ClasifyService extends Service {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (NeuroSkyManager.getNeuroSky() != null && NeuroSkyManager.getNeuroSky().isConnected()) {
+                if (NeuroSkyManager.getNeuroSky() != null && NeuroSkyManager.getNeuroSky().isConnected() && isIntentServiceRunning()) {
                     Log.d(TAG, "onStartCommand(): Classifying");
                     NeuroSkyManager.enviarWavesIdentificar();
                 }
@@ -50,8 +50,6 @@ public class ClasifyService extends Service {
         super.onDestroy();
         Log.d(TAG, "onDestroy(): ");
         intentServiceRunning = false;
-        NeuroSkyManager.stopSendingWaves();
-        NeuroSkyManager.getNeuroSky().disconnect();
     }
 
     @Nullable

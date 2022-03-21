@@ -16,6 +16,7 @@
 package ipn.mx.app.neurosky.library;
 
 import android.bluetooth.BluetoothAdapter;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -60,6 +61,7 @@ public class NeuroSky {
     }
 
     public void disconnect() {
+        Log.i("disconnect Diadema", "disconnect: Me desconecto");
         if (isConnected()) {
             closeConnection();
         }

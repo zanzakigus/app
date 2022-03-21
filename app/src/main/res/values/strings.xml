@@ -167,6 +167,11 @@
     <string name="text_update_stre_succed">Fortalezas actualizadas</string>
 
 
+    <!-- CLASE: Manual Detection -->
+    <string name="manual_detection_title">Detección Manual</string>
+    <string name="manual_detection_text_1">Para hacer la detección solo es necesario oprimir el circulo cuando este listo. La detección dura un minuto.</string>
+
+
     <!-- CLASE: CodePassword -->
     <string name="password_information">Se le ha enviado a su correo un código para poder actualizar la contraseña.</string>
     <string name="second_information">El correo puede tardar hasta un minuto en llegar. En caso de no encontrarlo favor de revisar la bandeja de spam o correos no deseados.</string>
