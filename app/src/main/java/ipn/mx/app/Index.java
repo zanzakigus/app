@@ -100,6 +100,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         GlobalInfo.setIniEnableNotifyConnHeadset(this);
 
         if (loggedPassword == null || loggedEmail == null) {
+            Log.i("A Login", "onCreate: Deberia de irme a login");
             Intent intent = new Intent(this, Login.class);
             /*intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
             startActivity(intent);

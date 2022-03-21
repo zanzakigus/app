@@ -81,12 +81,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
         loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
         if (loggedPassword != null && loggedEmail != null) {
+            Log.i("A index", "onCreate: Deberia de irme a index");
             Intent intent = new Intent(this, Index.class);
             startActivity(intent);
             finish();
         }
     }
-
 
     @Override
     public void onClick(View v) {

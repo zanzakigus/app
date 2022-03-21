@@ -50,6 +50,8 @@ public class ClasifyService extends Service {
         super.onDestroy();
         Log.d(TAG, "onDestroy(): ");
         intentServiceRunning = false;
+        NeuroSkyManager.stopSendingWaves();
+        NeuroSkyManager.getNeuroSky().disconnect();
     }
 
     @Nullable

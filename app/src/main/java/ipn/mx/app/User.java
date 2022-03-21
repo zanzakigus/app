@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.signs.Login;
 import ipn.mx.app.updateinfo.CodePassword;
 import ipn.mx.app.updateinfo.UpdateInfo;
@@ -221,6 +222,9 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.apply();
+
+        Intent stopHeadset = new Intent(this, ClasifyService.class);
+        stopService(stopHeadset);
 
         /*if (HeadsetConnectionService.isIsIntentServiceRunning()){
             Intent hcs = new Intent(this, HeadsetConnectionService.class);

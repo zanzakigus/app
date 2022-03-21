@@ -42,6 +42,7 @@ public class NeuroSkyManager {
     private static boolean estrendada = false;
     private static int trainFile = 0;
     private ArrayList<HashMap<String, String>> arrayWaves = new ArrayList<>();
+    private boolean bugHeadsetConnected = false;
 
     public NeuroSkyManager() {
 
@@ -166,6 +167,14 @@ public class NeuroSkyManager {
         NeuroSkyManager.trainFile = trainFile;
     }
 
+    public boolean isBugHeadsetConnected() {
+        return bugHeadsetConnected;
+    }
+
+    public void setBugHeadsetConnected(boolean bugHeadsetConnected) {
+        this.bugHeadsetConnected = bugHeadsetConnected;
+    }
+
     private void handleStateChange(final State state) {
         if (estadoDiadema.equals(State.UNKNOWN) || estadoDiadema.equals(State.DISCONNECTED) || estadoDiadema.equals(State.NOT_PAIRED)) {
             try {
@@ -182,8 +191,13 @@ public class NeuroSkyManager {
             case CONNECTED:
                 myToast = Toast.makeText(context, R.string.connected_diadema, Toast.LENGTH_LONG);
                 myToast.show();
+                setBugHeadsetConnected(true);
                 Log.d(LOG_TAG, LOG_TAG + ": " + estadoDiadema.toString());
             case NOT_FOUND:
+                if(isBugHeadsetConnected()) {
+                    setBugHeadsetConnected(false);
+                    break;
+                }
                 myToast = Toast.makeText(context, R.string.no_found_diadema, Toast.LENGTH_LONG);
                 myToast.show();
                 Log.d(LOG_TAG, LOG_TAG + ": " + estadoDiadema.toString());
