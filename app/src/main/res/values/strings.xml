@@ -149,6 +149,7 @@
     <string name="info_view_text_first">Buscamos alertarte cuando detectemos que estas pasando por una emoción negativa y logres ser conciente de su existencia.</string>
     <string name="info_view_text_second">Al hacerlo continuamente podras hacer concienca si las causas de la emoción están repitiendose.</string>
     <string name="info_view_text_third">Junto con la alerta de la detección te recomendaremos acciones o mensajes con el objetivo de ayudarte a pensar un poco más claro y ser conciente de lo que estas sintiendo.</string>
+    <string name="info_view_log_out"><u>Cerrar sesión</u></string>
 
     <!-- CLASE: Index -->
     <string name="no_neural">No se encontró la red neuronal</string>

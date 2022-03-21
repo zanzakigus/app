@@ -213,8 +213,6 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
 
         tvDetUltimaSemana.setText(detecion_week);
         tvDetTotal.setText(detecion_all);
-
-
     }
 
     private void logOut() {

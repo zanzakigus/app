@@ -27,7 +27,7 @@
         style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:gravity="top"
         android:justificationMode="inter_word"
         android:lineSpacingExtra="10dp"
@@ -43,7 +43,7 @@
         style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:gravity="top"
         android:justificationMode="inter_word"
         android:lineSpacingExtra="10dp"
@@ -59,7 +59,7 @@
         style="@style/center_things"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:gravity="top"
         android:justificationMode="inter_word"
         android:lineSpacingExtra="10dp"
@@ -69,6 +69,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_second"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/log_out"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/info_view_log_out"
+        android:textAppearance="@style/text"
+        android:textColor="@color/dark_blue"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/arrow" />
 
     <View
         android:id="@+id/arrow"
