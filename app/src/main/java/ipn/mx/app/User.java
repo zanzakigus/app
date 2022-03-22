@@ -223,7 +223,9 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         editor.apply();
 
         NeuroSkyManager.stopSendingWaves();
-        NeuroSkyManager.getNeuroSky().disconnect();
+        if (NeuroSkyManager.getNeuroSky() != null)
+            if (NeuroSkyManager.getNeuroSky().isConnected())
+                NeuroSkyManager.getNeuroSky().disconnect();
 
         Intent stopHeadset = new Intent(this, ClasifyService.class);
         stopService(stopHeadset);

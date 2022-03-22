@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ipn.mx.app.neuralfit.FitConnect;
+import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.signs.Login;
 
@@ -65,6 +66,11 @@ public class InfoAppView extends AppCompatActivity implements View.OnClickListen
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.clear();
             editor.apply();
+
+            NeuroSkyManager.stopSendingWaves();
+            if (NeuroSkyManager.getNeuroSky() != null)
+                if (NeuroSkyManager.getNeuroSky().isConnected())
+                    NeuroSkyManager.getNeuroSky().disconnect();
 
             Intent stopHeadset = new Intent(this, ClasifyService.class);
             stopService(stopHeadset);
