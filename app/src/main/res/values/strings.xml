@@ -83,8 +83,6 @@
     <!-- VISTA: strategy_temporal.xml -->
     <string name="text_strategy_temporal">Haz una pausa y respira profundo, es momento de valorar si esta emoción que experimentaste se está repitiendo y convirtiendo en un malestar para lograr tu bienestar.</string>
 
-
-
     <!-- VISTA: Headset Tutorial -->
     <string name="headset_tutorial_title">Uso de diadema</string>
     <string name="headset_tutorial_text_first">La diadema tiene tres modos de operacion, apagado, encendido o buscando dispositivo nuevo a conectarse.</string>
@@ -165,6 +163,12 @@
 
     <!-- CLASE: update_strengths -->
     <string name="text_update_stre_succed">Fortalezas actualizadas</string>
+
+    <!-- CLASE: Tutorial Headset -->
+    <string name="tutorial_headset_title">Tutorial de Diadema</string>
+    <string name="tutorial_headset_text_1">Para comprender como se utiliza de manera correcto la diadema junto con la aplicación se recomienda ver el siguiente video.</string>
+    <string name="tutorial_headset_fullscreen"><u>Oprima para pantalla completa.</u></string>
+    <string name="tutorial_headset_fullscreen_error">Ocurrio un problema al intentar abrir el video.</string>
 
 
     <!-- CLASE: Manual Detection -->
