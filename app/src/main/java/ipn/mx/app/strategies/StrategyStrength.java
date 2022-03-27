@@ -36,6 +36,7 @@ import ipn.mx.app.R;
 import ipn.mx.app.SettingHeadset;
 import ipn.mx.app.User;
 import ipn.mx.app.misc.BoxHelper;
+import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.signs.Login;
 
 public class StrategyStrength extends AppCompatActivity implements View.OnClickListener {
@@ -71,6 +72,7 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.strategy_strengths);
+        NeuroSkyManager.displaystrategy = true;
         context = this;
 
         primerRonda = new BoxHelper<>(false);
@@ -305,6 +307,7 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
     }
 
     public void stopSounds(){
+        NeuroSkyManager.displaystrategy = false;
         speaker.stop();
         mediaPlayer.stop();
     }

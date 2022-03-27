@@ -22,3 +22,6 @@ local.properties
 .idea/vcs.xml
 .idea
 /appwatch
+/appwatch/libs
+/appwatch/src
+/appwatch/src/

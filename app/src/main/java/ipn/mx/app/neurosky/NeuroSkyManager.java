@@ -33,6 +33,7 @@ public class NeuroSkyManager {
     public static final int TIPO_NEGATIVA = 0;
     public static final int TIPO_POSITIVA = 1;
     private final static String LOG_TAG = "NeuroSky";
+    public static boolean displaystrategy = false;
     private static NeuroSky neuroSky;
     private static State estadoDiadema = State.UNKNOWN;
     @SuppressLint("StaticFieldLeak")
@@ -43,6 +44,7 @@ public class NeuroSkyManager {
     private static int trainFile = 0;
     private ArrayList<HashMap<String, String>> arrayWaves = new ArrayList<>();
     private boolean bugHeadsetConnected = false;
+
 
     public NeuroSkyManager() {
 
@@ -338,7 +340,7 @@ public class NeuroSkyManager {
             myToast.show();
             return;
         }
-        if (message.equals("0")) {
+        if (message.equals("0") && !displaystrategy) {
             NotificationManagerData nmd = new NotificationManagerData(context);
             GlobalNotificationManager gnm = new GlobalNotificationManager(context, nmd);
             gnm.generateNotification();

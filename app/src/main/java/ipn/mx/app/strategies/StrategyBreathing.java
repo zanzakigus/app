@@ -24,6 +24,7 @@ import ipn.mx.app.R;
 import ipn.mx.app.SettingHeadset;
 import ipn.mx.app.User;
 import ipn.mx.app.global.GlobalInfo;
+import ipn.mx.app.neurosky.NeuroSkyManager;
 
 public class StrategyBreathing extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,6 +55,8 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.strategy_breathing);
+
+        NeuroSkyManager.displaystrategy = true;
 
         contentLayout = findViewById(R.id.lt_content);
         //contentLayout.setOnTouchListener(contentTouchListener);
@@ -399,6 +402,7 @@ public class StrategyBreathing extends AppCompatActivity implements View.OnClick
     }
 
     public void stopSounds(){
+        NeuroSkyManager.displaystrategy = false;
         speaker.stop();
         mediaPlayer.stop();
     }
