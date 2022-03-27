@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 
@@ -48,6 +50,8 @@ public class ClasifyService extends Service {
     // stop on calling this method
     public void onDestroy() {
         super.onDestroy();
+        GlobalInfo.setClasifyTimeDelayCounter(0);
+        NeuroSkyManager.arrayWaves = new ArrayList<>();
         Log.d(TAG, "onDestroy(): ");
         intentServiceRunning = false;
     }
