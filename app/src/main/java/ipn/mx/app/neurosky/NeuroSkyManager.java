@@ -42,9 +42,8 @@ public class NeuroSkyManager {
     private static boolean clasificar = false;
     private static boolean estrendada = false;
     private static int trainFile = 0;
-    private ArrayList<HashMap<String, String>> arrayWaves = new ArrayList<>();
+    public static ArrayList<HashMap<String, String>> arrayWaves = new ArrayList<>();
     private boolean bugHeadsetConnected = false;
-
 
     public NeuroSkyManager() {
 
