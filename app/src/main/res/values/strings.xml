@@ -2,13 +2,13 @@
 
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
-<!--    <string name="server_host">http://192.168.3.20:8000</string>-->
+    <string name="server_host">http://192.168.3.20:8000</string>
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.75:8000</string>-->
     <!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <!--<string name="server_host">http://192.168.1.18:8000</string>-->
-    <string name="server_host">http://192.168.1.83:8000</string>
+    <!--<string name="server_host">http://192.168.1.83:8000</string>-->
 
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -79,6 +79,14 @@
     <string name="text_strategy_strengths">Haz una pausa y respira profundo. Es preciso recordarte tus fortalezas, para que tengas en mente que lo que estás pasando es temporal y tienes herramientas para superarlo.</string>
     <string name="text_no_info_strategy_stre">No hay información que mostrar.</string>
     <string name="text_btn_tell_me">Dime mis fortalezas</string>
+
+    <!-- VISTA: strategy_phrases.xml -->
+    <string name="title_strategy_phrases">Hemos detectado una emoción negativa</string>
+    <string name="text_strategy_phrases">Haz una pausa, respira profundo, lee y escucha lo siguiente.</string>
+    <string name="text_no_info_strategy_phr">No hay información que mostrar.</string>
+    <string name="text_btn_tell_me_phrases">Dímelas</string>
+
+    Una vez que observamos, identificamos y afrontamos nuestros pensamientos y sentimientos, aquellos que son inservibles se escaquean y no vuelven a aparecer. 
 
     <!-- VISTA: strategy_temporal.xml -->
     <string name="text_strategy_temporal">Haz una pausa y respira profundo, es momento de valorar si esta emoción que experimentaste se está repitiendo y convirtiendo en un malestar para lograr tu bienestar.</string>
