@@ -20,6 +20,7 @@ import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.neurosky.library.NeuroSky;
 import ipn.mx.app.neurosky.library.exception.BluetoothNotEnabledException;
 import ipn.mx.app.service.HeadsetConnectionService;
+import ipn.mx.app.tutorial.TutorialHeadset;
 
 public class SettingHeadset extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +31,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
     private final String TAG = "SettingHeadset";
-    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser;
+    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser, btnInfo;
     Switch swtEnableNoti;
     TextView tvUserName;
     // variable for shared preferences.
@@ -58,6 +59,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
 
+        btnInfo = findViewById(R.id.headset_setting_text_info_headset);
         btnConnHs = findViewById(R.id.conectar);
         btnDiscHs = findViewById(R.id.desconetar);
         btnClasify = findViewById(R.id.detectar_emocion);
@@ -78,6 +80,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
 
         swtEnableNoti.setChecked(GlobalInfo.isEnableNotifyConnHeadset());
 
+        btnInfo.setOnClickListener(this);
         btnClasify.setOnClickListener(this);
         btnDiscHs.setOnClickListener(this);
         btnConnHs.setOnClickListener(this);
@@ -90,7 +93,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         Log.i("Neurosky", "Estatus de Neurosky: " + neuroSky);
 
         if (NeuroSkyManager.getNeuroSky() != null) {
-            if(NeuroSkyManager.getNeuroSky().isConnected()){
+            if (NeuroSkyManager.getNeuroSky().isConnected()) {
                 btnDiscHs.setVisibility(View.VISIBLE);
                 btnClasify.setVisibility(View.VISIBLE);
                 btnConnHs.setVisibility(View.GONE);
@@ -122,6 +125,9 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
+            startActivity(intent);
+        } else if (btnInfo == v) {
+            Intent intent = new Intent(this, TutorialHeadset.class);
             startActivity(intent);
         } else if (btnConnHs == v) {
             Log.d(TAG, "onClick()-btnConnHs: ");

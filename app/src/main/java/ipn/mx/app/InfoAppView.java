@@ -13,6 +13,7 @@ import ipn.mx.app.neuralfit.FitConnect;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.signs.Login;
+import ipn.mx.app.tutorial.TutorialHeadset;
 
 public class InfoAppView extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,7 +61,7 @@ public class InfoAppView extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == Arrow) {
-            Intent intent = new Intent(this, FitConnect.class);
+            Intent intent = new Intent(this, TutorialHeadset.class);
             startActivity(intent);
         } else if(v == tvLogOut){
             SharedPreferences.Editor editor = sharedpreferences.edit();
