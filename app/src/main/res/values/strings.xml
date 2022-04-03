@@ -103,6 +103,7 @@
     <!-- VISTA: headset_setting -->
     <string name="text_notify_conn">Notificar conexión</string>
     <string name="text_button_clasify">Detectar emoción</string>
+    <string name="headset_setting_text_info_headset">Uso de la diadema</string>
     <string name="text_button_conn_sett">Conectar diadema</string>
     <string name="text_button_desconn_sett">Desconectar diadema</string>
     <string name="text_sett_disconn">Diadema Desconectada</string>

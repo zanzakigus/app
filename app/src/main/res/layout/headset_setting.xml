@@ -58,6 +58,18 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <Button
+                android:id="@+id/headset_setting_text_info_headset"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/background_blue"
+                android:gravity="center"
+                android:text="@string/headset_setting_text_info_headset"
+                android:textColor="@color/black"
+                android:theme="@style/inside_button" />
+
+            <Button
                 android:id="@+id/conectar"
                 style="@style/center_things"
                 android:layout_width="match_parent"
