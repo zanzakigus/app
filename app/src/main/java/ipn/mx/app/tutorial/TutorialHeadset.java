@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ipn.mx.app.InfoAppView;
 import ipn.mx.app.R;
+import ipn.mx.app.SettingHeadset;
 import ipn.mx.app.neuralfit.FitConnect;
 
 public class TutorialHeadset extends AppCompatActivity implements View.OnClickListener {
@@ -32,15 +33,7 @@ public class TutorialHeadset extends AppCompatActivity implements View.OnClickLi
 
     final String urlTutorialHeadset = "https://youtu.be/RyEQG6QNmvY";
 
-    // creating constant keys for shared preferences.
-    public static String SHARED_PREFS;
-    public static String EMAIL_KEY;
-    public static String PASSWORD_KEY;
-    // variable for shared preferences.
-    static SharedPreferences sharedpreferences;
-    //logged variables
-    private String loggedEmail;
-    private String loggedPassword;
+    static String logeado;
 
 
     @Override
@@ -49,6 +42,8 @@ public class TutorialHeadset extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.tutorial_headset);
 
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tutorial_diadema);
+
+        logeado = getIntent().getStringExtra("logeado");
 
         videoView = findViewById(R.id.video);
         videoView.setVideoURI(videoUri);
@@ -59,11 +54,6 @@ public class TutorialHeadset extends AppCompatActivity implements View.OnClickLi
 
         arrow = findViewById(R.id.arrow);
         arrow.setOnClickListener(this);
-
-        SHARED_PREFS = this.getResources().getString(R.string.shared_key);
-        EMAIL_KEY = this.getResources().getString(R.string.logged_email_key);
-        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
 
     }
 
@@ -80,10 +70,10 @@ public class TutorialHeadset extends AppCompatActivity implements View.OnClickLi
             }
         } else if (arrow == v) {
             Intent intent;
-            if (loggedPassword == null)
+            if (logeado != null)
                 intent = new Intent(this, FitConnect.class);
             else
-                intent = new Intent(this, InfoAppView.class);
+                intent = new Intent(this, SettingHeadset.class);
             startActivity(intent);
         }
     }

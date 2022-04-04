@@ -2,13 +2,13 @@
 
     <!-- SETTINGS -->
     <!--<string name="server_host">http://127.0.0.1:5000</string>-->
-    <string name="server_host">http://192.168.3.20:8000</string>
+<!--    <string name="server_host">http://192.168.3.20:8000</string>-->
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.75:8000</string>-->
     <!--    <string name="server_host">http://192.168.1.65:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
     <!--<string name="server_host">http://192.168.1.18:8000</string>-->
-    <!--<string name="server_host">http://192.168.1.83:8000</string>-->
+    <string name="server_host">http://192.168.1.83:8000</string>
 
     <string name="shared_key">shared_prefs</string>
     <string name="logged_email_key">email_key</string>
@@ -174,10 +174,16 @@
     <string name="text_update_stre_succed">Fortalezas actualizadas</string>
 
     <!-- CLASE: Tutorial Headset -->
-    <string name="tutorial_headset_title">Tutorial de Diadema</string>
-    <string name="tutorial_headset_text_1">Para comprender como se utiliza de manera correcto la diadema junto con la aplicación se recomienda ver el siguiente video.</string>
+    <string name="tutorial_headset_title">Tutorial de Entrenamiento</string>
+    <string name="tutorial_headset_text_1">Para ver un ejemplo del entrenamiento de la aplicación puede ver el siguiente video de muestra.</string>
     <string name="tutorial_headset_fullscreen"><u>Oprima para pantalla completa.</u></string>
     <string name="tutorial_headset_fullscreen_error">Ocurrio un problema al intentar abrir el video.</string>
+
+    <!-- CLASE: Tutorial Training -->
+    <string name="tutorial_training_title">Tutorial de Diadema</string>
+    <string name="tutorial_training_text_1">Para comprender como se utiliza de manera correcto la diadema junto con la aplicación se recomienda ver el siguiente video.</string>
+    <string name="tutorial_training_fullscreen"><u>Oprima para pantalla completa.</u></string>
+    <string name="tutorial_training_fullscreen_error">Ocurrio un problema al intentar abrir el video.</string>
 
 
     <!-- CLASE: Manual Detection -->

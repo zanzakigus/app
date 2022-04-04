@@ -62,6 +62,7 @@ public class InfoAppView extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if (v == Arrow) {
             Intent intent = new Intent(this, TutorialHeadset.class);
+            intent.putExtra("logeado", "false");
             startActivity(intent);
         } else if(v == tvLogOut){
             SharedPreferences.Editor editor = sharedpreferences.edit();
