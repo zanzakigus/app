@@ -100,7 +100,7 @@ public class TrainFinished extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(this, TrainPositivePersonal.class);
+        Intent intent = new Intent(this, Index.class);
         startActivity(intent);
         finish();
     }

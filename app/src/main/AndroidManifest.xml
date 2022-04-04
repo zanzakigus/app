@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
-            android:name=".strategies.StrategyStrength"
+            android:name=".Index"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -34,7 +34,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".signs.SignUp2"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".signs.SignUpStrengths"
             android:theme="@style/Theme.AppCompat.NoActionBar"
@@ -57,68 +57,73 @@
         <activity
             android:name=".updateinfo.UpdateStrengths"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".updateinfo.CodePassword"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".updateinfo.ForgetPassword"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".updateinfo.UpdatePassword"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.FitConnect"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.FitNeural1"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.FitNeural2"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.IncompleteTraining"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.TrainNegativeVisual"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.TrainNegativePersonal"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".neuralfit.TrainFinished"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.EndNegativeSection"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.TrainPositiveVisual"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".neuralfit.TrainPositivePersonal"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".tutorial.TutorialHeadset"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".tutorial.TutorialTraining"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".ManualDetection"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-<!--
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".strategies.StrategyBreathing"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".strategies.StrategyStrength"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".strategies.StrategyPhrases"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
--->
 
         <!-- Vistas para hacer pruebas -->
         <activity
             android:name=".test.ClickNotification"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
             android:name=".SettingHeadset"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
 
         <service
