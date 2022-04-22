@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -65,6 +66,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
     EditText fecha_ini, fecha_fin;
     TextView pieTitle, lineTitle, noInfo;
     Context context;
+    CheckBox cbPositive, cbNegative;
+
+
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
     String fInicial, fFinal;
@@ -97,6 +101,11 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         lineChart = findViewById(R.id.chart1);
         pieChart = findViewById(R.id.chart2);
         noInfo = findViewById(R.id.no_info);
+        cbNegative = findViewById(R.id.checkbox_negative);
+        cbPositive = findViewById(R.id.checkbox_positive);
+
+        cbNegative.setChecked(true);
+        cbPositive.setChecked(true);
 
 
         fecha_ini.setKeyListener(null);
@@ -110,6 +119,8 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
         aSwitch.setOnClickListener(this);
+        cbPositive.setOnClickListener(this);
+        cbNegative.setOnClickListener(this);
 
 
         final Calendar c = Calendar.getInstance();
@@ -242,9 +253,22 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             datePickerDialog.show();
         } else if (aSwitch == v) {
             aSwitch.setText(aSwitch.isChecked() ? "Graficas" : "Listado");
+            cbPositive.setVisibility(aSwitch.isChecked() ? View.GONE : View.VISIBLE);
+            cbNegative.setVisibility(aSwitch.isChecked() ? View.GONE : View.VISIBLE);
             getHistory();
+        }else if (cbPositive == v || cbNegative == v){
+            boolean checked = ((CheckBox) v).isChecked();
+            CheckBox checkBox = (CheckBox) v;
+            if(!cbNegative.isChecked() && !cbPositive.isChecked()){
+                Toast myToast = Toast.makeText(context, R.string.text_non_selected, Toast.LENGTH_LONG);
+                myToast.show();
+                checkBox.setChecked(true);
+            }else{
+                getHistory();
+            }
         }
     }
+
 
     private String formatoNumeroDosCifras(int num) {
         return (num < 10) ? "0" + num : Integer.toString(num);
@@ -259,7 +283,21 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         params.put("password", loggedPassword);
         params.put("fecha_ini", fInicial);
         params.put("fecha_fin", fFinal);
-        int tipo = aSwitch.isChecked() ? GlobalInfo.TIPO_NEGATIVO : GlobalInfo.TIPO_NEGATIVO;
+        int tipo = GlobalInfo.TIPO_ALL;
+        if(!aSwitch.isChecked()){
+            if( cbNegative.isChecked() && !cbPositive.isChecked()){
+                tipo = GlobalInfo.TIPO_NEGATIVO;
+
+            }else if( !cbNegative.isChecked() && cbPositive.isChecked()){
+                tipo = GlobalInfo.TIPO_POSITIVO;
+
+            }else if( cbNegative.isChecked() && cbPositive.isChecked()){
+                tipo = GlobalInfo.TIPO_ALL;
+            }
+        }
+
+
+
         params.put("tipo", String.valueOf(tipo));
 
         HistoryDetection historyDetection = new HistoryDetection();
@@ -334,6 +372,10 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 emocion.setLayoutParams(newLayoutParams);
 
                 TextView fecha = emocion.findViewById(R.id.text_date);
+                View icon = emocion.findViewById(R.id.icon_burn);
+                if(emociones.getJSONObject(i).getInt("id_emocion")==1){
+                    icon.setBackgroundResource(R.drawable.icon_snowflake);
+                }
                 fecha.setText(emociones.getJSONObject(i).getString("fecha_deteccion"));
                 vertical_scroll.addView(emocion);
             }

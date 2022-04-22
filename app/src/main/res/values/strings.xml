@@ -119,6 +119,9 @@
     <string name="text_line_chart_title">Emociones negativas</string>
     <string name="text_line_pie_title">Emociones negativas</string>
     <string name="text_no_info_history">No hay información que mostrar, seleccionar otro periodo.</string>
+    <string name="text_check_negative">Emociones negativas</string>
+    <string name="text_check_positive">Emociones positivas</string>
+    <string name="text_non_selected">Debes seleccionar al menos un tipo</string>
 
     <!-- CLASE: HeadsetConnectionService -->
     <string name="text_conn_serv_btn">Configuración</string>
