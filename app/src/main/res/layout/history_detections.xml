@@ -137,15 +137,46 @@
                 app:layout_constraintTop_toBottomOf="@id/vertical_scroll"
                 tools:ignore="MissingConstraints,Suspicious0dp" />
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart1"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:minHeight="200dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/title_line_chart" />
+                app:layout_constraintTop_toBottomOf="@id/title_line_chart"
+                >
+                <TextView
+                    android:id="@+id/y_left_line"
+                    style="@style/center_things"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="50dp"
+                    android:rotation="-90"
+                    android:text="@string/text_y_line_chart"
+                    android:textAppearance="@style/text_blue_small"
+                    app:layout_constraintEnd_toStartOf="@id/chart1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints" />
+
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:minHeight="200dp"
+                    android:maxWidth="200dp"
+                    android:visibility="gone"
+
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
             <TextView
                 android:id="@+id/title_pie_chart"
@@ -163,6 +194,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/vertical_scroll"
                 tools:ignore="MissingConstraints,Suspicious0dp" />
+
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart2"

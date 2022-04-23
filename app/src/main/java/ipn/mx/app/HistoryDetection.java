@@ -28,6 +28,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -69,7 +70,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
     LinearLayout vertical_scroll;
     Switch aSwitch;
     EditText fecha_ini, fecha_fin;
-    TextView pieTitle, lineTitle, noInfo;
+    TextView pieTitle, lineTitle, noInfo, lineyLabel;
     Context context;
     CheckBox cbPositive, cbNegative;
 
@@ -108,6 +109,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         noInfo = findViewById(R.id.no_info);
         cbNegative = findViewById(R.id.checkbox_negative);
         cbPositive = findViewById(R.id.checkbox_positive);
+        lineyLabel = findViewById(R.id.y_left_line);
 
         cbNegative.setChecked(true);
         cbPositive.setChecked(true);
@@ -320,6 +322,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         historyDetection.anno_fin = anno_fin;
         historyDetection.context = context;
         historyDetection.noInfo = noInfo;
+        historyDetection.lineyLabel = lineyLabel;
 
         Class[] parameterTypes = new Class[2];
         parameterTypes[0] = JSONObject.class;
@@ -356,6 +359,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         pieChart.setVisibility(View.GONE);
         lineTitle.setVisibility(View.GONE);
         pieTitle.setVisibility(View.GONE);
+        lineyLabel.setVisibility(View.GONE);
         for (ConstraintLayout emocion : emocionesViews) {
             vertical_scroll.removeView(emocion);
         }
@@ -579,6 +583,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
         pieTitle.setVisibility(View.VISIBLE);
         pieChart.setVisibility(View.VISIBLE);
+        lineyLabel.setVisibility(View.VISIBLE);
         Legend l = pieChart.getLegend();
         l.setTextColor(text_color);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
@@ -774,8 +779,13 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 return mFormat.format(new Date(millis));
             }
         });
+
+
+
         lineChart.setVisibility(View.VISIBLE);
         lineTitle.setVisibility(View.VISIBLE);
+
+
 
         lineChart.setData(lineData);
         // create marker to display box when values are selected

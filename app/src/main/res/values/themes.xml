@@ -44,6 +44,13 @@
         <item name="android:textColor">#38386D</item>
     </style>
 
+    <!-- Estilo de la Letra Azul Small -->
+    <style name="text_blue_small">
+        <item name="android:textSize">8sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">#38386D</item>
+    </style>
+
     <!-- Estilo de la Letra Amarillo Negritas -->
     <style name="text_yellow_bold">
         <item name="android:textSize">32sp</item>

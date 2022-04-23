@@ -122,6 +122,7 @@
     <string name="text_check_negative">Emociones negativas</string>
     <string name="text_check_positive">Emociones positivas</string>
     <string name="text_non_selected">Debes seleccionar al menos un tipo</string>
+    <string name="text_y_line_chart">Porcentaje E.N.</string>
 
     <!-- CLASE: HeadsetConnectionService -->
     <string name="text_conn_serv_btn">Configuración</string>
