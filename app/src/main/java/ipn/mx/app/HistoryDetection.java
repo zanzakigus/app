@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -33,6 +35,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -41,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,6 +55,7 @@ import java.util.concurrent.TimeUnit;
 
 import ipn.mx.app.chartcustom.MarkerViewPointer;
 import ipn.mx.app.global.GlobalInfo;
+import ipn.mx.app.strategies.StrategyBreathing;
 
 public class HistoryDetection extends AppCompatActivity implements View.OnClickListener {
 
@@ -380,10 +385,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                 vertical_scroll.addView(emocion);
             }
         }
-
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public void grafica(JSONObject response, Context context) throws JSONException {
         Log.d(TAG, "grafica() ");
         if (response.has("error")) {
@@ -414,10 +418,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             generateDataLine();
             generateDataPie();
         }
-
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     private void generateDataPie() {
         Log.d(TAG, "generateDataPie(): ");
 
@@ -443,7 +446,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         } else {
             tipo = 3; // por horas
         }
-        int count = 0;
+        int countNega = 0, countPosi = 0 , total = 0;
         String fechaAnter = null;
         String day = null;
         String month = null;
@@ -455,8 +458,10 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         ArrayList<PieEntry> entries = new ArrayList<>();
         for (int i = 0; i < emocionesJSONArray.length(); i++) {
             String fecha = null;
+            int tipo_emo = -1;
             try {
                 fecha = emocionesJSONArray.getJSONObject(i).getString("fecha_deteccion");
+                tipo_emo = emocionesJSONArray.getJSONObject(i).getInt("id_emocion");
             } catch (Exception e) {
                 Log.e(TAG, "generateDataPie() ");
                 e.printStackTrace();
@@ -475,6 +480,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             }
             String dataAnt;
             int iIni = 0, iFin, finFormat, iniFormat = 0;
+
             if (tipo == 3) {
                 iIni = 11;
                 iFin = 13;
@@ -496,13 +502,30 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             }
             String data = fecha.substring(iIni, iFin);
             if (!data.equals(dataAnt)) {
-                entries.add(new PieEntry(count, fechaAnter.substring(iniFormat, finFormat)));
-                count = 0;
+                float porgNega = (float)countNega / (float) total;
+                entries.add(new PieEntry((porgNega*100), getfechaPie(tipo,fechaAnter,iniFormat,finFormat)));
+                countNega = 0;
+                countPosi = 0;
+                total = 0;
+
                 if (emocionesJSONArray.length() == i + 1) {
-                    entries.add(new PieEntry(count + 1, fecha.substring(iniFormat, finFormat)));
+                    porgNega = 0;
+                    if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                        porgNega = 100;
+                    }
+                    entries.add(new PieEntry(porgNega, getfechaPie(tipo,fecha,iniFormat,finFormat)));
                 }
             } else if (emocionesJSONArray.length() == i + 1) {
-                entries.add(new PieEntry(count + 1, fechaAnter.substring(iniFormat, finFormat)));
+                float porgNega = 0;
+                total++;
+                if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                    countNega++;
+                }else {
+                    countPosi++;
+                }
+                porgNega = (float)countNega/(float) total;
+                total = 0;
+                entries.add(new PieEntry(porgNega*100, getfechaPie(tipo,fechaAnter,iniFormat,finFormat)));
             }
 
             fechaAnter = fecha;
@@ -514,34 +537,73 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
             calendar.set(Calendar.YEAR, Integer.parseInt(year));
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
-            count++;
+            if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                countNega++;
+            }else {
+                countPosi++;
+            }
+            total++;
         }
 
 
         PieDataSet d = new PieDataSet(entries, "");
 
+
+        int text_color = context.getResources().getColor(R.color.dark_blue);
+
         // space between slices
         d.setSliceSpace(2f);
         d.setColors(ColorTemplate.COLORFUL_COLORS);
         d.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        d.setValueLineColor(text_color);
         d.setValueTextSize(11f);
         d.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
 
 
-        pieChart.setData(new PieData(d));
+        PieData data = new PieData(d);
+        data.setValueTextColor(text_color);
+        data.setValueFormatter(new PercentFormatter());
+        pieChart.setData(data);
         pieChart.animateX(1000);
         pieChart.getDescription().setEnabled(false);
         pieChart.setRotationEnabled(true);
         pieChart.setHighlightPerTapEnabled(true);
+        pieChart.setUsePercentValues(true);
+        //pieChart.setDrawHoleEnabled(false);
+        pieChart.setDrawEntryLabels(false);
+
+        int color = context.getResources().getColor(R.color.secondary_color);
+        pieChart.setOutlineSpotShadowColor(color);
+        pieChart.setTransparentCircleColor(color);
+        pieChart.setHoleColor(color);
 
         pieTitle.setVisibility(View.VISIBLE);
         pieChart.setVisibility(View.VISIBLE);
         Legend l = pieChart.getLegend();
+        l.setTextColor(text_color);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
 
 
+    }
+
+    private String getfechaPie(int tipo, String fecha, int ini, int fin){
+        String fechaSal;
+        if (tipo == 3) {
+            fechaSal = fecha.substring(ini,fin);
+
+        } else if (tipo == 2) {
+
+            fechaSal = fecha.substring(ini,fin);
+
+        } else {
+            String month = fecha.substring(3, 5);
+            String monthString = new DateFormatSymbols(new Locale("es")).getShortMonths()[Integer.parseInt(month)-1];
+            String year = fecha.substring(6, 10);
+            fechaSal = monthString + " " + year;
+        }
+        return fechaSal;
     }
 
 
@@ -573,7 +635,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             format = "dd MMM HH:mm";
             tipo = 3; // por horas
         }
-        int count = 0;
+        int countNega = 0, countPosi = 0 , total = 0;
         String fechaAnter;
         String day = null;
         String month = null;
@@ -583,8 +645,10 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         Log.d(TAG, "generateDataLine() lenght: " + emocionesJSONArray.length());
         for (int i = 0; i < emocionesJSONArray.length(); i++) {
             String fecha = null;
+            int tipo_emo = -1;
             try {
                 fecha = emocionesJSONArray.getJSONObject(i).getString("fecha_deteccion");
+                tipo_emo = emocionesJSONArray.getJSONObject(i).getInt("id_emocion");
             } catch (Exception e) {
                 Log.e(TAG, "generateDataLine() ");
                 e.printStackTrace();
@@ -623,8 +687,11 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             long now;
             if (!data.equals(dataAnt)) {
                 now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
-                values1.add(new Entry(now, count));
-                count = 0;
+                System.out.println("porcen 1 "+((float)countNega/(float) total)*100);
+                values1.add(new Entry(now, ((float)countNega/(float) total)*100));
+                countNega = 0;
+                countPosi =0;
+                total = 0;
                 if (emocionesJSONArray.length() == i + 1) {
                     day = fecha.substring(0, 2);
                     month = fecha.substring(3, 5);
@@ -635,11 +702,27 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                     calendar.set(Calendar.YEAR, Integer.parseInt(year));
                     calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
                     now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
-                    values1.add(new Entry(now, 1));
+                    int porgNega = 0;
+                    if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                        porgNega = 100;
+                    }
+                    System.out.println("porcen 2 "+porgNega);
+                    values1.add(new Entry(now, porgNega));
                 }
             } else if (emocionesJSONArray.length() == i + 1) {
                 now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
-                values1.add(new Entry(now, count + 1));
+                float porgNega = 0;
+                total++;
+                if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                    countNega++;
+                }else {
+                    countPosi++;
+                }
+
+                porgNega = (float)countNega/(float) total;
+                System.out.println("porcen 3 "+porgNega);
+                total = 0;
+                values1.add(new Entry(now, porgNega*100));
             }
 
 
@@ -651,7 +734,15 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
             calendar.set(Calendar.YEAR, Integer.parseInt(year));
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
-            count++;
+
+
+            if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                countNega++;
+            }else {
+                countPosi++;
+            }
+            total++;
+
         }
 
         LineDataSet d1 = new LineDataSet(values1, "Emociones negativas");

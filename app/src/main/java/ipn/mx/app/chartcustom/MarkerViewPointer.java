@@ -38,11 +38,12 @@ public class MarkerViewPointer extends MarkerView {
         if (e instanceof CandleEntry) {
 
             CandleEntry ce = (CandleEntry) e;
+            String texto =  Utils.formatNumber(ce.getHigh(), 0, true)+"%";
 
-            tvContent.setText(Utils.formatNumber(ce.getHigh(), 0, true));
+            tvContent.setText(texto);
         } else {
-
-            tvContent.setText(Utils.formatNumber(e.getY(), 0, true));
+            String texto =  Utils.formatNumber(e.getY(), 0, true)+"%";
+            tvContent.setText(texto);
         }
 
         super.refreshContent(e, highlight);
