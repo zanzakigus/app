@@ -43,7 +43,7 @@ public class TrainNegativePersonal extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.train_negative_personal);
-
+        dialog = new Dialog(this);
         vertical_scroll = findViewById(R.id.vertical_scroll);
 
         agregarConsejos();

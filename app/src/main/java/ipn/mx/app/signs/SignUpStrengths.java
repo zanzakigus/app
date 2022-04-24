@@ -1,9 +1,12 @@
 package ipn.mx.app.signs;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -11,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +34,7 @@ import java.util.HashSet;
 import ipn.mx.app.Index;
 import ipn.mx.app.PeticionAPI;
 import ipn.mx.app.R;
+import ipn.mx.app.neurosky.NeuroSkyManager;
 
 public class SignUpStrengths extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
@@ -40,9 +45,12 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
     String correo, contra, nombre, apPaterno, apMaterno, fechaNacimiento;
     SharedPreferences sharedpreferences;
     EditText edtCadena;
-    ImageView imvAgregar;
+    ImageView imvAgregar,imvQuestion;
     LinearLayout scrollView;
     HashSet<String> tagCadenas = new HashSet<>();
+
+    Dialog dialog;
+    Button btnContinuarDialog;
 
 
     @Override
@@ -57,17 +65,19 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
         apMaterno = getIntent().getStringExtra("ap_materno");
         fechaNacimiento = getIntent().getStringExtra("fecha_nacimiento");
 
-
+        dialog = new Dialog(this);
         btnNext = findViewById(R.id.arrow);
         edtCadena = findViewById(R.id.cadena_input);
         imvAgregar = findViewById(R.id.agregar);
         scrollView = findViewById(R.id.scrollview);
+        imvQuestion = findViewById(R.id.question);
 
 
         // Agregar accion al boton
         btnNext.setOnClickListener(this);
         imvAgregar.setOnClickListener(this);
         edtCadena.setOnEditorActionListener(this);
+        imvQuestion.setOnClickListener(this);
 
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -118,8 +128,21 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
                 addStrength(cadena);
             }
 
+        } else if (imvQuestion == v){
+            internalNotification();
+        }else if (btnContinuarDialog == v){
+            dialog.dismiss();
         }
     }
+
+    private void internalNotification(){
+        dialog.setContentView(R.layout.alert_dialog_explanation_stren);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnContinuarDialog = dialog.findViewById(R.id.btn_continuar);
+        btnContinuarDialog.setOnClickListener(this);
+        dialog.show();
+    }
+
 
     public void addStrength(String cadena) {
 

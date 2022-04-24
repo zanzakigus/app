@@ -60,6 +60,11 @@
     <!-- VISTA: sign_up_strengths -->
     <string name="title_sign_up_strengths">Necesitamos saber más de ti, dinos tus fortalezas</string>
     <string name="text_input_strengths">Fortaleza</string>
+    <string name="text_strengths_explanation">Las fortalezas personales son esas capacidades, cualidades, recursos, habilidades innatas, que están en nosotros desde que nacemos, pero que muchas veces la persona no es capaz de ver, no ha aprendido a identificarlas y por ello piensa que no están. Por ejemplo, el compromiso, la organización, el carisma o la curiosidad.</string>
+    <string name="btn_expla_stren_leave">Cerrar</string>
+    <string name="titulo_noti_explan">¿Fortalezas?</string>
+
+
 
     <!-- VISTA: strategy_breathing.xml -->
     <string name="title_strategy_breath">Hemos detectado una emoción negativa</string>

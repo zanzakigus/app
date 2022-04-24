@@ -24,14 +24,15 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_close"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/titulo_cuidado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="@string/test_Ciudado"
+                android:text="@string/titulo_noti_explan"
                 android:textColor="@color/dark_blue"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -40,21 +41,24 @@
 
             <ImageView
                 android:id="@+id/img_cuidado"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/not_stonks"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/strenghts"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titulo_cuidado" />
 
             <TextView
                 android:id="@+id/texto_cuidado"
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/test_emocion_detectada"
-                android:textSize="18sp"
+                android:justificationMode="inter_word"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:textColor="@color/dark_blue"
+                android:text="@string/text_strengths_explanation"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_cuidado" />
@@ -69,7 +73,7 @@
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="@string/test_btn_continuar"
+                android:text="@string/btn_expla_stren_leave"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

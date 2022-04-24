@@ -47,6 +47,8 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.train_positive_visual);
 
+        dialog = new Dialog(this);
+
         neuroSky = NeuroSkyManager.getNeuroSky();
         if (neuroSky.isConnected()) {
             neuroSky.start();

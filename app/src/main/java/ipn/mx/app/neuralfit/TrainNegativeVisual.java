@@ -48,6 +48,7 @@ public class TrainNegativeVisual extends AppCompatActivity implements View.OnCli
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.train_negative_visual);
+        dialog = new Dialog(this);
 
         neuroSky = NeuroSkyManager.getNeuroSky();
         if (neuroSky.isConnected()) {

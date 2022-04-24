@@ -1,9 +1,12 @@
 package ipn.mx.app.updateinfo;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,7 +46,7 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
 
     SharedPreferences sharedpreferences;
     EditText edtCadena;
-    ImageView imvAgregar;
+    ImageView imvAgregar,imvQuestion;
     LinearLayout scrollView;
     HashSet<String> tagCadenas = new HashSet<>();
     Context context;
@@ -53,10 +56,15 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
     private String loggedEmail;
     private String loggedPassword;
 
+    Dialog dialog;
+    Button btnContinuarDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_strengths);
+
+        dialog = new Dialog(this);
 
         context = this;
 
@@ -65,6 +73,7 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
         imvAgregar = findViewById(R.id.agregar);
         scrollView = findViewById(R.id.scrollview);
         btnUpdate = findViewById(R.id.update_stre);
+        imvQuestion = findViewById(R.id.question);
 
 
         // Agregar accion al boton
@@ -72,6 +81,7 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
         imvAgregar.setOnClickListener(this);
         edtCadena.setOnEditorActionListener(this);
         btnUpdate.setOnClickListener(this);
+        imvQuestion.setOnClickListener(this);
 
         SHARED_PREFS = this.getResources().getString(R.string.shared_key);
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -155,7 +165,19 @@ public class UpdateStrengths extends AppCompatActivity implements View.OnClickLi
                 addStrength(cadena);
             }
 
+        } else if (imvQuestion == v){
+            internalNotification();
+        }else if (btnContinuarDialog == v){
+            dialog.dismiss();
         }
+    }
+
+    private void internalNotification(){
+        dialog.setContentView(R.layout.alert_dialog_explanation_stren);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnContinuarDialog = dialog.findViewById(R.id.btn_continuar);
+        btnContinuarDialog.setOnClickListener(this);
+        dialog.show();
     }
 
     public void addStrength(String cadena) {

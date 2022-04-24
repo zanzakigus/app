@@ -43,6 +43,8 @@ public class TrainPositivePersonal extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.train_positive_personal);
 
+        dialog = new Dialog(this);
+
         vertical_scroll = findViewById(R.id.vertical_scroll);
 
         agregarConsejos();

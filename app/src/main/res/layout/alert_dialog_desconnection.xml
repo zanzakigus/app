@@ -55,6 +55,7 @@
                 android:gravity="center"
                 android:text="@string/m_dialog_disconnect"
                 android:textSize="18sp"
+                android:textColor="@color/dark_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_cuidado" />
