@@ -152,8 +152,6 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
         mediaPlayer.setLooping(true); // Set looping
         mediaPlayer.setVolume(100, 100);
         mediaPlayer.start();
-
-
     }
 
     @Override
@@ -312,6 +310,5 @@ public class StrategyStrength extends AppCompatActivity implements View.OnClickL
         speaker.stop();
         mediaPlayer.stop();
     }
-
 
 }

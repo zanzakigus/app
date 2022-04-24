@@ -35,7 +35,7 @@ import ipn.mx.app.signs.Login;
 
 public class StrategyPhrases extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = StrategyStrength.class.getSimpleName();
+    private static final String TAG = StrategyPhrases.class.getSimpleName();
 
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
@@ -45,7 +45,7 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
 
     private Button btnHome, btnGraph, btnNotification, btnUser, btnTellMe;
     TextView tvNoInfo;
-    LinearLayout vertical_scroll;
+    ConstraintLayout vertical_scroll;
     TextView tvTextInst;
     Handler handler = new Handler();
 
@@ -98,36 +98,33 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
         PASSWORD_KEY = this.getResources().getString(R.string.logged_password_key);
 
 
-        // initializing our shared preferences.
-        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-
-        loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
-        loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
-
-        if (loggedPassword == null || loggedEmail == null) {
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
-
-
-//         Se hace peticion para obtener la informacion del usuario
-        PeticionAPI api = new PeticionAPI(this);
-        HashMap<String, String> params = new HashMap<>();
-        params.put("correo", loggedEmail);
-        params.put("password", loggedPassword);
+//        // initializing our shared preferences.
+//        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+//
+//        loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
+//        loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
+//
+//        if (loggedPassword == null || loggedEmail == null) {
+//            Intent intent = new Intent(this, Login.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
+//
+//
+////         Se hace peticion para obtener la informacion del usuario
+//        PeticionAPI api = new PeticionAPI(this);
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("correo", loggedEmail);
+//        params.put("password", loggedPassword);
 
         initSpeaker();
         putInfoOnScreen();
-
 
         mediaPlayer = MediaPlayer.create(this, R.raw.strengths_strategy);
         mediaPlayer.setLooping(true); // Set looping
         mediaPlayer.setVolume(100, 100);
         mediaPlayer.start();
-
-
     }
 
     @Override
@@ -165,7 +162,6 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
                 if (status != TextToSpeech.ERROR) {
                     speaker.setLanguage(new Locale(getResources().getString(R.string.locale_lenguage_mx)));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
                         speaker.speak(tvTextInst.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED);
                     } else {
                         speaker.speak(tvTextInst.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
@@ -205,40 +201,9 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
         phrases.add("Percibir lo que está sucediendo, dentro y fuera de ti, en el mismo momento en que ocurre, conlleva un sentimiento de serenidad y, como si surgiera de la nada, te guía hacia la ecuanimidad y la calma que tanto ansiamos. ");
 
 
-
-
-
-
         tvNoInfo.setVisibility(View.GONE);
         Log.d(TAG, "putInfoOnScreen() " + phrases.size());
-        for (int i = 0; i < phrases.size(); i++) {
-            ConstraintLayout frase = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.component_question, null);
-
-            ConstraintLayout.LayoutParams newLayoutParams = new ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT);
-            newLayoutParams.topMargin = 20;
-            frase.setLayoutParams(newLayoutParams);
-
-            TextView texto = frase.findViewById(R.id.text_question);
-            texto.setText(phrases.get(i));
-
-            frase.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (primerRonda.get()) {
-                        speaker.speak(texto.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
-
-                    }
-
-                }
-
-            });
-            vertical_scroll.addView(frase);
-
-        }
-            sayPhrase();
-
+        sayPhrase();
     }
 
     public void sayPhrase() {
@@ -249,25 +214,49 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
             public void run() {
                 Log.i(TAG, "handler");
                 if (i < phrases.size()) {
+
                     if (lecturaInstruc.get()) {
                         lecturaInstruc.set(false);
-                        Log.i(TAG, "handler: speak "+phrases.get(i));
 
+                        ConstraintLayout frase = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.component_question, null);
+
+                        ConstraintLayout.LayoutParams newLayoutParams = new ConstraintLayout.LayoutParams(
+                                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                                ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                        newLayoutParams.leftToLeft = 0;
+                        newLayoutParams.topToTop = 0;
+                        newLayoutParams.rightToRight = 0;
+                        newLayoutParams.bottomToBottom = 0;
+                        frase.setLayoutParams(newLayoutParams);
+
+                        TextView texto = frase.findViewById(R.id.text_question);
+                        texto.setText(phrases.get(i));
+
+//                        frase.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                if (primerRonda.get()) {
+//                                    speaker.speak(texto.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+//                                }
+//                            }
+//                        });
+
+                        vertical_scroll.removeAllViews();
+                        vertical_scroll.addView(frase);
+
+                        Log.i(TAG, "handler: speak " + phrases.get(i));
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             speaker.speak(phrases.get(i), TextToSpeech.QUEUE_FLUSH, null, TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED);
                         } else {
                             speaker.speak(phrases.get(i), TextToSpeech.QUEUE_FLUSH, null);
                         }
-
                         i++;
                     }
                     handler.postDelayed(this, 1000);
-
                 } else {
                     primerRonda.set(true);
                     handler.removeCallbacks(this);
                 }
-
             }
         }, 1000);
     }
