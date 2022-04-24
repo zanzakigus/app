@@ -179,6 +179,7 @@ public class NeuroSkyManager {
     private void handleStateChange(final State state) {
         if (estadoDiadema.equals(State.UNKNOWN) || estadoDiadema.equals(State.DISCONNECTED) || estadoDiadema.equals(State.NOT_PAIRED)) {
             try {
+                resetData();
                 neuroSky.connect();
             } catch (BluetoothNotEnabledException e) {
                 Toast myToast = Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG);
@@ -347,7 +348,6 @@ public class NeuroSkyManager {
             myToast.show();
         }
 
-
     }
 
     public void onSentWaves(JSONObject response, Context context) throws JSONException {
@@ -366,6 +366,13 @@ public class NeuroSkyManager {
             return;
         }
         Log.d(LOG_TAG + "-WAVES SENT", "brain: Enviada con exito.");
+
+    }
+
+    public static void resetData(){
+        GlobalInfo.setClasifyTimeDelayCounter(0);
+        GlobalInfo.setClasifyTimeDelayCounter(0);
+        arrayWaves = new ArrayList<>();
 
     }
 }

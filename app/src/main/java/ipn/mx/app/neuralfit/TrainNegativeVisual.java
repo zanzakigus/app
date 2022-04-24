@@ -1,13 +1,17 @@
 package ipn.mx.app.neuralfit;
 
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import ipn.mx.app.Index;
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
@@ -35,6 +40,9 @@ public class TrainNegativeVisual extends AppCompatActivity implements View.OnCli
     private ProgressBar progressBar;
     private TextView progressText;
     private NeuroSky neuroSky;
+
+    Dialog dialog;
+    Button btnContinuarDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,11 +132,17 @@ public class TrainNegativeVisual extends AppCompatActivity implements View.OnCli
                         // text under the progress bar
                         int time = GlobalInfo.getTrainSectionTime();
                         if (i <= time) {
-                            progressText.setText("" + i);
-                            int progress = (i * 100) / time;
-                            progressBar.setProgress(progress);
-                            i++;
-                            handler.postDelayed(this, 1000);
+                            if(!neuroSky.isConnected()){
+                                internalNotification();
+                                handler.removeCallbacks(this);
+                            }else{
+                                progressText.setText("" + i);
+                                int progress = (i * 100) / time;
+                                progressBar.setProgress(progress);
+                                i++;
+                                handler.postDelayed(this, 1000);
+                            }
+
                         } else {
                             NeuroSkyManager.stopSendingWaves();
                             enviado = true;
@@ -166,7 +180,21 @@ public class TrainNegativeVisual extends AppCompatActivity implements View.OnCli
                 Log.d("Al abrir el video", "onClick: " + e.toString());
                 Toast.makeText(this, getResources().getString(R.string.train_negative_visual_error_open_video), Toast.LENGTH_LONG).show();
             }
+        }else if (v == btnContinuarDialog){
+            Intent intent = new Intent(this, Index.class);
+            startActivity(intent);
+            finish();
         }
     }
+    private void internalNotification(){
+        NeuroSkyManager.resetData();
+        dialog.setContentView(R.layout.alert_dialog_desconnection);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnContinuarDialog = dialog.findViewById(R.id.btn_continuar);
+        btnContinuarDialog.setOnClickListener(this);
+        dialog.show();
+    }
+
 }
+
 

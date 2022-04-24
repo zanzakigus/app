@@ -5,9 +5,9 @@
 <!--    <string name="server_host">http://192.168.3.20:8000</string>-->
     <!--<string name="server_host">http://192.168.1.71:8000</string>-->
     <!--<string name="server_host">http://192.168.1.75:8000</string>-->
-        <string name="server_host">http://192.168.1.64:8000</string>
+<!--        <string name="server_host">http://192.168.1.64:8000</string>-->
     <!--<string name="server_host">http://192.168.1.15:8000</string>-->
-    <!--<string name="server_host">http://192.168.1.18:8000</string>-->
+    <string name="server_host">http://192.168.1.18:8000</string>
 <!--    <string name="server_host">http://192.168.1.83:8000</string>-->
 
     <string name="shared_key">shared_prefs</string>
@@ -116,9 +116,13 @@
     <string name="text_switch_history">Listado</string>
     <string name="text_date_no_mayor_ini">La fecha de inicio debe ser anterior a la fecha final</string>
     <string name="text_date_no_mayor_fin">La fecha de final debe ser posterior a la fecha inicial</string>
-    <string name="text_line_chart_title">Emociones negativas</string>
-    <string name="text_line_pie_title">Emociones negativas</string>
+    <string name="text_line_chart_title">% de emociones negativas con respecto al total</string>
+    <string name="text_line_pie_title">Distribución porcentual de las emociones negativas</string>
     <string name="text_no_info_history">No hay información que mostrar, seleccionar otro periodo.</string>
+    <string name="text_check_negative">Emociones negativas</string>
+    <string name="text_check_positive">Emociones positivas</string>
+    <string name="text_non_selected">Debes seleccionar al menos un tipo</string>
+    <string name="text_y_line_chart">Porcentaje E.N.</string>
 
     <!-- CLASE: HeadsetConnectionService -->
     <string name="text_conn_serv_btn">Configuración</string>
@@ -302,6 +306,9 @@
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
     <string name="m_big_text">Se ha detectado que te encuentras experimentando una emoción negativa, presiona el botón estrategia para poder apoyarte. </string>
     <string name="m_notification_button">Estrategia </string>
+    <string name="m_notification_title">¡¡Ciudado!!</string>
+    <string name="m_btn_continuar">Reiniciar</string>
+    <string name="m_dialog_disconnect">La diadema se ha desconectado, es necesario reiniciar esta sección del entrenamiento.</string>
 
 
 </resources>
