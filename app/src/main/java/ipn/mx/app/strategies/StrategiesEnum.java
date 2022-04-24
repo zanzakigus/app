@@ -5,9 +5,11 @@ import ipn.mx.app.Index;
 
 public enum StrategiesEnum {
 
-    INDEX(0, Index.class),
+    BREATHING(0, StrategyBreathing.class),
     STRENGHT(1, StrategyStrength.class),
-    BREATHING(2, StrategyBreathing.class);
+    MEDITATION(2, StrategyTemporal.class),
+    PHRASES(3, StrategyPhrases.class);
+
 
     private final int settingsPosition;
     private final Class resId;

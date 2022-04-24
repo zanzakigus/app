@@ -107,6 +107,9 @@
             android:name=".ManualDetection"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
+            android:name=".strategies.StrategySelection"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".strategies.StrategyBreathing"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

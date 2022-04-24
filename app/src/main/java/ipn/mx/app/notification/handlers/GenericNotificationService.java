@@ -10,6 +10,7 @@ import ipn.mx.app.Index;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.notification.GlobalNotificationManager;
 import ipn.mx.app.strategies.StrategiesEnum;
+import ipn.mx.app.strategies.StrategySelection;
 
 public class GenericNotificationService extends IntentService {
 
@@ -39,9 +40,8 @@ public class GenericNotificationService extends IntentService {
      */
     private void handleActionYes() {
         Log.d(TAG, "handleActionStrategy()");
-        Random random = new Random();
-        int strategyNumber = random.nextInt(2);
-        Intent intent = new Intent(getApplicationContext(), StrategiesEnum.values()[strategyNumber].getResId());
+
+        Intent intent = new Intent(getApplicationContext(), StrategySelection.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         GlobalNotificationManager.clearNotification(this, GlobalInfo.NOTIFICATION_EMOTION_ID);

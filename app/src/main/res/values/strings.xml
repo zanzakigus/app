@@ -33,6 +33,7 @@
     <string name="update_password">Cambiar contraseña</string>
     <string name="log_out">Cerrar Sesión</string>
     <string name="text_date">15 / Agosto / 21</string>
+    <string name="text_strategy">Una estrategia</string>
     <string name="text_question">Esto es una pregunta muy preguntona</string>
     <string name="text_psicologia_positiva">Información en el video:</string>
     <string name="title_buenos_dias">Buenos días</string>
@@ -90,6 +91,9 @@
 
     <!-- VISTA: strategy_temporal.xml -->
     <string name="text_strategy_temporal">Haz una pausa y respira profundo, es momento de valorar si esta emoción que experimentaste se está repitiendo y convirtiendo en un malestar para lograr tu bienestar.</string>
+
+    <!-- VISTA: selection_strategy.xml -->
+    <string name="title_selection_strategy">Selecciona una estrategia</string>
 
     <!-- VISTA: Headset Tutorial -->
     <string name="headset_tutorial_title">Uso de diadema</string>
