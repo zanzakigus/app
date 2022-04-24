@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
-            android:name=".strategies.StrategyBreathing"
+            android:name=".Index"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -106,18 +106,18 @@
         <activity
             android:name=".ManualDetection"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-<!--        <activity-->
-<!--            android:name=".strategies.StrategyBreathing"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".strategies.StrategyStrength"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".strategies.StrategyPhrases"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".strategies.StrategyTemporal"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
+        <activity
+            android:name=".strategies.StrategyBreathing"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".strategies.StrategyStrength"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".strategies.StrategyPhrases"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".strategies.StrategyTemporal"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <!-- Vistas para hacer pruebas -->
         <activity

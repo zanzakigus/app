@@ -104,19 +104,19 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
         loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
 
-//        if (loggedPassword == null || loggedEmail == null) {
-//            Intent intent = new Intent(this, Login.class);
-//            startActivity(intent);
-//            finish();
-//            return;
-//        }
+        if (loggedPassword == null || loggedEmail == null) {
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
 
 
-        // Se hace peticion para obtener la informacion del usuario
-//        PeticionAPI api = new PeticionAPI(this);
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("correo", loggedEmail);
-//        params.put("password", loggedPassword);
+//         Se hace peticion para obtener la informacion del usuario
+        PeticionAPI api = new PeticionAPI(this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("correo", loggedEmail);
+        params.put("password", loggedPassword);
 
         initSpeaker();
         putInfoOnScreen();
