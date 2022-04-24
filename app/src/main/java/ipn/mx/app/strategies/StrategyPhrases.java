@@ -112,7 +112,7 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        // Se hace peticion para obtener la informacion del usuario
+//         Se hace peticion para obtener la informacion del usuario
         PeticionAPI api = new PeticionAPI(this);
         HashMap<String, String> params = new HashMap<>();
         params.put("correo", loggedEmail);

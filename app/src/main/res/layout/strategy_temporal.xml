@@ -53,7 +53,15 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
-
+            <VideoView
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                style="@style/center_things"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/tutorial_headset_fullscreen"
+                app:layout_constraintBottom_toTopOf="@+id/arrow"/>
 
 
 

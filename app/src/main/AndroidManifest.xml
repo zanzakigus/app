@@ -115,6 +115,9 @@
         <activity
             android:name=".strategies.StrategyPhrases"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".strategies.StrategyTemporal"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <!-- Vistas para hacer pruebas -->
         <activity
