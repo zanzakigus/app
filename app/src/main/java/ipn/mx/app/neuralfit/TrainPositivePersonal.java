@@ -78,7 +78,7 @@ public class TrainPositivePersonal extends AppCompatActivity implements View.OnC
             } else if (!enviado) {
                 Toast.makeText(this, R.string.first_send_waves, Toast.LENGTH_LONG).show();
             } else {
-                Intent intent = new Intent(this, Index.class);
+                Intent intent = new Intent(this, TrainFinished.class);
                 startActivity(intent);
                 finish();
             }
