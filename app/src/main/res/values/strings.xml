@@ -1,13 +1,13 @@
 <resources>
 
     <!-- SETTINGS -->
-    <!--<string name="server_host">http://127.0.0.1:5000</string>-->
+<!--    <string name="server_host">http://127.0.0.1:5000</string>-->
 <!--    <string name="server_host">http://192.168.3.20:8000</string>-->
-    <!--<string name="server_host">http://192.168.1.71:8000</string>-->
-    <!--<string name="server_host">http://192.168.1.75:8000</string>-->
-<!--        <string name="server_host">http://192.168.1.64:8000</string>-->
-    <!--<string name="server_host">http://192.168.1.15:8000</string>-->
-    <string name="server_host">http://192.168.1.18:8000</string>
+<!--    <string name="server_host">http://192.168.1.71:8000</string>-->
+<!--    <string name="server_host">http://192.168.1.75:8000</string>-->
+    <string name="server_host">http://192.168.1.64:8000</string>
+<!--    <string name="server_host">http://192.168.1.15:8000</string>-->
+<!--    <string name="server_host">http://192.168.1.18:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.83:8000</string>-->
 
     <string name="shared_key">shared_prefs</string>
@@ -65,8 +65,6 @@
     <string name="btn_expla_stren_leave">Cerrar</string>
     <string name="titulo_noti_explan">¿Fortalezas?</string>
 
-
-
     <!-- VISTA: strategy_breathing.xml -->
     <string name="title_strategy_breath">Hemos detectado una emoción negativa</string>
     <string name="text_strategy_breath">Haz una pausa, respira e intenta buscar algunas cosas buenas a lo que ha ocurrido, pregúntate si estás viento todo el panorama.</string>
@@ -79,7 +77,6 @@
     <string name="text_cirle_breath">4</string>
     <string name="strategy_breath_done">¡Bien hecho!</string>
     <string name="strategy_breath_almost">Casi termina</string>
-
 
     <!-- VISTA: strategy_strengths.xml -->
     <string name="title_strategy_strengths">Hemos detectado una emoción negativa</string>

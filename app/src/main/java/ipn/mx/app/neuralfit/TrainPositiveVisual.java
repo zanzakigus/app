@@ -1,5 +1,6 @@
 package ipn.mx.app.neuralfit;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +44,9 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
     Dialog dialog;
     Button btnContinuarDialog;
 
+    ImageView youtubeLogo;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,11 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
         progressBar = findViewById(R.id.progress_bar);
         progressText = findViewById(R.id.progress_text);
         btnNext = findViewById(R.id.arrow);
+        youtubeLogo = findViewById(R.id.youtube_logo);
+
+        btnNext.setOnClickListener(this);
+        progressBar.setOnClickListener(this);
+        youtubeLogo.setOnClickListener(this);
 
         tvRecomendation1 = findViewById(R.id.train_positive_visual_recomendations_1);
         tvRecomendation2 = findViewById(R.id.train_positive_visual_recomendations_2);
@@ -72,9 +82,6 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
         tvRecomendation1.setOnClickListener(this);
         tvRecomendation2.setOnClickListener(this);
         tvRecomendation3.setOnClickListener(this);
-
-        btnNext.setOnClickListener(this);
-        progressBar.setOnClickListener(this);
 
         // Poner el texto de los video recomendados
         textRecomendations = new ArrayList<String[]>();
@@ -94,9 +101,9 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
             textRecomendations.add(urlSeparada);
         }
 
-        tvRecomendation1.setText(textRecomendations.get(0)[0]);
-        tvRecomendation2.setText(textRecomendations.get(1)[0]);
-        tvRecomendation3.setText(textRecomendations.get(2)[0]);
+        tvRecomendation1.setText("  " + textRecomendations.get(0)[0]);
+        tvRecomendation2.setText("  " + textRecomendations.get(1)[0]);
+        tvRecomendation3.setText("  " + textRecomendations.get(2)[0]);
     }
 
     @Override
@@ -180,7 +187,16 @@ public class TrainPositiveVisual extends AppCompatActivity implements View.OnCli
                 Log.d("Al abrir el video", "onClick: " + e.toString());
                 Toast.makeText(this, getResources().getString(R.string.train_negative_visual_error_open_video), Toast.LENGTH_LONG).show();
             }
-        }else if (v == btnContinuarDialog){
+        } else if (v == youtubeLogo) {
+            Uri urlVideo = Uri.parse("https://youtu.be/");
+            Intent videoIntent = new Intent(Intent.ACTION_VIEW, urlVideo);
+            try {
+                startActivity(videoIntent);
+            } catch (ActivityNotFoundException e) {
+                Log.d("Al abrir youtube", "onClick: " + e.toString());
+                Toast.makeText(this, getResources().getString(R.string.train_negative_visual_error_open_video), Toast.LENGTH_LONG).show();
+            }
+        } else if (v == btnContinuarDialog){
             Intent intent = new Intent(this, Index.class);
             startActivity(intent);
             finish();

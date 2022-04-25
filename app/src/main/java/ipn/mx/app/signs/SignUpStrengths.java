@@ -7,6 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -52,7 +57,6 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
     Dialog dialog;
     Button btnContinuarDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +87,6 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         EMAIL_KEY = this.getResources().getString(R.string.logged_email_key);
         PASSWORD_KEY = this.getResources().getString(R.string.logged_password_key);
-
-
     }
 
     @Override
@@ -181,7 +183,7 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
         newTag.setBackground(getResources().getDrawable(R.drawable.background_estrategy));
         newTag.setOrientation(LinearLayout.HORIZONTAL);
         newTag.setGravity(Gravity.CENTER);
-        newTag.setPadding(50, 15, 30, 15);
+        newTag.setPadding(50, 10, 30, 10);
         newTag.addView(newInfo);
         newTag.addView(icon);
 
@@ -287,7 +289,6 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
         ((Activity) context).finish();
     }
 
-
     private boolean validarTamano(String cadena, LinearLayout scrollView) {
         LinearLayout ultimoHijo = (LinearLayout) scrollView.getChildAt(scrollView.getChildCount() - 1);
         int hijos = ultimoHijo.getChildCount();
@@ -306,6 +307,5 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
             result = true;
         return result;
     }
-
 
 }

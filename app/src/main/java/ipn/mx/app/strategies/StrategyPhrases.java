@@ -98,25 +98,25 @@ public class StrategyPhrases extends AppCompatActivity implements View.OnClickLi
         PASSWORD_KEY = this.getResources().getString(R.string.logged_password_key);
 
 
-//        // initializing our shared preferences.
-//        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-//
-//        loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
-//        loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
-//
-//        if (loggedPassword == null || loggedEmail == null) {
-//            Intent intent = new Intent(this, Login.class);
-//            startActivity(intent);
-//            finish();
-//            return;
-//        }
-//
-//
-////         Se hace peticion para obtener la informacion del usuario
-//        PeticionAPI api = new PeticionAPI(this);
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("correo", loggedEmail);
-//        params.put("password", loggedPassword);
+        // initializing our shared preferences.
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
+        loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
+
+        if (loggedPassword == null || loggedEmail == null) {
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+
+//      Se hace peticion para obtener la informacion del usuario
+        PeticionAPI api = new PeticionAPI(this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("correo", loggedEmail);
+        params.put("password", loggedPassword);
 
         initSpeaker();
         putInfoOnScreen();
