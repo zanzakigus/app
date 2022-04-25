@@ -52,6 +52,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         btnHome = findViewById(R.id.icon_home);
         btnGraph = findViewById(R.id.icon_graph);
         btnNotification = findViewById(R.id.icon_notifications);
+        btnNotification.setBackgroundResource(R.drawable.icon_notification_outline);
         btnUser = findViewById(R.id.icon_user);
 
         btnHome.setOnClickListener(this);

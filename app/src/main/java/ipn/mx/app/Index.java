@@ -1,6 +1,7 @@
 package ipn.mx.app;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,6 +54,9 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
     private String loggedEmail;
     private String loggedPassword;
 
+    final String urlTutorial = "https://youtu.be/IxMpad5K-Og";
+    TextView fullscreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         tevNombreUsuario = findViewById(R.id.title_username);
 
         btnHome = findViewById(R.id.icon_home);
+        btnHome.setBackgroundResource(R.drawable.icon_home_outline);
         btnGraph = findViewById(R.id.icon_graph);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
@@ -74,6 +79,9 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
 
         MediaController mc = new MediaController(this);
         vVIni.setMediaController(mc);
+
+        fullscreen = findViewById(R.id.tutorial_fullscreen);
+        fullscreen.setOnClickListener(this);
 
 
         btnHome.setOnClickListener(this);
@@ -145,6 +153,15 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
+        }else if (fullscreen == v) {
+            Uri urlVideo = Uri.parse(urlTutorial);
+            Intent videoIntent = new Intent(Intent.ACTION_VIEW, urlVideo);
+            try {
+                startActivity(videoIntent);
+            } catch (ActivityNotFoundException e) {
+                Log.d("TutorialHeadset", "Fullscreen onClick: " + e.toString());
+                Toast.makeText(this, getResources().getString(R.string.tutorial_headset_fullscreen_error), Toast.LENGTH_LONG).show();
+            }
         }
     }
 

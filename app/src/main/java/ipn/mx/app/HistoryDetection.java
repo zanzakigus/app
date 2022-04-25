@@ -96,6 +96,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
         btnHome = findViewById(R.id.icon_home);
         btnGraph = findViewById(R.id.icon_graph);
+        btnGraph.setBackgroundResource(R.drawable.icon_graph_outline);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
         vertical_scroll = findViewById(R.id.vertical_scroll);

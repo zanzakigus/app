@@ -60,6 +60,7 @@ public class UpdateInfo extends AppCompatActivity implements View.OnClickListene
         btnGraph = findViewById(R.id.icon_graph);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
+        btnUser.setBackgroundResource(R.drawable.icon_user_outline);
 
         btnHome.setOnClickListener(this);
         btnGraph.setOnClickListener(this);
