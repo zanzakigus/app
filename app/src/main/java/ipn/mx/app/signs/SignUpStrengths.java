@@ -76,7 +76,6 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
         scrollView = findViewById(R.id.scrollview);
         imvQuestion = findViewById(R.id.question);
 
-
         // Agregar accion al boton
         btnNext.setOnClickListener(this);
         imvAgregar.setOnClickListener(this);
@@ -145,10 +144,7 @@ public class SignUpStrengths extends AppCompatActivity implements View.OnClickLi
         dialog.show();
     }
 
-
     public void addStrength(String cadena) {
-
-
         if (cadena.length() == 0) {
             Toast.makeText(this, R.string.text_empty_strengt, Toast.LENGTH_LONG).show();
             return;

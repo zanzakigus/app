@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_white"
+    android:orientation="vertical"
+    style="@style/center_things">
+
+    <TextView
+        android:id="@+id/date_daily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/title_blue"
+        android:textSize="18sp"
+        android:text="@string/component_daily_date_example"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/gratitude_daily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_blue"
+        android:textSize="16sp"
+        android:text="@string/component_daily_gratitude_example"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:justificationMode="inter_word"/>
+
+</LinearLayout>

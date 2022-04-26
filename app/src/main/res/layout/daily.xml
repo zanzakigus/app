@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary_color">
+
+    <TextView
+        android:id="@+id/daily_title"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/daily_title"
+        android:textAppearance="@style/title_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/daily_text_first"
+        style="@style/center_things"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:gravity="top"
+        android:justificationMode="inter_word"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/daily_text_first"
+        android:textAppearance="@style/text_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/daily_title"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/date_input"
+        style="@style/center_things"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/custom_input"
+        android:drawablePadding="12dp"
+        android:hint="@string/daily_placeholder_date_input"
+        android:imeOptions="actionSend"
+        android:inputType="none"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
+        app:layout_constraintEnd_toStartOf="@+id/agregar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daily_text_first" />
+
+    <ImageView
+        android:id="@+id/agregar"
+        style="@style/center_things"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_check_circle_green"
+        app:layout_constraintTop_toBottomOf="@+id/daily_text_first"
+        app:layout_constraintLeft_toRightOf="@id/cadena_input"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="-15dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/action_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_input">
+
+        <LinearLayout
+            android:id="@+id/vertical_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/no_info"
+                style="@style/center_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:gravity="center"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/text_no_info_history"
+                android:textAppearance="@style/title_blue"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/action_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

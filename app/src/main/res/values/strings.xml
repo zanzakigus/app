@@ -173,6 +173,18 @@
     <!-- CLASE: Index -->
     <string name="no_neural">No se encontró la red neuronal</string>
 
+    <!-- CLASE: Daily -->
+    <string name="daily_title">Bitácora</string>
+    <string name="daily_text_first">Recuerda que agradeciendo estamos feliz por existir y por las buenas cosas que nos pasan día a día.</string>
+    <string name="daily_placeholder_date_input">Fecha a buscar</string>
+    <string name="daily_dialog_title">Nuevo agradecimiento</string>
+    <string name="daily_dialog_text">Fecha a buscar</string>
+    <string name="daily_dialog_add">Agregar</string>
+
+    <!-- CLASE: ComponentDaily -->
+    <string name="component_daily_date_example">Fecha Ejemplo</string>
+    <string name="component_daily_gratitude_example">Agradecimiento de ejemplo. Agradecimiento de ejemplo. Agradecimiento de ejemplo. Agradecimiento de ejemplo. Agradecimiento de ejemplo.</string>
+
     <!-- CLASE: User -->
     <string name="user_dialog_title">¡¡Cambio de contraseña!!</string>
     <string name="user_dialog_message">¿Desea empezar el procedimiento para actualizar la contraseña?</string>

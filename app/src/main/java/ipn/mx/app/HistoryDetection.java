@@ -66,7 +66,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
     private final String TAG = "HistoryDetection";
-    Button btnHome, btnGraph, btnNotification, btnUser;
+    Button btnHome, btnGraph, btnNotification, btnUser, btnDaily;
     LinearLayout vertical_scroll;
     Switch aSwitch;
     EditText fecha_ini, fecha_fin;
@@ -99,6 +99,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         btnGraph.setBackgroundResource(R.drawable.icon_graph_outline);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
+        btnDaily = findViewById(R.id.icon_daily);
         vertical_scroll = findViewById(R.id.vertical_scroll);
         aSwitch = findViewById(R.id.swt_history);
         fecha_ini = findViewById(R.id.fecha_ini_input);
@@ -126,6 +127,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
+        btnDaily.setOnClickListener(this);
         aSwitch.setOnClickListener(this);
         cbPositive.setOnClickListener(this);
         cbNegative.setOnClickListener(this);
@@ -188,6 +190,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
+        } else if (btnDaily == v) {
+            Intent intent = new Intent(this, Daily.class);
+            startActivity(intent);
         } else if (fecha_ini == v) {
             Log.d(TAG, "onClick()-fecha_ini: ");
 
@@ -218,10 +223,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                         mes_ini = month;
                         dia_ini = day;
                         getHistory();
-
                     }
-
-
                 }
             }, anno_ini, mes_ini, dia_ini);
             datePickerDialog.show();
@@ -264,14 +266,14 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             cbPositive.setVisibility(aSwitch.isChecked() ? View.GONE : View.VISIBLE);
             cbNegative.setVisibility(aSwitch.isChecked() ? View.GONE : View.VISIBLE);
             getHistory();
-        }else if (cbPositive == v || cbNegative == v){
+        } else if (cbPositive == v || cbNegative == v) {
             boolean checked = ((CheckBox) v).isChecked();
             CheckBox checkBox = (CheckBox) v;
-            if(!cbNegative.isChecked() && !cbPositive.isChecked()){
+            if (!cbNegative.isChecked() && !cbPositive.isChecked()) {
                 Toast myToast = Toast.makeText(context, R.string.text_non_selected, Toast.LENGTH_LONG);
                 myToast.show();
                 checkBox.setChecked(true);
-            }else{
+            } else {
                 getHistory();
             }
         }
@@ -292,18 +294,17 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         params.put("fecha_ini", fInicial);
         params.put("fecha_fin", fFinal);
         int tipo = GlobalInfo.TIPO_ALL;
-        if(!aSwitch.isChecked()){
-            if( cbNegative.isChecked() && !cbPositive.isChecked()){
+        if (!aSwitch.isChecked()) {
+            if (cbNegative.isChecked() && !cbPositive.isChecked()) {
                 tipo = GlobalInfo.TIPO_NEGATIVO;
 
-            }else if( !cbNegative.isChecked() && cbPositive.isChecked()){
+            } else if (!cbNegative.isChecked() && cbPositive.isChecked()) {
                 tipo = GlobalInfo.TIPO_POSITIVO;
 
-            }else if( cbNegative.isChecked() && cbPositive.isChecked()){
+            } else if (cbNegative.isChecked() && cbPositive.isChecked()) {
                 tipo = GlobalInfo.TIPO_ALL;
             }
         }
-
 
 
         params.put("tipo", String.valueOf(tipo));
@@ -383,7 +384,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
                 TextView fecha = emocion.findViewById(R.id.text_date);
                 View icon = emocion.findViewById(R.id.icon_burn);
-                if(emociones.getJSONObject(i).getInt("id_emocion")==1){
+                if (emociones.getJSONObject(i).getInt("id_emocion") == 1) {
                     icon.setBackgroundResource(R.drawable.icon_snowflake);
                 }
                 fecha.setText(emociones.getJSONObject(i).getString("fecha_deteccion"));
@@ -451,7 +452,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         } else {
             tipo = 3; // por horas
         }
-        int countNega = 0, countPosi = 0 , total = 0;
+        int countNega = 0, countPosi = 0, total = 0;
         String fechaAnter = null;
         String day = null;
         String month = null;
@@ -507,30 +508,30 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             }
             String data = fecha.substring(iIni, iFin);
             if (!data.equals(dataAnt)) {
-                float porgNega = (float)countNega / (float) total;
-                entries.add(new PieEntry((porgNega*100), getfechaPie(tipo,fechaAnter,iniFormat,finFormat)));
+                float porgNega = (float) countNega / (float) total;
+                entries.add(new PieEntry((porgNega * 100), getfechaPie(tipo, fechaAnter, iniFormat, finFormat)));
                 countNega = 0;
                 countPosi = 0;
                 total = 0;
 
                 if (emocionesJSONArray.length() == i + 1) {
                     porgNega = 0;
-                    if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                    if (tipo_emo == GlobalInfo.TIPO_NEGATIVO) {
                         porgNega = 100;
                     }
-                    entries.add(new PieEntry(porgNega, getfechaPie(tipo,fecha,iniFormat,finFormat)));
+                    entries.add(new PieEntry(porgNega, getfechaPie(tipo, fecha, iniFormat, finFormat)));
                 }
             } else if (emocionesJSONArray.length() == i + 1) {
                 float porgNega = 0;
                 total++;
-                if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                if (tipo_emo == GlobalInfo.TIPO_NEGATIVO) {
                     countNega++;
-                }else {
+                } else {
                     countPosi++;
                 }
-                porgNega = (float)countNega/(float) total;
+                porgNega = (float) countNega / (float) total;
                 total = 0;
-                entries.add(new PieEntry(porgNega*100, getfechaPie(tipo,fechaAnter,iniFormat,finFormat)));
+                entries.add(new PieEntry(porgNega * 100, getfechaPie(tipo, fechaAnter, iniFormat, finFormat)));
             }
 
             fechaAnter = fecha;
@@ -542,9 +543,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             calendar.set(Calendar.MONTH, Integer.parseInt(month) - 1);  // 0-11 so 1 less
             calendar.set(Calendar.YEAR, Integer.parseInt(year));
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
-            if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+            if (tipo_emo == GlobalInfo.TIPO_NEGATIVO) {
                 countNega++;
-            }else {
+            } else {
                 countPosi++;
             }
             total++;
@@ -594,18 +595,18 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private String getfechaPie(int tipo, String fecha, int ini, int fin){
+    private String getfechaPie(int tipo, String fecha, int ini, int fin) {
         String fechaSal;
         if (tipo == 3) {
-            fechaSal = fecha.substring(ini,fin);
+            fechaSal = fecha.substring(ini, fin);
 
         } else if (tipo == 2) {
 
-            fechaSal = fecha.substring(ini,fin);
+            fechaSal = fecha.substring(ini, fin);
 
         } else {
             String month = fecha.substring(3, 5);
-            String monthString = new DateFormatSymbols(new Locale("es")).getShortMonths()[Integer.parseInt(month)-1];
+            String monthString = new DateFormatSymbols(new Locale("es")).getShortMonths()[Integer.parseInt(month) - 1];
             String year = fecha.substring(6, 10);
             fechaSal = monthString + " " + year;
         }
@@ -641,7 +642,7 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             format = "dd MMM HH:mm";
             tipo = 3; // por horas
         }
-        int countNega = 0, countPosi = 0 , total = 0;
+        int countNega = 0, countPosi = 0, total = 0;
         String fechaAnter;
         String day = null;
         String month = null;
@@ -693,10 +694,10 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             long now;
             if (!data.equals(dataAnt)) {
                 now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
-                System.out.println("porcen 1 "+((float)countNega/(float) total)*100);
-                values1.add(new Entry(now, ((float)countNega/(float) total)*100));
+                System.out.println("porcen 1 " + ((float) countNega / (float) total) * 100);
+                values1.add(new Entry(now, ((float) countNega / (float) total) * 100));
                 countNega = 0;
-                countPosi =0;
+                countPosi = 0;
                 total = 0;
                 if (emocionesJSONArray.length() == i + 1) {
                     day = fecha.substring(0, 2);
@@ -709,26 +710,26 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
                     calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
                     now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
                     int porgNega = 0;
-                    if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                    if (tipo_emo == GlobalInfo.TIPO_NEGATIVO) {
                         porgNega = 100;
                     }
-                    System.out.println("porcen 2 "+porgNega);
+                    System.out.println("porcen 2 " + porgNega);
                     values1.add(new Entry(now, porgNega));
                 }
             } else if (emocionesJSONArray.length() == i + 1) {
                 now = TimeUnit.MILLISECONDS.toHours(calendar.getTimeInMillis());
                 float porgNega = 0;
                 total++;
-                if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+                if (tipo_emo == GlobalInfo.TIPO_NEGATIVO) {
                     countNega++;
-                }else {
+                } else {
                     countPosi++;
                 }
 
-                porgNega = (float)countNega/(float) total;
-                System.out.println("porcen 3 "+porgNega);
+                porgNega = (float) countNega / (float) total;
+                System.out.println("porcen 3 " + porgNega);
                 total = 0;
-                values1.add(new Entry(now, porgNega*100));
+                values1.add(new Entry(now, porgNega * 100));
             }
 
 
@@ -742,9 +743,9 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
 
 
-            if( tipo_emo == GlobalInfo.TIPO_NEGATIVO){
+            if (tipo_emo == GlobalInfo.TIPO_NEGATIVO) {
                 countNega++;
-            }else {
+            } else {
                 countPosi++;
             }
             total++;
@@ -782,10 +783,8 @@ public class HistoryDetection extends AppCompatActivity implements View.OnClickL
         });
 
 
-
         lineChart.setVisibility(View.VISIBLE);
         lineTitle.setVisibility(View.VISIBLE);
-
 
 
         lineChart.setData(lineData);

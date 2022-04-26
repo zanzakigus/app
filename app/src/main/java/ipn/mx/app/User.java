@@ -38,7 +38,7 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
     static SharedPreferences sharedpreferences;
     Context cGlobal;
     // Action Bar
-    Button btnHome, btnGraph, btnNotification, btnUser;
+    Button btnHome, btnGraph, btnNotification, btnUser, btnDaily;
     // View
     TextView tvUsername, tvFNacimiento, tvEmail, tvDetUltimaSemana, tvDetTotal;
     Button btnUpdateInfo, btnLogOut, btnUpdatePassword;
@@ -59,11 +59,13 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
         btnUser.setBackgroundResource(R.drawable.icon_user_outline);
+        btnDaily = findViewById(R.id.icon_daily);
 
         btnHome.setOnClickListener(this);
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
+        btnDaily.setOnClickListener(this);
 
         // View
         tvUsername = findViewById(R.id.title_username);
@@ -141,6 +143,9 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
             startActivity(intent);
         } else if (btnUpdateInfo == v) {
             Intent intent = new Intent(this, UpdateInfo.class);
+            startActivity(intent);
+        } else if (btnDaily == v) {
+            Intent intent = new Intent(this, Daily.class);
             startActivity(intent);
         } else if (btnLogOut == v) {
             logOut();

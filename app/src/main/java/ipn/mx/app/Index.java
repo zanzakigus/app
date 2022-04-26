@@ -33,14 +33,13 @@ import ipn.mx.app.signs.Login;
 
 public class Index extends AppCompatActivity implements View.OnClickListener {
 
-
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
     public static String EMAIL_KEY;
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
     Context context;
-    Button btnHome, btnGraph, btnNotification, btnUser;
+    Button btnHome, btnGraph, btnNotification, btnUser, btnDaily;
     TextView tevNombreUsuario;
     VideoView vVIni;
 
@@ -72,6 +71,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         btnGraph = findViewById(R.id.icon_graph);
         btnNotification = findViewById(R.id.icon_notifications);
         btnUser = findViewById(R.id.icon_user);
+        btnDaily = findViewById(R.id.icon_daily);
         vVIni = findViewById(R.id.video_ini);
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/"
                 + R.raw.video_ini);
@@ -88,6 +88,7 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
+        btnDaily.setOnClickListener(this);
 
         /*btnNext.setOnClickListener(this);*/
         queue = Volley.newRequestQueue(this);
@@ -153,7 +154,10 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         } else if (btnUser == v) {
             Intent intent = new Intent(this, User.class);
             startActivity(intent);
-        }else if (fullscreen == v) {
+        } else if(btnDaily == v) {
+            Intent intent = new Intent(this, Daily.class);
+            startActivity(intent);
+        } else if (fullscreen == v) {
             Uri urlVideo = Uri.parse(urlTutorial);
             Intent videoIntent = new Intent(Intent.ACTION_VIEW, urlVideo);
             try {

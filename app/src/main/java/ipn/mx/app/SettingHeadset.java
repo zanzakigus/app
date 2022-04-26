@@ -31,7 +31,7 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
     public static String PASSWORD_KEY;
     public static String NOMBRE_KEY;
     private final String TAG = "SettingHeadset";
-    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser, btnInfo;
+    Button btnConnHs, btnDiscHs, btnClasify, btnHome, btnGraph, btnNotification, btnUser, btnInfo, btnDaily;
     Switch swtEnableNoti;
     TextView tvUserName;
     // variable for shared preferences.
@@ -54,11 +54,13 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
         btnNotification = findViewById(R.id.icon_notifications);
         btnNotification.setBackgroundResource(R.drawable.icon_notification_outline);
         btnUser = findViewById(R.id.icon_user);
+        btnDaily = findViewById(R.id.icon_daily);
 
         btnHome.setOnClickListener(this);
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
+        btnDaily.setOnClickListener(this);
 
         btnInfo = findViewById(R.id.headset_setting_text_info_headset);
         btnConnHs = findViewById(R.id.conectar);
@@ -129,6 +131,9 @@ public class SettingHeadset extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         } else if (btnInfo == v) {
             Intent intent = new Intent(this, TutorialHeadset.class);
+            startActivity(intent);
+        } else if (btnDaily == v) {
+            Intent intent = new Intent(this, Daily.class);
             startActivity(intent);
         } else if (btnConnHs == v) {
             Log.d(TAG, "onClick()-btnConnHs: ");

@@ -54,7 +54,6 @@
         app:layout_constraintTop_toTopOf="@id/background_action_bar"
         tools:ignore="MissingConstraints" />
 
-
     <Button
         android:id="@+id/icon_user"
         android:layout_width="30dp"
@@ -62,8 +61,20 @@
         android:background="@drawable/icon_user"
         app:backgroundTint="@color/color_button_green"
         app:layout_constraintBottom_toBottomOf="@id/background_action_bar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/icon_daily"
         app:layout_constraintStart_toEndOf="@id/icon_notifications"
+        app:layout_constraintTop_toTopOf="@id/background_action_bar"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/icon_daily"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_bookmark"
+        app:backgroundTint="@color/color_button_green"
+        app:layout_constraintBottom_toBottomOf="@id/background_action_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_user"
         app:layout_constraintTop_toTopOf="@id/background_action_bar"
         tools:ignore="MissingConstraints" />
 
