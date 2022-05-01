@@ -38,7 +38,7 @@
     <string name="text_strategy">Una estrategia</string>
     <string name="text_question">Esto es una pregunta muy preguntona</string>
     <string name="text_psicologia_positiva">Puedes ver el siguiente video para obtener más información:</string>
-    <string name="text_video_full_index"><u>Oprima para ver en pantalla completa.</u></string>
+    <string name="text_video_full_index"><u>Oprime para ver en pantalla completa.</u></string>
     <string name="title_buenos_dias">Buenos días</string>
     <string name="title_history_detections">Histórico de detecciones</string>
     <string name="title_user">Datos Personales</string>
@@ -63,7 +63,7 @@
     <!-- VISTA: sign_up_strengths -->
     <string name="title_sign_up_strengths">Necesitamos saber más de ti, dinos tus fortalezas</string>
     <string name="text_input_strengths">Fortaleza</string>
-    <string name="text_strengths_explanation">Las fortalezas personales son esas capacidades, cualidades, recursos, habilidades innatas, que están en nosotros desde que nacemos, pero que muchas veces la persona no es capaz de ver, no ha aprendido a identificarlas y por ello piensa que no están. Por ejemplo, el compromiso, la organización, el carisma o la curiosidad.</string>
+    <string name="text_strengths_explanation">Las fortalezas son esas capacidades, cualidades, recursos, habilidades innatas, que están en nosotros desde que nacemos, pero que muchas veces la persona no es capaz de ver, no ha aprendido a identificarlas y por ello piensa que no están. Por ejemplo, el compromiso, la organización, el carisma o la curiosidad.</string>
     <string name="btn_expla_stren_leave">Cerrar</string>
     <string name="titulo_noti_explan">¿Fortalezas?</string>
 
@@ -74,11 +74,11 @@
     <string name="text_breath_in">Inhale</string>
     <string name="text_breath_out">Exhale</string>
     <string name="text_breath_exercise">Presiona el círculo cuando quieras comenzar</string>
-    <string name="text_relax_and_confortable">Relájese y póngase cómodo</string>
-    <string name="text_focus_on_breathing">Concéntrese en su respiración</string>
+    <string name="text_relax_and_confortable">Relájate y ponte cómodo</string>
+    <string name="text_focus_on_breathing">Concéntrate en tu respiración</string>
     <string name="text_cirle_breath">4</string>
     <string name="strategy_breath_done">¡Bien hecho!</string>
-    <string name="strategy_breath_almost">Casi termina</string>
+    <string name="strategy_breath_almost">Casi terminas</string>
 
     <!-- VISTA: strategy_strengths.xml -->
     <string name="title_strategy_strengths">Hemos detectado una emoción negativa</string>
@@ -103,9 +103,9 @@
     <!-- VISTA: Headset Tutorial -->
     <string name="headset_tutorial_title">Uso de diadema</string>
     <string name="headset_tutorial_text_first">La diadema tiene tres modos de operación, apagado, encendido o buscando dispositivo nuevo a conectarse.</string>
-    <string name="headset_tutorial_text_second">Sí es la primera vez que se conecta hacia la diadema, favor de colocar la diadema en la tercera opción y buscarla mediante Bluetooth en su celular.</string>
-    <string name="headset_tutorial_text_third">Cuando ya esté conectada, favor de colocarla en su cabeza como se muestra en el siguiente video.</string>
-    <string name="headset_tutorial_text_fourth">No se olvide de colocar la pinza en la sección de su oreja.</string>
+    <string name="headset_tutorial_text_second">Sí es la primera vez que se vincula la diadema, coloca la diadema en la tercera opción y buscala mediante Bluetooth en tu celular.</string>
+    <string name="headset_tutorial_text_third">Cuando ya esté conectada, colocala en tu cabeza como se muestra en el siguiente video.</string>
+    <string name="headset_tutorial_text_fourth">No olvides colocar la pinza en la sección de tu oreja.</string>
     <string name="headset_tutorial_text_fifth">Hasta este punto la aplicacion deberia de ser capaz de conectarse a la diadema y poder interactuar con ella.</string>
     <string name="headset_tutorial_btn_continuar">Continuar</string>
 
@@ -146,10 +146,10 @@
     <string name="missing_password">Se requiere de una contraseña para continuar</string>
 
     <!-- CLASE: SignUp2 -->
-    <string name="missing_name">Se requiere de su nombre para continuar</string>
-    <string name="missing_a_paterno">Se requiere de su apellido paterno para continuar</string>
-    <string name="missing_a_materno">Se requiere de su apellido materno para continuar</string>
-    <string name="missing_f_nacimiento">Se requiere de su fecha de nacimiento para continuar</string>
+    <string name="missing_name">Se requiere tu nombre para continuar</string>
+    <string name="missing_a_paterno">Se requiere tu apellido paterno para continuar</string>
+    <string name="missing_a_materno">Se requiere tu apellido materno para continuar</string>
+    <string name="missing_f_nacimiento">Se requiere tu fecha de nacimiento para continuar</string>
     <string name="focus_f_nacimiento">Selecciona tu fecha de nacimiento</string>
 
     <!-- CLASE: SignUpStrengths-->
@@ -190,7 +190,7 @@
 
     <!-- CLASE: User -->
     <string name="user_dialog_title">¡¡Cambio de contraseña!!</string>
-    <string name="user_dialog_message">¿Desea empezar el procedimiento para actualizar la contraseña?</string>
+    <string name="user_dialog_message">¿Deseas empezar el procedimiento para actualizar la contraseña?</string>
     <string name="user_dialog_affirmative">Cambiar contraseña</string>
     <string name="user_dialog_negative">Cancelar</string>
 
@@ -202,26 +202,26 @@
 
     <!-- CLASE: Tutorial Headset -->
     <string name="tutorial_headset_title">Tutorial de Entrenamiento</string>
-    <string name="tutorial_headset_text_1">Para ver un ejemplo del entrenamiento de la aplicación puede ver el siguiente video de muestra.</string>
-    <string name="tutorial_headset_fullscreen"><u>Oprima para pantalla completa.</u></string>
-    <string name="tutorial_headset_fullscreen_error">Ocurrio un problema al intentar abrir el video.</string>
+    <string name="tutorial_headset_text_1">Para ver un ejemplo del entrenamiento de la aplicación puedes ver el siguiente video de muestra.</string>
+    <string name="tutorial_headset_fullscreen"><u>Oprime para pantalla completa.</u></string>
+    <string name="tutorial_headset_fullscreen_error">Ocurrió un problema al intentar abrir el video.</string>
 
     <!-- CLASE: Tutorial Training -->
     <string name="tutorial_training_title">Tutorial de Diadema</string>
-    <string name="tutorial_training_text_1">Para comprender cómo se utiliza de manera correcta la diadema junto con la aplicación se recomienda ver el siguiente video.</string>
-    <string name="tutorial_training_fullscreen"><u>Oprima para pantalla completa.</u></string>
-    <string name="tutorial_training_fullscreen_error">Ocurrio un problema al intentar abrir el video.</string>
+    <string name="tutorial_training_text_1">Para comprender cómo se utiliza de manera correcta la diadema junto con la aplicación te recomendamos ver el siguiente video.</string>
+    <string name="tutorial_training_fullscreen"><u>Oprime para pantalla completa.</u></string>
+    <string name="tutorial_training_fullscreen_error">Ocurrió un problema al intentar abrir el video.</string>
 
 
     <!-- CLASE: Manual Detection -->
     <string name="manual_detection_title">Detección Manual</string>
-    <string name="manual_detection_text_1">Para hacer la detección sólo es necesario oprimir el círculo cuando esté listo. La detección dura un minuto.</string>
+    <string name="manual_detection_text_1">Para hacer la detección sólo es necesario oprimir el círculo cuando estés listo. La detección dura un minuto.</string>
 
 
     <!-- CLASE: CodePassword -->
-    <string name="password_information">Se le ha enviado a su correo un código para poder actualizar la contraseña.</string>
+    <string name="password_information">Se ha enviado a tu correo un código para poder actualizar la contraseña.</string>
     <string name="second_information">El correo puede tardar hasta un minuto en llegar. En caso de no encontrarlo favor de revisar la bandeja de spam o correos no deseados.</string>
-    <string name="third_information">En caso de cerrar la aplicación el código quedará inválida y deberá de iniciar el procedimiento de nuevo.</string>
+    <string name="third_information">En caso de cerrar la aplicación el código quedará inválida y deberás de iniciar el procedimiento de nuevo.</string>
     <string name="invalid_password_code">Favor de ingresar una contraseña válida. Solo queda un intento restante.</string>
     <string name="log_out_reason">Por motivos de seguridad se ha cerrado la sesión.</string>
     <string name="confirme_code">Validar código</string>
@@ -229,14 +229,14 @@
     <!-- CLASE: ForgetPassword -->
     <string name="forget_password_title">Recuperar Contraseña</string>
     <string name="forget_password_send_email">Enviar correo</string>
-    <string name="forget_password_first_text">Favor de ingresar su correo registrado en la aplicación. Se le enviará un correo con su nueva contraseña.</string>
-    <string name="forget_password_second_text">La actualización de la contraseña se hace de forma inmediata. Se recomienda que se cambie la contraseña iniciando sesión en la sección de perfil.</string>
+    <string name="forget_password_first_text">Favor de ingresar tu correo registrado en la aplicación. Se te enviará un correo con su nueva contraseña.</string>
+    <string name="forget_password_second_text">La actualización de la contraseña se hace de forma inmediata. Se recomienda que se cambies la contraseña iniciando sesión en la sección de perfil.</string>
 
     <!-- CLASE: UpdatePassword -->
     <string name="update_password_new">Ingrese la nueva contraseña</string>
     <string name="update_password_confirm">Confirme la contraseña</string>
     <string name="update_password_text_first">La actualización de la contraseña se hará de forma inmediata.</string>
-    <string name="update_password_text_second">Se cerrará la sesión para que pueda ingresar con la nueva contraseña.</string>
+    <string name="update_password_text_second">Se cerrará la sesión para que puedas ingresar con la nueva contraseña.</string>
     <string name="update_password_password_short">La contraseña debe tener mínimo 5 carácteres.</string>
     <string name="update_password_passwords_no_equals">La contraseña debe tener mínimo 5 carácteres.</string>
     <string name="update_password_success">Se actualizó la contraseña correctamente</string>
@@ -247,7 +247,7 @@
 
     <!-- CLASE: Incomplete Training -->
     <string name="incomplete_training_title">Entrenamiento Incompleto</string>
-    <string name="incomplete_training_text_first">El entrenamiento de los patrones cerebrales quedó pendiente y se retomará hasta donde se había llegado.</string>
+    <string name="incomplete_training_text_first">El entrenamiento de los patrones cerebrales quedó pendiente y se retomará hasta donde habías llegado.</string>
     <string name="incomplete_training_training_first">Emoción Negativa Visual</string>
     <string name="incomplete_training_training_second">Emoción Negativa Personal</string>
     <string name="incomplete_training_training_third">Emoción Positiva Visual</string>
@@ -261,11 +261,11 @@
     <string name="train_negative_visual_recomendations_1">Escena Toy Story 3 https://youtu.be/SPRxeOOTXxg</string>
     <string name="train_negative_visual_recomendations_2">Escena La Vida es Bella https://youtu.be/YL-errZiNd8</string>
     <string name="train_negative_visual_recomendations_3">Historia Tailandés https://youtu.be/Gcnbxc5Zul0</string>
-    <string name="train_negative_visual_error_open_video">Ocurrio un problema al intentar abrir el video.</string>
+    <string name="train_negative_visual_error_open_video">Ocurrió un problema al intentar abrir el video.</string>
 
     <!-- CLASE: Train Negative Personal -->
     <string name="train_negative_personal_title">Emoción Negativa Personal</string>
-    <string name="train_negative_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron.</string>
+    <string name="train_negative_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron</string>
     <string name="train_negative_personal_advice_1">Tu recuerdo más triste</string>
     <string name="train_negative_personal_advice_2">El lugar que da más miedo</string>
     <string name="train_negative_personal_advice_3">La pérdida de un ser querido</string>
@@ -275,7 +275,7 @@
 
     <!-- CLASE: Train Positive Visual -->
     <string name="train_positive_visual_title">Emoción Positiva Visual</string>
-    <string name="train_positive_visual_text_first">En esta sección se te va a solicitar buscar un video que te produzca emociones positivas</string>
+    <string name="train_positive_visual_text_first">Busca un vídeo que te produzca alguna emoción positiva presionando el logo de YouTube o presionando alguno de los tres que te proponemos</string>
     <string name="train_positive_visual_text_second">Se recomienda seguir el video antes visto para ver la forma correcta de realizar el entrenamiento</string>
     <string name="train_positive_visual_recomendations_1">Mejores Memes https://youtu.be/2s9ovowoOyk</string>
     <string name="train_positive_visual_recomendations_2">Video Motivacional https://youtu.be/CfEOwQnd-OM?t=40</string>
@@ -283,7 +283,7 @@
 
     <!-- CLASE: Train Positive Personal -->
     <string name="train_positive_personal_title">Emoción Positiva Personal</string>
-    <string name="train_positive_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron.</string>
+    <string name="train_positive_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron</string>
     <string name="train_positive_personal_advice_1">Tu recuerdo más feliz</string>
     <string name="train_positive_personal_advice_2">El lugar que más tranquilidad te provoca</string>
     <string name="train_positive_personal_advice_3">Tus seres queridos</string>
@@ -294,29 +294,29 @@
     <!-- CLASE: Train Finished -->
     <string name="train_finished_title">Entrenamiento Completado</string>
     <string name="train_finished_text_first">Felicidades has completado el entrenamiento, en este momento la red neuronal se está entrenando con tu información.</string>
-    <string name="train_finished_text_second">Este proceso puede demorar hasta 5 minutos, puede minimizar la aplicación, se le notificará cuando termine.</string>
+    <string name="train_finished_text_second">Este proceso puede demorar hasta 5 minutos, puedes minimizar la aplicación, se te notificará cuando termine.</string>
     <string name="train_finished_training">Entrenando</string>
     <string name="train_finished_trained">Entrenamiento completado</string>
 
     <!-- CLASE: End Negative Section -->
     <string name="end_negative_section_title">Terminaste la primera sección</string>
     <string name="end_negative_section_text_first">Hemos terminado la medición de tus patrones cerebrales cuando sientes emociones que potencialmente pueden convertirse en emociones negativas.</string>
-    <string name="end_negative_section_text_second">Es momento de que te relajes, respires profundamente y pienses solo en tu pulmones llenándose de oxígeno y expulsando el aire.</string>
+    <string name="end_negative_section_text_second">Es momento de que te relajes, respires profundamente y pienses solo en tus pulmones llenándose de oxígeno y expulsando el aire.</string>
 
     <!-- CLASE: Section fit Neural Network -->
     <string name="timer">---</string>
     <string name="connect">CONECTAR\nDIADEMA</string>
-    <string name="text_primer_analisis_1">Para el correcto funcionamiento de la app necesitamos analizar tus patrones cerebrales en determinados momentos, e necesario que portes la diadema y la conectes a tu dispositivo.</string>
+    <string name="text_primer_analisis_1">Para el correcto funcionamiento de la app necesitamos analizar tus patrones cerebrales en determinados momentos, es necesario que portes la diadema y la conectes a tu dispositivo.</string>
     <string name="text_primer_analisis_2">A continuación se te pedirá imaginar ciertas situaciones personales, puedes cerrar los ojos y pensar en ellas mientras analizamos tus datos.</string>
     <string name="no_connect">La diadema no está conectada, favor de conectar para poder continuar.</string>
     <string name="no_found_diadema">No se encontró la diadema, favor de verificar que la diadema esté en modo búsqueda.</string>
     <string name="searching_diadema">Se está intentando conectar a la diadema, espere un momento por favor…</string>
-    <string name="connected_diadema">Diadema conectada, puede continuar</string>
-    <string name="text_listo_fit_wave">Cuando sientas que estés listo presiona el círculo azul.</string>
+    <string name="connected_diadema">Diadema conectada, puedes continuar</string>
+    <string name="text_listo_fit_wave">Cuando sientas que estás listo presiona el círculo azul.</string>
     <string name="sending_waves">Enviando ondas cerebrales.</string>
     <string name="sent_waves_succed">Ondas cerebrales enviadas con éxito, puedes continuar.</string>
     <string name="sent_waves_try">Ya se enviaron las ondas cerebrales necesarias, favor de continuar.</string>
-    <string name="first_send_waves">Para continuar se debe de hacer el entrenamiento, favor de darle al circulo cuando esté listo.</string>
+    <string name="first_send_waves">Para continuar se debe de hacer el entrenamiento, presiona el círculo cuando estés listo.</string>
 
     <!-- Test: Todos los strings de las vistas de Testeo -->
     <string name="test_Ciudado">¡¡Cuidado!!</string>
@@ -336,8 +336,8 @@
     <!-- Notifications: String para la notficacion de la bitacora-->
     <string name="daily_summary_text">Agradecimientos esperando</string>
     <string name="daily_content_title">¡¡Es hora!!</string>
-    <string name="daily_content_text">¿Qué ha ocurrido en su…</string>
-    <string name="daily_big_text">¿Qué ha ocurrido en su día que quiera agradecer? </string>
+    <string name="daily_content_text">¿Qué ha ocurrido en tu…</string>
+    <string name="daily_big_text">¿Qué ha ocurrido en tu día que quiera agradecer? </string>
     <string name="daily_notification_button">Bitácora</string>
     <string name="daily_notification_title">¡¡Es hora!!</string>
 </resources>
