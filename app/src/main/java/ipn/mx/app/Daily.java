@@ -51,6 +51,10 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
     Dialog dialog;
     Button dialogBtnAgregar;
     EditText dialogNuevoAgradecimiento;
+    Button dialogBtnModificar;
+    EditText dialogCambiarAgradecimiento;
+
+    String viejoAgradecimiento = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +163,20 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
             dialog.dismiss();
         } else if (v == btnAgregar) {
             internalNotification();
+        } else if(v == dialogBtnModificar) {
+            String textoArchivo = getBeforeGratitudes().replace(viejoAgradecimiento, dialogCambiarAgradecimiento.getText().toString());
+            OutputStreamWriter outputStreamWriter = null;
+            try {
+                outputStreamWriter = new OutputStreamWriter(openFileOutput(nameBitacora, MODE_PRIVATE));
+                outputStreamWriter.write(textoArchivo);
+                outputStreamWriter.flush();
+                outputStreamWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            updateGratitudes();
+            onScreenGratitudes();
+            dialog.dismiss();
         }
     }
 
@@ -167,7 +185,6 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
         for (String[] auxArray : agradecimientos) {
             resul.append(auxArray[0]).append(",").append(auxArray[1].replace("\n", "\\n")).append("\n");
         }
-        Log.d(TAG, "getBeforeGratitudes: " + resul.toString());
         return resul.toString();
     }
 
@@ -220,6 +237,23 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
 
             TextView dateText = (TextView) view.findViewById(R.id.date_daily);
             dateText.setText(auxArray[0]);
+
+            Context auxContext = this;
+
+            ImageView imgChange = (ImageView) view.findViewById(R.id.ic_change);
+            imgChange.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viejoAgradecimiento = auxArray[1];
+                    dialog.setContentView(R.layout.alert_dialog_change_gratitud);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialogCambiarAgradecimiento = (EditText) dialog.findViewById(R.id.gratitud_input);
+                    dialogCambiarAgradecimiento.setText(auxArray[1]);
+                    dialogBtnModificar = dialog.findViewById(R.id.btn_cambiar);
+                    dialogBtnModificar.setOnClickListener((View.OnClickListener) auxContext);
+                    dialog.show();
+                }
+            });
 
             TextView gratitudeText = (TextView) view.findViewById(R.id.gratitude_daily);
             gratitudeText.setText(auxArray[1]);
