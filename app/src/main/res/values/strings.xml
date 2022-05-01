@@ -6,7 +6,8 @@
 <!--    <string name="server_host">http://192.168.1.71:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.75:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.64:8000</string>-->
-    <string name="server_host">http://192.168.1.65:8000</string>
+<!--    <string name="server_host">http://192.168.1.65:8000</string>-->
+    <string name="server_host">http://20.231.22.208:8080</string>
 <!--    <string name="server_host">http://192.168.1.15:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.18:8000</string>-->
 <!--    <string name="server_host">http://192.168.1.83:8000</string>-->

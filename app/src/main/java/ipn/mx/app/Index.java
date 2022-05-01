@@ -86,7 +86,6 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         fullscreen = findViewById(R.id.tutorial_fullscreen);
         fullscreen.setOnClickListener(this);
 
-
         btnHome.setOnClickListener(this);
         btnGraph.setOnClickListener(this);
         btnNotification.setOnClickListener(this);

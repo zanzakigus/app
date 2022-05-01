@@ -299,8 +299,6 @@ public class NeuroSkyManager {
             Toast myToast = Toast.makeText(context, "Usuario no Loggeado", Toast.LENGTH_LONG);
             myToast.show();
         }
-
-
     }
 
     public void onFitResponse(JSONObject response, Context context) throws JSONException {
@@ -372,6 +370,5 @@ public class NeuroSkyManager {
         GlobalInfo.setClasifyTimeDelayCounter(0);
         GlobalInfo.setClasifyTimeDelayCounter(0);
         arrayWaves = new ArrayList<>();
-
     }
 }

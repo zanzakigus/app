@@ -10,6 +10,7 @@
         <domain includeSubdomains="true">192.168.1.65</domain>
         <domain includeSubdomains="true">192.168.1.18</domain>
         <domain includeSubdomains="true">192.168.1.83</domain>
+        <domain includeSubdomains="true">20.231.22.208</domain>
         <domain includeSubdomains="true">localhost</domain>
     </domain-config>
 </network-security-config>
