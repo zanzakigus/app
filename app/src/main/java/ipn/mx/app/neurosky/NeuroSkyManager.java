@@ -347,7 +347,6 @@ public class NeuroSkyManager {
             Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
             myToast.show();
         }
-
     }
 
     public void onSentWaves(JSONObject response, Context context) throws JSONException {

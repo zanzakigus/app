@@ -64,7 +64,7 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:src="@drawable/ic_check_circle_green"
+        android:src="@drawable/ic_add_circle"
         app:layout_constraintTop_toBottomOf="@+id/daily_text_first"
         app:layout_constraintLeft_toRightOf="@id/cadena_input"
         app:layout_constraintRight_toRightOf="parent"

@@ -23,8 +23,8 @@
             android:name=".Index"
             android:exported="true"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -136,11 +136,9 @@
             android:name=".SettingHeadset"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-
         <service
             android:name=".notification.handlers.GenericNotificationService"
             android:exported="false" />
-
 
         <service
             android:name=".service.HeadsetConnectionService"
@@ -150,7 +148,23 @@
             android:name=".service.ClasifyService"
             android:exported="false" />
 
+        <service
+            android:name=".service.SendNotificationsService"
+            android:exported="false" />
 
+        <receiver
+            android:name=".service.StartSendNotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
+
+            </intent-filter>
+        </receiver>
 
     </application>
 

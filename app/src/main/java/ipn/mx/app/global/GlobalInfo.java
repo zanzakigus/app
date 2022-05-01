@@ -2,12 +2,15 @@ package ipn.mx.app.global;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 import ipn.mx.app.R;
 
 public class GlobalInfo {
+
+    private static final String TAG = GlobalInfo.class.getSimpleName();
 
     public static final int NOTIFICATION_EMOTION_ID = 888;
     public static final int NOTIFICATION_CONN_ID = 999;
@@ -31,7 +34,6 @@ public class GlobalInfo {
 
     public static boolean isEnableNotifyConnHeadset() {
         return enableNotifyConnHeadset;
-
     }
 
     public static void setEnableNotifyConnHeadset(boolean notifyConnHeadset, Context context) {
@@ -78,5 +80,24 @@ public class GlobalInfo {
 
     public static void setClasifyTimeDelayCounter(int clasifyTimeDelayCounter) {
         GlobalInfo.clasifyTimeDelayCounter = clasifyTimeDelayCounter;
+    }
+
+    public static int[][] getScheduleNotifications() {
+        int[][] hourNotification = new int[3][2];
+        int[] aux = new int[2];
+
+        // A las 8 de la mañana
+        aux[0] = 8;
+        hourNotification[0] = aux.clone();
+
+        // A las 2 de la tarde
+        aux[0] = 14;
+        hourNotification[1] = aux.clone();
+
+        // A las 8 de la noche
+        aux[0] = 20;
+        hourNotification[2] = aux.clone();
+
+        return hourNotification;
     }
 }

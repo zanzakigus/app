@@ -8,7 +8,7 @@ import androidx.core.app.NotificationCompat;
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 
-public class NotificationManagerData extends MockDatabase.MockNotificationData {
+public class NotificationManagerDaily extends MockDatabase.MockNotificationData {
 
 
     // Unique data for this Notification.Style:
@@ -19,22 +19,20 @@ public class NotificationManagerData extends MockDatabase.MockNotificationData {
     private int notificationId;
 
 
-    public NotificationManagerData(Context context) {
-
-
+    public NotificationManagerDaily(Context context) {
         // Standard Notification values:
         // Title for API <16 (4.0 and below) devices.
-        mContentTitle = context.getResources().getString(R.string.m_content_title);
+        mContentTitle = context.getResources().getString(R.string.daily_content_title);
         ;
         // Content for API <24 (4.0 and below) devices.
-        mContentText = context.getResources().getString(R.string.m_content_text);
+        mContentText = context.getResources().getString(R.string.daily_content_text);
         mPriority = NotificationCompat.PRIORITY_HIGH;
-        buttonText = context.getResources().getString(R.string.m_notification_button);
+        buttonText = context.getResources().getString(R.string.daily_notification_button);
 
         // BigText Style Notification values:
         mBigContentTitle = context.getResources().getString(R.string.app_name);
-        mBigText = context.getResources().getString(R.string.m_big_text);
-        mSummaryText = context.getResources().getString(R.string.m_summary_text);
+        mBigText = context.getResources().getString(R.string.daily_big_text);
+        mSummaryText = context.getResources().getString(R.string.daily_summary_text);
         notificationId = GlobalInfo.NOTIFICATION_EMOTION_ID;
 
         // Notification channel values (for devices targeting 26 and above):

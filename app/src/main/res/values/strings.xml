@@ -322,13 +322,19 @@
 
     <!-- Notifications: Todos los strings para las notificaciones -->
     <string name="m_summary_text">Emoción detectada</string>
-    <string name="m_content_title">¡¡Ciudado!!</string>
+    <string name="m_content_title">¡¡Cuidado!!</string>
     <string name="m_content_text">Se ha detectado una emoción negativa…</string>
     <string name="m_big_text">Se ha detectado que te encuentras experimentando una emoción negativa, presiona el botón estrategia para poder apoyarte. </string>
     <string name="m_notification_button">Estrategia </string>
-    <string name="m_notification_title">¡¡Ciudado!!</string>
+    <string name="m_notification_title">¡¡Cuidado!!</string>
     <string name="m_btn_continuar">Reiniciar</string>
     <string name="m_dialog_disconnect">La diadema se ha desconectado, es necesario reiniciar esta sección del entrenamiento.</string>
 
-
+    <!-- Notifications: String para la notficacion de la bitacora-->
+    <string name="daily_summary_text">Agradecimientos esperando</string>
+    <string name="daily_content_title">¡¡Es hora!!</string>
+    <string name="daily_content_text">¿Qué ha ocurrido en su…</string>
+    <string name="daily_big_text">¿Qué ha ocurrido en su día que quiera agradecer? </string>
+    <string name="daily_notification_button">Bitácora</string>
+    <string name="daily_notification_title">¡¡Es hora!!</string>
 </resources>

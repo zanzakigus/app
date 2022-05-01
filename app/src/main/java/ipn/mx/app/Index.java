@@ -29,9 +29,12 @@ import java.util.HashMap;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.service.ClasifyService;
 import ipn.mx.app.service.HeadsetConnectionService;
+import ipn.mx.app.service.SendNotificationsService;
 import ipn.mx.app.signs.Login;
 
 public class Index extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = Index.class.getSimpleName();
 
     // creating constant keys for shared preferences.
     public static String SHARED_PREFS;
@@ -107,6 +110,12 @@ public class Index extends AppCompatActivity implements View.OnClickListener {
         loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
 
         GlobalInfo.setIniEnableNotifyConnHeadset(this);
+
+        if(!SendNotificationsService.isIntentServiceRunning()){
+            Log.d(TAG, "onCreate: Entro al if");
+            Intent hcs = new Intent(this, SendNotificationsService.class);
+            startService(hcs);
+        }
 
         if (loggedPassword == null || loggedEmail == null) {
             Log.i("A Login", "onCreate: Deberia de irme a login");
