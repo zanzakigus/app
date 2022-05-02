@@ -1,6 +1,7 @@
 package ipn.mx.app.strategies;
 
 
+import ipn.mx.app.Daily;
 import ipn.mx.app.Index;
 
 public enum StrategiesEnum {
@@ -8,7 +9,8 @@ public enum StrategiesEnum {
     BREATHING(0, StrategyBreathing.class),
     STRENGHT(1, StrategyStrength.class),
     MEDITATION(2, StrategyTemporal.class),
-    PHRASES(3, StrategyPhrases.class);
+    PHRASES(3, StrategyPhrases.class),
+    BITACORA(4, Daily.class);
 
 
     private final int settingsPosition;
