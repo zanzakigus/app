@@ -141,6 +141,10 @@
             android:exported="false" />
 
         <service
+            android:name=".notification.handlers.GenericNotificactionServiceDiConn"
+            android:exported="false" />
+
+        <service
             android:name=".service.HeadsetConnectionService"
             android:exported="false" />
 

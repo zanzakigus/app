@@ -19,7 +19,7 @@ public class GenericNotificationServiceDaily extends IntentService {
     private static final String TAG = "GenericNotificationServiceDaily";
 
     public GenericNotificationServiceDaily() {
-        super("GenericNotificationService");
+        super("GenericNotificationServiceDaily");
     }
 
     @SuppressLint("LongLogTag")
@@ -37,7 +37,8 @@ public class GenericNotificationServiceDaily extends IntentService {
         Intent intent = new Intent(getApplicationContext(), Daily.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        GlobalNotificationManager.clearNotification(this, GlobalInfo.NOTIFICATION_EMOTION_ID);
-        GlobalInfo.notificationsDisplayed.remove(GlobalInfo.NOTIFICATION_EMOTION_ID);
+        GlobalNotificationManager.clearNotification(this, GlobalInfo.NOTIFICATION_DAILY);
+        Integer notIn = GlobalInfo.NOTIFICATION_DAILY;
+        GlobalInfo.notificationsDisplayed.remove(notIn);
     }
 }

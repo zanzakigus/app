@@ -9,10 +9,13 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import ipn.mx.app.Index;
 import ipn.mx.app.R;
+import ipn.mx.app.SettingHeadset;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.neurosky.NeuroSkyManager;
 import ipn.mx.app.notification.GlobalNotificationManager;
+import ipn.mx.app.notification.handlers.GenericNotificactionServiceDiConn;
 import ipn.mx.app.notification.mock.NotificationManagerData;
 
 public class HeadsetConnectionService extends Service {
@@ -49,6 +52,8 @@ public class HeadsetConnectionService extends Service {
                     nmd.setmBigText(context.getResources().getString(R.string.text_conn_serv_btext));
                     nmd.setNotificationId(GlobalInfo.NOTIFICATION_CONN_ID);
                     GlobalNotificationManager gnm = new GlobalNotificationManager(getApplicationContext(), nmd);
+                    gnm.setNotifyIntent(new Intent(context, SettingHeadset.class));
+                    gnm.setStrategyIntent(new Intent(context, GenericNotificactionServiceDiConn.class));
                     gnm.generateNotification();
                 }
                 handler.postDelayed(this, 60000);

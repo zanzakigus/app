@@ -20,7 +20,6 @@ import ipn.mx.app.Index;
 import ipn.mx.app.R;
 import ipn.mx.app.global.GlobalInfo;
 import ipn.mx.app.notification.handlers.GenericNotificationService;
-import ipn.mx.app.notification.handlers.GenericNotificationServiceDaily;
 import ipn.mx.app.notification.mock.NotificationManagerDaily;
 import ipn.mx.app.notification.mock.NotificationManagerData;
 import ipn.mx.app.notification.util.NotificationUtil;
@@ -101,7 +100,10 @@ public class GlobalNotificationManager {
 
 
         // 3. Set up main Intent for notification.
-        notifyIntent = new Intent(context, Index.class);
+        if (notifyIntent == null) {
+            notifyIntent = new Intent(context, Index.class);
+        }
+
 
         // Sets the Activity to start in a new, empty task
         /* notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
@@ -117,7 +119,9 @@ public class GlobalNotificationManager {
         // 4. Create additional Actions (Intents) for the Notification.
 
         // Strategy Action
-        strategyIntent = new Intent(context, GenericNotificationService.class);
+        if (strategyIntent == null) {
+            strategyIntent = new Intent(context, GenericNotificationService.class);
+        }
         strategyIntent.setAction(GenericNotificationService.STRATEGY_ACTION_YES);
 
         PendingIntent strategyPendingIntent = PendingIntent.getService(context, 0, strategyIntent, 0);
@@ -176,6 +180,7 @@ public class GlobalNotificationManager {
 
 
                 .build();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
         try {
             notificationManagerCompat.notify(notificacionManagerData.getNotificationId(), notification);
@@ -280,7 +285,7 @@ public class GlobalNotificationManager {
 
 
                 .build();
-
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
         try {
             notificationManagerCompat.notify(notificacionManagerDaily.getNotificationId(), notification);
             GlobalInfo.notificationsDisplayed.add(notificacionManagerDaily.getNotificationId());

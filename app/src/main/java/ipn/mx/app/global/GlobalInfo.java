@@ -14,6 +14,7 @@ public class GlobalInfo {
 
     public static final int NOTIFICATION_EMOTION_ID = 888;
     public static final int NOTIFICATION_CONN_ID = 999;
+    public static final int NOTIFICATION_DAILY = 777;
     public static final int TIPO_NEGATIVO = 0;
     public static final int TIPO_POSITIVO = 1;
     public static final int TIPO_ALL = -1;
