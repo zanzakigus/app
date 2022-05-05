@@ -244,5 +244,6 @@ public class User extends AppCompatActivity implements View.OnClickListener, Dia
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
+        finishAffinity();
     }
 }
