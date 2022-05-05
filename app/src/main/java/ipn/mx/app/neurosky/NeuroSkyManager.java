@@ -342,8 +342,8 @@ public class NeuroSkyManager {
             NotificationManagerData nmd = new NotificationManagerData(context);
             GlobalNotificationManager gnm = new GlobalNotificationManager(context, nmd);
             gnm.generateNotification();
-            Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
-            myToast.show();
+            /*Toast myToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            myToast.show();*/
         }
     }
 
