@@ -23,6 +23,7 @@ import ipn.mx.app.notification.handlers.GenericNotificationService;
 import ipn.mx.app.notification.mock.NotificationManagerDaily;
 import ipn.mx.app.notification.mock.NotificationManagerData;
 import ipn.mx.app.notification.util.NotificationUtil;
+import ipn.mx.app.strategies.StrategySelection;
 
 public class GlobalNotificationManager {
     public static final String TAG = "Notification";
@@ -101,7 +102,7 @@ public class GlobalNotificationManager {
 
         // 3. Set up main Intent for notification.
         if (notifyIntent == null) {
-            notifyIntent = new Intent(context, Index.class);
+            notifyIntent = new Intent(context, StrategySelection.class);
         }
 
 
