@@ -337,7 +337,7 @@
     <string name="daily_summary_text">Agradecimientos esperando</string>
     <string name="daily_content_title">¡¡Es hora!!</string>
     <string name="daily_content_text">¿Qué ha ocurrido en tu…</string>
-    <string name="daily_big_text">¿Qué ha ocurrido en tu día que quiera agradecer? </string>
+    <string name="daily_big_text">¿Qué ha ocurrido en tu día que quieras agradecer? </string>
     <string name="daily_notification_button">Bitácora de agradecimiento</string>
     <string name="daily_notification_title">¡¡Es hora!!</string>
 </resources>
