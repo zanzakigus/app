@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,8 +20,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,12 +37,15 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import ipn.mx.app.global.GlobalInfo;
+import ipn.mx.app.service.SendNotificationsService;
+import ipn.mx.app.signs.Login;
 import ipn.mx.app.strategies.StrategyPhrases;
 
 public class Daily extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     private static final String TAG = Daily.class.getSimpleName();
-    private static final String nameBitacora = "Bitacora.txt";
+    private static final String nameBitacora = "_bitacora.txt";
 
     ArrayList<String[]> agradecimientos;
     File fileBitacora;
@@ -56,12 +64,27 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
 
     String viejoAgradecimiento = "";
 
+
+    public static String SHARED_PREFS;
+    public static String EMAIL_KEY;
+    public static String PASSWORD_KEY;
+    public static String NOMBRE_KEY;
+
+    //Http request variables
+    RequestQueue queue;
+    String host;
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+
+    //logged variables
+    private String loggedEmail;
+    private String loggedPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily);
 
-        fileBitacora = new File(getFilesDir(), nameBitacora);
         agradecimientos = new ArrayList<>();
 
         dateInput = findViewById(R.id.date_input);
@@ -87,6 +110,34 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
         btnNotification.setOnClickListener(this);
         btnUser.setOnClickListener(this);
         btnDaily.setOnClickListener(this);
+
+        queue = Volley.newRequestQueue(this);
+        host = this.getResources().getString(R.string.server_host);
+
+        // initializing shared preferences keys.
+        SHARED_PREFS = this.getResources().getString(R.string.shared_key);
+        EMAIL_KEY = this.getResources().getString(R.string.logged_email_key);
+        PASSWORD_KEY = this.getResources().getString(R.string.logged_password_key);
+        NOMBRE_KEY = this.getResources().getString(R.string.logged_nombre);
+
+        // initializing our shared preferences.
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        loggedEmail = sharedpreferences.getString(EMAIL_KEY, null);
+        loggedPassword = sharedpreferences.getString(PASSWORD_KEY, null);
+
+        GlobalInfo.setIniEnableNotifyConnHeadset(this);
+
+        if (loggedPassword == null || loggedEmail == null) {
+            Log.i("A Login", "onCreate: Deberia de irme a login");
+            Intent intent = new Intent(this, Login.class);
+            /*intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        fileBitacora = new File(getFilesDir(), loggedEmail + nameBitacora);
 
         if (!fileBitacora.exists()) {
             try {
