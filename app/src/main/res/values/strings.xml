@@ -265,7 +265,7 @@
 
     <!-- CLASE: Train Negative Personal -->
     <string name="train_negative_personal_title">Emoción Negativa Personal</string>
-    <string name="train_negative_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron</string>
+    <string name="train_negative_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, cierra ojos y visualízate cuando el momento ocurrió</string>
     <string name="train_negative_personal_advice_1">Tu recuerdo más triste</string>
     <string name="train_negative_personal_advice_2">El lugar que da más miedo</string>
     <string name="train_negative_personal_advice_3">La pérdida de un ser querido</string>
@@ -283,7 +283,7 @@
 
     <!-- CLASE: Train Positive Personal -->
     <string name="train_positive_personal_title">Emoción Positiva Personal</string>
-    <string name="train_positive_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, puedes cerrar los ojos para intentar visualizarte de nuevo cuando sucedieron</string>
+    <string name="train_positive_personal_text_first">En esta sección requerimos que pienses en las siguientes situaciones personales, cierra ojos y visualízate cuando el momento ocurrió</string>
     <string name="train_positive_personal_advice_1">Tu recuerdo más feliz</string>
     <string name="train_positive_personal_advice_2">El lugar que más tranquilidad te provoca</string>
     <string name="train_positive_personal_advice_3">Tus seres queridos</string>
