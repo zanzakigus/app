@@ -82,7 +82,7 @@
 
     <!-- VISTA: strategy_strengths.xml -->
     <string name="title_strategy_strengths">Hemos detectado una emoción negativa</string>
-    <string name="text_strategy_strengths">Haz una pausa y respira profundo. Recuerda tus fortalezas y practicalas, lo que estás pasando es temporal y tienes herramientas para superarlo.</string>
+    <string name="text_strategy_strengths">Haz una pausa y respira profundo. Recuerda tus fortalezas y practícalas, lo que estás pasando es temporal y tienes herramientas para superarlo.</string>
     <string name="text_no_info_strategy_stre">No hay información que mostrar.</string>
     <string name="text_btn_tell_me">Dime mis fortalezas</string>
 
