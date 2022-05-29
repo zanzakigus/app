@@ -45,7 +45,7 @@ import ipn.mx.app.strategies.StrategyPhrases;
 public class Daily extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     private static final String TAG = Daily.class.getSimpleName();
-    private static final String nameBitacora = "_bitacora.txt";
+    private static String nameBitacora = "_bitacora.txt";
 
     ArrayList<String[]> agradecimientos;
     File fileBitacora;
@@ -137,7 +137,8 @@ public class Daily extends AppCompatActivity implements View.OnClickListener, Vi
             return;
         }
 
-        fileBitacora = new File(getFilesDir(), loggedEmail + nameBitacora);
+        nameBitacora = loggedEmail + nameBitacora;
+        fileBitacora = new File(getFilesDir(), nameBitacora);
 
         if (!fileBitacora.exists()) {
             try {
